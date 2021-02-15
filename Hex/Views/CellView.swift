@@ -17,7 +17,7 @@ struct CellView: View {
                 cell.changeColor()
             }
             .foregroundColor(cell.color)
-            .overlay(Text("\(cell.id / 6), \(cell.id % 6)"))
-            .frame(width: rect.width / 6, height: rect.width / 6)
+            .overlay(Text("\(cell.id / 11), \(cell.id % 11)"))
+            .frame(width: rect.width / 16.5, height: rect.width / 16.5)
     }
 }
