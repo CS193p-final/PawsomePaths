@@ -13,6 +13,7 @@
 		C699738025D9F4DC00337F70 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C699737F25D9F4DC00337F70 /* Preview Assets.xcassets */; };
 		C699738A25D9F51C00337F70 /* PolygonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699738925D9F51C00337F70 /* PolygonShape.swift */; };
 		C699739025D9F96600337F70 /* HexGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699738F25D9F96600337F70 /* HexGrid.swift */; };
+		C699739425D9FF2800337F70 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699739325D9FF2800337F70 /* CellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		C699738125D9F4DC00337F70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C699738925D9F51C00337F70 /* PolygonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonShape.swift; sourceTree = "<group>"; };
 		C699738F25D9F96600337F70 /* HexGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexGrid.swift; sourceTree = "<group>"; };
+		C699739325D9FF2800337F70 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				C699738825D9F4EE00337F70 /* Shapes */,
+				C699739225D9FEF300337F70 /* Views */,
 				C699737825D9F4DB00337F70 /* HexApp.swift */,
 				C699737A25D9F4DB00337F70 /* ContentView.swift */,
 				C699737C25D9F4DC00337F70 /* Assets.xcassets */,
@@ -78,9 +81,17 @@
 			isa = PBXGroup;
 			children = (
 				C699738925D9F51C00337F70 /* PolygonShape.swift */,
-				C699738F25D9F96600337F70 /* HexGrid.swift */,
 			);
 			path = Shapes;
+			sourceTree = "<group>";
+		};
+		C699739225D9FEF300337F70 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C699738F25D9F96600337F70 /* HexGrid.swift */,
+				C699739325D9FF2800337F70 /* CellView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C699737B25D9F4DB00337F70 /* ContentView.swift in Sources */,
+				C699739425D9FF2800337F70 /* CellView.swift in Sources */,
 				C699737925D9F4DB00337F70 /* HexApp.swift in Sources */,
 				C699738A25D9F51C00337F70 /* PolygonShape.swift in Sources */,
 				C699739025D9F96600337F70 /* HexGrid.swift in Sources */,

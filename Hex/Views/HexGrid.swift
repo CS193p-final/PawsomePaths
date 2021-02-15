@@ -13,6 +13,8 @@ struct HexGrid: View {
     let imgsize = CGSize(width: 150, height: 150)
     var hexagonWidth: CGFloat { (imgsize.width / 2) * cos(.pi / 6) * 2 }
     
+    var cellView: CellView
+    
     var body: some View {
         let gridItems = Array(repeating: GridItem(.fixed(hexagonWidth), spacing: spacing), count: cols)
         
@@ -20,8 +22,7 @@ struct HexGrid: View {
             LazyVGrid(columns: gridItems, spacing: spacing) {
                 ForEach(0..<200) { idx in
                     VStack(spacing: 0) {
-                        Image(systemName: "circle.fill")
-                            .resizable()
+                        cellView
                             .frame(width: imgsize.width, height: imgsize.height)
                             .clipShape(PolygonShape(sides: 6).rotation(Angle.degrees(90)))
                             .offset(x: isEvenRow(idx) ? 0: hexagonWidth / 2 + (spacing / 2))
