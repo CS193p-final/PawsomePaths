@@ -8,19 +8,13 @@
 import SwiftUI
 
 struct CellView: View {
-    let id: Int
-    @State private var color: Color = .white
+    @ObservedObject var cell: Cell
     var body: some View {
         Rectangle()
-            .foregroundColor(color)
             .onTapGesture {
-                if color == .red {
-                    color = .blue
-                }
-                else {
-                    color = .red
-                }
+                cell.changeColor()
             }
-            .overlay(Text("\(id / 6), \(id % 6)"))
+            .foregroundColor(cell.color)
+            .overlay(Text("\(cell.id / 6), \(cell.id % 6)"))
     }
 }

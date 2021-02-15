@@ -22,7 +22,7 @@ struct HexGrid: View {
             LazyVGrid(columns: gridItems, spacing: spacing) {
                 ForEach(0..<200) { idx in
                     VStack(spacing: 0) {
-                        CellView(id: idx)
+                        CellView(cell: Cell(id: idx))
                             .frame(width: imgsize.width, height: imgsize.height)
                             .clipShape(PolygonShape(sides: 6).rotation(Angle.degrees(90)))
                             .offset(x: isEvenRow(idx) ? 0: hexagonWidth / 2 + (spacing / 2))
