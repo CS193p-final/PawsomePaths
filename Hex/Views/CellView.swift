@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CellView: View {
+    let id: Int
     @State private var color: Color = .white
     var body: some View {
         Rectangle()
@@ -20,5 +21,6 @@ struct CellView: View {
                     color = .red
                 }
             }
+            .overlay(Text("\(id / 6), \(id % 6)"))
     }
 }
