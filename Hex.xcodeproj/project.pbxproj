@@ -11,6 +11,7 @@
 		C699737B25D9F4DB00337F70 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699737A25D9F4DB00337F70 /* ContentView.swift */; };
 		C699737D25D9F4DC00337F70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C699737C25D9F4DC00337F70 /* Assets.xcassets */; };
 		C699738025D9F4DC00337F70 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C699737F25D9F4DC00337F70 /* Preview Assets.xcassets */; };
+		C699738A25D9F51C00337F70 /* PolygonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699738925D9F51C00337F70 /* PolygonShape.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		C699737C25D9F4DC00337F70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C699737F25D9F4DC00337F70 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C699738125D9F4DC00337F70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C699738925D9F51C00337F70 /* PolygonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonShape.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 		C699737725D9F4DB00337F70 /* Hex */ = {
 			isa = PBXGroup;
 			children = (
+				C699738825D9F4EE00337F70 /* Shapes */,
 				C699737825D9F4DB00337F70 /* HexApp.swift */,
 				C699737A25D9F4DB00337F70 /* ContentView.swift */,
 				C699737C25D9F4DC00337F70 /* Assets.xcassets */,
@@ -67,6 +70,14 @@
 				C699737F25D9F4DC00337F70 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C699738825D9F4EE00337F70 /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				C699738925D9F51C00337F70 /* PolygonShape.swift */,
+			);
+			path = Shapes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +151,7 @@
 			files = (
 				C699737B25D9F4DB00337F70 /* ContentView.swift in Sources */,
 				C699737925D9F4DB00337F70 /* HexApp.swift in Sources */,
+				C699738A25D9F51C00337F70 /* PolygonShape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
