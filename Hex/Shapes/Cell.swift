@@ -14,7 +14,7 @@ class Cell: Identifiable, ObservableObject {
     
     init(id: Int) {
         self.id = id
-        color = .white
+        color = .purple
     }
     
     func changeColor() {
