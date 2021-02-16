@@ -11,7 +11,8 @@
 		C1D1CFE725DB6CBE00A6EAAE /* Array+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */; };
 		C6596A2F25DB0B0200A0F94B /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A2E25DB0B0200A0F94B /* GameBoard.swift */; };
 		C6596A3325DB11F000A0F94B /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A3225DB11F000A0F94B /* Queue.swift */; };
-		C6596A3825DB1BA500A0F94B /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A3725DB1BA500A0F94B /* GameState.swift */; };
+		C6596A3825DB1BA500A0F94B /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A3725DB1BA500A0F94B /* GameViewModel.swift */; };
+		C6596A4725DB40B400A0F94B /* MonteCarlo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A4625DB40B400A0F94B /* MonteCarlo.swift */; };
 		C699737925D9F4DB00337F70 /* HexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699737825D9F4DB00337F70 /* HexApp.swift */; };
 		C699737B25D9F4DB00337F70 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699737A25D9F4DB00337F70 /* GameView.swift */; };
 		C699737D25D9F4DC00337F70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C699737C25D9F4DC00337F70 /* Assets.xcassets */; };
@@ -26,7 +27,8 @@
 		C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Identifiable.swift"; sourceTree = "<group>"; };
 		C6596A2E25DB0B0200A0F94B /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		C6596A3225DB11F000A0F94B /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
-		C6596A3725DB1BA500A0F94B /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		C6596A3725DB1BA500A0F94B /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		C6596A4625DB40B400A0F94B /* MonteCarlo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonteCarlo.swift; sourceTree = "<group>"; };
 		C699737525D9F4DB00337F70 /* Hex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C699737825D9F4DB00337F70 /* HexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexApp.swift; sourceTree = "<group>"; };
 		C699737A25D9F4DB00337F70 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -53,7 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				C6596A2E25DB0B0200A0F94B /* GameBoard.swift */,
-				C6596A3725DB1BA500A0F94B /* GameState.swift */,
+				C6596A3725DB1BA500A0F94B /* GameViewModel.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -64,6 +66,14 @@
 				C6596A3225DB11F000A0F94B /* Queue.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C6596A4525DB400D00A0F94B /* AI */ = {
+			isa = PBXGroup;
+			children = (
+				C6596A4625DB40B400A0F94B /* MonteCarlo.swift */,
+			);
+			path = AI;
 			sourceTree = "<group>";
 		};
 		C699736C25D9F4DB00337F70 = {
@@ -85,6 +95,7 @@
 		C699737725D9F4DB00337F70 /* Hex */ = {
 			isa = PBXGroup;
 			children = (
+				C6596A4525DB400D00A0F94B /* AI */,
 				C699737C25D9F4DC00337F70 /* Assets.xcassets */,
 				C6596A3125DB11D900A0F94B /* Extensions */,
 				C6596A2D25DB0AA400A0F94B /* Game */,
@@ -197,11 +208,12 @@
 				C699737B25D9F4DB00337F70 /* GameView.swift in Sources */,
 				C699739425D9FF2800337F70 /* CellView.swift in Sources */,
 				C699737925D9F4DB00337F70 /* HexApp.swift in Sources */,
+				C6596A4725DB40B400A0F94B /* MonteCarlo.swift in Sources */,
 				C6596A3325DB11F000A0F94B /* Queue.swift in Sources */,
 				C6596A2F25DB0B0200A0F94B /* GameBoard.swift in Sources */,
 				C1D1CFE725DB6CBE00A6EAAE /* Array+Identifiable.swift in Sources */,
 				C699738A25D9F51C00337F70 /* PolygonShape.swift in Sources */,
-				C6596A3825DB1BA500A0F94B /* GameState.swift in Sources */,
+				C6596A3825DB1BA500A0F94B /* GameViewModel.swift in Sources */,
 				C699739025D9F96600337F70 /* HexGrid.swift in Sources */,
 				C1D1CFE225DA0ED500A6EAAE /* Cell.swift in Sources */,
 			);
