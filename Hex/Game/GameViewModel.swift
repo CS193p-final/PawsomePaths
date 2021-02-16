@@ -25,6 +25,14 @@ class GameViewModel: ObservableObject {
     
     var playerTurn: String { "Player \(board.playerTurn)" }
     
+    var result: String {
+        switch board.checkResult() {
+        case .player1Win: return "Player 1 wins"
+        case .player2Win: return "Player 2 wins"
+        case .unknown: return "Unknown"
+        }
+    }
+    
     // MARK: - Intent(s)
     func play(cellId: Int) {
         _ = board.play(move: BoardPosition(id: cellId))

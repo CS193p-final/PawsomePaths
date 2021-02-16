@@ -60,7 +60,7 @@ struct GameBoard: Hashable {
         return self
     }
     
-    private func checkResult() -> GameResult {
+    func checkResult() -> GameResult {
         
         // Check if player 1 has connected top to bottom
         var visited = Array(repeating: Array(repeating: false, count: size), count: size)

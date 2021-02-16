@@ -11,10 +11,11 @@ struct GameView: View {
     @ObservedObject var hexGame = GameViewModel()
     
     var body: some View {
-        HexGrid(appendArray()) { cell in
+        HexGrid(hexGame.cellValues) { cell in
             CellView(cell: cell)
                 .onTapGesture {
                     hexGame.play(cellId: cell.id)
+                    print(hexGame.result)
                 }
         }
     }
