@@ -7,12 +7,19 @@
 
 import SwiftUI
 
-struct HexGrid: View {
-    let cols: Int = 11
-    let spacing: CGFloat = 1
-    let imgsize = CGSize(width: 150, height: 150)
-    
-//    var cellView: CellView
+struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable, ItemView: View{
+    private var items: [Item]
+    private var id: KeyPath<Item,ID>
+    private var viewForItems: (Item) -> ItemView
+    private let cols: Int = 11
+    private let spacing: CGFloat = 1
+    private let imgsize = CGSize(width: 150, height: 150)
+        
+    init(_ items: [Item], id: KeyPath<Item, ID>, viewForItems: @escaping (Item) -> ItemView) {
+        self.items = items
+        self.id = id
+        self.viewForItems = viewForItems
+    }
     
     var body: some View {
         GeometryReader { geometry in
@@ -20,11 +27,12 @@ struct HexGrid: View {
             let gridItems = Array(repeating: GridItem(.fixed(hexagonWidth), spacing: -hexagonWidth/1.7), count: cols)
             ScrollView(.vertical) {
                 LazyVGrid(columns: gridItems, spacing: 0) {
-                    ForEach(0..<121) { idx in
+                    ForEach(items, id: id) { item in
                         VStack(spacing: 0) {
-                            CellView(cell: Cell(id: idx), rect: geometry.size)
+                            viewForItems(item)
+                                .frame(width: geometry.size.width / 16.5, height: geometry.size.width / 16.5)
                                 .clipShape(PolygonShape(sides: 6).rotation(Angle.degrees(90)))
-                                .offset(x: offset(id: idx, hexagonWidth: hexagonWidth))
+                                .offset(x: offset(id: items.firstIndex(matching: item)!, hexagonWidth: hexagonWidth))
                         }
                     }
                 }
@@ -37,8 +45,23 @@ struct HexGrid: View {
     }
 }
 
+extension HexGrid where Item: Identifiable, ID == Item.ID {
+    init(_ items: [Item], viewForItems: @escaping (Item) -> ItemView) {
+        self.init(items, id: \Item.id, viewForItems: viewForItems)
+    }
+}
+
 struct HexGrid_Preview: PreviewProvider {
+    static var cellArray = [Cell]()
+    static func appendArray() -> [Cell]{
+        for index in (0..<121) {
+            cellArray.append(Cell(id: index))
+        }
+        return cellArray
+    }
     static var previews: some View {
-        HexGrid()
+        HexGrid(appendArray()) { cell in
+            CellView(cell: cell)
+        }
     }
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C1D1CFE225DA0ED500A6EAAE /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D1CFE125DA0ED500A6EAAE /* Cell.swift */; };
+		C1D1CFE725DB6CBE00A6EAAE /* Array+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */; };
 		C6596A2F25DB0B0200A0F94B /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A2E25DB0B0200A0F94B /* GameBoard.swift */; };
 		C6596A3325DB11F000A0F94B /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A3225DB11F000A0F94B /* Queue.swift */; };
 		C6596A3825DB1BA500A0F94B /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A3725DB1BA500A0F94B /* GameState.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		C1D1CFE125DA0ED500A6EAAE /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Identifiable.swift"; sourceTree = "<group>"; };
 		C6596A2E25DB0B0200A0F94B /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		C6596A3225DB11F000A0F94B /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		C6596A3725DB1BA500A0F94B /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			children = (
 				C699737A25D9F4DB00337F70 /* GameView.swift */,
 				C699738F25D9F96600337F70 /* HexGrid.swift */,
+				C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */,
 				C699739325D9FF2800337F70 /* CellView.swift */,
 			);
 			path = Views;
@@ -196,6 +199,7 @@
 				C699737925D9F4DB00337F70 /* HexApp.swift in Sources */,
 				C6596A3325DB11F000A0F94B /* Queue.swift in Sources */,
 				C6596A2F25DB0B0200A0F94B /* GameBoard.swift in Sources */,
+				C1D1CFE725DB6CBE00A6EAAE /* Array+Identifiable.swift in Sources */,
 				C699738A25D9F51C00337F70 /* PolygonShape.swift in Sources */,
 				C6596A3825DB1BA500A0F94B /* GameState.swift in Sources */,
 				C699739025D9F96600337F70 /* HexGrid.swift in Sources */,

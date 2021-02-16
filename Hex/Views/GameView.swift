@@ -9,7 +9,18 @@ import SwiftUI
 
 struct GameView: View {
     var body: some View {
-        HexGrid()
+
+        HexGrid(appendArray()) { cell in
+            CellView(cell: cell)
+        }
+    }
+    
+    func appendArray() -> [Cell]{
+        var cellArray = [Cell]()
+        for index in (0..<121) {
+            cellArray.append(Cell(id: index))
+        }
+        return cellArray
     }
 }
 
