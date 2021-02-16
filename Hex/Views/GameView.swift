@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct GameView: View {
+    @ObservedObject var hexGame = GameViewModel()
+    
     var body: some View {
-
         HexGrid(appendArray()) { cell in
             CellView(cell: cell)
+                .onTapGesture {
+                    hexGame.
+                }
         }
     }
     

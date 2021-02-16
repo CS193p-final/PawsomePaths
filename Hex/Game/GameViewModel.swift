@@ -11,14 +11,16 @@ class GameViewModel: ObservableObject {
     @Published var board = GameBoard()
     
     // MARK: - Access
-    var cellValues: [Int] {
-        var array = [Int]()
+    var cellValues: [Cell] {
+        var cells = [Cell]()
+        var id = 0
         for r in 0..<board.size {
             for c in 0..<board.size {
-                array.append(board.board[r][c])
+                cells.append(Cell(id: id, colorCode: board.board[r][c]))
+                id += 1
             }
         }
-        return array
+        return cells
     }
     
     var playerTurn: String { "Player \(board.playerTurn)" }

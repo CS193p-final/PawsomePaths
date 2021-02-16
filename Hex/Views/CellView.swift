@@ -8,12 +8,9 @@
 import SwiftUI
 
 struct CellView: View {
-    @ObservedObject var cell: Cell    
+    var cell: Cell
     var body: some View {
         Rectangle()
-            .onTapGesture {
-                cell.changeColor()
-            }
             .foregroundColor(cell.color)
             .overlay(Text("\(cell.id / 11), \(cell.id % 11)"))
     }
