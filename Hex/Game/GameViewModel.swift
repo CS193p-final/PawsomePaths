@@ -26,5 +26,7 @@ class GameViewModel: ObservableObject {
     var playerTurn: String { "Player \(board.playerTurn)" }
     
     // MARK: - Intent(s)
-    
+    func play(cellId: Int) {
+        _ = board.play(move: BoardPosition(id: cellId))
+    }
 }

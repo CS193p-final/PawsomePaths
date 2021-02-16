@@ -16,40 +16,48 @@ enum GameResult {
 struct BoardPosition {
     var r: Int
     var c: Int
+    
+    init(r: Int, c: Int) {
+        self.r = r
+        self.c = c
+    }
+    
+    init(id: Int) {
+        // TODO: Fix magic number
+        r = id / 11
+        c = id % 11
+    }
 }
 
-struct GameBoard {
+struct GameBoard: Hashable {
     private static let dr = [-1, -1, 0, 1, 1, 0]
     private static let dc = [0, 1, 1, 0, -1, -1]
     
-    var size: Int
-    var board: [[Int]]
-    var playerTurn: Int {
-        // TODO: optimize this computed variable
-        var player1 = 0
-        for r in 0..<size {
-            for c in 0..<size {
-                if board[r][c] == 1 {
-                    player1 -= 1
-                }
-                if board[r][c] == 2 {
-                    player1 += 1
-                }
-            }
-        }
-        assert(player1 > -2 && player1 < 2)
-        if player1 < 0 {
-            return 2
-        }
-        else {
-            return 1
-        }
-    }
-    
+    private(set) var size: Int
+    private(set) var board: [[Int]]
+    private(set) var playerTurn: Int = 1
     
     init(size: Int = 11) {
         self.size = size
         board = Array(repeating: Array(repeating: 0, count: size), count: size)
+    }
+    
+    var legalMoves: [BoardPosition] {
+        var moves = [BoardPosition]()
+        for r in 0..<size {
+            for c in 0..<size {
+                if board[r][c] == 0 {
+                    moves.append(BoardPosition(r: r, c: c))
+                }
+            }
+        }
+        return moves
+    }
+    
+    mutating func play(move: BoardPosition) -> GameBoard {
+        board[move.r][move.c] = playerTurn
+        playerTurn = 3 - playerTurn
+        return self
     }
     
     private func checkResult() -> GameResult {

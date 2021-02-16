@@ -14,7 +14,7 @@ struct GameView: View {
         HexGrid(appendArray()) { cell in
             CellView(cell: cell)
                 .onTapGesture {
-                    hexGame.
+                    hexGame.play(cellId: cell.id)
                 }
         }
     }
