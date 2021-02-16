@@ -1,5 +1,5 @@
 //
-//  GameState.swift
+//  GameViewModel.swift
 //  Hex
 //
 //  Created by Duong Pham on 2/15/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class GameState: ObservableObject {
+class GameViewModel: ObservableObject {
     @Published var board = GameBoard()
     
     // MARK: - Access
