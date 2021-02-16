@@ -12,26 +12,26 @@ struct WelcomeView: View {
         NavigationView {
             VStack {
                 NavigationLink(
-                    destination: GameView(hexGame: GameViewModel()),
+                    destination: GameView(hexGame: GameViewModel(name: "2player")),
                     label: {
                         RoundedRectangle(cornerRadius: 10).opacity(0.3)
                             .frame(width: 150, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                            .overlay(Text("New 2 Player Game")).font(.headline)
+                            .overlay(Text("2 Player Game")).font(.headline)
                     })
                 NavigationLink(
-                    destination: GameView(hexGame: GameViewModel()),
+                    destination: GameView(hexGame: GameViewModel(name: "computer")),
                     label: {
                         RoundedRectangle(cornerRadius: 10).opacity(0.3)
                             .frame(width: 150, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                            .overlay(Text("New Computer Game")).font(.headline)
-                    })
+                            .overlay(Text("Computer Game")).font(.headline)
+                        })
             }
         }
     }
 }
-
-struct WelcomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        WelcomeView()
-    }
-}
+//
+//struct WelcomeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WelcomeView()
+//    }
+//}

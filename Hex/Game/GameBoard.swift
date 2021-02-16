@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 enum GameResult {
     case unknown
@@ -29,13 +30,25 @@ struct BoardPosition {
     }
 }
 
-struct GameBoard: Hashable {
+struct GameBoard: Hashable, Codable {
     private static let dr = [-1, -1, 0, 1, 1, 0]
     private static let dc = [0, 1, 1, 0, -1, -1]
     
     private(set) var size: Int
     private(set) var board: [[Int]]
     private(set) var playerTurn: Int = 1
+    
+    var json: Data? {
+        try? JSONEncoder().encode(self)
+    }
+    
+    init?(json: Data?) {
+        if json != nil, let newBoard = try? JSONDecoder().decode(GameBoard.self, from: json!) {
+            self = newBoard
+        } else {
+            return nil
+        }
+    }
     
     init(size: Int = 11) {
         self.size = size

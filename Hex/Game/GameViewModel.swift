@@ -6,9 +6,19 @@
 //
 
 import SwiftUI
+import Combine
 
 class GameViewModel: ObservableObject {
     @Published var board = GameBoard()
+    private var autoSaveCancellable: AnyCancellable?
+    
+    init(name: String) {
+        let defaultsKey = "HexGame.\(name)"
+        board = GameBoard(json: UserDefaults.standard.data(forKey: defaultsKey)) ?? GameBoard()
+        autoSaveCancellable = $board.sink { board in
+            UserDefaults.standard.setValue(board.json, forKey: defaultsKey)
+        }
+    }
     
     // MARK: - Access
     var cellValues: [Cell] {
@@ -31,10 +41,6 @@ class GameViewModel: ObservableObject {
         case .player2Win: return "Player 2 wins"
         case .unknown: return "Unknown"
         }
-    }
-    
-    init(board: GameBoard) {
-        self.board = board
     }
     
     init() {
