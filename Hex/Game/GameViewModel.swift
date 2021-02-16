@@ -33,8 +33,20 @@ class GameViewModel: ObservableObject {
         }
     }
     
+    init(board: GameBoard) {
+        self.board = board
+    }
+    
+    init() {
+        self.board = GameBoard(size: 11)
+    }
+    
     // MARK: - Intent(s)
     func play(cellId: Int) {
         _ = board.play(move: BoardPosition(id: cellId))
+    }
+    
+    func newGame() {
+        self.board = GameBoard(size: 11)
     }
 }

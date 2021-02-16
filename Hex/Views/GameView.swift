@@ -11,12 +11,24 @@ struct GameView: View {
     @ObservedObject var hexGame = GameViewModel()
     
     var body: some View {
+        Text("Hex Game").bold().font(.headline)
+        HStack {
+            Text("Player 1 turn").foregroundColor(hexGame.board.playerTurn == 1 ? .red : .gray)
+                .padding()
+            Text("Player 2 turn").foregroundColor(hexGame.board.playerTurn == 2 ? .blue : .gray)
+                .padding()
+        }
         HexGrid(hexGame.cellValues) { cell in
             CellView(cell: cell)
                 .onTapGesture {
                     hexGame.play(cellId: cell.id)
                     print(hexGame.result)
                 }
+        }
+        Button(action: hexGame.newGame) {
+            RoundedRectangle(cornerRadius: 10).opacity(0.3)
+                .frame(width: 100, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .overlay(Text("New Game"))
         }
     }
     
