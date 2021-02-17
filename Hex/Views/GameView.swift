@@ -24,6 +24,9 @@ struct GameView: View {
                 .onTapGesture {
                     hexGame.play(cellId: cell.id)
                     print(hexGame.result)
+                    if hexGame.gameEnded {
+                        showResult = true
+                    }
                 }
         }
         .popover(isPresented: $showResult) {
@@ -34,14 +37,6 @@ struct GameView: View {
                 .frame(width: 100, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .overlay(Text("New Game"))
         }
-    }
-    
-    func appendArray() -> [Cell]{
-        var cellArray = [Cell]()
-        for index in (0..<121) {
-            cellArray.append(Cell(id: index))
-        }
-        return cellArray
     }
 }
 

@@ -43,6 +43,14 @@ class GameViewModel: ObservableObject {
         }
     }
     
+    var gameEnded: Bool {
+        switch board.checkResult() {
+        case .player1Win: return true
+        case .player2Win: return true
+        case .unknown: return false
+        }
+    }
+    
     init() {
         self.board = GameBoard(size: 11)
     }

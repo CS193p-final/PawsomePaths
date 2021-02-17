@@ -26,13 +26,29 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
             let gridItems = Array(repeating: GridItem(.fixed(hexagonWidth), spacing: -hexagonWidth/1.7), count: cols)
             Rectangle()
                 .foregroundColor(.red)
-                .frame(width: geometry.size.width / 16.5 * 11, height: geometry.size.width / 16.5 / 2, alignment: .center)
+                .frame(width: geometry.size.width / hexInOneLine * CGFloat(cols - 1), height: geometry.size.width / hexInOneLine / 2, alignment: .center)
+                //.offset(y: -geometry.size.width / hexInOneLine / 4)
+            Rectangle()
+                .foregroundColor(.blue)
+                .frame(width: diagonalLength(geometry.size.width), height: geometry.size.width / hexInOneLine / 2, alignment: .center)
+                .rotationEffect(Angle.degrees(60))
+                .offset(x: diagonalLength(geometry.size.width) / 2 + (geometry.size.width / hexInOneLine) / 2
+                    ,y: geometry.size.width / hexInOneLine * CGFloat((cols / 2)) + geometry.size.width / hexInOneLine / 2)
+            Rectangle()
+                .foregroundColor(.blue)
+                .frame(width: diagonalLength(geometry.size.width), height: geometry.size.width / hexInOneLine / 2, alignment: .center)
+                .rotationEffect(Angle.degrees(60))
+                .offset(x: -(geometry.size.width / hexInOneLine * CGFloat(cols + 4)) / 4, y: geometry.size.width / hexInOneLine * CGFloat(cols / 2) + geometry.size.width / hexInOneLine / 2)
+            Rectangle()
+                .foregroundColor(.red)
+                .frame(width: geometry.size.width / hexInOneLine * CGFloat(cols), height: geometry.size.width / 16.5 / 2, alignment: .center)
+                .offset(x: geometry.size.width / hexInOneLine * CGFloat((cols + 1) / 2), y: geometry.size.width / hexInOneLine * CGFloat(cols))
             ScrollView(.vertical) {
                 LazyVGrid(columns: gridItems, spacing: 0) {
                     ForEach(items, id: id) { item in
                         VStack(spacing: 0) {
                             viewForItems(item)
-                                .frame(width: geometry.size.width / 16.5, height: geometry.size.width / 16.5)
+                                .frame(width: geometry.size.width / hexInOneLine, height: geometry.size.width / hexInOneLine)
                                 .clipShape(PolygonShape(sides: 6).rotation(Angle.degrees(90)))
                                 .offset(x: offset(id: items.firstIndex(matching: item)!, hexagonWidth: hexagonWidth))
                         }
@@ -40,15 +56,17 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
                 }
             }
             .zIndex(1)
-            .offset(y: geometry.size.width / 16.5 / 4)
-            Rectangle()
-                .foregroundColor(.red)
-                .frame(width: geometry.size.width / 16.5 * 11, height: geometry.size.width / 16.5 / 2, alignment: .center)
-                .offset(x: geometry.size.width / 16.5 * 5.5, y: geometry.size.width / 16.5 * 11)
+            .offset(y: geometry.size.width / hexInOneLine / 4)
         }
     }
     func offset(id: Int, hexagonWidth: CGFloat) -> CGFloat {
-        CGFloat(id / 11 + 1) * CGFloat(hexagonWidth / 4) - CGFloat(6 * hexagonWidth / 4)
+        CGFloat(id / cols + 1) * CGFloat(hexagonWidth / 4) - CGFloat(6 * hexagonWidth / 4)
+    }
+    var hexInOneLine: CGFloat {
+        CGFloat(cols + cols / 2)
+    }
+    func diagonalLength(_ geometryWidth: CGFloat) -> CGFloat {
+        (geometryWidth / hexInOneLine * CGFloat(cols)) / CGFloat(sin(60 * Double.pi / 180))
     }
 }
 
