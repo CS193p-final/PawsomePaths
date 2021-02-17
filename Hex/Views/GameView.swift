@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GameView: View {
     @ObservedObject var hexGame = GameViewModel()
+    @State private var showResult = false
     
     var body: some View {
         Text("Hex Game").bold().font(.headline)
@@ -25,6 +26,9 @@ struct GameView: View {
                     print(hexGame.result)
                 }
         }
+        .popover(isPresented: $showResult) {
+            resultReport(game: hexGame)
+        }
         Button(action: hexGame.newGame) {
             RoundedRectangle(cornerRadius: 10).opacity(0.3)
                 .frame(width: 100, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
@@ -38,6 +42,13 @@ struct GameView: View {
             cellArray.append(Cell(id: index))
         }
         return cellArray
+    }
+}
+
+struct resultReport: View {
+    var game: GameViewModel
+    var body: some View {
+        Text("\(game.result)").font(.headline)
     }
 }
 

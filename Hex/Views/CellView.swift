@@ -12,6 +12,5 @@ struct CellView: View {
     var body: some View {
         Rectangle()
             .foregroundColor(cell.color)
-            .overlay(Text("\(cell.id / 11), \(cell.id % 11)"))
     }
 }

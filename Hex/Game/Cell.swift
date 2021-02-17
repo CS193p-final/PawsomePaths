@@ -26,12 +26,4 @@ struct Cell: Identifiable {
             color = .purple
         }
     }
-    
-    mutating func changeColor() {
-        if color == Color.red {
-            color = .blue
-        } else {
-            color = .red
-        }
-    }
 }

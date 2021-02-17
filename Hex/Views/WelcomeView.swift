@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     var body: some View {
+        RoundedRectangle(cornerRadius: 90).foregroundColor(.pink).overlay(
         NavigationView {
             VStack {
                 NavigationLink(
@@ -18,20 +19,20 @@ struct WelcomeView: View {
                             .frame(width: 150, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                             .overlay(Text("2 Player Game")).font(.headline)
                     })
-                NavigationLink(
-                    destination: GameView(hexGame: GameViewModel(name: "computer")),
-                    label: {
-                        RoundedRectangle(cornerRadius: 10).opacity(0.3)
-                            .frame(width: 150, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                            .overlay(Text("Computer Game")).font(.headline)
-                        })
+            NavigationLink(
+                destination: GameView(hexGame: GameViewModel(name: "computer")),
+                label: {
+                    RoundedRectangle(cornerRadius: 10).opacity(0.3)
+                        .frame(width: 150, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        .overlay(Text("Computer Game")).font(.headline)
+                    })
             }
-        }
+        })
     }
 }
-//
-//struct WelcomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WelcomeView()
-//    }
-//}
+
+struct WelcomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        WelcomeView()
+    }
+}

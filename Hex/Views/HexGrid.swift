@@ -13,7 +13,6 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
     private var viewForItems: (Item) -> ItemView
     private let cols: Int = 11
     private let spacing: CGFloat = 1
-    private let imgsize = CGSize(width: 150, height: 150)
         
     init(_ items: [Item], id: KeyPath<Item, ID>, viewForItems: @escaping (Item) -> ItemView) {
         self.items = items
@@ -25,6 +24,9 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
         GeometryReader { geometry in
             let hexagonWidth = (geometry.size.width / 12) * cos(.pi / 6) * 2
             let gridItems = Array(repeating: GridItem(.fixed(hexagonWidth), spacing: -hexagonWidth/1.7), count: cols)
+            Rectangle()
+                .foregroundColor(.red)
+                .frame(width: geometry.size.width / 16.5 * 11, height: geometry.size.width / 16.5 / 2, alignment: .center)
             ScrollView(.vertical) {
                 LazyVGrid(columns: gridItems, spacing: 0) {
                     ForEach(items, id: id) { item in
@@ -37,9 +39,14 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
                     }
                 }
             }
+            .zIndex(1)
+            .offset(y: geometry.size.width / 16.5 / 4)
+            Rectangle()
+                .foregroundColor(.red)
+                .frame(width: geometry.size.width / 16.5 * 11, height: geometry.size.width / 16.5 / 2, alignment: .center)
+                .offset(x: geometry.size.width / 16.5 * 5.5, y: geometry.size.width / 16.5 * 11)
         }
     }
-    
     func offset(id: Int, hexagonWidth: CGFloat) -> CGFloat {
         CGFloat(id / 11 + 1) * CGFloat(hexagonWidth / 4) - CGFloat(6 * hexagonWidth / 4)
     }
