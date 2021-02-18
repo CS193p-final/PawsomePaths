@@ -12,7 +12,7 @@
 		C1D1CFE725DB6CBE00A6EAAE /* Array+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */; };
 		C6596A2F25DB0B0200A0F94B /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A2E25DB0B0200A0F94B /* GameBoard.swift */; };
 		C6596A3325DB11F000A0F94B /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A3225DB11F000A0F94B /* Queue.swift */; };
-		C6596A3825DB1BA500A0F94B /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A3725DB1BA500A0F94B /* GameViewModel.swift */; };
+		C6596A3825DB1BA500A0F94B /* TwoPlayersGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A3725DB1BA500A0F94B /* TwoPlayersGame.swift */; };
 		C6596A4725DB40B400A0F94B /* MonteCarlo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A4625DB40B400A0F94B /* MonteCarlo.swift */; };
 		C699737925D9F4DB00337F70 /* HexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699737825D9F4DB00337F70 /* HexApp.swift */; };
 		C699737B25D9F4DB00337F70 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699737A25D9F4DB00337F70 /* GameView.swift */; };
@@ -21,6 +21,8 @@
 		C699738A25D9F51C00337F70 /* PolygonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699738925D9F51C00337F70 /* PolygonShape.swift */; };
 		C699739025D9F96600337F70 /* HexGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699738F25D9F96600337F70 /* HexGrid.swift */; };
 		C699739425D9FF2800337F70 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699739325D9FF2800337F70 /* CellView.swift */; };
+		C6B09AD425DE126000C96782 /* DumpAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09AD325DE126000C96782 /* DumpAI.swift */; };
+		C6B09AD825DE142D00C96782 /* SinglePlayerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +31,7 @@
 		C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Identifiable.swift"; sourceTree = "<group>"; };
 		C6596A2E25DB0B0200A0F94B /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		C6596A3225DB11F000A0F94B /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
-		C6596A3725DB1BA500A0F94B /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		C6596A3725DB1BA500A0F94B /* TwoPlayersGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoPlayersGame.swift; sourceTree = "<group>"; };
 		C6596A4625DB40B400A0F94B /* MonteCarlo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonteCarlo.swift; sourceTree = "<group>"; };
 		C699737525D9F4DB00337F70 /* Hex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C699737825D9F4DB00337F70 /* HexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexApp.swift; sourceTree = "<group>"; };
@@ -40,6 +42,8 @@
 		C699738925D9F51C00337F70 /* PolygonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonShape.swift; sourceTree = "<group>"; };
 		C699738F25D9F96600337F70 /* HexGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexGrid.swift; sourceTree = "<group>"; };
 		C699739325D9FF2800337F70 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		C6B09AD325DE126000C96782 /* DumpAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DumpAI.swift; sourceTree = "<group>"; };
+		C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePlayerGame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,9 +60,9 @@
 		C6596A2D25DB0AA400A0F94B /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				C6B09AD625DE13C000C96782 /* Modes */,
 				C1D1CFE125DA0ED500A6EAAE /* Cell.swift */,
 				C6596A2E25DB0B0200A0F94B /* GameBoard.swift */,
-				C6596A3725DB1BA500A0F94B /* GameViewModel.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -66,6 +70,7 @@
 		C6596A3125DB11D900A0F94B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */,
 				C6596A3225DB11F000A0F94B /* Queue.swift */,
 			);
 			path = Extensions;
@@ -75,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				C6596A4625DB40B400A0F94B /* MonteCarlo.swift */,
+				C6B09AD325DE126000C96782 /* DumpAI.swift */,
 			);
 			path = AI;
 			sourceTree = "<group>";
@@ -132,11 +138,19 @@
 			children = (
 				C699737A25D9F4DB00337F70 /* GameView.swift */,
 				C699738F25D9F96600337F70 /* HexGrid.swift */,
-				C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */,
 				C699739325D9FF2800337F70 /* CellView.swift */,
 				C101D1E325DC5789000E86E0 /* WelcomeView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C6B09AD625DE13C000C96782 /* Modes */ = {
+			isa = PBXGroup;
+			children = (
+				C6596A3725DB1BA500A0F94B /* TwoPlayersGame.swift */,
+				C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */,
+			);
+			path = Modes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,9 +229,11 @@
 				C6596A3325DB11F000A0F94B /* Queue.swift in Sources */,
 				C6596A2F25DB0B0200A0F94B /* GameBoard.swift in Sources */,
 				C1D1CFE725DB6CBE00A6EAAE /* Array+Identifiable.swift in Sources */,
+				C6B09AD425DE126000C96782 /* DumpAI.swift in Sources */,
 				C101D1E425DC5789000E86E0 /* WelcomeView.swift in Sources */,
 				C699738A25D9F51C00337F70 /* PolygonShape.swift in Sources */,
-				C6596A3825DB1BA500A0F94B /* GameViewModel.swift in Sources */,
+				C6B09AD825DE142D00C96782 /* SinglePlayerGame.swift in Sources */,
+				C6596A3825DB1BA500A0F94B /* TwoPlayersGame.swift in Sources */,
 				C699739025D9F96600337F70 /* HexGrid.swift in Sources */,
 				C1D1CFE225DA0ED500A6EAAE /* Cell.swift in Sources */,
 			);

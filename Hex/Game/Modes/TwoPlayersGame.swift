@@ -1,5 +1,5 @@
 //
-//  GameViewModel.swift
+//  TwoPlayersGame.swift
 //  Hex
 //
 //  Created by Duong Pham on 2/15/21.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-class GameViewModel: ObservableObject {
+class TwoPlayersGame: ObservableObject {
     @Published var board = GameBoard()
     private var autoSaveCancellable: AnyCancellable?
     
