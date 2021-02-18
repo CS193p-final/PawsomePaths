@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GameView: View {
-    @ObservedObject var hexGame = TwoPlayersGame()
+    @ObservedObject var hexGame: GameMode
     @State private var showResult = false
     
     var body: some View {
@@ -41,7 +41,7 @@ struct GameView: View {
 }
 
 struct resultReport: View {
-    var game: TwoPlayersGame
+    var game: GameMode
     var body: some View {
         Text("\(game.result)").font(.headline)
     }
@@ -49,6 +49,6 @@ struct resultReport: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView()
+        GameView(hexGame: SinglePlayerGame())
     }
 }

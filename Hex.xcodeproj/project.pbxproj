@@ -23,6 +23,7 @@
 		C699739425D9FF2800337F70 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699739325D9FF2800337F70 /* CellView.swift */; };
 		C6B09AD425DE126000C96782 /* DumpAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09AD325DE126000C96782 /* DumpAI.swift */; };
 		C6B09AD825DE142D00C96782 /* SinglePlayerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */; };
+		C6B09ADB25DEF36E00C96782 /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09ADA25DEF36E00C96782 /* GameMode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		C699739325D9FF2800337F70 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		C6B09AD325DE126000C96782 /* DumpAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DumpAI.swift; sourceTree = "<group>"; };
 		C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePlayerGame.swift; sourceTree = "<group>"; };
+		C6B09ADA25DEF36E00C96782 /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			children = (
 				C6596A3725DB1BA500A0F94B /* TwoPlayersGame.swift */,
 				C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */,
+				C6B09ADA25DEF36E00C96782 /* GameMode.swift */,
 			);
 			path = Modes;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				C699737925D9F4DB00337F70 /* HexApp.swift in Sources */,
 				C6596A4725DB40B400A0F94B /* MonteCarlo.swift in Sources */,
 				C6596A3325DB11F000A0F94B /* Queue.swift in Sources */,
+				C6B09ADB25DEF36E00C96782 /* GameMode.swift in Sources */,
 				C6596A2F25DB0B0200A0F94B /* GameBoard.swift in Sources */,
 				C1D1CFE725DB6CBE00A6EAAE /* Array+Identifiable.swift in Sources */,
 				C6B09AD425DE126000C96782 /* DumpAI.swift in Sources */,
