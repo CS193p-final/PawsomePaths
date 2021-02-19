@@ -22,37 +22,46 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
     
     var body: some View {
         GeometryReader { geometry in
-            let gridItems = Array(repeating: GridItem(.fixed(geometry.size.width/hexInOneLine), spacing: 0), count: cols)
+            let gridItems = Array(repeating: GridItem(.fixed(hexagonWidth(geometry.size.width)), spacing: 0), count: cols)
 
-            RedBorder(cols: cols, frameSize: geometry.size.width / hexInOneLine)
-            RedBorder(cols: cols, frameSize: geometry.size.width / hexInOneLine)
-                .offset(x: CGFloat(cols / 2) * geometry.size.width / CGFloat(hexInOneLine), y: geometry.size.width / hexInOneLine * CGFloat(cols) - geometry.size.width / hexInOneLine / 2)
-            BlueBorder(cols: cols, frameSize: geometry.size.width / hexInOneLine, geometryWidth: geometry.size.width)
-            BlueBorder(cols: cols, frameSize: geometry.size.width / hexInOneLine, geometryWidth: geometry.size.width)
-                .offset(x: CGFloat(cols) * geometry.size.width / CGFloat(hexInOneLine) - geometry.size.width / hexInOneLine / 2)
+//            RedBorder(cols: cols, frameSize: hexagonHeight(geometry.size.width))
+//            RedBorder(cols: cols, frameSize: hexagonHeight(geometry.size.width))
+//                .offset(x: CGFloat(cols / 2) * hexagonWidth(geometry.size.width), y: hexagonHeight(geometry.size.width) * CGFloat(cols) - hexagonHeight(geometry.size.width) / 2)
+//            BlueBorder(cols: cols, frameSize: geometry.size.width / hexInOneLine, geometryWidth: geometry.size.width)
+//            BlueBorder(cols: cols, frameSize: hexagonHeight(geometry.size.width), geometryWidth: geometry.size.width)
+//                .offset(x: CGFloat(cols) * hexagonHeight(geometry.size.width) - hexagonHeight(geometry.size.width) / 2)
 
             ScrollView(.vertical) {
                 LazyVGrid(columns: gridItems, spacing: 0) {
                     ForEach(items, id: id) { item in
-                        VStack(spacing: 0) {
+                        VStack() {
                             viewForItems(item)
+                                .frame(width: hexagonWidth(geometry.size.width), height: hexagonHeight(geometry.size.width))
                                 .clipShape(PolygonShape(sides: 6))
-                                .frame(width: geometry.size.width / hexInOneLine, height: geometry.size.width / hexInOneLine)
                                 .offset(x: offset(id: items.firstIndex(matching: item)!, geometryWidth: geometry.size.width))
+                                .padding(.vertical, -hexagonHeight(geometry.size.width) / 8)
                         }
                     }
                 }
             }
             .zIndex(1)
-            .offset(y: geometry.size.width / hexInOneLine / 4)
+            .offset(y: hexagonHeight(geometry.size.width) / 4)
         }
     }
     func offset(id: Int, geometryWidth: CGFloat) -> CGFloat {
-        CGFloat(id / cols) * (geometryWidth / CGFloat(hexInOneLine * 2))
-            - ((geometryWidth - (geometryWidth / hexInOneLine) * CGFloat(cols)) / 2)
+        CGFloat(id / cols) * hexagonWidth(geometryWidth / 2) - (hexagonWidth(geometryWidth) * CGFloat(cols - 1) / 4)
+        
     }
     var hexInOneLine: CGFloat {
-        CGFloat(cols + cols / 2)
+        CGFloat(cols + (cols / 2))
+    }
+    
+    func hexagonWidth(_ geometryWidth: CGFloat) -> CGFloat {
+        CGFloat(sin(60 * Double.pi / 180)) * geometryWidth / hexInOneLine
+    }
+    
+    func hexagonHeight(_ geometryWidth: CGFloat) -> CGFloat {
+        geometryWidth / hexInOneLine
     }
 }
 
@@ -71,7 +80,7 @@ struct HexGrid_Preview: PreviewProvider {
         return cellArray
     }
     static var previews: some View {
-        HexGrid(appendArray(), cols: 11) { cell in
+        HexGrid(appendArray(), cols: 6) { cell in
             CellView(cell: cell)
         }
     }
