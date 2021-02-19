@@ -20,7 +20,7 @@ struct WelcomeView: View {
                             .overlay(Text("2 Player Game")).font(.headline)
                     })
             NavigationLink(
-                destination: GameView(hexGame: TwoPlayersGame(name: "computer")),
+                destination: GameView(hexGame: SinglePlayerGame()),
                 label: {
                     RoundedRectangle(cornerRadius: 10).opacity(0.3)
                         .frame(width: 150, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
