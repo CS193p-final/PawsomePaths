@@ -19,15 +19,17 @@ struct GameView: View {
             Text("Player 2 turn").foregroundColor(hexGame.board.playerTurn == 2 ? .blue : .gray)
                 .padding()
         }
-        HexGrid(hexGame.cellValues) { cell in
-            CellView(cell: cell)
-                .onTapGesture {
-                    hexGame.play(cellId: cell.id)
-                    print(hexGame.result)
-                    if hexGame.gameEnded {
-                        showResult = true
+        ZStack {
+            HexGrid(hexGame.cellValues) { cell in
+                CellView(cell: cell)
+                    .onTapGesture {
+                        hexGame.play(cellId: cell.id)
+                        print(hexGame.result)
+                        if hexGame.gameEnded {
+                            showResult = true
+                        }
                     }
-                }
+            }
         }
         .popover(isPresented: $showResult) {
             resultReport(game: hexGame)
