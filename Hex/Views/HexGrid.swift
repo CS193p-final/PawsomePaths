@@ -37,6 +37,10 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
             RedBorder(cols: cols, frameSize: geometry.size.width / hexInOneLine)
             RedBorder(cols: cols, frameSize: geometry.size.width / hexInOneLine)
                 .offset(x: CGFloat(cols / 2) * geometry.size.width / CGFloat(hexInOneLine), y: geometry.size.width / hexInOneLine * CGFloat(cols) - geometry.size.width / hexInOneLine / 2)
+            BlueBorder(cols: cols, frameSize: geometry.size.width / hexInOneLine, geometryWidth: geometry.size.width)
+            BlueBorder(cols: cols, frameSize: geometry.size.width / hexInOneLine, geometryWidth: geometry.size.width)
+                .offset(x: CGFloat(cols) * geometry.size.width / CGFloat(hexInOneLine) - geometry.size.width / hexInOneLine / 2)
+
             ScrollView(.vertical) {
                 LazyVGrid(columns: gridItems, spacing: 0) {
                     ForEach(items, id: id) { item in
