@@ -20,7 +20,7 @@ struct GameView: View {
                 .padding()
         }
         ZStack {
-            HexGrid(hexGame.cellValues) { cell in
+            HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                 CellView(cell: cell)
                     .onTapGesture {
                         hexGame.play(cellId: cell.id)

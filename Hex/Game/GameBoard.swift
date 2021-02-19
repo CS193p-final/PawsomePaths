@@ -17,16 +17,19 @@ enum GameResult {
 struct BoardPosition {
     var r: Int
     var c: Int
+    var cols: Int
     
-    init(r: Int, c: Int) {
+    init(r: Int, c: Int, cols: Int) {
         self.r = r
         self.c = c
+        self.cols = cols
     }
     
-    init(id: Int) {
+    init(id: Int, cols: Int) {
         // TODO: Fix magic number
-        r = id / 11
-        c = id % 11
+        r = id / cols
+        c = id % cols
+        self.cols = cols
     }
 }
 
@@ -60,7 +63,7 @@ struct GameBoard: Hashable, Codable {
         for r in 0..<size {
             for c in 0..<size {
                 if board[r][c] == 0 {
-                    moves.append(BoardPosition(r: r, c: c))
+                    moves.append(BoardPosition(r: r, c: c, cols: size))
                 }
             }
         }
@@ -81,7 +84,7 @@ struct GameBoard: Hashable, Codable {
         
         for c in 0..<size {
             if board[0][c] == 1 {
-                queue.enqueue(BoardPosition(r: 0, c: c))
+                queue.enqueue(BoardPosition(r: 0, c: c, cols: size))
                 visited[0][c] = true
             }
         }
@@ -99,7 +102,7 @@ struct GameBoard: Hashable, Codable {
                     let c_ = c + GameBoard.dc[i]
                     if (isInside(r: r_, c: c_) && board[r_][c_] == 1 && !visited[r_][c_]) {
                         visited[r_][c_] = true
-                        queue.enqueue(BoardPosition(r: r_, c: c_))
+                        queue.enqueue(BoardPosition(r: r_, c: c_, cols: size))
                     }
                 }
             }
@@ -111,7 +114,7 @@ struct GameBoard: Hashable, Codable {
         
         for r in 0..<size {
             if board[r][0] == 2 {
-                queue.enqueue(BoardPosition(r: r, c: 0))
+                queue.enqueue(BoardPosition(r: r, c: 0, cols: size))
                 visited[r][0] = true
             }
         }
@@ -129,7 +132,7 @@ struct GameBoard: Hashable, Codable {
                     let c_ = c + GameBoard.dc[i]
                     if (isInside(r: r_, c: c_) && board[r_][c_] == 2 && !visited[r_][c_]) {
                         visited[r_][c_] = true
-                        queue.enqueue(BoardPosition(r: r_, c: c_))
+                        queue.enqueue(BoardPosition(r: r_, c: c_, cols: size))
                     }
                 }
             }

@@ -11,7 +11,7 @@ class GameMode: ObservableObject {
     @Published var board: GameBoard
     
     init() {
-        self.board = GameBoard(size: 11)
+        self.board = GameBoard(size: 10)
     }
     
     // MARK: - Access
@@ -47,10 +47,10 @@ class GameMode: ObservableObject {
     
     // MARK: - Intent(s)
     func play(cellId: Int) {
-        _ = board.play(move: BoardPosition(id: cellId))
+        _ = board.play(move: BoardPosition(id: cellId, cols: board.size))
     }
     
     func newGame() {
-        self.board = GameBoard(size: 11)
+        self.board = GameBoard(size: 8)
     }
 }

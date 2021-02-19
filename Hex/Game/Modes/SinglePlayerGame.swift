@@ -28,7 +28,7 @@ class SinglePlayerGame: GameMode {
     
     // MARK: - Intent(s)
     override func play(cellId: Int) {
-        _ = board.play(move: BoardPosition(id: cellId))
+        _ = board.play(move: BoardPosition(id: cellId, cols: board.size))
         if gameEnded {
             return
         }

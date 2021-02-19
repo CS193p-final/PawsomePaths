@@ -9,12 +9,13 @@ import SwiftUI
 
 struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable, ItemView: View{
     private var items: [Item]
+    private let cols: Int
     private var id: KeyPath<Item,ID>
     private var viewForItems: (Item) -> ItemView
-    private let cols: Int = 11
         
-    init(_ items: [Item], id: KeyPath<Item, ID>, viewForItems: @escaping (Item) -> ItemView) {
+    init(_ items: [Item], cols: Int, id: KeyPath<Item, ID>, viewForItems: @escaping (Item) -> ItemView) {
         self.items = items
+        self .cols = cols
         self.id = id
         self.viewForItems = viewForItems
     }
@@ -56,8 +57,8 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
 }
 
 extension HexGrid where Item: Identifiable, ID == Item.ID {
-    init(_ items: [Item], viewForItems: @escaping (Item) -> ItemView) {
-        self.init(items, id: \Item.id, viewForItems: viewForItems)
+    init(_ items: [Item], cols: Int, viewForItems: @escaping (Item) -> ItemView) {
+        self.init(items, cols: cols, id: \Item.id, viewForItems: viewForItems)
     }
 }
 
@@ -70,7 +71,7 @@ struct HexGrid_Preview: PreviewProvider {
         return cellArray
     }
     static var previews: some View {
-        HexGrid(appendArray()) { cell in
+        HexGrid(appendArray(), cols: 11) { cell in
             CellView(cell: cell)
         }
     }
