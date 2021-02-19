@@ -23,17 +23,6 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
         GeometryReader { geometry in
             let gridItems = Array(repeating: GridItem(.fixed(geometry.size.width/hexInOneLine), spacing: 0), count: cols)
 
-//            Rectangle()
-//                .foregroundColor(.blue)
-//                .frame(width: diagonalLength(geometry.size.width), height: geometry.size.width / hexInOneLine / 2, alignment: .center)
-//                .rotationEffect(Angle.degrees(60))
-//                .offset(x: diagonalLength(geometry.size.width) / 2 + (geometry.size.width / hexInOneLine) / 2
-//                    ,y: geometry.size.width / hexInOneLine * CGFloat((cols / 2)) + geometry.size.width / hexInOneLine / 2)
-//            Rectangle()
-//                .foregroundColor(.blue)
-//                .frame(height: geometry.size.width / hexInOneLine * CGFloat(cols), alignment: .center)
-//                .offset(y: geometry.size.width / hexInOneLine / 2)
-
             RedBorder(cols: cols, frameSize: geometry.size.width / hexInOneLine)
             RedBorder(cols: cols, frameSize: geometry.size.width / hexInOneLine)
                 .offset(x: CGFloat(cols / 2) * geometry.size.width / CGFloat(hexInOneLine), y: geometry.size.width / hexInOneLine * CGFloat(cols) - geometry.size.width / hexInOneLine / 2)

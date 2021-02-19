@@ -26,7 +26,7 @@ struct BlueBorder: View {
             }
             Rectangle()
                 .frame(width: frameSize * CGFloat(cols), height: frameSize / 2)
-                .rotationEffect(Angle.degrees(64))
+                .rotationEffect(Angle.degrees(63.5))
                 .offset(x: CGFloat(cols / 2) * (frameSize / 2) - frameSize / 4 - CGFloat(cols / 2) * frameSize)
                 .offset(y: frameSize / 4)
                 .foregroundColor(.blue)
