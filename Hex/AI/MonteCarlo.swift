@@ -30,13 +30,8 @@ struct MonteCarlo {
             runSimulation()
             games += 1
         }
-//        for _ in 0..<100 {
-//            runSimulation()
-//            games += 1
-//        }
         
-        
-        print("simulated \(games) games")
+//        print("simulated \(games) games")
         
         let moves = board.legalMoves
         let nextStates = moves.map{board.nextState(move: $0)}
@@ -53,9 +48,9 @@ struct MonteCarlo {
             }
         }
         
-        print("winrate: \(bestWinrate)")
-        print("wins = \(wins[board.nextState(move: bestMove)]), plays = \(plays[board.nextState(move: bestMove)])")
-        print()
+//        print("winrate: \(bestWinrate)")
+//        print("wins = \(wins[board.nextState(move: bestMove)]), plays = \(plays[board.nextState(move: bestMove)])")
+//        print()
         return bestMove
     }
     
@@ -68,7 +63,6 @@ struct MonteCarlo {
         while state.checkResult() == .unknown {
             let legalMoves = state.legalMoves
             let nextStates = legalMoves.map{state.nextState(move: $0)}
-            var bestMove: BoardPosition
             
             // check if we have stats for all possible moves
             var allMovesHaveStats = true
@@ -78,14 +72,12 @@ struct MonteCarlo {
                 let nextState = state.nextState(move: move)
                 if !plays.keys.contains(nextState) {
                     state = nextState
-                    bestMove = move
                     allMovesHaveStats = false
                     break
                 }
                 else {
                     logTotal += Double(plays[nextState]!)
                 }
-//                nextStates.append(nextState)
             }
             
             if allMovesHaveStats {
@@ -93,13 +85,11 @@ struct MonteCarlo {
                 var bestValue: Double = 0
 
                 for i in 0..<legalMoves.count {
-                    let move = legalMoves[i]
                     let nextState = nextStates[i]
 
                     let currentValue: Double = Double(wins[nextState]!) / Double(plays[nextState]!) + cConstant * sqrt(logTotal / Double(plays[nextState]!))
                     if currentValue > bestValue {
                         bestValue = currentValue
-                        bestMove = move
                         state = nextState
                     }
                 }
@@ -115,8 +105,8 @@ struct MonteCarlo {
             }
             visitedStates.insert(state)
         }
-        print(state.description)
-        print("winner = \(state.winner)")
+//        print(state.description)
+//        print("winner = \(state.winner)")
         
         for s in visitedStates {
             if !plays.keys.contains(s) {

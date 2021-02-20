@@ -51,6 +51,6 @@ class GameMode: ObservableObject {
     }
     
     func newGame() {
-        self.board = GameBoard(size: 9)
+        self.board = GameBoard(size: 5)
     }
 }
