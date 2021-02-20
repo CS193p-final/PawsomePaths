@@ -9,8 +9,8 @@ import SwiftUI
 
 struct BlueBorder: View {
     var cols: Int
-    var frameSize: CGFloat
-    var geometryWidth: CGFloat
+    var frameHeight: CGFloat
+    var frameWidth: CGFloat
     
     var body: some View {
         ZStack {
@@ -18,17 +18,17 @@ struct BlueBorder: View {
                 ForEach (0..<cols, id: \.self) { cellIndex in
                     CellView(cell: Cell(id: cols * cols + 1, colorCode: 2))
                         .clipShape(PolygonShape(sides: 6))
-                        .frame(width: frameSize, height: frameSize)
-                        .offset(x: CGFloat(cellIndex) * (frameSize / 2) - frameSize / 4 - CGFloat(cols / 2) * frameSize)
-                        .offset(y: frameSize / 4)
+                        .frame(width: frameWidth, height: frameHeight)
+                        .offset(x: CGFloat(cellIndex) * (frameWidth / 2) - frameWidth / 4 - CGFloat(cols / 2) * frameWidth)
+                        .offset(y: frameHeight / 4)
+                        .padding(.vertical, -frameHeight / 8)
                 }
-                .zIndex(1)
             }
             Rectangle()
-                .frame(width: frameSize * CGFloat(cols), height: frameSize / 2)
-                .rotationEffect(Angle.degrees(63.5))
-                .offset(x: CGFloat(cols / 2) * (frameSize / 2) - frameSize / 4 - CGFloat(cols / 2) * frameSize)
-                .offset(y: frameSize / 4)
+                .frame(width: frameWidth * CGFloat(cols - 1), height: frameWidth / 2)
+                .rotationEffect(Angle.degrees(60))
+                .offset(x: cols % 2 == 0 ? (CGFloat(cols / 2) * (frameWidth / 2) - frameWidth / 4 - CGFloat(cols / 2) * frameWidth) - frameWidth/4 : CGFloat(cols / 2) * (frameWidth / 2) - frameWidth / 4 - CGFloat(cols / 2) * frameWidth)
+                .offset(y: frameWidth / 4)
                 .foregroundColor(.blue)
         }
     }
