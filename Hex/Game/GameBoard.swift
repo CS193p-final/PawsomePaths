@@ -45,6 +45,23 @@ struct GameBoard: Hashable, Codable {
         try? JSONEncoder().encode(self)
     }
     
+    var description: String {
+        var res = ""
+        for r in 0..<size {
+            var line = ""
+            for _ in 0..<r {
+                line += " "
+            }
+            for c in 0..<size {
+                line += String(board[r][c])
+                line += " "
+            }
+            res += line
+            res += "\n"
+        }
+        return res
+    }
+    
     init?(json: Data?) {
         if json != nil, let newBoard = try? JSONDecoder().decode(GameBoard.self, from: json!) {
             self = newBoard
@@ -70,10 +87,26 @@ struct GameBoard: Hashable, Codable {
         return moves
     }
     
-    mutating func play(move: BoardPosition) -> GameBoard {
+    var winner: Int {
+        switch checkResult() {
+        case .player1Win:
+            return 1
+        case .player2Win:
+            return 2
+        default:
+            return 0
+        }
+    }
+    
+    func nextState(move: BoardPosition) -> GameBoard {
+        var newState = self
+        newState.play(move: move)
+        return newState
+    }
+    
+    mutating func play(move: BoardPosition) {
         board[move.r][move.c] = playerTurn
         playerTurn = 3 - playerTurn
-        return self
     }
     
     func checkResult() -> GameResult {

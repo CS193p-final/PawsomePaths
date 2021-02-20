@@ -47,7 +47,7 @@ class GameMode: ObservableObject {
     
     // MARK: - Intent(s)
     func play(cellId: Int) {
-        _ = board.play(move: BoardPosition(id: cellId, cols: board.size))
+        board.play(move: BoardPosition(id: cellId, cols: board.size))
     }
     
     func newGame() {

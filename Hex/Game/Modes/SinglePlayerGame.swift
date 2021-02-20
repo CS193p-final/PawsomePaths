@@ -28,12 +28,14 @@ class SinglePlayerGame: GameMode {
     
     // MARK: - Intent(s)
     override func play(cellId: Int) {
-        _ = board.play(move: BoardPosition(id: cellId, cols: board.size))
+        board.play(move: BoardPosition(id: cellId, cols: board.size))
         if gameEnded {
             return
         }
-        let move = DumpAI(currentState: board).makeMove()
-        _ = board.play(move: move)
+//        let move = DumpAI(currentState: board).makeMove()
+        let boardCopy = board
+        var mcts = MonteCarlo(board: boardCopy)
+        board.play(move: mcts.getPlay())
     }
 }
 

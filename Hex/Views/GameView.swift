@@ -24,7 +24,6 @@ struct GameView: View {
                 CellView(cell: cell)
                     .onTapGesture {
                         hexGame.play(cellId: cell.id)
-                        print(hexGame.result)
                         if hexGame.gameEnded {
                             showResult = true
                         }
