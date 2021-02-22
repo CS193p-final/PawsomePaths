@@ -24,16 +24,19 @@ struct BlueBorder: View {
                 }
             }
             Rectangle()
-                .frame(width: frameWidth * CGFloat(cols - 1), height: frameWidth / 2)
-                .rotationEffect(Angle.degrees(60.5))
-                .offset(x: cols % 2 == 0 ? (CGFloat(cols / 2) * (frameWidth / 2) - frameWidth / 4 - CGFloat(cols / 2) * frameWidth) - frameWidth/4 : CGFloat(cols / 2) * (frameWidth / 2) - frameWidth / 4 - CGFloat(cols / 2) * frameWidth)
+                .frame(width: frameHeight * CGFloat(cols - 1), height: frameHeight/2)
+                .rotationEffect(Angle.degrees(60.3))
+                .offset(x: cols % 2 == 0 ? xOffset - frameHeight/4 : xOffset)
                 .foregroundColor(.blue)
         }
     }
+    var xOffset: CGFloat {
+        (CGFloat(cols / 2) * frameHeight / 2 - frameWidth/5 - CGFloat(cols / 2) * frameWidth)
+    }
 }
 
-//struct BlueBorder_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BlueBorder()
-//    }
-//}
+struct BlueBorder_Previews: PreviewProvider {
+    static var previews: some View {
+        BlueBorder(cols: 7, frameHeight: 50, frameWidth: 50)
+    }
+}
