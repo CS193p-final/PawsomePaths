@@ -12,13 +12,13 @@ struct GameView: View {
     @State private var showResult = false
     
     var body: some View {
-        Text("Hex Game").bold().font(.headline)
-        HStack {
-            Text("Player 1 turn").foregroundColor(hexGame.board.playerTurn == 1 ? .red : .gray)
-                .padding()
-            Text("Player 2 turn").foregroundColor(hexGame.board.playerTurn == 2 ? .blue : .gray)
-                .padding()
-        }
+//        Text("Hex Game").bold().font(.headline)
+//        HStack {
+//            Text("Player 1 turn").foregroundColor(hexGame.board.playerTurn == 1 ? .red : .gray)
+//                .padding()
+//            Text("Player 2 turn").foregroundColor(hexGame.board.playerTurn == 2 ? .blue : .gray)
+//                .padding()
+//        }
         ZStack {
             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                 CellView(cell: cell)
@@ -29,15 +29,15 @@ struct GameView: View {
                         }
                     }
             }
-        }
+        } 
         .popover(isPresented: $showResult) {
             resultReport(game: hexGame)
         }
-        Button(action: hexGame.newGame) {
-            RoundedRectangle(cornerRadius: 10).opacity(0.3)
-                .frame(width: 100, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .overlay(Text("New Game"))
-        }
+//        Button(action: hexGame.newGame) {
+//            RoundedRectangle(cornerRadius: 10).opacity(0.3)
+//                .frame(width: 100, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+//                .overlay(Text("New Game"))
+//        }
     }
 }
 
@@ -50,6 +50,9 @@ struct resultReport: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(hexGame: SinglePlayerGame())
+        Group {
+            GameView(hexGame: SinglePlayerGame())
+            GameView(hexGame: SinglePlayerGame())
+        }
     }
 }

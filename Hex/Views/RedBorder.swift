@@ -17,8 +17,8 @@ struct RedBorder: View {
             HStack(spacing: 0) {
                 ForEach (0..<cols, id: \.self) { cellIndex in
                     CellView(cell: Cell(id: cols * cols + 1, colorCode: 1))
-                        .clipShape(PolygonShape(sides: 6))
                         .frame(width: frameWidth, height: frameHeight)
+                        .clipShape(PolygonShape(sides: 6))
                 }
             }
             Rectangle()

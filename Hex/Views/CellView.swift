@@ -10,7 +10,7 @@ import SwiftUI
 struct CellView: View {
     var cell: Cell
     var body: some View {
-        Rectangle()
+        PolygonShape(sides: 6)
             .foregroundColor(cell.color)
     }
 }
