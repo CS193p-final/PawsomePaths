@@ -70,7 +70,7 @@ struct GameBoard: Hashable, Codable {
         }
     }
     
-    init(size: Int = 1) {
+    init(size: Int) {
         self.size = size
         board = Array(repeating: Array(repeating: 0, count: size), count: size)
     }
@@ -96,6 +96,14 @@ struct GameBoard: Hashable, Codable {
         default:
             return 0
         }
+    }
+    
+    mutating func incrementSize() {
+        size += 1
+    }
+    
+    mutating func decrementSize() {
+        size -= 1
     }
     
     func nextState(move: BoardPosition) -> GameBoard {

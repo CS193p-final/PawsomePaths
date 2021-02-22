@@ -50,7 +50,15 @@ class GameMode: ObservableObject {
         board.play(move: BoardPosition(id: cellId, cols: board.size))
     }
     
-    func newGame() {
-        self.board = GameBoard(size: 6)
+    func newGame(size: Int) {
+        self.board = GameBoard(size: size)
+    }
+    
+    func incrementSize() {
+        self.board.incrementSize()
+    }
+    
+    func decrementSize() {
+        self.board.decrementSize()
     }
 }
