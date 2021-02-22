@@ -11,7 +11,7 @@ class GameMode: ObservableObject {
     @Published var board: GameBoard
     
     init() {
-        self.board = GameBoard(size: 7)
+        self.board = GameBoard(size: 5)
     }
     
     // MARK: - Access

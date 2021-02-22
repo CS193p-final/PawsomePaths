@@ -29,7 +29,7 @@ struct GameView: View {
                         }
                     }
             }
-        } 
+        }
         .popover(isPresented: $showResult) {
             resultReport(game: hexGame)
         }

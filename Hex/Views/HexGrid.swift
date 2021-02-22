@@ -31,7 +31,7 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
                     RedBorder(cols: Int(hexInOneLine), frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
                         .position(x: (geometry.size.width - hexInOneLine * hexagonWidth(geometry.size.width))/2 + hexInOneLine * hexagonWidth(geometry.size.width) / 2, y: yPositionTopRedBorder(geometry.size.height, geometryWidth: geometry.size.width)  + hexagonHeight(geometry.size.width)/4)
                     RedBorder(cols: Int(hexInOneLine), frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
-                        .position(x: (geometry.size.width - hexInOneLine * hexagonWidth(geometry.size.width))/2 + hexInOneLine * hexagonWidth(geometry.size.width) / 2, y: yPositionTopRedBorder(geometry.size.height, geometryWidth: geometry.size.width) + (hexagonHeight(geometry.size.width) * CGFloat(cols)) -  hexagonHeight(geometry.size.width)/4)
+                        .position(x: (geometry.size.width - hexInOneLine * hexagonWidth(geometry.size.width))/2 + hexInOneLine * hexagonWidth(geometry.size.width) / 2, y: yPositionTopRedBorder(geometry.size.height, geometryWidth: geometry.size.width) + (hexagonHeight(geometry.size.width) * CGFloat(cols-1) * 7/8) + CGFloat(hexagonHeight(geometry.size.width) * 3/4))
                         //.offset(y: YOffsetRedBorder(geometry.size.width))
                         //.offset(x: cols % 2 == 0 ? CGFloat(cols / 2) * hexagonWidth(geometry.size.width) + geometry.size.width - (hexInOneLine+1) * hexagonWidth(geometry.size.width) - hexagonWidth(geometry.size.width) / 8 : CGFloat(cols / 2) * hexagonWidth(geometry.size.width) + geometry.size.width - (hexInOneLine) * hexagonWidth(geometry.size.width))
                         //.offset(y: (hexagonHeight(geometry.size.width * 7 / 8)) * CGFloat(cols - 1) - (hexagonHeight(geometry.size.width / 2)) - CGFloat(cols) * hexagonWidth(geometry.size.width) / 2)
@@ -46,8 +46,8 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
                                 viewForItems(item)
                                     .frame(width: hexagonWidth(geometry.size.width), height: hexagonHeight(geometry.size.width))
                                     .offset(x: offset(id: items.firstIndex(matching: item)!, geometryWidth: geometry.size.width))
-                                    //.offset(y: -hexagonHeight(geometry.size.width)/8)
-                                    //.offset(y: items.firstIndex(matching: item)! / cols == 0 ? 0 : -hexagonHeight(geometry.size.width) / 8)
+                                    .padding(.top, -hexagonHeight(geometry.size.width)/8)
+                                    //.padding(.bottom, items.firstIndex(matching: item)! / cols == 0 ? 0 : -hexagonHeight(geometry.size.width) / 8)
                             }
 
                         }
@@ -75,7 +75,7 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
     }
     
     func yPositionTopRedBorder(_ geometryHeight: CGFloat, geometryWidth: CGFloat) -> CGFloat {
-        (geometryHeight - (hexagonHeight(geometryWidth) * CGFloat(cols-1) + hexagonHeight(geometryWidth))) / 2
+        (geometryHeight - (hexagonHeight(geometryWidth) * CGFloat(cols-2) * 7/8 + hexagonHeight(geometryWidth) + hexagonHeight(geometryWidth))) / 2
     }
 }
 
