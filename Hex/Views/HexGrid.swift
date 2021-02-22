@@ -28,13 +28,10 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         .opacity(0.5)
                         .foregroundColor(.green)
-                    RedBorder(cols: Int(hexInOneLine), frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
-                        .position(x: (geometry.size.width - hexInOneLine * hexagonWidth(geometry.size.width))/2 + hexInOneLine * hexagonWidth(geometry.size.width) / 2, y: yPositionTopRedBorder(geometry.size.height, geometryWidth: geometry.size.width)  + hexagonHeight(geometry.size.width)/4)
-                    RedBorder(cols: Int(hexInOneLine), frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
-                        .position(x: (geometry.size.width - hexInOneLine * hexagonWidth(geometry.size.width))/2 + hexInOneLine * hexagonWidth(geometry.size.width) / 2, y: yPositionTopRedBorder(geometry.size.height, geometryWidth: geometry.size.width) + (hexagonHeight(geometry.size.width) * CGFloat(cols-1) * 7/8) + CGFloat(hexagonHeight(geometry.size.width) * 3/4))
-                        //.offset(y: YOffsetRedBorder(geometry.size.width))
-                        //.offset(x: cols % 2 == 0 ? CGFloat(cols / 2) * hexagonWidth(geometry.size.width) + geometry.size.width - (hexInOneLine+1) * hexagonWidth(geometry.size.width) - hexagonWidth(geometry.size.width) / 8 : CGFloat(cols / 2) * hexagonWidth(geometry.size.width) + geometry.size.width - (hexInOneLine) * hexagonWidth(geometry.size.width))
-                        //.offset(y: (hexagonHeight(geometry.size.width * 7 / 8)) * CGFloat(cols - 1) - (hexagonHeight(geometry.size.width / 2)) - CGFloat(cols) * hexagonWidth(geometry.size.width) / 2)
+                    RedBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
+                        .position(x: xPositionTopRedBorder(geometry.size.width), y: yPositionTopRedBorder(geometry.size.height, geometryWidth: geometry.size.width)  + hexagonHeight(geometry.size.width)/4)
+                    RedBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
+                        .position(x: xPositionTopRedBorder(geometry.size.width) + (hexagonWidth(geometry.size.width) * CGFloat(cols-1))/2, y: yPositionTopRedBorder(geometry.size.height, geometryWidth: geometry.size.width) + (hexagonHeight(geometry.size.width) * CGFloat(cols-1) * 7/8) + CGFloat(hexagonHeight(geometry.size.width) * 3/4))
                     //BlueBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
                         //.offset(x: -CGFloat(cols) * hexagonWidth(geometry.size.width) / 4)
                     //BlueBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
@@ -63,7 +60,7 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
         
     }
     var hexInOneLine: CGFloat {
-        CGFloat(cols + (cols / 2))
+        CGFloat(cols) + CGFloat(cols/2)
     }
     
     func hexagonWidth(_ geometryWidth: CGFloat) -> CGFloat {
@@ -76,6 +73,13 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
     
     func yPositionTopRedBorder(_ geometryHeight: CGFloat, geometryWidth: CGFloat) -> CGFloat {
         (geometryHeight - (hexagonHeight(geometryWidth) * CGFloat(cols-2) * 7/8 + hexagonHeight(geometryWidth) + hexagonHeight(geometryWidth))) / 2
+    }
+    
+    func xPositionTopRedBorder(_ geometryWidth: CGFloat) -> CGFloat {
+        if cols % 2 == 0 {
+            return (geometryWidth - (hexInOneLine-0.5) * hexagonWidth(geometryWidth))/2 + CGFloat(cols) * hexagonWidth(geometryWidth) / 2
+        }
+        return (geometryWidth - hexInOneLine * hexagonWidth(geometryWidth))/2 + CGFloat(cols) * hexagonWidth(geometryWidth) / 2
     }
 }
 
