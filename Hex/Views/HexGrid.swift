@@ -26,8 +26,10 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
                 ZStack {
                     RedBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
                         .position(x: xPositionTopRedBorder(geometry.size.width), y: yPositionTopRedBorder(geometry.size.height, geometryWidth: geometry.size.width) + hexagonHeight(geometry.size.width)/4)
+                    
                     RedBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
                         .position(x: xPositionTopRedBorder(geometry.size.width) + (hexagonWidth(geometry.size.width) * CGFloat(cols-1))/2, y: yPositionTopRedBorder(geometry.size.height, geometryWidth: geometry.size.width) + (hexagonHeight(geometry.size.width) * CGFloat(cols-1) * 7/8) + CGFloat(hexagonHeight(geometry.size.width) * 3/4))
+
                     BlueBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
                         .offset(x: xOffsetRightBlueBorder(geometry.size.width))
                         .offset(y: hexagonHeight(geometry.size.width)/8)
@@ -44,17 +46,18 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
                                     .offset(x: offset(id: items.firstIndex(matching: item)!, geometryWidth: geometry.size.width))
                                     .padding(.top, -hexagonHeight(geometry.size.width)/8)
                             }
-
                         }
                     }
                     .zIndex(1)
                 }
         }
     }
+    
     func offset(id: Int, geometryWidth: CGFloat) -> CGFloat {
         CGFloat(id / cols) * hexagonWidth(geometryWidth / 2) - (hexagonWidth(geometryWidth) * CGFloat(cols - 1) / 4)
         
     }
+    
     var hexInOneLine: CGFloat {
         if cols % 2 == 0 {
             return CGFloat(cols) + CGFloat(cols/2) - 0.5

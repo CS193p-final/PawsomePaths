@@ -12,13 +12,13 @@ struct GameView: View {
     @State private var showResult = false
     
     var body: some View {
-//        Text("Hex Game").bold().font(.headline)
-//        HStack {
-//            Text("Player 1 turn").foregroundColor(hexGame.board.playerTurn == 1 ? .red : .gray)
-//                .padding()
-//            Text("Player 2 turn").foregroundColor(hexGame.board.playerTurn == 2 ? .blue : .gray)
-//                .padding()
-//        }
+        Text("Hex Game").bold().font(.headline)
+        HStack {
+            Text("Player 1 turn").foregroundColor(hexGame.board.playerTurn == 1 ? .red : .gray)
+                .padding()
+            Text("Player 2 turn").foregroundColor(hexGame.board.playerTurn == 2 ? .blue : .gray)
+                .padding()
+        }
         ZStack {
             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                 CellView(cell: cell)
