@@ -8,7 +8,7 @@
 import Foundation
 
 class SinglePlayerGame: GameMode {
-    
+
     override var playerTurn: String {
         if (board.playerTurn == 1) {
             return "Your turn"

@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct GameView: View {
-    @EnvironmentObject var hexGame: GameMode
+    @ObservedObject var hexGame: GameMode
     @State private var showResult = false
     @State private var showSettings = false
     
     var body: some View {
+        let board = hexGame.board
         Text("Hex Game").bold().font(.headline)
         HStack {
-            Text("Player 1 turn").foregroundColor(hexGame.board.playerTurn == 1 ? .red : .gray)
+            Text("Player 1 turn").foregroundColor(board.playerTurn == 1 ? .red : .gray)
                 .padding()
-            Text("Player 2 turn").foregroundColor(hexGame.board.playerTurn == 2 ? .blue : .gray)
+            Text("Player 2 turn").foregroundColor(board.playerTurn == 2 ? .blue : .gray)
                 .padding()
         }
         Image(systemName: "gearshape")
@@ -25,7 +26,7 @@ struct GameView: View {
                 showSettings = true
             }
             .popover(isPresented: $showSettings, content: {
-                settingsView().environmentObject(hexGame)
+                settingsView(game: hexGame)
             })
         ZStack {
             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
@@ -57,7 +58,7 @@ struct resultReport: View {
 }
 
 struct settingsView: View {
-    @EnvironmentObject var game: GameMode
+    @ObservedObject var game: GameMode
     var body: some View {
         Section(header: Text("Board size")) {
             Stepper(
@@ -74,11 +75,11 @@ struct settingsView: View {
     }
 }
 
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            GameView(hexGame: SinglePlayerGame())
-//            GameView(hexGame: SinglePlayerGame())
-//        }
-//    }
-//}
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            GameView(hexGame: SinglePlayerGame())
+            GameView(hexGame: SinglePlayerGame())
+        }
+    }
+}

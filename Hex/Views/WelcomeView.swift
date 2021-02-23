@@ -13,14 +13,14 @@ struct WelcomeView: View {
         NavigationView {
             VStack {
                 NavigationLink(
-                    destination: GameView().environmentObject( TwoPlayersGame(name: "2player")),
+                    destination: GameView(hexGame: TwoPlayersGame(name: "twoplayer")),
                     label: {
                         RoundedRectangle(cornerRadius: 10).opacity(0.3)
-                            .frame(width: 150, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .frame(width: 150, height: 50, alignment: .center)
                             .overlay(Text("2 Player Game")).font(.headline)
                     })
             NavigationLink(
-                destination: GameView().environmentObject(SinglePlayerGame()),
+                destination: GameView(hexGame: SinglePlayerGame()),
                 label: {
                     RoundedRectangle(cornerRadius: 10).opacity(0.3)
                         .frame(width: 150, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
