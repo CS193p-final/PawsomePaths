@@ -50,9 +50,9 @@ struct MonteCarlo {
             }
         }
         
-        print("winrate: \(bestWinrate)")
-        print("wins = \(wins[board.nextState(move: bestMove)]), plays = \(plays[board.nextState(move: bestMove)])")
-        print()
+//        print("winrate: \(bestWinrate)")
+//        print("wins = \(wins[board.nextState(move: bestMove)]), plays = \(plays[board.nextState(move: bestMove)])")
+//        print()
         return bestMove
     }
     

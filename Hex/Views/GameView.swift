@@ -41,7 +41,7 @@ struct GameView: View {
         .popover(isPresented: $showResult) {
             resultReport(game: hexGame)
         }
-        Button(action: hexGame.newGame(size: 11)) {
+        Button(action: {hexGame.newGame(size: 11) }) {
             RoundedRectangle(cornerRadius: 10).opacity(0.3)
                 .frame(width: 100, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .overlay(Text("New Game"))

@@ -70,7 +70,7 @@ struct GameBoard: Hashable, Codable {
         }
     }
     
-    init(size: Int) {
+    init(size: Int = 6) {
         self.size = size
         board = Array(repeating: Array(repeating: 0, count: size), count: size)
     }
