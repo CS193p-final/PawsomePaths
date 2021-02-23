@@ -31,7 +31,7 @@ struct MonteCarlo {
             games += 1
         }
         
-//        print("simulated \(games) games")
+        print("simulated \(games) games")
         
         let moves = board.legalMoves
         let nextStates = moves.map{board.nextState(move: $0)}
@@ -41,16 +41,18 @@ struct MonteCarlo {
         for i in 0..<moves.count {
             let move = moves[i]
             let nextState = nextStates[i]
-            let winrate: Double = Double(wins[nextState]!) / Double(plays[nextState]!)
-            if winrate > bestWinrate {
-                bestWinrate = winrate
-                bestMove = move
+            if let wins = wins[nextState] {
+                let winrate: Double = Double(wins) / Double(plays[nextState]!)
+                if winrate > bestWinrate {
+                    bestWinrate = winrate
+                    bestMove = move
+                }
             }
         }
         
-//        print("winrate: \(bestWinrate)")
-//        print("wins = \(wins[board.nextState(move: bestMove)]), plays = \(plays[board.nextState(move: bestMove)])")
-//        print()
+        print("winrate: \(bestWinrate)")
+        print("wins = \(wins[board.nextState(move: bestMove)]), plays = \(plays[board.nextState(move: bestMove)])")
+        print()
         return bestMove
     }
     
