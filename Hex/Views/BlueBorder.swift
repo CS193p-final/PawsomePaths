@@ -16,18 +16,35 @@ struct BlueBorder: View {
         ZStack {
             VStack(spacing: 0) {
                 ForEach (0..<cols, id: \.self) { cellIndex in
-                    CellView(cell: Cell(id: cols * cols + 1, colorCode: 2))
-                        .clipShape(PolygonShape(sides: 6))
+                    PolygonShape(sides: 6)
+                        .stroke(lineWidth: 5)
                         .frame(width: frameWidth, height: frameHeight)
                         .offset(x: CGFloat(cellIndex) * (frameWidth / 2) - frameWidth / 4 - CGFloat(cols / 2) * frameWidth)
                         .padding(.top, -frameHeight / 8)
+                        .foregroundColor(.blue)
                 }
             }
             Rectangle()
+                .stroke(lineWidth: 5)
                 .frame(width: frameHeight * CGFloat(cols - 1), height: frameHeight/2)
                 .rotationEffect(Angle.degrees(60.3))
                 .offset(x: cols % 2 == 0 ? xOffset - frameHeight/4 : xOffset)
                 .foregroundColor(.blue)
+            
+            Rectangle()
+                .frame(width: frameHeight * CGFloat(cols - 1), height: frameHeight/2)
+                .rotationEffect(Angle.degrees(60.3))
+                .offset(x: cols % 2 == 0 ? xOffset - frameHeight/4 : xOffset)
+                .foregroundColor(.white)
+            VStack(spacing: 0) {
+                ForEach (0..<cols, id: \.self) { cellIndex in
+                    PolygonShape(sides: 6)
+                        .frame(width: frameWidth, height: frameHeight)
+                        .offset(x: CGFloat(cellIndex) * (frameWidth / 2) - frameWidth / 4 - CGFloat(cols / 2) * frameWidth)
+                        .padding(.top, -frameHeight / 8)
+                        .foregroundColor(.white)
+                }
+            }
         }
     }
     var xOffset: CGFloat {

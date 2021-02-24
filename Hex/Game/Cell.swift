@@ -21,6 +21,8 @@ struct Cell: Identifiable {
             color = .red
         case 2:
             color = .blue
+        case 3:
+            color = .white
         default:
             print("Unexpected color code")
             color = .gray

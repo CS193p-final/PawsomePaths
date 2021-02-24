@@ -98,14 +98,6 @@ struct GameBoard: Hashable, Codable {
         }
     }
     
-    mutating func incrementSize() {
-        size += 1
-    }
-    
-    mutating func decrementSize() {
-        size -= 1
-    }
-    
     func nextState(move: BoardPosition) -> GameBoard {
         var newState = self
         newState.play(move: move)
