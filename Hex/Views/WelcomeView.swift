@@ -8,26 +8,30 @@
 import SwiftUI
 
 struct WelcomeView: View {
+    @State private var twoPlayerGameView = false
+    @State private var singlePlayerGameView = false
     var body: some View {
-        RoundedRectangle(cornerRadius: 90).foregroundColor(.pink).overlay(
-        NavigationView {
-            VStack {
-                NavigationLink(
-                    destination: GameView(hexGame: TwoPlayersGame(name: "twoplayer")),
-                    label: {
-                        RoundedRectangle(cornerRadius: 10).opacity(0.3)
-                            .frame(width: 150, height: 50, alignment: .center)
-                            .overlay(Text("2 Player Game")).font(.headline)
-                    })
-            NavigationLink(
-                destination: GameView(hexGame: SinglePlayerGame()),
-                label: {
-                    RoundedRectangle(cornerRadius: 10).opacity(0.3)
-                        .frame(width: 150, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                        .overlay(Text("Computer Game")).font(.headline)
-                    })
+        if (twoPlayerGameView) {
+            GameView(hexGame: TwoPlayersGame(name: "twoplayer"))
+        } else if (singlePlayerGameView) {
+            GameView(hexGame: SinglePlayerGame())
+        } else {
+            Button {
+                twoPlayerGameView = true
+            } label: {
+                RoundedRectangle(cornerRadius: 10).opacity(0.3)
+                   .frame(width: 150, height: 50, alignment: .center)
+                   .overlay(Text("2 Player Game")).font(.headline)
             }
-        })
+            
+            Button {
+                singlePlayerGameView = true
+            } label: {
+                RoundedRectangle(cornerRadius: 10).opacity(0.3)
+                   .frame(width: 150, height: 50, alignment: .center)
+                   .overlay(Text("Computer Game")).font(.headline)
+            }
+        }
     }
 }
 
