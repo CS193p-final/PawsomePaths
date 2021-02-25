@@ -8,8 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		C101D1E425DC5789000E86E0 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C101D1E325DC5789000E86E0 /* WelcomeView.swift */; };
+		C11545AC25E7478100E8B591 /* SparkTractory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11545AB25E7478100E8B591 /* SparkTractory.swift */; };
+		C11545B025E74CF300E8B591 /* SparkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11545AF25E74CF300E8B591 /* SparkView.swift */; };
+		C11545B325E74E1C00E8B591 /* Firework.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11545B225E74E1C00E8B591 /* Firework.swift */; };
+		C11545B625E7578000E8B591 /* ClassicFirework.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11545B525E7578000E8B591 /* ClassicFirework.swift */; };
 		C18DD74A25DEFDD600A29151 /* RedBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18DD74925DEFDD600A29151 /* RedBorder.swift */; };
 		C18DD74E25DF60BE00A29151 /* BlueBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18DD74D25DF60BE00A29151 /* BlueBorder.swift */; };
+		C1CE2BB625E77B740012E731 /* ClassFireworkAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */; };
+		C1CE2BB925E7824A0012E731 /* ClassicFireworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CE2BB825E7824A0012E731 /* ClassicFireworkController.swift */; };
+		C1CE2BBC25E792BE0012E731 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CE2BBB25E792BE0012E731 /* CGPoint+Extensions.swift */; };
 		C1D1CFE225DA0ED500A6EAAE /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D1CFE125DA0ED500A6EAAE /* Cell.swift */; };
 		C1D1CFE725DB6CBE00A6EAAE /* Array+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */; };
 		C6596A2F25DB0B0200A0F94B /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A2E25DB0B0200A0F94B /* GameBoard.swift */; };
@@ -30,8 +37,15 @@
 
 /* Begin PBXFileReference section */
 		C101D1E325DC5789000E86E0 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		C11545AB25E7478100E8B591 /* SparkTractory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkTractory.swift; sourceTree = "<group>"; };
+		C11545AF25E74CF300E8B591 /* SparkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkView.swift; sourceTree = "<group>"; };
+		C11545B225E74E1C00E8B591 /* Firework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firework.swift; sourceTree = "<group>"; };
+		C11545B525E7578000E8B591 /* ClassicFirework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicFirework.swift; sourceTree = "<group>"; };
 		C18DD74925DEFDD600A29151 /* RedBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedBorder.swift; sourceTree = "<group>"; };
 		C18DD74D25DF60BE00A29151 /* BlueBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueBorder.swift; sourceTree = "<group>"; };
+		C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassFireworkAnimator.swift; sourceTree = "<group>"; };
+		C1CE2BB825E7824A0012E731 /* ClassicFireworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicFireworkController.swift; sourceTree = "<group>"; };
+		C1CE2BBB25E792BE0012E731 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		C1D1CFE125DA0ED500A6EAAE /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Identifiable.swift"; sourceTree = "<group>"; };
 		C6596A2E25DB0B0200A0F94B /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
@@ -148,6 +162,13 @@
 				C101D1E325DC5789000E86E0 /* WelcomeView.swift */,
 				C18DD74925DEFDD600A29151 /* RedBorder.swift */,
 				C18DD74D25DF60BE00A29151 /* BlueBorder.swift */,
+				C11545AB25E7478100E8B591 /* SparkTractory.swift */,
+				C1CE2BBB25E792BE0012E731 /* CGPoint+Extensions.swift */,
+				C11545AF25E74CF300E8B591 /* SparkView.swift */,
+				C11545B225E74E1C00E8B591 /* Firework.swift */,
+				C11545B525E7578000E8B591 /* ClassicFirework.swift */,
+				C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */,
+				C1CE2BB825E7824A0012E731 /* ClassicFireworkController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -235,16 +256,23 @@
 				C699739425D9FF2800337F70 /* CellView.swift in Sources */,
 				C699737925D9F4DB00337F70 /* HexApp.swift in Sources */,
 				C6596A4725DB40B400A0F94B /* MonteCarlo.swift in Sources */,
+				C1CE2BB625E77B740012E731 /* ClassFireworkAnimator.swift in Sources */,
 				C6596A3325DB11F000A0F94B /* Queue.swift in Sources */,
 				C6B09ADB25DEF36E00C96782 /* GameMode.swift in Sources */,
+				C1CE2BB925E7824A0012E731 /* ClassicFireworkController.swift in Sources */,
+				C11545B325E74E1C00E8B591 /* Firework.swift in Sources */,
 				C6596A2F25DB0B0200A0F94B /* GameBoard.swift in Sources */,
+				C1CE2BBC25E792BE0012E731 /* CGPoint+Extensions.swift in Sources */,
 				C18DD74E25DF60BE00A29151 /* BlueBorder.swift in Sources */,
+				C11545AC25E7478100E8B591 /* SparkTractory.swift in Sources */,
 				C1D1CFE725DB6CBE00A6EAAE /* Array+Identifiable.swift in Sources */,
 				C6B09AD425DE126000C96782 /* DumpAI.swift in Sources */,
 				C101D1E425DC5789000E86E0 /* WelcomeView.swift in Sources */,
+				C11545B625E7578000E8B591 /* ClassicFirework.swift in Sources */,
 				C18DD74A25DEFDD600A29151 /* RedBorder.swift in Sources */,
 				C699738A25D9F51C00337F70 /* PolygonShape.swift in Sources */,
 				C6B09AD825DE142D00C96782 /* SinglePlayerGame.swift in Sources */,
+				C11545B025E74CF300E8B591 /* SparkView.swift in Sources */,
 				C6596A3825DB1BA500A0F94B /* TwoPlayersGame.swift in Sources */,
 				C699739025D9F96600337F70 /* HexGrid.swift in Sources */,
 				C1D1CFE225DA0ED500A6EAAE /* Cell.swift in Sources */,

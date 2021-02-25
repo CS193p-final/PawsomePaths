@@ -11,25 +11,30 @@ struct BlueBorder: View {
     var cols: Int
     var frameHeight: CGFloat
     var frameWidth: CGFloat
+    var lineWidth: CGFloat = 10
     
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
                 ForEach (0..<cols, id: \.self) { cellIndex in
                     PolygonShape(sides: 6)
-                        .stroke(lineWidth: 5)
+                        .stroke(lineWidth: lineWidth)
                         .frame(width: frameWidth, height: frameHeight)
                         .offset(x: CGFloat(cellIndex) * (frameWidth / 2) - frameWidth / 4 - CGFloat(cols / 2) * frameWidth)
                         .padding(.top, -frameHeight / 8)
                         .foregroundColor(.blue)
+                        .opacity(0.8)
+
                 }
             }
             Rectangle()
-                .stroke(lineWidth: 5)
+                .stroke(lineWidth:lineWidth)
                 .frame(width: frameHeight * CGFloat(cols - 1), height: frameHeight/2)
                 .rotationEffect(Angle.degrees(60.3))
                 .offset(x: cols % 2 == 0 ? xOffset - frameHeight/4 : xOffset)
                 .foregroundColor(.blue)
+                .opacity(0.8)
+
             
             Rectangle()
                 .frame(width: frameHeight * CGFloat(cols - 1), height: frameHeight/2)

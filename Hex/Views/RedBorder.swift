@@ -11,20 +11,25 @@ struct RedBorder: View {
     var cols: Int
     var frameHeight: CGFloat
     var frameWidth: CGFloat
+    var lineWidth: CGFloat = 10
     
     var body: some View {
         ZStack {
             HStack(spacing: 0) {
                 ForEach (0..<cols, id: \.self) { cellIndex in
                     PolygonShape(sides: 6)
-                        .stroke(lineWidth: 5)
+                        .stroke(lineWidth: lineWidth)
                         .frame(width: frameWidth, height: frameHeight)
                         .foregroundColor(.red)
+                        .opacity(0.8)
+
                 }
             }
             Rectangle()
-                .stroke(lineWidth: 5)
+                .stroke(lineWidth: lineWidth)
                 .frame(width: frameWidth * CGFloat(cols - 1), height: frameHeight / 2, alignment: .leading).foregroundColor(.red)
+                .opacity(0.8)
+
             
             Rectangle()
                 .frame(width: frameWidth * CGFloat(cols - 1), height: frameHeight / 2, alignment: .leading).foregroundColor(.white)
@@ -36,6 +41,7 @@ struct RedBorder: View {
                 }
             }
         }
+        .opacity(0.8)
 
     }
 }

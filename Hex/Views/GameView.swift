@@ -6,54 +6,82 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct GameView: View {
-    @ObservedObject var hexGame: GameMode
+    @State private var welcomeView = false
     @State private var showResult = false
     @State private var showSettings = false
+    @ObservedObject var hexGame: GameMode
     
     var body: some View {
         let board = hexGame.board
-        Text("Hex Game").bold().font(.headline)
-        HStack {
-            Text("Player 1 turn").foregroundColor(board.playerTurn == 1 ? .red : .gray)
+        if (welcomeView) {
+            WelcomeView()
+        } else {
+            Text("Back")
                 .padding()
-            Text("Player 2 turn").foregroundColor(board.playerTurn == 2 ? .blue : .gray)
-                .padding()
-        }
-        Image(systemName: "gearshape")
-            .onTapGesture {
-                showSettings = true
+                .foregroundColor(.blue)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .onTapGesture {
+                    welcomeView = true
+                }
+            
+            Text("Hex Game").bold().font(.headline)
+            
+            HStack {
+                Text("Player 1 turn").foregroundColor(board.playerTurn == 1 ? .red : .gray)
+                    .padding()
+                Text("Player 2 turn").foregroundColor(board.playerTurn == 2 ? .blue : .gray)
+                    .padding()
             }
-            .popover(isPresented: $showSettings, content: {
-                settingsView(game: hexGame)
-            })
-        ZStack {
-            HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
-                CellView(cell: cell)
-                    .onTapGesture {
-                        hexGame.play(cellId: cell.id)
-                        if hexGame.gameEnded {
-                            showResult = true
+            
+            Image(systemName: "gearshape")
+                .onTapGesture {
+                    showSettings = true
+                }
+                .popover(isPresented: $showSettings, content: {
+                    settingsView(game: hexGame)
+                })
+            
+            ZStack {
+                HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
+                    CellView(cell: cell)
+                        .onTapGesture {
+                            hexGame.play(cellId: cell.id)
+                            if hexGame.gameEnded {
+                                showResult = true
+                            }
                         }
-                    }
+                }
             }
-        }
-        .popover(isPresented: $showResult) {
-            resultReport(game: hexGame)
-        }
-        Button(action: {hexGame.newGame(size: hexGame.board.size) }) {
-            RoundedRectangle(cornerRadius: 10).opacity(0.3)
-                .frame(width: 100, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .overlay(Text("New Game"))
+            .popover(isPresented: $showResult) {
+                resultReport(game: hexGame)
+            }
+            
+            Button(action: {hexGame.newGame(size: hexGame.board.size) }) {
+                RoundedRectangle(cornerRadius: 10).opacity(0.3)
+                    .frame(width: 100, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .overlay(Text("New Game"))
+            }
         }
     }
 }
 
 struct resultReport: View {
     var game: GameMode
+    let fireworkController = ClassicFireworkController()
     var body: some View {
         Text("\(game.result)").font(.headline)
+            .onTapGesture {
+                addFireworks()
+            }
+    }
+    
+    func addFireworks() {
+        let label = UILabel()
+        label.text = "🎉🎉🎉"
+        fireworkController.addFireworks(sparks: 2, around: UILabel())
     }
 }
 
