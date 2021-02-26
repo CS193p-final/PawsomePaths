@@ -21,28 +21,26 @@ struct RedBorder: View {
                         .stroke(lineWidth: lineWidth)
                         .frame(width: frameWidth, height: frameHeight)
                         .foregroundColor(.red)
-                        .opacity(0.8)
 
                 }
             }
             Rectangle()
                 .stroke(lineWidth: lineWidth)
                 .frame(width: frameWidth * CGFloat(cols - 1), height: frameHeight / 2, alignment: .leading).foregroundColor(.red)
-                .opacity(0.8)
 
             
             Rectangle()
-                .frame(width: frameWidth * CGFloat(cols - 1), height: frameHeight / 2, alignment: .leading).foregroundColor(.white)
+                .frame(width: frameWidth * CGFloat(cols - 1), height: frameHeight / 2, alignment: .leading)
+                .foregroundColor(UITraitCollection().userInterfaceStyle == .light ? .white : .black)
+
             HStack(spacing: 0) {
                 ForEach (0..<cols, id: \.self) { cellIndex in
                     PolygonShape(sides: 6)
                         .frame(width: frameWidth, height: frameHeight)
-                        .foregroundColor(.white)
+                        .foregroundColor(UITraitCollection().userInterfaceStyle == .light ? .white : .black)
                 }
             }
         }
-        .opacity(0.8)
-
     }
 }
 //

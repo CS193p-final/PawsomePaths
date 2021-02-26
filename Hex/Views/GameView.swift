@@ -73,9 +73,6 @@ struct resultReport: View {
     let fireworkController = ClassicFireworkController()
     var body: some View {
         Text("\(game.result)").font(.headline)
-            .onTapGesture {
-                addFireworks()
-            }
     }
     
     func addFireworks() {
@@ -87,18 +84,28 @@ struct resultReport: View {
 
 struct settingsView: View {
     @ObservedObject var game: GameMode
+    @State private var showAlert: Bool = false
     var body: some View {
         Section(header: Text("Board size")) {
             Stepper(
                 onIncrement: {
                     game.incrementSize()
+                    if game.board.size == 11 {
+                        showAlert = true
+                    }
                 },
                 onDecrement: {
                     game.decrementSize()
+                    if game.board.size == 3 {
+                        showAlert = true
+                    }
                 },
                 label: {
                     Text("\(game.board.size)")
                 })
+                .alert(isPresented: $showAlert) { () -> Alert in
+                    Alert(title: Text("Invalid board size"), message: Text("Board size cannot be less than 3x3 or greater than 11x11"), dismissButton: Alert.Button.cancel())
+                }
         }
     }
 }

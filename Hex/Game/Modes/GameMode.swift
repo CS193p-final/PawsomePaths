@@ -55,12 +55,16 @@ class GameMode: ObservableObject {
     }
     
     func incrementSize() {
-        let size = board.size + 1
-        newGame(size: size)
+        if board.size < 11 {
+            let size = board.size + 1
+            newGame(size: size)
+        }
     }
     
     func decrementSize() {
-        let size = board.size - 1
-        newGame(size: size)
+        if board.size > 3 {
+            let size = board.size - 1
+            newGame(size: size)
+        }
     }
 }
