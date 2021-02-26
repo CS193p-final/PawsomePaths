@@ -70,15 +70,10 @@ struct GameView: View {
 
 struct resultReport: View {
     var game: GameMode
-    let fireworkController = ClassicFireworkController()
     var body: some View {
+        Image(systemName: "ladybug")
         Text("\(game.result)").font(.headline)
-    }
-    
-    func addFireworks() {
-        let label = UILabel()
-        label.text = "🎉🎉🎉"
-        fireworkController.addFireworks(sparks: 2, around: UILabel())
+        FireworkRepresentable()
     }
 }
 
