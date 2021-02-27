@@ -56,19 +56,34 @@ struct GameView: View {
                 }
             }
             .popup(isPresented: $showResult) {
-                HStack {
+                VStack {
                     resultReport(game: hexGame)
+                    ZStack {
+                        Button("Menu") {
+                            welcomeView = true
+                        }
+                        RoundedRectangle(cornerRadius: 10).opacity(0.3)
+                    }
+                    .frame(width: 100, height: 40, alignment: .center)
+                    .foregroundColor(.pink)
+                    .padding()
                 }
                 .frame(width: 300, height: 450, alignment: .center)
                 .background(Color(red: 0.85, green: 0.8, blue: 0.95))
                 .cornerRadius(30.0)
             }
-            
-            Button(action: {hexGame.newGame(size: hexGame.board.size) }) {
-                RoundedRectangle(cornerRadius: 10).opacity(0.3)
-                    .frame(width: 100, height: 40, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .overlay(Text("New Game"))
-            }
+            newGameButton(game: hexGame)
+        }
+    }
+}
+
+struct newGameButton: View {
+    var game: GameMode
+    var body: some View {
+        Button(action: {game.newGame(size: game.board.size) }) {
+            RoundedRectangle(cornerRadius: 10).opacity(0.3)
+                .frame(width: 100, height: 40, alignment: .center)
+                .overlay(Text("New Game"))
         }
     }
 }
@@ -76,7 +91,12 @@ struct GameView: View {
 struct resultReport: View {
     var game: GameMode
     var body: some View {
-        FireworkRepresentable(text: game.result)
+        VStack {
+            FireworkRepresentable(text: game.result)
+            newGameButton(game: game)
+                .foregroundColor(.pink)
+        }
+
     }
 }
 

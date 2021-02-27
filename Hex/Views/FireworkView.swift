@@ -15,6 +15,7 @@ struct FireworkRepresentable: UIViewRepresentable {
     func makeUIView(context: Context) -> some UIView {
         label.text = "\(text)"
         label.style()
+        label.textAlignment = .center
         return label
     }
     
@@ -27,7 +28,6 @@ struct FireworkRepresentable: UIViewRepresentable {
 extension UILabel {
 
     func style() {
-
         self.textColor = .white
         self.layer.cornerRadius = 8
         self.font = UIFont.boldSystemFont(ofSize: 20)
