@@ -55,8 +55,13 @@ struct GameView: View {
                         }
                 }
             }
-            .popover(isPresented: $showResult) {
-                resultReport(game: hexGame)
+            .popup(isPresented: $showResult) {
+                HStack {
+                    resultReport(game: hexGame)
+                }
+                .frame(width: 300, height: 450, alignment: .center)
+                .background(Color(red: 0.85, green: 0.8, blue: 0.95))
+                .cornerRadius(30.0)
             }
             
             Button(action: {hexGame.newGame(size: hexGame.board.size) }) {
@@ -71,9 +76,7 @@ struct GameView: View {
 struct resultReport: View {
     var game: GameMode
     var body: some View {
-        Image(systemName: "ladybug")
-        Text("\(game.result)").font(.headline)
-        FireworkRepresentable()
+        FireworkRepresentable(text: game.result)
     }
 }
 

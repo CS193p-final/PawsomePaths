@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C101D1E425DC5789000E86E0 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C101D1E325DC5789000E86E0 /* WelcomeView.swift */; };
+		C10AA70125EA2C59006C7531 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10AA70025EA2C59006C7531 /* PopupView.swift */; };
 		C1102DAA25E8A0180054C992 /* FireworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1102DA925E8A0180054C992 /* FireworkView.swift */; };
 		C11545AC25E7478100E8B591 /* SparkTractory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11545AB25E7478100E8B591 /* SparkTractory.swift */; };
 		C11545B025E74CF300E8B591 /* SparkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11545AF25E74CF300E8B591 /* SparkView.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		C101D1E325DC5789000E86E0 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		C10AA70025EA2C59006C7531 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		C1102DA925E8A0180054C992 /* FireworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireworkView.swift; sourceTree = "<group>"; };
 		C11545AB25E7478100E8B591 /* SparkTractory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkTractory.swift; sourceTree = "<group>"; };
 		C11545AF25E74CF300E8B591 /* SparkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkView.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		C699739225D9FEF300337F70 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C10AA70025EA2C59006C7531 /* PopupView.swift */,
 				C699737A25D9F4DB00337F70 /* GameView.swift */,
 				C699738F25D9F96600337F70 /* HexGrid.swift */,
 				C699739325D9FF2800337F70 /* CellView.swift */,
@@ -280,6 +283,7 @@
 				C1102DAA25E8A0180054C992 /* FireworkView.swift in Sources */,
 				C699739025D9F96600337F70 /* HexGrid.swift in Sources */,
 				C1D1CFE225DA0ED500A6EAAE /* Cell.swift in Sources */,
+				C10AA70125EA2C59006C7531 /* PopupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

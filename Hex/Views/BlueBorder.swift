@@ -16,6 +16,8 @@ struct BlueBorder: View {
     
     
     var body: some View {
+        let blue = Color(red:0.39, green:0.55, blue:0.894)
+
         ZStack {
             VStack(spacing: 0) {
                 ForEach (0..<cols, id: \.self) { cellIndex in
@@ -24,7 +26,7 @@ struct BlueBorder: View {
                         .frame(width: frameWidth, height: frameHeight)
                         .offset(x: CGFloat(cellIndex) * (frameWidth / 2) - frameWidth / 4 - CGFloat(cols / 2) * frameWidth)
                         .padding(.top, -frameHeight / 8)
-                        .foregroundColor(.blue)
+                        .foregroundColor(blue)
 
                 }
             }
@@ -33,14 +35,14 @@ struct BlueBorder: View {
                 .frame(width: frameHeight * CGFloat(cols - 1), height: frameHeight/2)
                 .rotationEffect(Angle.degrees(60.3))
                 .offset(x: cols % 2 == 0 ? xOffset - frameHeight/4 : xOffset)
-                .foregroundColor(.blue)
+                .foregroundColor(blue)
 
             
             Rectangle()
                 .frame(width: frameHeight * CGFloat(cols - 1), height: frameHeight/2)
                 .rotationEffect(Angle.degrees(60.3))
                 .offset(x: cols % 2 == 0 ? xOffset - frameHeight/4 : xOffset)
-                .foregroundColor(UITraitCollection().userInterfaceStyle == .light ? .white : .black)
+                .foregroundColor(.white)
             
             VStack(spacing: 0) {
                 ForEach (0..<cols, id: \.self) { cellIndex in
@@ -48,7 +50,7 @@ struct BlueBorder: View {
                         .frame(width: frameWidth, height: frameHeight)
                         .offset(x: CGFloat(cellIndex) * (frameWidth / 2) - frameWidth / 4 - CGFloat(cols / 2) * frameWidth)
                         .padding(.top, -frameHeight / 8)
-                        .foregroundColor(UITraitCollection().userInterfaceStyle == .light ? .white : .black)
+                        .foregroundColor(.white)
                 }
             }
         }

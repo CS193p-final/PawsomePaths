@@ -14,30 +14,32 @@ struct RedBorder: View {
     var lineWidth: CGFloat = 10
     
     var body: some View {
+        let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
+
         ZStack {
             HStack(spacing: 0) {
                 ForEach (0..<cols, id: \.self) { cellIndex in
                     PolygonShape(sides: 6)
                         .stroke(lineWidth: lineWidth)
                         .frame(width: frameWidth, height: frameHeight)
-                        .foregroundColor(.red)
+                        .foregroundColor(red)
 
                 }
             }
             Rectangle()
                 .stroke(lineWidth: lineWidth)
-                .frame(width: frameWidth * CGFloat(cols - 1), height: frameHeight / 2, alignment: .leading).foregroundColor(.red)
+                .frame(width: frameWidth * CGFloat(cols - 1), height: frameHeight / 2, alignment: .leading).foregroundColor(red)
 
             
             Rectangle()
                 .frame(width: frameWidth * CGFloat(cols - 1), height: frameHeight / 2, alignment: .leading)
-                .foregroundColor(UITraitCollection().userInterfaceStyle == .light ? .white : .black)
+                .foregroundColor(.white)
 
             HStack(spacing: 0) {
                 ForEach (0..<cols, id: \.self) { cellIndex in
                     PolygonShape(sides: 6)
                         .frame(width: frameWidth, height: frameHeight)
-                        .foregroundColor(UITraitCollection().userInterfaceStyle == .light ? .white : .black)
+                        .foregroundColor(.white)
                 }
             }
         }

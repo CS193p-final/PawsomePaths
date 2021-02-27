@@ -10,30 +10,27 @@ import SwiftUI
 
 struct FireworkRepresentable: UIViewRepresentable {
     let fireworkController = ClassicFireworkController()
-    let label = UIButton()
+    let label = UILabel()
+    var text: String
     func makeUIView(context: Context) -> some UIView {
-        label.setTitle("🎉🎉🎉", for: .normal)
+        label.text = "\(text)"
         label.style()
         return label
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        fireworkController.addFireworks(sparks: 2, around: label)
+        fireworkController.addFireworks(sparks: 8, around: label)
     }
 }
 
-final class FireworkView: UIViewController {
-    let fireworkController = ClassicFireworkController()
-}
 
-extension UIButton {
+extension UILabel {
 
     func style() {
-        let color = UIColor(red:0.42, green:0.58, blue:0.98, alpha:1.00)
-        self.backgroundColor = color
-        self.setTitleColor(.white, for: .normal)
+
+        self.textColor = .white
         self.layer.cornerRadius = 8
-        self.titleLabel!.font = UIFont.boldSystemFont(ofSize: 20)
+        self.font = UIFont.boldSystemFont(ofSize: 20)
 
         let layer = self.layer
         layer.shadowColor = UIColor.black.cgColor
