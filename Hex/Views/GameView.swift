@@ -29,13 +29,14 @@ struct GameView: View {
             
             Text("Hex Game").bold().font(.headline)
             
+            
             HStack {
                 Text("Player 1 turn").foregroundColor(board.playerTurn == 1 ? .red : .gray)
                     .padding()
                 Text("Player 2 turn").foregroundColor(board.playerTurn == 2 ? .blue : .gray)
                     .padding()
             }
-            
+
             Image(systemName: "gearshape")
                 .onTapGesture {
                     showSettings = true
@@ -43,16 +44,18 @@ struct GameView: View {
                 .popover(isPresented: $showSettings, content: {
                     settingsView(game: hexGame)
                 })
-            
             ZStack {
                 HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
-                    CellView(cell: cell)
-                        .onTapGesture {
+                    CellView(cell: cell).onTapGesture {
+                        if hexGame.gameEnded {
+                            showResult = true
+                        } else {
                             hexGame.play(cellId: cell.id)
-                            if hexGame.gameEnded {
-                                showResult = true
-                            }
                         }
+                    }
+                }
+                if (showResult == true) {
+                    FireworkRepresentable()
                 }
             }
             .popup(isPresented: $showResult) {
@@ -63,10 +66,12 @@ struct GameView: View {
                             welcomeView = true
                         }
                         RoundedRectangle(cornerRadius: 10).opacity(0.3)
+
                     }
                     .frame(width: 100, height: 40, alignment: .center)
                     .foregroundColor(.pink)
                     .padding()
+
                 }
                 .frame(width: 300, height: 450, alignment: .center)
                 .background(Color(red: 0.85, green: 0.8, blue: 0.95))
@@ -92,11 +97,10 @@ struct resultReport: View {
     var game: GameMode
     var body: some View {
         VStack {
-            FireworkRepresentable(text: game.result)
+            Text("\(game.result)")
             newGameButton(game: game)
                 .foregroundColor(.pink)
         }
-
     }
 }
 

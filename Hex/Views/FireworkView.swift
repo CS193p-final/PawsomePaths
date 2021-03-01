@@ -11,16 +11,14 @@ import SwiftUI
 struct FireworkRepresentable: UIViewRepresentable {
     let fireworkController = ClassicFireworkController()
     let label = UILabel()
-    var text: String
     func makeUIView(context: Context) -> some UIView {
-        label.text = "\(text)"
         label.style()
         label.textAlignment = .center
         return label
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        fireworkController.addFireworks(sparks: 8, around: label)
+        fireworkController.addFireworks(count: 4, sparks: 8, around: label)
     }
 }
 
