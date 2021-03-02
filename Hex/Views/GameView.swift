@@ -44,40 +44,47 @@ struct GameView: View {
                 .popover(isPresented: $showSettings, content: {
                     settingsView(game: hexGame)
                 })
-            ZStack {
-                HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
-                    CellView(cell: cell).onTapGesture {
-                        if hexGame.gameEnded {
-                            showResult = true
-                        } else {
-                            hexGame.play(cellId: cell.id)
+            GeometryReader { geometry in
+                ZStack {
+                    HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
+                        CellView(cell: cell).onTapGesture {
+                            if hexGame.gameEnded {
+                                showResult = true
+                            } else {
+                                hexGame.play(cellId: cell.id)
+                            }
                         }
                     }
-                }
-                if (showResult == true) {
-                    FireworkRepresentable()
-                }
-            }
-            .popup(isPresented: $showResult) {
-                VStack {
-                    resultReport(game: hexGame)
-                    ZStack {
-                        Button("Menu") {
-                            welcomeView = true
+                    .popup(isPresented: $showResult) {
+                        VStack {
+                            resultReport(game: hexGame)
+                            ZStack {
+                                Button("Menu") {
+                                    welcomeView = true
+                                }
+                                RoundedRectangle(cornerRadius: 10).opacity(0.3)
+
+                            }
+                            .frame(width: 100, height: 40, alignment: .center)
+                            .foregroundColor(.pink)
+                            .padding()
+
                         }
-                        RoundedRectangle(cornerRadius: 10).opacity(0.3)
+                        .frame(width: 300, height: 450, alignment: .center)
+                        .background(Color(red: 0.85, green: 0.8, blue: 0.95))
+                        .cornerRadius(30.0)
+                    }
+                    if (showResult == true) {
+                        FireworkRepresentable().zIndex(1).offset(x: geometry.size.width / 2)
+                        FireworkRepresentable().zIndex(1)
+                        FireworkRepresentable().zIndex(1).offset(x: geometry.size.width, y: geometry.size.height / 2)
 
                     }
-                    .frame(width: 100, height: 40, alignment: .center)
-                    .foregroundColor(.pink)
-                    .padding()
-
                 }
-                .frame(width: 300, height: 450, alignment: .center)
-                .background(Color(red: 0.85, green: 0.8, blue: 0.95))
-                .cornerRadius(30.0)
             }
-            newGameButton(game: hexGame)
+            if !showResult {
+                newGameButton(game: hexGame)
+            }
         }
     }
 }
