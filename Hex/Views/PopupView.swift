@@ -14,7 +14,7 @@ extension View {
         isPresented: Binding<Bool>,
         type: Popup<PopupContent>.PopupType = .`default`,
         position: Popup<PopupContent>.Position = .bottom,
-        animation: Animation = Animation.easeOut(duration: 0.3),
+        animation: Animation = Animation.easeOut(duration: 0.5),
         autohideIn: Double? = nil,
         closeOnTap: Bool = true,
         closeOnTapOutside: Bool = false,

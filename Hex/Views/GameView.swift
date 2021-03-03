@@ -60,41 +60,41 @@ struct GameView: View {
                             Image("background")
                             VStack {
                                 resultReport(game: hexGame)
+                                    .padding(.vertical, 150)
+                                newGameButton(game: hexGame, showResult: showResult)
                                 ZStack {
                                     Button("Menu") {
                                         welcomeView = true
                                     }
                                     RoundedRectangle(cornerRadius: 10).opacity(0.3)
-
                                 }
                                 .frame(width: 100, height: 40, alignment: .center)
-                                .foregroundColor(.pink)
                                 .padding()
-
                             }
                         }
                         .frame(width: 300, height: 450, alignment: .center)
                         .cornerRadius(30.0)
+                        .foregroundColor(.green)
                     }
+                    
                     if (showResult == true) {
-                        FireworkRepresentable().zIndex(1).offset(x: geometry.size.width / 2)
-                        FireworkRepresentable().zIndex(1)
-                        FireworkRepresentable().zIndex(1).offset(x: geometry.size.width, y: geometry.size.height / 2)
-
+                        FireworkRepresentable().offset(x: geometry.size.width / 2)                    .zIndex(-1)
+                        FireworkRepresentable().zIndex(-1)
+                        FireworkRepresentable().offset(x: geometry.size.width, y: geometry.size.height / 2).zIndex(-1)
                     }
                 }
             }
-            if !showResult {
-                newGameButton(game: hexGame)
-            }
+            newGameButton(game: hexGame, showResult: !showResult)
+                .foregroundColor(!showResult ? .blue : .gray)
         }
     }
 }
 
 struct newGameButton: View {
     var game: GameMode
+    var showResult: Bool
     var body: some View {
-        Button(action: {game.newGame(size: game.board.size) }) {
+        Button(action: {showResult ? game.newGame(size: game.board.size) : nil}) {
             RoundedRectangle(cornerRadius: 10).opacity(0.3)
                 .frame(width: 100, height: 40, alignment: .center)
                 .overlay(Text("New Game"))
@@ -106,9 +106,14 @@ struct resultReport: View {
     var game: GameMode
     var body: some View {
         VStack {
-            Text("\(game.result)")
-            newGameButton(game: game)
-                .foregroundColor(.pink)
+            ZStack {
+                //Text("\(game.result)").font(.system(size: 36, weight: .bold, design: .rounded))
+                Text("\(game.result)")
+                    .font(Font.custom("KronaOne-Regular", size: 36))
+                    //.foregroundColor(.white).zIndex(-1)
+            }
+
+
         }
     }
 }
@@ -143,9 +148,9 @@ struct settingsView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            GameView(hexGame: SinglePlayerGame())
-            GameView(hexGame: SinglePlayerGame())
-        }
+//        Group {
+//            GameView(hexGame: SinglePlayerGame())
+//            GameView(hexGame: SinglePlayerGame())
+        resultReport(game: SinglePlayerGame())
     }
 }

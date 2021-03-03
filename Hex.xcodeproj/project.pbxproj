@@ -14,6 +14,7 @@
 		C11545B025E74CF300E8B591 /* SparkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11545AF25E74CF300E8B591 /* SparkView.swift */; };
 		C11545B325E74E1C00E8B591 /* Firework.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11545B225E74E1C00E8B591 /* Firework.swift */; };
 		C11545B625E7578000E8B591 /* ClassicFirework.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11545B525E7578000E8B591 /* ClassicFirework.swift */; };
+		C131A08525EF47A50060193A /* KronaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C131A08425EF47A50060193A /* KronaOne-Regular.ttf */; };
 		C18DD74A25DEFDD600A29151 /* RedBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18DD74925DEFDD600A29151 /* RedBorder.swift */; };
 		C18DD74E25DF60BE00A29151 /* BlueBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18DD74D25DF60BE00A29151 /* BlueBorder.swift */; };
 		C1CE2BB625E77B740012E731 /* ClassFireworkAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */; };
@@ -45,6 +46,7 @@
 		C11545AF25E74CF300E8B591 /* SparkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkView.swift; sourceTree = "<group>"; };
 		C11545B225E74E1C00E8B591 /* Firework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firework.swift; sourceTree = "<group>"; };
 		C11545B525E7578000E8B591 /* ClassicFirework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicFirework.swift; sourceTree = "<group>"; };
+		C131A08425EF47A50060193A /* KronaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KronaOne-Regular.ttf"; sourceTree = "<group>"; };
 		C18DD74925DEFDD600A29151 /* RedBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedBorder.swift; sourceTree = "<group>"; };
 		C18DD74D25DF60BE00A29151 /* BlueBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueBorder.swift; sourceTree = "<group>"; };
 		C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassFireworkAnimator.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 		C6596A3125DB11D900A0F94B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C131A08425EF47A50060193A /* KronaOne-Regular.ttf */,
 				C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */,
 				C6596A3225DB11F000A0F94B /* Queue.swift */,
 			);
@@ -247,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C699738025D9F4DC00337F70 /* Preview Assets.xcassets in Resources */,
+				C131A08525EF47A50060193A /* KronaOne-Regular.ttf in Resources */,
 				C699737D25D9F4DC00337F70 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
