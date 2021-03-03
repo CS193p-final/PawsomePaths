@@ -10,11 +10,12 @@ import UIKit
 
 struct GameView: View {
     @State private var welcomeView = false
-    @State private var showResult = false
+    @State var showResult = false
     @State private var showSettings = false
     @ObservedObject var hexGame: GameMode
     let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
     let blue = Color(red:0.39, green:0.55, blue:0.894)
+    let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     let buttonFontSize: CGFloat = 12
     let gameTitle: CGFloat = 36
     let playerTurnFontSize: CGFloat = 20
@@ -24,80 +25,81 @@ struct GameView: View {
         if (welcomeView) {
             WelcomeView()
         } else {
-            Text("Back")
-                .padding()
-                .foregroundColor(.blue)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .onTapGesture {
-                    welcomeView = true
-                }
-            
-            Text("Hex Game")
-                .font(Font.custom("KronaOne-Regular", size: gameTitle))
-                .foregroundColor(Color(red: 0, green: 0.14453125, blue: 0, opacity: 1))
-            
-            
-            HStack {
-                Text("Player 1 turn").foregroundColor(board.playerTurn == 1 ? red : .gray)
-                    .padding()
-                Text("Player 2 turn").foregroundColor(board.playerTurn == 2 ? blue : .gray)
-                    .padding()
-            }
-            .font(Font.custom("KronaOne-Regular", size: playerTurnFontSize))
-
-
-            Image(systemName: "gearshape")
-                .onTapGesture {
-                    showSettings = true
-                }
-                .popup(isPresented: $showSettings) {
-                    settingsView(game: hexGame)
-                        .frame(width: 250, height: 75, alignment: .top)
-                }
-            GeometryReader { geometry in
-                ZStack {
-                    HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
-                        CellView(cell: cell).onTapGesture {
-                            if hexGame.gameEnded {
-                                showResult = true
-                            } else {
-                                hexGame.play(cellId: cell.id)
-                            }
+            ZStack {
+                Rectangle().foregroundColor(backgroundColor).ignoresSafeArea()
+                VStack {
+                    Text("Back")
+                        .padding()
+                        .foregroundColor(.blue)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .onTapGesture {
+                            welcomeView = true
                         }
+                    Text("Hex Game")
+                        .font(Font.custom("KronaOne-Regular", size: gameTitle))
+                        .foregroundColor(Color(red: 0.82422, green: 0.37891, blue: 0.207, opacity: 1))
+                    HStack {
+                        Text("Player 1 turn").foregroundColor(board.playerTurn == 1 ? red : .gray)
+                            .padding()
+                        Text("Player 2 turn").foregroundColor(board.playerTurn == 2 ? blue : .gray)
+                            .padding()
                     }
-                    .popup(isPresented: $showResult) {
+                    .font(Font.custom("KronaOne-Regular", size: playerTurnFontSize))
+                    Image(systemName: "gearshape")
+                        .onTapGesture {
+                            showSettings = true
+                        }
+                        .popup(isPresented: $showSettings) {
+                            settingsView(game: hexGame)
+                                .frame(width: 250, alignment: .top)
+                        }
+                    GeometryReader { geometry in
                         ZStack {
-                            Image("background")
-                            VStack {
-                                resultReport(game: hexGame)
-                                    .padding(.vertical, 150)
-                                newGameButton(game: hexGame, showResult: showResult)
-                                ZStack {
-                                    Button("Menu") {
-                                        welcomeView = true
+                            HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
+                                CellView(cell: cell).onTapGesture {
+                                    if hexGame.gameEnded {
+                                        showResult = true
+                                    } else {
+                                        hexGame.play(cellId: cell.id)
                                     }
-                                    RoundedRectangle(cornerRadius: 10).opacity(0.3)
                                 }
-                                .frame(width: 100, height: 40, alignment: .center)
-                                .padding()
+                            }
+                            .popup(isPresented: $showResult) {
+                                ZStack {
+                                    Image("background")
+                                    VStack {
+                                        resultReport(game: hexGame)
+                                            .padding(.vertical, 150)
+                                        newGameButton(game: hexGame, showResult: showResult)
+                                        ZStack {
+                                            Button("Menu") {
+                                                welcomeView = true
+                                                hexGame.newGame(size: hexGame.board.size)
+                                            }
+                                            RoundedRectangle(cornerRadius: 10).opacity(0.3)
+                                        }
+                                        .frame(width: 100, height: 40, alignment: .center)
+                                        .padding()
+                                    }
+                                }
+                                .frame(width: 300, height: 450, alignment: .center)
+                                .cornerRadius(30.0)
+                                .font(Font.custom("KronaOne-Regular", size: buttonFontSize))
+                                .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
+                            }
+                            
+                            if (showResult == true) {
+                                FireworkRepresentable().offset(x: geometry.size.width / 2)                    .zIndex(-1)
+                                FireworkRepresentable().zIndex(-1)
+                                FireworkRepresentable().offset(x: geometry.size.width, y: geometry.size.height / 2).zIndex(-1)
                             }
                         }
-                        .frame(width: 300, height: 450, alignment: .center)
-                        .cornerRadius(30.0)
-                        .font(Font.custom("KronaOne-Regular", size: buttonFontSize))
-                        .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
                     }
-                    
-                    if (showResult == true) {
-                        FireworkRepresentable().offset(x: geometry.size.width / 2)                    .zIndex(-1)
-                        FireworkRepresentable().zIndex(-1)
-                        FireworkRepresentable().offset(x: geometry.size.width, y: geometry.size.height / 2).zIndex(-1)
-                    }
+                    newGameButton(game: hexGame, showResult: !showResult)
+                        .foregroundColor(!showResult ? .blue : .gray)
+                        .padding()
                 }
             }
-            newGameButton(game: hexGame, showResult: !showResult)
-                .foregroundColor(!showResult ? .blue : .gray)
-                .padding()
         }
     }
 }
@@ -111,8 +113,8 @@ struct newGameButton: View {
         Button(action: {showResult ? game.newGame(size: game.board.size) : nil}) {
             RoundedRectangle(cornerRadius: 10).opacity(0.3)
                 .frame(width: 100, height: 40, alignment: .center)
-                .overlay(Text("New Game").font(Font.custom("KronaOne-Regular", size: buttonFontSize))
-)
+                .overlay(Text("New Game")
+                .font(Font.custom("KronaOne-Regular", size: buttonFontSize)))
         }
     }
 }

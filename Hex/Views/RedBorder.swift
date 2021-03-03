@@ -14,6 +14,7 @@ struct RedBorder: View {
     var lineWidth: CGFloat = 10
     
     var body: some View {
+        let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
         let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
 
         ZStack {
@@ -33,13 +34,13 @@ struct RedBorder: View {
             
             Rectangle()
                 .frame(width: frameWidth * CGFloat(cols - 1), height: frameHeight / 2, alignment: .leading)
-                .foregroundColor(.white)
+                .foregroundColor(backgroundColor)
 
             HStack(spacing: 0) {
                 ForEach (0..<cols, id: \.self) { cellIndex in
                     PolygonShape(sides: 6)
                         .frame(width: frameWidth, height: frameHeight)
-                        .foregroundColor(.white)
+                        .foregroundColor(backgroundColor)
                 }
             }
         }
