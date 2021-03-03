@@ -20,16 +20,20 @@ struct WelcomeView: View {
                 twoPlayerGameView = true
             } label: {
                 RoundedRectangle(cornerRadius: 10).opacity(0.3)
-                   .frame(width: 150, height: 50, alignment: .center)
-                   .overlay(Text("2 Player Game")).font(.headline)
+                    .frame(width: 250, height: 75, alignment: .center)
+                    .overlay(Text("2 Player Game"))
+                    .font(Font.custom("KronaOne-Regular", size: 20))
+                    .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
             }
             
             Button {
                 singlePlayerGameView = true
             } label: {
                 RoundedRectangle(cornerRadius: 10).opacity(0.3)
-                   .frame(width: 150, height: 50, alignment: .center)
-                   .overlay(Text("Computer Game")).font(.headline)
+                    .frame(width: 250, height: 75, alignment: .center)
+                    .overlay(Text("Computer Game"))
+                    .font(Font.custom("KronaOne-Regular", size: 20))
+                    .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
             }
         }
     }

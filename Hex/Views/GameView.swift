@@ -13,6 +13,11 @@ struct GameView: View {
     @State private var showResult = false
     @State private var showSettings = false
     @ObservedObject var hexGame: GameMode
+    let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
+    let blue = Color(red:0.39, green:0.55, blue:0.894)
+    let buttonFontSize: CGFloat = 12
+    let gameTitle: CGFloat = 36
+    let playerTurnFontSize: CGFloat = 20
     
     var body: some View {
         let board = hexGame.board
@@ -27,23 +32,28 @@ struct GameView: View {
                     welcomeView = true
                 }
             
-            Text("Hex Game").bold().font(.headline)
+            Text("Hex Game")
+                .font(Font.custom("KronaOne-Regular", size: gameTitle))
+                .foregroundColor(Color(red: 0, green: 0.14453125, blue: 0, opacity: 1))
             
             
             HStack {
-                Text("Player 1 turn").foregroundColor(board.playerTurn == 1 ? .red : .gray)
+                Text("Player 1 turn").foregroundColor(board.playerTurn == 1 ? red : .gray)
                     .padding()
-                Text("Player 2 turn").foregroundColor(board.playerTurn == 2 ? .blue : .gray)
+                Text("Player 2 turn").foregroundColor(board.playerTurn == 2 ? blue : .gray)
                     .padding()
             }
+            .font(Font.custom("KronaOne-Regular", size: playerTurnFontSize))
+
 
             Image(systemName: "gearshape")
                 .onTapGesture {
                     showSettings = true
                 }
-                .popover(isPresented: $showSettings, content: {
+                .popup(isPresented: $showSettings) {
                     settingsView(game: hexGame)
-                })
+                        .frame(width: 250, height: 75, alignment: .top)
+                }
             GeometryReader { geometry in
                 ZStack {
                     HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
@@ -74,7 +84,8 @@ struct GameView: View {
                         }
                         .frame(width: 300, height: 450, alignment: .center)
                         .cornerRadius(30.0)
-                        .foregroundColor(.green)
+                        .font(Font.custom("KronaOne-Regular", size: buttonFontSize))
+                        .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
                     }
                     
                     if (showResult == true) {
@@ -86,34 +97,37 @@ struct GameView: View {
             }
             newGameButton(game: hexGame, showResult: !showResult)
                 .foregroundColor(!showResult ? .blue : .gray)
+                .padding()
         }
     }
 }
 
 struct newGameButton: View {
     var game: GameMode
+    let buttonFontSize: CGFloat = 12
+
     var showResult: Bool
     var body: some View {
         Button(action: {showResult ? game.newGame(size: game.board.size) : nil}) {
             RoundedRectangle(cornerRadius: 10).opacity(0.3)
                 .frame(width: 100, height: 40, alignment: .center)
-                .overlay(Text("New Game"))
+                .overlay(Text("New Game").font(Font.custom("KronaOne-Regular", size: buttonFontSize))
+)
         }
     }
 }
 
 struct resultReport: View {
     var game: GameMode
+    let resultFontSize: CGFloat = 30
+
     var body: some View {
         VStack {
             ZStack {
-                //Text("\(game.result)").font(.system(size: 36, weight: .bold, design: .rounded))
                 Text("\(game.result)")
-                    .font(Font.custom("KronaOne-Regular", size: 36))
-                    //.foregroundColor(.white).zIndex(-1)
+                    .font(Font.custom("KronaOne-Regular", size: resultFontSize))
+                    .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
             }
-
-
         }
     }
 }
@@ -148,9 +162,9 @@ struct settingsView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-//        Group {
-//            GameView(hexGame: SinglePlayerGame())
-//            GameView(hexGame: SinglePlayerGame())
-        resultReport(game: SinglePlayerGame())
+        Group {
+            GameView(hexGame: SinglePlayerGame())
+            GameView(hexGame: SinglePlayerGame())
+        }
     }
 }

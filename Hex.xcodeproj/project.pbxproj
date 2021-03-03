@@ -83,6 +83,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C11F648825F023200094C266 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				C131A08425EF47A50060193A /* KronaOne-Regular.ttf */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		C6596A2D25DB0AA400A0F94B /* Game */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,7 +104,6 @@
 		C6596A3125DB11D900A0F94B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				C131A08425EF47A50060193A /* KronaOne-Regular.ttf */,
 				C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */,
 				C6596A3225DB11F000A0F94B /* Queue.swift */,
 			);
@@ -131,6 +138,7 @@
 		C699737725D9F4DB00337F70 /* Hex */ = {
 			isa = PBXGroup;
 			children = (
+				C11F648825F023200094C266 /* Assets */,
 				C6596A4525DB400D00A0F94B /* AI */,
 				C699737C25D9F4DC00337F70 /* Assets.xcassets */,
 				C6596A3125DB11D900A0F94B /* Extensions */,
