@@ -56,22 +56,24 @@ struct GameView: View {
                         }
                     }
                     .popup(isPresented: $showResult) {
-                        VStack {
-                            resultReport(game: hexGame)
-                            ZStack {
-                                Button("Menu") {
-                                    welcomeView = true
+                        ZStack {
+                            Image("background")
+                            VStack {
+                                resultReport(game: hexGame)
+                                ZStack {
+                                    Button("Menu") {
+                                        welcomeView = true
+                                    }
+                                    RoundedRectangle(cornerRadius: 10).opacity(0.3)
+
                                 }
-                                RoundedRectangle(cornerRadius: 10).opacity(0.3)
+                                .frame(width: 100, height: 40, alignment: .center)
+                                .foregroundColor(.pink)
+                                .padding()
 
                             }
-                            .frame(width: 100, height: 40, alignment: .center)
-                            .foregroundColor(.pink)
-                            .padding()
-
                         }
                         .frame(width: 300, height: 450, alignment: .center)
-                        .background(Color(red: 0.85, green: 0.8, blue: 0.95))
                         .cornerRadius(30.0)
                     }
                     if (showResult == true) {
