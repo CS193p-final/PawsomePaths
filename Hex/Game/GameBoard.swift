@@ -36,14 +36,10 @@ struct BoardPosition: Hashable {
 struct GameBoard: Hashable, Codable {
     private static let dr = [-1, -1, 0, 1, 1, 0]
     private static let dc = [0, 1, 1, 0, -1, -1]
-    static var top    = BoardPosition(r: 0, c: 0, cols: -1)
-    static var bottom = BoardPosition(r: 0, c: 0, cols: -2)
-    static var left   = BoardPosition(r: 0, c: 0, cols: -3)
-    static var right  = BoardPosition(r: 0, c: 0, cols: -4)
     
     private(set) var size: Int
     var board: [[Int]]
-    var difficulty = 5
+    var difficulty = 3
     private(set) var playerTurn: Int = 1
     
     var json: Data? {
@@ -162,7 +158,6 @@ struct GameBoard: Hashable, Codable {
     }
     
     func checkResult() -> GameResult {
-        
         // Check if player 1 has connected top to bottom
         var visited = Array(repeating: Array(repeating: false, count: size), count: size)
         var queue = Queue<BoardPosition>()
@@ -224,17 +219,6 @@ struct GameBoard: Hashable, Codable {
         }
         
         return .unknown
-    }
-    
-    func evaluate(player: Int) {
-        var player1Distance = Int.max
-        var player2Distance = Int.min
-        
-        // calculate distance from top to bottom using two-distance metric
-        var distanceFromTop = Dictionary<BoardPosition, Int>()
-        distanceFromTop[GameBoard.top] = 0
-        
-        
     }
     
     func isInside(position: BoardPosition) -> Bool {

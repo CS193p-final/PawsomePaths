@@ -10,7 +10,7 @@ import SwiftUI
 struct Minimax {
     var board: GameBoard
     var computer: Int = 2
-    var caculationTime = DispatchTimeInterval.seconds(200)
+    var caculationTime = DispatchTimeInterval.seconds(1)
     var endTime = DispatchTime.now()
     
     mutating func getPlay() -> BoardPosition {
@@ -19,7 +19,7 @@ struct Minimax {
         
         // Apply iterative deeping on top minimax
         let maxDifficulty = board.difficulty
-        for difficulty in 1...3 {
+        for difficulty in 1...maxDifficulty {
             board.difficulty = difficulty
             var eval = 0
             let score = minimax(depth: difficulty, isMaximizingPlayer: true, a: Int.min, b: Int.max, bestMove: &bestMove, critical: &eval)
@@ -36,7 +36,7 @@ struct Minimax {
     
     mutating func minimax(depth: Int, isMaximizingPlayer: Bool, a: Int, b: Int, bestMove: inout BoardPosition, critical: inout Int) -> Int {
 
-        if depth == 0 { // TODO: add time constant
+        if depth == 0 {
             return staticEvaluate(player: computer)
         }
         
@@ -148,7 +148,7 @@ struct Minimax {
         // Compute hexes needed for player 1 to win (up-to-down BFS search)
         var costMatrix = Array(repeating: Array(repeating: Int.max, count: size), count: size)
         initCostMatrix(&costMatrix, player: 1)
-//        print(costMatrix)
+        
         for r in 0..<size {
             for c in 0..<size {
                 if board[r, c] == 2 { // from this cell, the cost to other cells is infinity (for player 1), therefore we skip it
