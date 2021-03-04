@@ -28,7 +28,7 @@ struct Cell: Identifiable {
         case 3:
             color = .white
         default:
-            print("Unexpected color code")
+            print("Unexpected color code: \(colorCode)")
             color = gray
         }
     }

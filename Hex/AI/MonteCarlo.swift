@@ -58,6 +58,7 @@ struct MonteCarlo {
     
     // Plays out a "random" game from current position, then updates the statistics tables with the result.s
     mutating func runSimulation() {
+//        return
         var visitedStates = Set<GameBoard>()
         var state = board
         var expand = true

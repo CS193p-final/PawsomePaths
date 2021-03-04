@@ -14,7 +14,7 @@ enum GameResult {
     case player2Win
 }
 
-struct BoardPosition {
+struct BoardPosition: Hashable {
     var r: Int
     var c: Int
     var cols: Int
@@ -36,9 +36,14 @@ struct BoardPosition {
 struct GameBoard: Hashable, Codable {
     private static let dr = [-1, -1, 0, 1, 1, 0]
     private static let dc = [0, 1, 1, 0, -1, -1]
+    static var top    = BoardPosition(r: 0, c: 0, cols: -1)
+    static var bottom = BoardPosition(r: 0, c: 0, cols: -2)
+    static var left   = BoardPosition(r: 0, c: 0, cols: -3)
+    static var right  = BoardPosition(r: 0, c: 0, cols: -4)
     
     private(set) var size: Int
-    private(set) var board: [[Int]]
+    var board: [[Int]]
+    var difficulty = 5
     private(set) var playerTurn: Int = 1
     
     var json: Data? {
@@ -75,11 +80,52 @@ struct GameBoard: Hashable, Codable {
         board = Array(repeating: Array(repeating: 0, count: size), count: size)
     }
     
+    subscript(row: Int, col: Int) -> Int {
+        board[row][col]
+    }
+    
     var legalMoves: [BoardPosition] {
         var moves = [BoardPosition]()
         for r in 0..<size {
             for c in 0..<size {
                 if board[r][c] == 0 {
+                    moves.append(BoardPosition(r: r, c: c, cols: size))
+                }
+            }
+        }
+        return moves
+    }
+    
+    // return possible good move (at most 2 hexes always from occupied cell)
+    var goodMoves: [BoardPosition] {
+        var queue = Queue<BoardPosition>()
+        var distance = Array(repeating: Array(repeating: -1, count: size), count: size)
+        
+        for r in 0..<size {
+            for c in 0..<size {
+                if board[r][c] != 0 {
+                    queue.enqueue(BoardPosition(r: r, c: c, cols: size))
+                    distance[r][c] = 0
+                }
+            }
+        }
+        
+        while !queue.isEmpty {
+            let cell = queue.dequeue()!
+            for i in 0..<GameBoard.dr.count {
+                let r_ = cell.r + GameBoard.dr[i]
+                let c_ = cell.c + GameBoard.dc[i]
+                if isInside(r: r_, c: c_) && distance[r_][c_] == -1 {
+                    distance[r_][c_] = distance[cell.r][cell.c] + 1
+                    queue.enqueue(BoardPosition(r: r_, c: c_, cols: size))
+                }
+            }
+        }
+        
+        var moves = [BoardPosition]()
+        for r in 0..<size {
+            for c in 0..<size {
+                if distance[r][c] <= 2 && distance[r][c] != 0 {
                     moves.append(BoardPosition(r: r, c: c, cols: size))
                 }
             }
@@ -106,6 +152,12 @@ struct GameBoard: Hashable, Codable {
     
     mutating func play(move: BoardPosition) {
         board[move.r][move.c] = playerTurn
+        playerTurn = 3 - playerTurn
+    }
+    
+    mutating func undo(move: BoardPosition) {
+        assert(board[move.r][move.c] != playerTurn)
+        board[move.r][move.c] = 0
         playerTurn = 3 - playerTurn
     }
     
@@ -174,7 +226,18 @@ struct GameBoard: Hashable, Codable {
         return .unknown
     }
     
-    private func isInside(position: BoardPosition) -> Bool {
+    func evaluate(player: Int) {
+        var player1Distance = Int.max
+        var player2Distance = Int.min
+        
+        // calculate distance from top to bottom using two-distance metric
+        var distanceFromTop = Dictionary<BoardPosition, Int>()
+        distanceFromTop[GameBoard.top] = 0
+        
+        
+    }
+    
+    func isInside(position: BoardPosition) -> Bool {
         isInside(r: position.r, c: position.c)
     }
     

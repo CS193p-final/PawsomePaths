@@ -8,7 +8,7 @@
 import Foundation
 
 class SinglePlayerGame: GameMode {
-
+    
     override var playerTurn: String {
         if (board.playerTurn == 1) {
             return "Your turn"
@@ -35,8 +35,11 @@ class SinglePlayerGame: GameMode {
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             let boardCopy = self.board
-            var mcts = MonteCarlo(board: boardCopy)
-            self.board.play(move: mcts.getPlay())
+//            var mcts = MonteCarlo(board: boardCopy)
+//            self.board.play(move: mcts.getPlay())
+            
+            var AI = Minimax(board: boardCopy)
+            self.board.play(move: AI.getPlay())
         }
     }
 }
