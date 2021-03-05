@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RedBorder: View {
     var cols: Int
+    var isTop: Bool
     var frameHeight: CGFloat
     var frameWidth: CGFloat
     var lineWidth: CGFloat = 10
@@ -31,11 +32,20 @@ struct RedBorder: View {
                 .stroke(lineWidth: lineWidth)
                 .frame(width: frameWidth * CGFloat(cols - 1), height: frameHeight / 2, alignment: .leading).foregroundColor(red)
 
-            
-            Rectangle()
-                .frame(width: frameWidth * CGFloat(cols - 1), height: frameHeight / 2, alignment: .leading)
-                .foregroundColor(backgroundColor)
 
+            Rectangle()
+                .frame(width: frameWidth * CGFloat(cols) - lineWidth + 1, height: frameHeight, alignment: .leading)
+                .foregroundColor(backgroundColor)
+                .offset(x: isTop ? lineWidth / 2: -lineWidth / 2,
+                        y: isTop ? frameHeight / 4 : -frameHeight / 4)
+
+            Rectangle()
+                .frame(width: frameWidth * CGFloat(cols) + 1, height: frameHeight / 2, alignment: .leading)
+                .foregroundColor(backgroundColor)
+                .offset(x: 0,
+                        y: isTop ? frameHeight / 4 : -frameHeight / 4)
+
+            
             HStack(spacing: 0) {
                 ForEach (0..<cols, id: \.self) { cellIndex in
                     PolygonShape(sides: 6)

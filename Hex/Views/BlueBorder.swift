@@ -10,6 +10,7 @@ import UIKit
 
 struct BlueBorder: View {
     var cols: Int
+    var isLeft: Bool
     var frameHeight: CGFloat
     var frameWidth: CGFloat
     var lineWidth: CGFloat = 10
@@ -40,7 +41,9 @@ struct BlueBorder: View {
 
             
             Rectangle()
-                .frame(width: frameHeight * CGFloat(cols - 1), height: frameHeight/2)
+                .frame(width: frameHeight * CGFloat(cols - 1) + lineWidth, height: frameHeight)
+                .offset(x: isLeft ? frameHeight / 2 - lineWidth : -frameHeight / 2 - 4,
+                        y: isLeft ? -frameHeight/4 : frameHeight/4)
                 .rotationEffect(Angle.degrees(60.3))
                 .offset(x: cols % 2 == 0 ? xOffset - frameHeight/4 : xOffset)
                 .foregroundColor(backgroundColor)
@@ -63,6 +66,6 @@ struct BlueBorder: View {
 
 struct BlueBorder_Previews: PreviewProvider {
     static var previews: some View {
-        BlueBorder(cols: 7, frameHeight: 50, frameWidth: 50)
+        BlueBorder(cols: 7, isLeft: true, frameHeight: 50, frameWidth: 50)
     }
 }
