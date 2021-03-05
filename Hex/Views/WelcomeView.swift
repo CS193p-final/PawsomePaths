@@ -21,7 +21,7 @@ struct WelcomeView: View {
             } label: {
                 RoundedRectangle(cornerRadius: 10).opacity(0.3)
                     .frame(width: 250, height: 75, alignment: .center)
-                    .overlay(Text("2 Player Game"))
+                    .overlay(Text("2 Players"))
                     .font(Font.custom("KronaOne-Regular", size: 20))
                     .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
             }
@@ -31,7 +31,7 @@ struct WelcomeView: View {
             } label: {
                 RoundedRectangle(cornerRadius: 10).opacity(0.3)
                     .frame(width: 250, height: 75, alignment: .center)
-                    .overlay(Text("Computer Game"))
+                    .overlay(Text("Single Player"))
                     .font(Font.custom("KronaOne-Regular", size: 20))
                     .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
             }
