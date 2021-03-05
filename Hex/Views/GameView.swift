@@ -57,11 +57,15 @@ struct GameView: View {
                         ZStack {
                             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                                 CellView(cell: cell).onTapGesture {
+                                    hexGame.play(cellId: cell.id)
                                     if hexGame.gameEnded {
                                         showResult = true
-                                    } else {
-                                        hexGame.play(cellId: cell.id)
                                     }
+//                                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//                                        if hexGame.gameEnded {
+//                                            showResult = true
+//                                        }
+//                                    }
                                 }
                             }
                             .popup(isPresented: $showResult) {
