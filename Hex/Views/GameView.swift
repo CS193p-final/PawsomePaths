@@ -25,8 +25,8 @@ struct GameView: View {
         if (welcomeView) {
             WelcomeView()
         } else {
-            ZStack {
-                Rectangle().foregroundColor(backgroundColor).ignoresSafeArea()
+            GeometryReader { geometry in
+                Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-2)
                 VStack {
                     Text("Back")
                         .padding()
@@ -49,11 +49,11 @@ struct GameView: View {
                         .onTapGesture {
                             showSettings = true
                         }
-                        .popup(isPresented: $showSettings) {
+                        .popover(isPresented: $showSettings) {
                             settingsView(game: hexGame)
                                 .frame(width: 250, alignment: .top)
                         }
-                    GeometryReader { geometry in
+
                         ZStack {
                             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                                 CellView(cell: cell).onTapGesture {
@@ -61,11 +61,6 @@ struct GameView: View {
                                     if hexGame.gameEnded {
                                         showResult = true
                                     }
-//                                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//                                        if hexGame.gameEnded {
-//                                            showResult = true
-//                                        }
-//                                    }
                                 }
                             }
                             .popup(isPresented: $showResult) {
@@ -91,22 +86,23 @@ struct GameView: View {
                                 .font(Font.custom("KronaOne-Regular", size: buttonFontSize))
                                 .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
                             }
-                            
                             if (showResult == true) {
-                                FireworkRepresentable().offset(x: geometry.size.width / 2)                    .zIndex(-1)
-                                FireworkRepresentable().zIndex(-1)
-                                FireworkRepresentable().offset(x: geometry.size.width, y: geometry.size.height / 2).zIndex(-1)
+                                ForEach(0...4, id: \.self) {_ in
+                                    FireworkRepresentable().position(x: CGFloat.random(in: 10 ... geometry.size.width/2 - 10), y: CGFloat.random(in: 10 ... geometry.size.height/2 - 10)).zIndex(-1)
+                                    FireworkRepresentable().position(x: CGFloat.random(in: geometry.size.width / 2 ... geometry.size.width-10), y: CGFloat.random(in: geometry.size.height / 2 ... geometry.size.height-10)).zIndex(-1)
+                                }
                             }
                         }
-                    }
-                    newGameButton(game: hexGame, showResult: !showResult)
-                        .foregroundColor(!showResult ? .blue : .gray)
-                        .padding()
+
+                newGameButton(game: hexGame, showResult: !showResult)
+                    .foregroundColor(!showResult ? .blue : .gray)
+                    .padding()
                 }
             }
         }
     }
 }
+
 
 struct newGameButton: View {
     var game: GameMode
