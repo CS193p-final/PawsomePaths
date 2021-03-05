@@ -108,8 +108,9 @@
 		C6596A3125DB11D900A0F94B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */,
 				C6596A3225DB11F000A0F94B /* Queue.swift */,
+				C1CE2BBB25E792BE0012E731 /* CGPoint+Extensions.swift */,
+				C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */,
 				C600184D25E8AE1E00DB9CDC /* Int+Extension.swift */,
 			);
 			path = Extensions;
@@ -185,7 +186,6 @@
 				C18DD74925DEFDD600A29151 /* RedBorder.swift */,
 				C18DD74D25DF60BE00A29151 /* BlueBorder.swift */,
 				C11545AB25E7478100E8B591 /* SparkTractory.swift */,
-				C1CE2BBB25E792BE0012E731 /* CGPoint+Extensions.swift */,
 				C11545AF25E74CF300E8B591 /* SparkView.swift */,
 				C11545B225E74E1C00E8B591 /* Firework.swift */,
 				C11545B525E7578000E8B591 /* ClassicFirework.swift */,
