@@ -33,7 +33,7 @@ class GameMode: ObservableObject {
         switch board.checkResult() {
         case .player1Win: return "Player 1 wins"
         case .player2Win: return "Player 2 wins"
-        case .unknown: return "Unknown"
+        case .unknown: return "You win"
         }
     }
     

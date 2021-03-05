@@ -72,7 +72,7 @@ struct GameView: View {
                                 ZStack {
                                     Image("background")
                                     VStack {
-                                        resultReport(game: hexGame)
+                                        resultReport(result: hexGame.result)
                                             .padding(.vertical, 150)
                                         newGameButton(game: hexGame, showResult: showResult)
                                         ZStack {
@@ -124,13 +124,13 @@ struct newGameButton: View {
 }
 
 struct resultReport: View {
-    var game: GameMode
+    var result: String
     let resultFontSize: CGFloat = 30
 
     var body: some View {
         VStack {
             ZStack {
-                Text("\(game.result)")
+                Text("\(result)")
                     .font(Font.custom("KronaOne-Regular", size: resultFontSize))
                     .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
             }
