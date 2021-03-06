@@ -18,7 +18,7 @@ struct GameView: View {
     let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     let buttonFontSize: CGFloat = 12
     let gameTitle: CGFloat = 36
-    let playerTurnFontSize: CGFloat = 20
+    let playerTurnFontSize: CGFloat = 18
     
     var body: some View {
         let board = hexGame.board
@@ -57,11 +57,14 @@ struct GameView: View {
                         ZStack {
                             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                                 CellView(cell: cell).onTapGesture {
-                                    hexGame.play(cellId: cell.id)
+                                    if !hexGame.gameEnded {
+                                        hexGame.play(cellId: cell.id)
+                                    }
                                     if hexGame.gameEnded {
                                         showResult = true
                                     }
                                 }
+                            
                             }
                             .popup(isPresented: $showResult) {
                                 ZStack {
@@ -87,9 +90,8 @@ struct GameView: View {
                                 .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
                             }
                             if (showResult == true) {
-                                ForEach(0...4, id: \.self) {_ in
-                                    FireworkRepresentable().position(x: CGFloat.random(in: 10 ... geometry.size.width/2 - 10), y: CGFloat.random(in: 10 ... geometry.size.height/2 - 10)).zIndex(-1)
-                                    FireworkRepresentable().position(x: CGFloat.random(in: geometry.size.width / 2 ... geometry.size.width-10), y: CGFloat.random(in: geometry.size.height / 2 ... geometry.size.height-10)).zIndex(-1)
+                                ForEach(0...8, id: \.self) {_ in
+                                    FireworkRepresentable().position(x: CGFloat.random(in: 0 ... geometry.size.width-10), y: CGFloat.random(in: 0 ... geometry.size.height-10)).zIndex(-1)
                                 }
                             }
                         }
