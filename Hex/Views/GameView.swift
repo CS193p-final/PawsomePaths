@@ -55,16 +55,20 @@ struct GameView: View {
                         }
 
                         ZStack {
+                            if (showResult == true) {
+                                ForEach(0...8, id: \.self) {_ in
+                                    FireworkRepresentable().position(x: CGFloat.random(in: 10 ... 2 * geometry.size.width), y: CGFloat.random(in: 10 ... geometry.size.height)).zIndex(-1)
+                                }
+                            }
                             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                                 CellView(cell: cell).onTapGesture {
-                                    if !hexGame.gameEnded {
+                                    if !hexGame.gameEnded { // only when game has not ended
                                         hexGame.play(cellId: cell.id)
                                     }
                                     if hexGame.gameEnded {
                                         showResult = true
                                     }
                                 }
-                            
                             }
                             .popup(isPresented: $showResult) {
                                 ZStack {
@@ -89,13 +93,7 @@ struct GameView: View {
                                 .font(Font.custom("KronaOne-Regular", size: buttonFontSize))
                                 .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
                             }
-                            if (showResult == true) {
-                                ForEach(0...8, id: \.self) {_ in
-                                    FireworkRepresentable().position(x: CGFloat.random(in: 0 ... geometry.size.width-10), y: CGFloat.random(in: 0 ... geometry.size.height-10)).zIndex(-1)
-                                }
-                            }
                         }
-
                 newGameButton(game: hexGame, showResult: !showResult)
                     .foregroundColor(!showResult ? .blue : .gray)
                     .padding()
