@@ -35,7 +35,7 @@ struct BlueBorder: View {
             Rectangle()
                 .stroke(lineWidth:lineWidth)
                 .frame(width: frameHeight * CGFloat(cols - 1), height: frameHeight/2)
-                .rotationEffect(Angle.degrees(60.3))
+                .rotationEffect(Angle.degrees(60))
                 .offset(x: cols % 2 == 0 ? xOffset - frameHeight/4 : xOffset)
                 .foregroundColor(blue)
 
@@ -44,7 +44,7 @@ struct BlueBorder: View {
                 .frame(width: frameHeight * CGFloat(cols - 1) + lineWidth, height: frameHeight)
                 .offset(x: isLeft ? frameHeight / 2 - lineWidth : -frameHeight / 2 - 4,
                         y: isLeft ? -frameHeight/4 : frameHeight/4)
-                .rotationEffect(Angle.degrees(60.3))
+                .rotationEffect(Angle.degrees(60))
                 .offset(x: cols % 2 == 0 ? xOffset - frameHeight/4 : xOffset)
                 .foregroundColor(backgroundColor)
             
