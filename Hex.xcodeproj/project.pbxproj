@@ -36,6 +36,7 @@
 		C699738A25D9F51C00337F70 /* PolygonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699738925D9F51C00337F70 /* PolygonShape.swift */; };
 		C699739025D9F96600337F70 /* HexGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699738F25D9F96600337F70 /* HexGrid.swift */; };
 		C699739425D9FF2800337F70 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699739325D9FF2800337F70 /* CellView.swift */; };
+		C69FD61F25F94F4B0077394D /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69FD61E25F94F4B0077394D /* HowToPlayView.swift */; };
 		C6B09AD425DE126000C96782 /* DumpAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09AD325DE126000C96782 /* DumpAI.swift */; };
 		C6B09AD825DE142D00C96782 /* SinglePlayerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */; };
 		C6B09ADB25DEF36E00C96782 /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09ADA25DEF36E00C96782 /* GameMode.swift */; };
@@ -73,6 +74,7 @@
 		C699738925D9F51C00337F70 /* PolygonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonShape.swift; sourceTree = "<group>"; };
 		C699738F25D9F96600337F70 /* HexGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexGrid.swift; sourceTree = "<group>"; };
 		C699739325D9FF2800337F70 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		C69FD61E25F94F4B0077394D /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
 		C6B09AD325DE126000C96782 /* DumpAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DumpAI.swift; sourceTree = "<group>"; };
 		C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePlayerGame.swift; sourceTree = "<group>"; };
 		C6B09ADA25DEF36E00C96782 /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */,
 				C1CE2BB825E7824A0012E731 /* ClassicFireworkController.swift */,
 				C1102DA925E8A0180054C992 /* FireworkView.swift */,
+				C69FD61E25F94F4B0077394D /* HowToPlayView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				C6596A4725DB40B400A0F94B /* MonteCarlo.swift in Sources */,
 				C1CE2BB625E77B740012E731 /* ClassFireworkAnimator.swift in Sources */,
 				C6596A3325DB11F000A0F94B /* Queue.swift in Sources */,
+				C69FD61F25F94F4B0077394D /* HowToPlayView.swift in Sources */,
 				C6B09ADB25DEF36E00C96782 /* GameMode.swift in Sources */,
 				C600184E25E8AE1E00DB9CDC /* Int+Extension.swift in Sources */,
 				C1CE2BB925E7824A0012E731 /* ClassicFireworkController.swift in Sources */,
