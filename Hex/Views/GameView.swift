@@ -34,6 +34,7 @@ struct GameView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .onTapGesture {
                             welcomeView = true
+                            playSound("MouseClick", type: "mp3")
                         }
                     Text("Hex Game")
                         .font(Font.custom("KronaOne-Regular", size: gameTitle))
