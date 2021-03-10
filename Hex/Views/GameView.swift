@@ -62,6 +62,7 @@ struct GameView: View {
                             }
                             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                                 CellView(cell: cell).onTapGesture {
+                                    playSound("KeyboardTap", type: "mp3")
                                     if !hexGame.gameEnded { // only when game has not ended
                                         hexGame.play(cellId: cell.id)
                                     }
