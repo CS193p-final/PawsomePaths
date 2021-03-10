@@ -39,6 +39,7 @@
 		C69FD61F25F94F4B0077394D /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69FD61E25F94F4B0077394D /* HowToPlayView.swift */; };
 		C69FD62325F957570077394D /* KeyboardTap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C69FD62225F957570077394D /* KeyboardTap.mp3 */; };
 		C69FD62625F9578F0077394D /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69FD62525F9578F0077394D /* PlaySound.swift */; };
+		C69FD62925F95D040077394D /* WaterDrop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C69FD62825F95D040077394D /* WaterDrop.mp3 */; };
 		C6B09AD425DE126000C96782 /* DumpAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09AD325DE126000C96782 /* DumpAI.swift */; };
 		C6B09AD825DE142D00C96782 /* SinglePlayerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */; };
 		C6B09ADB25DEF36E00C96782 /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09ADA25DEF36E00C96782 /* GameMode.swift */; };
@@ -79,6 +80,7 @@
 		C69FD61E25F94F4B0077394D /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
 		C69FD62225F957570077394D /* KeyboardTap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = KeyboardTap.mp3; sourceTree = "<group>"; };
 		C69FD62525F9578F0077394D /* PlaySound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
+		C69FD62825F95D040077394D /* WaterDrop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = WaterDrop.mp3; sourceTree = "<group>"; };
 		C6B09AD325DE126000C96782 /* DumpAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DumpAI.swift; sourceTree = "<group>"; };
 		C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePlayerGame.swift; sourceTree = "<group>"; };
 		C6B09ADA25DEF36E00C96782 /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 		C69FD62125F957450077394D /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				C69FD62825F95D040077394D /* WaterDrop.mp3 */,
 				C69FD62225F957570077394D /* KeyboardTap.mp3 */,
 			);
 			path = Sounds;
@@ -286,6 +289,7 @@
 				C699738025D9F4DC00337F70 /* Preview Assets.xcassets in Resources */,
 				C131A08525EF47A50060193A /* KronaOne-Regular.ttf in Resources */,
 				C699737D25D9F4DC00337F70 /* Assets.xcassets in Resources */,
+				C69FD62925F95D040077394D /* WaterDrop.mp3 in Resources */,
 				C69FD62325F957570077394D /* KeyboardTap.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
