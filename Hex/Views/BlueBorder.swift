@@ -10,7 +10,6 @@ import UIKit
 
 struct BlueBorder: View {
     var cols: Int
-    var isLeft: Bool
     var frameHeight: CGFloat
     var frameWidth: CGFloat
     var lineWidth: CGFloat = 10
@@ -35,16 +34,14 @@ struct BlueBorder: View {
             Rectangle()
                 .stroke(lineWidth:lineWidth)
                 .frame(width: frameHeight * CGFloat(cols - 1), height: frameHeight/2)
-                .rotationEffect(Angle.degrees(60))
+                .rotationEffect(Angle.degrees(60.3))
                 .offset(x: cols % 2 == 0 ? xOffset - frameHeight/4 : xOffset)
                 .foregroundColor(blue)
 
             
             Rectangle()
-                .frame(width: frameHeight * CGFloat(cols - 1) + lineWidth, height: frameHeight)
-                .offset(x: isLeft ? frameHeight / 2 - lineWidth : -frameHeight / 2 - 4,
-                        y: isLeft ? -frameHeight/4 : frameHeight/4)
-                .rotationEffect(Angle.degrees(60))
+                .frame(width: frameHeight * CGFloat(cols - 1) + lineWidth * 2, height: frameHeight/2)
+                .rotationEffect(Angle.degrees(60.3))
                 .offset(x: cols % 2 == 0 ? xOffset - frameHeight/4 : xOffset)
                 .foregroundColor(backgroundColor)
             
@@ -61,11 +58,5 @@ struct BlueBorder: View {
     }
     var xOffset: CGFloat {
         (CGFloat(cols / 2) * frameHeight / 2 - frameWidth/5 - CGFloat(cols / 2) * frameWidth)
-    }
-}
-
-struct BlueBorder_Previews: PreviewProvider {
-    static var previews: some View {
-        BlueBorder(cols: 7, isLeft: true, frameHeight: 50, frameWidth: 50)
     }
 }

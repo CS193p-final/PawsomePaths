@@ -51,7 +51,7 @@ struct GameView: View {
                             showSettings = true
                         }
                         .popover(isPresented: $showSettings) {
-                            settingsView(game: hexGame)
+                            settingsView(game: hexGame, soundOn: soundOn)
                                 .frame(width: 250, alignment: .top)
                         }
 
@@ -139,6 +139,7 @@ struct resultReport: View {
 struct settingsView: View {
     @ObservedObject var game: GameMode
     @State private var showAlert: Bool = false
+    @State var soundOn: Bool
     var body: some View {
         Section(header: Text("Board size")) {
             Stepper(
@@ -160,6 +161,13 @@ struct settingsView: View {
                 .alert(isPresented: $showAlert) { () -> Alert in
                     Alert(title: Text("Invalid board size"), message: Text("Board size cannot be less than 3x3 or greater than 11x11"), dismissButton: Alert.Button.cancel())
                 }
+        }
+        Section(header: Text("Sound")) {
+            Image(systemName: soundOn ? "speaker.wave.3" : "speaker")
+                .onTapGesture {
+                    toggleSound()
+                }
+                .imageScale(.large)
         }
     }
 }
