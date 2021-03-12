@@ -8,9 +8,8 @@
 import AVFoundation
 
 var audioPlayer: AVAudioPlayer?
-var soundOn: Bool = true
 
-func playSound(_ sound: String, type: String) {
+func playSound(_ sound: String, type: String, soundOn: Bool) {
     if soundOn {
         if let path = Bundle.main.path(forResource: sound, ofType: type) {
             do {
@@ -21,8 +20,4 @@ func playSound(_ sound: String, type: String) {
             }
         }
     }
-}
-
-func toggleSound() {
-    soundOn = !soundOn
 }

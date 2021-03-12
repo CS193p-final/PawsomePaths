@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HowToPlayView: View {
     @State private var welcomeView = false
+    @State var soundOn: Bool
     let fontSize: CGFloat = 15
     var body: some View {
         if welcomeView {
@@ -21,7 +22,7 @@ struct HowToPlayView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .onTapGesture {
                         welcomeView = true
-                        playSound("MouseClick", type: "mp3")
+                        playSound("MouseClick", type: "mp3", soundOn: soundOn)
                     }
                 Text("Connect top and bottom side of the board to win")
                     .font(Font.custom("KronaOne-Regular", size: fontSize))

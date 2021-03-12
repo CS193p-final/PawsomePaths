@@ -13,6 +13,8 @@ struct GameView: View {
     @State var showResult = false
     @State private var showSettings = false
     @ObservedObject var hexGame: GameMode
+    @State var soundOn: Bool
+
     let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
     let blue = Color(red:0.39, green:0.55, blue:0.894)
     let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
@@ -34,7 +36,7 @@ struct GameView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .onTapGesture {
                             welcomeView = true
-                            playSound("MouseClick", type: "mp3")
+                            playSound("MouseClick", type: "mp3", soundOn: soundOn)
                         }
                     Text("Hex Game")
                         .font(Font.custom("KronaOne-Regular", size: gameTitle))
@@ -51,7 +53,7 @@ struct GameView: View {
                             showSettings = true
                         }
                         .popover(isPresented: $showSettings) {
-                            settingsView(game: hexGame, soundOn: soundOn)
+                            settingsView(game: hexGame, soundOn: $soundOn)
                                 .frame(width: 250, alignment: .top)
                         }
 
@@ -63,7 +65,7 @@ struct GameView: View {
                             }
                             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                                 CellView(cell: cell).onTapGesture {
-                                    playSound("WaterDrop", type: "mp3")
+                                    playSound("WaterDrop", type: "mp3", soundOn: soundOn)
                                     if !hexGame.gameEnded { // only when game has not ended
                                         hexGame.play(cellId: cell.id)
                                     }
@@ -74,10 +76,11 @@ struct GameView: View {
                             }
                             .popup(isPresented: $showResult) {
                                 ZStack {
-                                    Image("background")
+                                    Image(hexGame.result == "Computer wins" ? "losing" : "background")
                                     VStack {
-                                        resultReport(result: hexGame.result)
-                                            .padding(.vertical, 150)
+                                        resultReport(result: hexGame.result, soundOn: soundOn)
+                                            .padding(.bottom, 150)
+                                            .padding(.top, 80)
                                         newGameButton(game: hexGame, showResult: showResult)
                                         ZStack {
                                             Button("Menu") {
@@ -109,8 +112,8 @@ struct GameView: View {
 struct newGameButton: View {
     var game: GameMode
     let buttonFontSize: CGFloat = 12
-
     var showResult: Bool
+    
     var body: some View {
         Button(action: {showResult ? game.newGame(size: game.board.size) : nil}) {
             RoundedRectangle(cornerRadius: 10).opacity(0.3)
@@ -124,6 +127,7 @@ struct newGameButton: View {
 struct resultReport: View {
     var result: String
     let resultFontSize: CGFloat = 30
+    @State var soundOn: Bool
 
     var body: some View {
         VStack {
@@ -139,7 +143,9 @@ struct resultReport: View {
 struct settingsView: View {
     @ObservedObject var game: GameMode
     @State private var showAlert: Bool = false
-    @State var soundOn: Bool
+    @Binding var soundOn: Bool
+    private let palePink: Color = Color(red: 0.996, green: 0.8633, blue: 0.8828 , opacity: 1)
+
     var body: some View {
         Section(header: Text("Board size")) {
             Stepper(
@@ -161,22 +167,28 @@ struct settingsView: View {
                 .alert(isPresented: $showAlert) { () -> Alert in
                     Alert(title: Text("Invalid board size"), message: Text("Board size cannot be less than 3x3 or greater than 11x11"), dismissButton: Alert.Button.cancel())
                 }
+                .padding()
         }
         Section(header: Text("Sound")) {
-            Image(systemName: soundOn ? "speaker.wave.3" : "speaker")
-                .onTapGesture {
-                    toggleSound()
+            Button {
+                soundOn = !soundOn
+            } label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)                        .foregroundColor(palePink)
+                    Image(systemName: soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
+                        .foregroundColor(.pink)
                 }
-                .imageScale(.large)
+                .padding()
+            }
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            GameView(hexGame: SinglePlayerGame())
-            GameView(hexGame: SinglePlayerGame())
-        }
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            GameView(hexGame: SinglePlayerGame())
+//            GameView(hexGame: SinglePlayerGame())
+//        }
+//    }
+//}
