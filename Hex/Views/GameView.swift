@@ -13,7 +13,6 @@ struct GameView: View {
     @State var showResult = false
     @State private var showSettings = false
     @ObservedObject var hexGame: GameMode
-    @State var soundOn: Bool
 
     let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
     let blue = Color(red:0.39, green:0.55, blue:0.894)
@@ -37,7 +36,7 @@ struct GameView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .onTapGesture {
                             welcomeView = true
-                            playSound("MouseClick", type: "mp3", soundOn: soundOn)
+                            playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
                         }
                     Text("Hex Game")
                         .font(Font.custom("KronaOne-Regular", size: gameTitle))
@@ -54,7 +53,7 @@ struct GameView: View {
                             showSettings = true
                         }
                         .popover(isPresented: $showSettings) {
-                            settingsView(game: hexGame, soundOn: $soundOn)
+                            settingsView(game: hexGame)
                                 .frame(width: 250, alignment: .top)
                         }
 
@@ -66,7 +65,7 @@ struct GameView: View {
                             }
                             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                                 CellView(cell: cell).onTapGesture {
-                                    playSound("WaterDrop", type: "mp3", soundOn: soundOn)
+                                    playSound("move", type: "mp3", soundOn: hexGame.soundOn)
                                     if !hexGame.gameEnded { // only when game has not ended
                                         hexGame.play(cellId: cell.id)
                                     }
@@ -77,7 +76,7 @@ struct GameView: View {
                             }
                             .popup(isPresented: $showResult) {
                                 ZStack {
-                                    resultReport(game: hexGame, soundOn: soundOn, showResult: showResult)
+                                    resultReport(game: hexGame, soundOn: hexGame.soundOn, showResult: showResult)
                                     VStack {
                                         newGameButton(game: hexGame, showResult: showResult)
                                         Button {
@@ -146,7 +145,6 @@ struct resultReport: View {
 struct settingsView: View {
     @ObservedObject var game: GameMode
     @State private var showAlert: Bool = false
-    @Binding var soundOn: Bool
     private let palePink: Color = Color(red: 0.996, green: 0.8633, blue: 0.8828 , opacity: 1)
     let headerFontSize: CGFloat = 20
 
@@ -175,11 +173,24 @@ struct settingsView: View {
         }
         Section(header: Text("Sound").font(Font.custom("DotGothic16-Regular", size: headerFontSize))) {
             Button {
-                soundOn = !soundOn
+                game.soundOn = !game.soundOn
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)                        .foregroundColor(palePink)
-                    Image(systemName: soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
+                    Image(systemName: game.soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
+                        .foregroundColor(.pink)
+                }
+                .padding()
+            }
+        }
+        Section(header: Text("Music").font(Font.custom("DotGothic16-Regular", size: headerFontSize))) {
+            Button {
+                game.musicOn = !game.musicOn
+                stopMusic("musicBox", type: "mp3")
+            } label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)                        .foregroundColor(palePink)
+                    Image(systemName: game.musicOn ? "music.note" : "play.slash").imageScale(.large)
                         .foregroundColor(.pink)
                 }
                 .padding()

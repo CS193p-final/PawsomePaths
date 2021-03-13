@@ -9,9 +9,12 @@ import Foundation
 
 class GameMode: ObservableObject {
     @Published var board: GameBoard
+    @Published var soundOn: Bool = true
+    @Published var musicOn: Bool = true
     
     init() {
         self.board = GameBoard(size: 7)
+        playMusic("musicBox", type: "mp3", musicOn: musicOn)
     }
     
     // MARK: - Access
