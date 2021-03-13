@@ -76,29 +76,25 @@ struct GameView: View {
                                 }
                             }
                             .popup(isPresented: $showResult) {
-                                VStack {
-                                    resultReport(result: hexGame.result, soundOn: soundOn)
-                                        .padding(.bottom, 150)
-                                        .padding(.top, 80)
-                                    newGameButton(game: hexGame, showResult: showResult)
-                                    ZStack {
-                                        Button("Menu") {
+                                ZStack {
+                                    resultReport(game: hexGame, soundOn: soundOn, showResult: showResult)
+                                    VStack {
+                                        newGameButton(game: hexGame, showResult: showResult)
+                                        Button {
                                             welcomeView = true
                                             hexGame.newGame(size: hexGame.board.size)
+                                        } label: {
+                                            ZStack {
+                                                Text("Menu").font(Font.custom("KronaOne-Regular", size: buttonFontSize))
+                                                RoundedRectangle(cornerRadius: 10).opacity(0.3)
+                                            }
+                                            .frame(width: 100, height: 40, alignment: .center)
                                         }
-                                        RoundedRectangle(cornerRadius: 10).opacity(0.3)
                                     }
-                                    .frame(width: 100, height: 40, alignment: .center)
-                                    .padding()
+                                    .padding(.top, 275)
                                 }
-                                .background(Image(hexGame.result == "Computer wins" ? "losing" : "background"))
-                                .frame(width: 300, height: 450, alignment: .center)
-                                .cornerRadius(30.0)
-                                .font(Font.custom("KronaOne-Regular", size: buttonFontSize))
+
                                 .foregroundColor(buttonColor)
-                                .onDisappear {
-                                    animation(.none)
-                                }
                             }
                         }
                 newGameButton(game: hexGame, showResult: !showResult) // disabled when result view pop up
@@ -127,18 +123,23 @@ struct newGameButton: View {
 }
 
 struct resultReport: View {
-    var result: String
+    var game: GameMode
     let resultFontSize: CGFloat = 30
     @State var soundOn: Bool
+    var showResult: Bool
+    let buttonFontSize: CGFloat = 12
 
     var body: some View {
         VStack {
-            ZStack {
-                Text("\(result)")
-                    .font(Font.custom("KronaOne-Regular", size: resultFontSize))
-                    .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
-            }
+            Text("\(game.result)")
+                .font(Font.custom("KronaOne-Regular", size: resultFontSize))
+                .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
+                .padding(.bottom, 200)
         }
+        .background(Image(game.result == "Computer wins" ? "losing" : "background"))
+        .frame(width: 300, height: 450, alignment: .center)
+        .cornerRadius(30.0)
+        .font(Font.custom("KronaOne-Regular", size: buttonFontSize))
     }
 }
 
