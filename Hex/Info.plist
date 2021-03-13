@@ -9,6 +9,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>KronaOne-Regular.ttf</string>
+		<string>DotGothic16-Regular.ttf</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>

@@ -47,6 +47,7 @@
 		C16DA17825FC65620059C426 /* 50.png in Resources */ = {isa = PBXBuildFile; fileRef = C16DA15825FC65620059C426 /* 50.png */; };
 		C16DA17925FC65620059C426 /* 144.png in Resources */ = {isa = PBXBuildFile; fileRef = C16DA15925FC65620059C426 /* 144.png */; };
 		C16DA17A25FC65620059C426 /* 152.png in Resources */ = {isa = PBXBuildFile; fileRef = C16DA15A25FC65620059C426 /* 152.png */; };
+		C16DA17E25FC6A5C0059C426 /* DotGothic16-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C16DA17D25FC6A5C0059C426 /* DotGothic16-Regular.ttf */; };
 		C18DD74A25DEFDD600A29151 /* RedBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18DD74925DEFDD600A29151 /* RedBorder.swift */; };
 		C18DD74E25DF60BE00A29151 /* BlueBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18DD74D25DF60BE00A29151 /* BlueBorder.swift */; };
 		C1CE2BB625E77B740012E731 /* ClassFireworkAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */; };
@@ -119,6 +120,7 @@
 		C16DA15825FC65620059C426 /* 50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 50.png; sourceTree = "<group>"; };
 		C16DA15925FC65620059C426 /* 144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 144.png; sourceTree = "<group>"; };
 		C16DA15A25FC65620059C426 /* 152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 152.png; sourceTree = "<group>"; };
+		C16DA17D25FC6A5C0059C426 /* DotGothic16-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DotGothic16-Regular.ttf"; sourceTree = "<group>"; };
 		C18DD74925DEFDD600A29151 /* RedBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedBorder.swift; sourceTree = "<group>"; };
 		C18DD74D25DF60BE00A29151 /* BlueBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueBorder.swift; sourceTree = "<group>"; };
 		C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassFireworkAnimator.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				C16DA13A25FC65620059C426 /* AppIcon.appiconset */,
 				C69FD62125F957450077394D /* Sounds */,
 				C131A08425EF47A50060193A /* KronaOne-Regular.ttf */,
+				C16DA17D25FC6A5C0059C426 /* DotGothic16-Regular.ttf */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				C16DA17725FC65620059C426 /* 87.png in Resources */,
 				C131A08525EF47A50060193A /* KronaOne-Regular.ttf in Resources */,
 				C16DA15C25FC65620059C426 /* 1024.png in Resources */,
+				C16DA17E25FC6A5C0059C426 /* DotGothic16-Regular.ttf in Resources */,
 				C16DA16025FC65620059C426 /* 216.png in Resources */,
 				C699737D25D9F4DC00337F70 /* Assets.xcassets in Resources */,
 				C16DA16E25FC65620059C426 /* 20.png in Resources */,
