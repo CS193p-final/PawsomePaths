@@ -16,11 +16,14 @@ struct GameView: View {
 
     let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
     let blue = Color(red:0.39, green:0.55, blue:0.894)
+    let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
+
+
     let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     let buttonColor = Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1)
-    let buttonFontSize: CGFloat = 12
+    let buttonFontSize: CGFloat = 18
     let gameTitle: CGFloat = 36
-    let playerTurnFontSize: CGFloat = 18
+    let playerTurnFontSize: CGFloat = 20
     
     var body: some View {
         let board = hexGame.board
@@ -30,27 +33,31 @@ struct GameView: View {
             GeometryReader { geometry in
                 Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-2)
                 VStack {
-                    HStack {
-                        Text("Back").font(Font.custom("DotGothic16-Regular", size: buttonFontSize))
-                            .padding()
-                            .foregroundColor(.blue)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .onTapGesture {
-                                welcomeView = true
-                                playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn, musicOn: true)
-                            }
-                        
-                        Image(systemName: "gearshape").imageScale(.large)                            .foregroundColor(.blue)
-                            .onTapGesture {
-                                showSettings = true
-                            }
-                            .popover(isPresented: $showSettings) {
-                                settingsView(game: hexGame)
-                                    .frame(width: 250, alignment: .top)
-                            }
-                            .padding()
+                    ZStack {
+                        Rectangle().ignoresSafeArea().foregroundColor(hunterGreen)
+                        HStack {
+                            Text("Back").font(Font.custom("KronaOne-Regular", size: buttonFontSize))
+                                .padding()
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .onTapGesture {
+                                    welcomeView = true
+                                    playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn, musicOn: true)
+                                }
+                            
+                            Image(systemName: "gearshape").imageScale(.large)                            .foregroundColor(.white)
+                                .onTapGesture {
+                                    showSettings = true
+                                }
+                                .popover(isPresented: $showSettings) {
+                                    settingsView(game: hexGame)
+                                        .frame(width: 250, alignment: .top)
+                                }
+                                .padding()
+                        }
                     }
-
+                    .frame(width: geometry.size.width, height: 50, alignment: .topLeading)
+                    
                     Text("Hex Game")
                         .font(Font.custom("KronaOne-Regular", size: gameTitle))
                         .foregroundColor(Color(red: 0.82422, green: 0.37891, blue: 0.207, opacity: 1))
@@ -74,7 +81,6 @@ struct GameView: View {
                                         showResult = true
                                     }
                                 }
-                                //.opacity(0)
                             }
                             .popup(isPresented: $showResult) {
                                 ZStack {
@@ -86,16 +92,15 @@ struct GameView: View {
                                             hexGame.newGame(size: hexGame.board.size)
                                         } label: {
                                             ZStack {
-                                                Text("Menu").font(Font.custom("KronaOne-Regular", size: buttonFontSize))
-                                                RoundedRectangle(cornerRadius: 10).opacity(0.3)
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .foregroundColor(hunterGreen)
+                                                    .frame(width: 130, height: 50, alignment: .center)
+                                                Text("Menu").font(Font.custom("KronaOne-Regular", size: buttonFontSize)).foregroundColor(.white)
                                             }
-                                            .frame(width: 100, height: 40, alignment: .center)
                                         }
                                     }
                                     .padding(.top, 275)
                                 }
-
-                                .foregroundColor(buttonColor)
                             }
                         }
                 newGameButton(game: hexGame, showResult: !showResult) // disabled when result view pop up
@@ -110,8 +115,9 @@ struct GameView: View {
 
 struct newGameButton: View {
     var game: GameMode
-    let buttonFontSize: CGFloat = 12
+    let buttonFontSize: CGFloat = 15
     var showResult: Bool
+    let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
     
     var body: some View {
         Button(action: {
@@ -126,10 +132,11 @@ struct newGameButton: View {
             }
         }
     ) {
-            RoundedRectangle(cornerRadius: 10).opacity(0.3)
-                .frame(width: 100, height: 40, alignment: .center)
-                .overlay(Text("Reset Game")
-                .font(Font.custom("KronaOne-Regular", size: buttonFontSize)))
+            RoundedRectangle(cornerRadius: 10)
+                .frame(width: 130, height: 50, alignment: .center)
+                .overlay(Text("Reset Game").foregroundColor(.white)
+                            .font(Font.custom("KronaOne-Regular", size: buttonFontSize)))
+                .foregroundColor(hunterGreen)
         }
     }
 }
