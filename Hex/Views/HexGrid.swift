@@ -26,12 +26,12 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
                 ZStack {
                     BlueBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
                         .offset(x: xOffsetRightBlueBorder(geometry.size.width))
-                        .offset(y: hexagonHeight(geometry.size.width)/8)
+                        //.offset(y: hexagonHeight(geometry.size.width)/8)
 
 
                     BlueBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
-                        .offset(x: xOffsetLeftBlueBorder(geometry.size.width))
-                        .offset(y: -hexagonHeight(geometry.size.width)/8)
+                        .offset(x: xOffsetLeftBlueBorder(geometry.size.width, geometry.size.height))
+                        //.offset(y: -hexagonHeight(geometry.size.width)/8)
                     
                     RedBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
                         .position(x: xPositionTopRedBorder(geometry.size.width), y: yPositionTopRedBorder(geometry.size.height, geometryWidth: geometry.size.width) + hexagonHeight(geometry.size.width)/4)
@@ -39,9 +39,6 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
                     
                     RedBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
                         .position(x: xPositionTopRedBorder(geometry.size.width) + (hexagonWidth(geometry.size.width) * CGFloat(cols-1))/2, y: yPositionTopRedBorder(geometry.size.height, geometryWidth: geometry.size.width) + (hexagonHeight(geometry.size.width) * CGFloat(cols-1) * 7/8) + CGFloat(hexagonHeight(geometry.size.width) * 3/4))
-
-
-                    
 
                     LazyVGrid(columns: gridItems, spacing: 0) {
                         ForEach(items, id: id) { item in
@@ -60,7 +57,6 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
     
     func offset(id: Int, geometryWidth: CGFloat) -> CGFloat {
         CGFloat(id / cols) * hexagonWidth(geometryWidth / 2) - (hexagonWidth(geometryWidth) * CGFloat(cols - 1) / 4)
-        
     }
     
     var hexInOneLine: CGFloat {
@@ -88,13 +84,13 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
     
     func xOffsetRightBlueBorder(_ geometryWidth: CGFloat) -> CGFloat {
         if cols % 2 == 0 {
-            return -(CGFloat(cols) * (hexagonWidth(geometryWidth)) / 4 -  hexagonWidth(geometryWidth) * 3 / 4)
+            return -(CGFloat(cols) * (hexagonWidth(geometryWidth)) / 4 - hexagonWidth(geometryWidth) * 3 / 4) - CGFloat(hexagonWidth(geometryWidth) / 16)
         }
-        return (-CGFloat(cols) * (hexagonWidth(geometryWidth))) / 4 + (hexagonWidth(geometryWidth)/4)
+        return -(CGFloat(cols) * (hexagonWidth(geometryWidth)) / 4 - hexagonWidth(geometryWidth) / 4) - CGFloat(hexagonWidth(geometryWidth) / 16)
     }
     
-    func xOffsetLeftBlueBorder(_ geometryWidth: CGFloat) -> CGFloat {
-        xOffsetRightBlueBorder(geometryWidth) + hexagonWidth(geometryWidth) * CGFloat(cols) - (hexagonWidth(geometryWidth)/2)
+    func xOffsetLeftBlueBorder(_ geometryWidth: CGFloat, _ geometryHeight: CGFloat) -> CGFloat {
+        xOffsetRightBlueBorder(geometryWidth) + hexagonWidth(geometryWidth) * CGFloat(cols) - (hexagonWidth(geometryWidth)/2) + CGFloat(hexagonWidth(geometryHeight) / 16)
     }
 }
 

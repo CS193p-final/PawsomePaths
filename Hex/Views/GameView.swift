@@ -30,32 +30,33 @@ struct GameView: View {
             GeometryReader { geometry in
                 Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-2)
                 VStack {
-                    Text("Back")
-                        .padding()
-                        .foregroundColor(.blue)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .onTapGesture {
-                            welcomeView = true
-                            playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn, musicOn: true)
-                        }
+                    HStack {
+                        Text("Back").font(Font.custom("DotGothic16-Regular", size: buttonFontSize))
+                            .padding()
+                            .foregroundColor(.blue)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .onTapGesture {
+                                welcomeView = true
+                                playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn, musicOn: true)
+                            }
+                        
+                        Image(systemName: "gearshape").imageScale(.large)                            .foregroundColor(.blue)
+                            .onTapGesture {
+                                showSettings = true
+                            }
+                            .popover(isPresented: $showSettings) {
+                                settingsView(game: hexGame)
+                                    .frame(width: 250, alignment: .top)
+                            }
+                            .padding()
+                    }
+
                     Text("Hex Game")
                         .font(Font.custom("KronaOne-Regular", size: gameTitle))
                         .foregroundColor(Color(red: 0.82422, green: 0.37891, blue: 0.207, opacity: 1))
-                    HStack {
-                        Text("Player 1 turn").foregroundColor(board.playerTurn == 1 ? red : .gray)
-                            .padding()
-                        Text("Player 2 turn").foregroundColor(board.playerTurn == 2 ? blue : .gray)
-                            .padding()
-                    }
+                    Text(board.playerTurn == 1 ? "Player 1's turn" : "Player 2's turn").foregroundColor(board.playerTurn == 1 ? red : blue)
                     .font(Font.custom("KronaOne-Regular", size: playerTurnFontSize))
-                    Image(systemName: "gearshape")
-                        .onTapGesture {
-                            showSettings = true
-                        }
-                        .popover(isPresented: $showSettings) {
-                            settingsView(game: hexGame)
-                                .frame(width: 250, alignment: .top)
-                        }
+                    .padding()
 
                         ZStack {
                             if (showResult == true && hexGame.result != "Computer wins" ) {
@@ -73,6 +74,7 @@ struct GameView: View {
                                         showResult = true
                                     }
                                 }
+                                //.opacity(0)
                             }
                             .popup(isPresented: $showResult) {
                                 ZStack {
@@ -126,7 +128,7 @@ struct newGameButton: View {
     ) {
             RoundedRectangle(cornerRadius: 10).opacity(0.3)
                 .frame(width: 100, height: 40, alignment: .center)
-                .overlay(Text("New Game")
+                .overlay(Text("Reset Game")
                 .font(Font.custom("KronaOne-Regular", size: buttonFontSize)))
         }
     }
