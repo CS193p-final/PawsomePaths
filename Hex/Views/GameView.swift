@@ -32,6 +32,12 @@ struct GameView: View {
         } else {
             GeometryReader { geometry in
                 Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-2)
+                    .onAppear{
+                        playMusic("musicBox", type: "mp3", musicOn: hexGame.musicOn)
+                    }
+                    .onDisappear {
+                        stopMusic("musicBox", type: "mp3")
+                    }
                 VStack {
                     ZStack {
                         Rectangle().ignoresSafeArea().foregroundColor(hunterGreen)

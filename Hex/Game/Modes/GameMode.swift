@@ -16,7 +16,6 @@ class GameMode: ObservableObject {
     
     init() {
         self.board = GameBoard(size: 7)
-        playMusic("musicBox", type: "mp3", musicOn: board.musicOn)
     }
     
     init(name: String) {
