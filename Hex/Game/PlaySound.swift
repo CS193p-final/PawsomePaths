@@ -7,14 +7,15 @@
 
 import AVFoundation
 
-var audioPlayer: AVAudioPlayer?
+var soundPlayer: AVAudioPlayer?
+var musicPlayer: AVAudioPlayer?
 
-func playSound(_ sound: String, type: String, soundOn: Bool) {
+func playSound(_ sound: String, type: String, soundOn: Bool, musicOn: Bool) {
     if soundOn {
         if let path = Bundle.main.path(forResource: sound, ofType: type) {
             do {
-                audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
-                audioPlayer?.play()
+                soundPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+                soundPlayer?.play()
             } catch {
                 print("Error: Couldn't find and play the sound: \(sound)")
             }
@@ -26,9 +27,9 @@ func playMusic(_ sound: String, type: String, musicOn: Bool) {
     if musicOn {
         if let path = Bundle.main.path(forResource: sound, ofType: type) {
             do {
-                audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
-                audioPlayer?.numberOfLoops = -1
-                audioPlayer?.play()
+                musicPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+                musicPlayer?.numberOfLoops = -1
+                musicPlayer?.play()
             } catch {
                 print("Error: Couldn't find and play the sound: \(sound)")
             }
@@ -39,8 +40,8 @@ func playMusic(_ sound: String, type: String, musicOn: Bool) {
 func stopMusic(_ sound: String, type: String) {
     if let path = Bundle.main.path(forResource: sound, ofType: type) {
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
-            audioPlayer?.stop()
+            musicPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+            musicPlayer?.stop()
         } catch {
             print("Error: Couldn't find and stop the sound: \(sound)")
         }

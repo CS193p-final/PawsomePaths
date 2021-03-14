@@ -23,7 +23,7 @@ struct WelcomeView: View {
         else {
             Button {
                 twoPlayerGameView = true
-                playSound("MouseClick", type: "mp3", soundOn: true)
+                playSound("MouseClick", type: "mp3", soundOn: true, musicOn: true)
             } label: {
                 RoundedRectangle(cornerRadius: 10).opacity(0.3)
                     .frame(width: 250, height: 75, alignment: .center)
@@ -33,7 +33,7 @@ struct WelcomeView: View {
             }
             
             Button {
-                playSound("MouseClick", type: "mp3", soundOn: true)
+                playSound("MouseClick", type: "mp3", soundOn: true, musicOn: true)
                 singlePlayerGameView = true
             } label: {
                 RoundedRectangle(cornerRadius: 10).opacity(0.3)
@@ -44,7 +44,7 @@ struct WelcomeView: View {
             }
             
             Button {
-                playSound("MouseClick", type: "mp3", soundOn: true)
+                playSound("MouseClick", type: "mp3", soundOn: true, musicOn: true)
                 howToPlayView = true
             } label: {
                 RoundedRectangle(cornerRadius: 10).opacity(0.3)

@@ -36,7 +36,7 @@ struct GameView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .onTapGesture {
                             welcomeView = true
-                            playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
+                            playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn, musicOn: true)
                         }
                     Text("Hex Game")
                         .font(Font.custom("KronaOne-Regular", size: gameTitle))
@@ -65,7 +65,7 @@ struct GameView: View {
                             }
                             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                                 CellView(cell: cell).onTapGesture {
-                                    playSound("move", type: "mp3", soundOn: hexGame.soundOn)
+                                    playSound("move", type: "mp3", soundOn: hexGame.soundOn, musicOn: true)
                                     if !hexGame.gameEnded { // only when game has not ended
                                         hexGame.play(cellId: cell.id)
                                     }
@@ -112,7 +112,18 @@ struct newGameButton: View {
     var showResult: Bool
     
     var body: some View {
-        Button(action: {showResult ? game.newGame(size: game.board.size) : nil}) {
+        Button(action: {
+            let soundOn = game.soundOn
+            let musicOn = game.musicOn
+            showResult ? game.newGame(size: game.board.size) : nil
+            if game.soundOn != soundOn {
+                game.toggleSound()
+            }
+            if game.musicOn != musicOn {
+                game.toggleMusic()
+            }
+        }
+    ) {
             RoundedRectangle(cornerRadius: 10).opacity(0.3)
                 .frame(width: 100, height: 40, alignment: .center)
                 .overlay(Text("New Game")
@@ -186,7 +197,11 @@ struct settingsView: View {
         Section(header: Text("Music").font(Font.custom("DotGothic16-Regular", size: headerFontSize))) {
             Button {
                 game.toggleMusic()
-                stopMusic("musicBox", type: "mp3")
+                if game.musicOn {
+                    playMusic("musicBox", type: "mp3", musicOn: game.musicOn)
+                } else {
+                    stopMusic("musicBox", type: "mp3")
+                }
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)                        .foregroundColor(palePink)
