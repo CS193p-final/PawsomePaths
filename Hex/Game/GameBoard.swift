@@ -42,6 +42,9 @@ struct GameBoard: Hashable, Codable {
     var difficulty = 3
     private(set) var playerTurn: Int = 1
     
+    var soundOn: Bool = true
+    var musicOn: Bool = true
+    
     var json: Data? {
         try? JSONEncoder().encode(self)
     }
@@ -231,5 +234,13 @@ struct GameBoard: Hashable, Codable {
     
     private func isInside(r: Int, c: Int) -> Bool {
         (r >= 0 && c >= 0 && r < size && c < size)
+    }
+    
+    mutating func toggleSound() {
+        soundOn = !soundOn
+    }
+    
+    mutating func toggleMusic() {
+        musicOn = !musicOn
     }
 }

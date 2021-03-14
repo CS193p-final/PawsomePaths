@@ -14,9 +14,9 @@ struct WelcomeView: View {
     
     var body: some View {
         if (twoPlayerGameView) {
-            GameView(hexGame: TwoPlayersGame())
+            GameView(hexGame: TwoPlayersGame(name: "twoPlayer"))
         } else if (singlePlayerGameView) {
-            GameView(hexGame: SinglePlayerGame())
+            GameView(hexGame: SinglePlayerGame(name: "singlePlayer"))
         } else if (howToPlayView) {
             HowToPlayView(soundOn: true)
         }
@@ -33,8 +33,8 @@ struct WelcomeView: View {
             }
             
             Button {
-                singlePlayerGameView = true
                 playSound("MouseClick", type: "mp3", soundOn: true)
+                singlePlayerGameView = true
             } label: {
                 RoundedRectangle(cornerRadius: 10).opacity(0.3)
                     .frame(width: 250, height: 75, alignment: .center)
@@ -44,8 +44,8 @@ struct WelcomeView: View {
             }
             
             Button {
-                howToPlayView = true
                 playSound("MouseClick", type: "mp3", soundOn: true)
+                howToPlayView = true
             } label: {
                 RoundedRectangle(cornerRadius: 10).opacity(0.3)
                     .frame(width: 250, height: 75, alignment: .center)

@@ -173,7 +173,7 @@ struct settingsView: View {
         }
         Section(header: Text("Sound").font(Font.custom("DotGothic16-Regular", size: headerFontSize))) {
             Button {
-                game.soundOn = !game.soundOn
+                game.toggleSound()
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)                        .foregroundColor(palePink)
@@ -185,7 +185,7 @@ struct settingsView: View {
         }
         Section(header: Text("Music").font(Font.custom("DotGothic16-Regular", size: headerFontSize))) {
             Button {
-                game.musicOn = !game.musicOn
+                game.toggleMusic()
                 stopMusic("musicBox", type: "mp3")
             } label: {
                 ZStack {

@@ -6,15 +6,25 @@
 //
 
 import Foundation
+import Combine
 
 class GameMode: ObservableObject {
     @Published var board: GameBoard
-    @Published var soundOn: Bool = true
-    @Published var musicOn: Bool = true
+
+    private var autoSaveCancellable: AnyCancellable?
+
     
     init() {
         self.board = GameBoard(size: 7)
-        playMusic("musicBox", type: "mp3", musicOn: musicOn)
+        playMusic("musicBox", type: "mp3", musicOn: board.musicOn)
+    }
+    
+    init(name: String) {
+        let defaultsKey = "GameMode.\(name)"
+        board = GameBoard(json: UserDefaults.standard.data(forKey: defaultsKey)) ?? GameBoard()
+        autoSaveCancellable = $board.sink { board in
+            UserDefaults.standard.setValue(board.json, forKey: defaultsKey)
+        }
     }
     
     // MARK: - Access
@@ -48,6 +58,14 @@ class GameMode: ObservableObject {
         }
     }
     
+    var soundOn: Bool {
+        board.soundOn
+    }
+    
+    var musicOn: Bool {
+        board.musicOn
+    }
+    
     // MARK: - Intent(s)
     func play(cellId: Int) {
         board.play(move: BoardPosition(id: cellId, cols: board.size))
@@ -69,5 +87,13 @@ class GameMode: ObservableObject {
             let size = board.size - 1
             newGame(size: size)
         }
+    }
+    
+    func toggleSound() {
+        board.toggleSound()
+    }
+    
+    func toggleMusic() {
+        board.toggleMusic()
     }
 }
