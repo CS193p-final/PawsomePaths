@@ -79,12 +79,11 @@ struct GameView: View {
                             }
                             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                                 CellView(cell: cell).onTapGesture {
-                                    playSound("move", type: "mp3", soundOn: hexGame.soundOn, musicOn: true)
+                                    playSound("move", type: "wav", soundOn: hexGame.soundOn, musicOn: true)
                                     if !hexGame.gameEnded { // only when game has not ended
                                         hexGame.play(cellId: cell.id)
                                     }
                                 }
-                                //.opacity(0)
                             }
                             .onReceive(self.hexGame.$board, perform: { newValue in
                                 if newValue.winner != 0 {
@@ -170,6 +169,9 @@ struct resultReport: View {
         .frame(width: 300, height: 450, alignment: .center)
         .cornerRadius(30.0)
         .font(Font.custom("KronaOne-Regular", size: buttonFontSize))
+        .onAppear {
+            playMusic(game.result == "Computer wins" ? "lose" : "win", type: "mp3", musicOn: game.musicOn)
+        }
     }
 }
 

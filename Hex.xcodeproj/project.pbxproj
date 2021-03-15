@@ -51,6 +51,9 @@
 		C16DA17E25FC6A5C0059C426 /* DotGothic16-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C16DA17D25FC6A5C0059C426 /* DotGothic16-Regular.ttf */; };
 		C16DA18725FCAD220059C426 /* musicBox.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C16DA18525FCAD220059C426 /* musicBox.mp3 */; };
 		C16DA18825FCAD220059C426 /* move.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C16DA18625FCAD220059C426 /* move.mp3 */; };
+		C1781A88260014AD003A1168 /* lose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C1781A85260014AD003A1168 /* lose.mp3 */; };
+		C1781A8A260014AD003A1168 /* move.wav in Resources */ = {isa = PBXBuildFile; fileRef = C1781A87260014AD003A1168 /* move.wav */; };
+		C1781A8E2600154C003A1168 /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C1781A8D2600154C003A1168 /* win.mp3 */; };
 		C18DD74A25DEFDD600A29151 /* RedBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18DD74925DEFDD600A29151 /* RedBorder.swift */; };
 		C18DD74E25DF60BE00A29151 /* BlueBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18DD74D25DF60BE00A29151 /* BlueBorder.swift */; };
 		C1CE2BB625E77B740012E731 /* ClassFireworkAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */; };
@@ -130,6 +133,9 @@
 		C16DA17D25FC6A5C0059C426 /* DotGothic16-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DotGothic16-Regular.ttf"; sourceTree = "<group>"; };
 		C16DA18525FCAD220059C426 /* musicBox.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = musicBox.mp3; sourceTree = "<group>"; };
 		C16DA18625FCAD220059C426 /* move.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = move.mp3; sourceTree = "<group>"; };
+		C1781A85260014AD003A1168 /* lose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lose.mp3; sourceTree = "<group>"; };
+		C1781A87260014AD003A1168 /* move.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = move.wav; sourceTree = "<group>"; };
+		C1781A8D2600154C003A1168 /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
 		C18DD74925DEFDD600A29151 /* RedBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedBorder.swift; sourceTree = "<group>"; };
 		C18DD74D25DF60BE00A29151 /* BlueBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueBorder.swift; sourceTree = "<group>"; };
 		C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassFireworkAnimator.swift; sourceTree = "<group>"; };
@@ -355,6 +361,9 @@
 		C69FD62125F957450077394D /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				C1781A8D2600154C003A1168 /* win.mp3 */,
+				C1781A85260014AD003A1168 /* lose.mp3 */,
+				C1781A87260014AD003A1168 /* move.wav */,
 				C16DA18625FCAD220059C426 /* move.mp3 */,
 				C16DA18525FCAD220059C426 /* musicBox.mp3 */,
 				C69FD62B25F95F950077394D /* MouseClick.mp3 */,
@@ -434,6 +443,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1781A8E2600154C003A1168 /* win.mp3 in Resources */,
 				C644BB1825FEA90B008A7B64 /* GoogleService-Info.plist in Resources */,
 				C16DA16825FC65620059C426 /* 114.png in Resources */,
 				C16DA16D25FC65620059C426 /* 256.png in Resources */,
@@ -448,7 +458,9 @@
 				C16DA17225FC65620059C426 /* 57.png in Resources */,
 				C16DA16125FC65620059C426 /* 64.png in Resources */,
 				C16DA17A25FC65620059C426 /* 152.png in Resources */,
+				C1781A8A260014AD003A1168 /* move.wav in Resources */,
 				C16DA16925FC65620059C426 /* 128.png in Resources */,
+				C1781A88260014AD003A1168 /* lose.mp3 in Resources */,
 				C16DA16A25FC65620059C426 /* 512.png in Resources */,
 				C699738025D9F4DC00337F70 /* Preview Assets.xcassets in Resources */,
 				C16DA16425FC65620059C426 /* 72.png in Resources */,
