@@ -1,10 +1,10 @@
+
 //
 //  GameView.swift
 //  Hex
 //
 //  Created by Duong Pham on 2/14/21.
 //
-
 import SwiftUI
 import UIKit
 
@@ -21,6 +21,9 @@ struct GameView: View {
 
     let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     let buttonColor = Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1)
+    let buttonFontSize: CGFloat = 18
+    let gameTitle: CGFloat = 36
+    let playerTurnFontSize: CGFloat = 20
     
     var body: some View {
         let board = hexGame.board
@@ -28,9 +31,6 @@ struct GameView: View {
             WelcomeView()
         } else {
             GeometryReader { geometry in
-                let buttonFontSize: CGFloat = (geometry.size.width / 33)
-                let gameTitle: CGFloat = buttonFontSize * 2
-                let playerTurnFontSize: CGFloat = buttonFontSize * 1.2
                 Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-2)
                     .onAppear{
                         playMusic("musicBox", type: "mp3", musicOn: hexGame.musicOn)
@@ -59,11 +59,10 @@ struct GameView: View {
                                     settingsView(game: hexGame)
                                         .frame(width: 250, alignment: .top)
                                 }
-                                .padding(.horizontal)
+                                .padding()
                         }
                     }
-                    .frame(width: geometry.size.width, height: buttonFontSize * 2, alignment: .topLeading)
-                    .padding(.bottom)
+                    .frame(width: geometry.size.width, height: 50, alignment: .topLeading)
                     
                     Text("Hex Game")
                         .font(Font.custom("KronaOne-Regular", size: gameTitle))
@@ -85,49 +84,37 @@ struct GameView: View {
                                         hexGame.play(cellId: cell.id)
                                     }
                                 }
+                                //.opacity(0)
                             }
                             .onReceive(self.hexGame.$board, perform: { newValue in
                                 if newValue.winner != 0 {
-                    ZStack {
-                        if (showResult == true && hexGame.result != "Computer wins" ) {
-                            ForEach(0...8, id: \.self) {_ in
-                                FireworkRepresentable().position(x: CGFloat.random(in: 10 ... 2 * geometry.size.width), y: CGFloat.random(in: 10 ... geometry.size.height)).zIndex(-1)
-                            }
-                        }
-                        HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
-                            CellView(cell: cell).onTapGesture {
-                                playSound("move", type: "mp3", soundOn: hexGame.soundOn, musicOn: true)
-                                if !hexGame.gameEnded { // only when game has not ended
-                                    hexGame.play(cellId: cell.id)
-                                }
-                                if hexGame.gameEnded {
                                     showResult = true
                                 }
-                            }
-                        }
-                        .rotationEffect(Angle.degrees(90))
-                        .popup(isPresented: $showResult) {
-                            ZStack {
-                                resultReport(game: hexGame, soundOn: hexGame.soundOn, showResult: showResult, buttonFontSize: buttonFontSize)
-                                VStack {
-                                    newGameButton(game: hexGame, buttonFontSize: buttonFontSize, showResult: showResult)
-                                    Button {
-                                        welcomeView = true
-                                        hexGame.newGame(size: hexGame.board.size)
-                                    } label: {
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .foregroundColor(hunterGreen)
-                                                .frame(width: buttonFontSize * 10, height: buttonFontSize * 3, alignment: .center)
-                                            Text("Menu").font(Font.custom("KronaOne-Regular", size: buttonFontSize)).foregroundColor(.white)
+                                print("board is updated. Game ended = \(showResult)")
+                            })
+                            .rotationEffect(Angle.degrees(90))
+                            .popup(isPresented: $showResult) {
+                                ZStack {
+                                    resultReport(game: hexGame, soundOn: hexGame.soundOn, showResult: showResult)
+                                    VStack {
+                                        newGameButton(game: hexGame, showResult: showResult)
+                                        Button {
+                                            welcomeView = true
+                                            hexGame.newGame(size: hexGame.board.size)
+                                        } label: {
+                                            ZStack {
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .foregroundColor(hunterGreen)
+                                                    .frame(width: 130, height: 50, alignment: .center)
+                                                Text("Menu").font(Font.custom("KronaOne-Regular", size: buttonFontSize)).foregroundColor(.white)
+                                            }
                                         }
                                     }
+                                    .padding(.top, 275)
                                 }
-                                .padding(.top, 275)
                             }
                         }
-                    }
-                    newGameButton(game: hexGame, buttonFontSize: buttonFontSize, showResult: !showResult) // disabled when result view pop up
+                newGameButton(game: hexGame, showResult: !showResult) // disabled when result view pop up
                     .foregroundColor(!showResult ? .blue : .gray)
                     .padding()
                 }
@@ -139,7 +126,7 @@ struct GameView: View {
 
 struct newGameButton: View {
     var game: GameMode
-    let buttonFontSize: CGFloat
+    let buttonFontSize: CGFloat = 15
     var showResult: Bool
     let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
     
@@ -157,7 +144,7 @@ struct newGameButton: View {
         }
     ) {
             RoundedRectangle(cornerRadius: 10)
-                .frame(width: buttonFontSize * 10, height: buttonFontSize * 3, alignment: .center)
+                .frame(width: 130, height: 50, alignment: .center)
                 .overlay(Text("Reset Game").foregroundColor(.white)
                             .font(Font.custom("KronaOne-Regular", size: buttonFontSize)))
                 .foregroundColor(hunterGreen)
@@ -170,7 +157,7 @@ struct resultReport: View {
     let resultFontSize: CGFloat = 30
     @State var soundOn: Bool
     var showResult: Bool
-    let buttonFontSize: CGFloat
+    let buttonFontSize: CGFloat = 12
 
     var body: some View {
         VStack {
@@ -220,7 +207,7 @@ struct settingsView: View {
                 game.toggleSound()
             } label: {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 10).frame(width: headerFontSize * 2, height: headerFontSize * 2, alignment: .center)                        .foregroundColor(palePink)
+                    RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)                        .foregroundColor(palePink)
                     Image(systemName: game.soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
                         .foregroundColor(.pink)
                 }
@@ -237,7 +224,7 @@ struct settingsView: View {
                 }
             } label: {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 10).frame(width: headerFontSize * 2, height: headerFontSize * 2, alignment: .center)                        .foregroundColor(palePink)
+                    RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)                        .foregroundColor(palePink)
                     Image(systemName: game.musicOn ? "music.note" : "play.slash").imageScale(.large)
                         .foregroundColor(.pink)
                 }

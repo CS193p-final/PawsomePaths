@@ -16,7 +16,7 @@ struct RedBorder: View {
     var body: some View {
         let backgroundRed = Color(red: 0.929512, green: 0.1407, blue: 0.307, opacity: 1)
         Rectangle()
-            .frame(width: frameWidth * (CGFloat(cols) - 0.5), height: frameHeight / 2, alignment: .leading).foregroundColor(backgroundRed)
+            .frame(width: frameWidth * (CGFloat(cols) - 1), height: frameHeight / 2, alignment: .leading).foregroundColor(backgroundRed)
     }
 }
 

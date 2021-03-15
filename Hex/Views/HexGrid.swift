@@ -26,9 +26,11 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
                 ZStack {
                     BlueBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
                         .offset(x: xOffsetRightBlueBorder(geometry.size.width))
+                        .offset(y: hexagonWidth(geometry.size.width) / CGFloat(16))
 
                     BlueBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
                         .offset(x: xOffsetLeftBlueBorder(geometry.size.width, geometry.size.height))
+                        .offset(y: (-hexagonWidth(geometry.size.width) / 4) +  hexagonWidth(geometry.size.width) / CGFloat(16))
                     
                     RedBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
                         .position(x: xPositionTopRedBorder(geometry.size.width), y: yPositionTopRedBorder(geometry.size.height, geometryWidth: geometry.size.width) + hexagonHeight(geometry.size.width)/4)
@@ -75,7 +77,7 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
     }
     
     func xPositionTopRedBorder(_ geometryWidth: CGFloat) -> CGFloat {
-        return (CGFloat(cols) - 0.5) * hexagonWidth(geometryWidth) / 2
+        return (geometryWidth - ((CGFloat(cols) - 1) * hexagonWidth(geometryWidth) / 2)) / 2
     }
     
     func xOffsetRightBlueBorder(_ geometryWidth: CGFloat) -> CGFloat {
@@ -86,7 +88,7 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
     }
     
     func xOffsetLeftBlueBorder(_ geometryWidth: CGFloat, _ geometryHeight: CGFloat) -> CGFloat {
-        xOffsetRightBlueBorder(geometryWidth) + hexagonWidth(geometryWidth) * CGFloat(cols) - (hexagonWidth(geometryWidth)/2) + CGFloat(hexagonWidth(geometryHeight) / 16)
+        xOffsetRightBlueBorder(geometryWidth) + hexagonWidth(geometryWidth) * CGFloat(cols) - (hexagonWidth(geometryWidth)/2)
     }
 }
 

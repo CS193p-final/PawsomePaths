@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseDatabase
 
 class OnlineGame: GameMode {
     var databaseRef: DatabaseReference! = Database.database().reference()
