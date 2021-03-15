@@ -26,17 +26,13 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
                 ZStack {
                     BlueBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
                         .offset(x: xOffsetRightBlueBorder(geometry.size.width))
-                        //.offset(y: hexagonHeight(geometry.size.width)/8)
-
 
                     BlueBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
                         .offset(x: xOffsetLeftBlueBorder(geometry.size.width, geometry.size.height))
-                        //.offset(y: -hexagonHeight(geometry.size.width)/8)
                     
                     RedBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
                         .position(x: xPositionTopRedBorder(geometry.size.width), y: yPositionTopRedBorder(geometry.size.height, geometryWidth: geometry.size.width) + hexagonHeight(geometry.size.width)/4)
 
-                    
                     RedBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
                         .position(x: xPositionTopRedBorder(geometry.size.width) + (hexagonWidth(geometry.size.width) * CGFloat(cols-1))/2, y: yPositionTopRedBorder(geometry.size.height, geometryWidth: geometry.size.width) + (hexagonHeight(geometry.size.width) * CGFloat(cols-1) * 7/8) + CGFloat(hexagonHeight(geometry.size.width) * 3/4))
 
@@ -61,9 +57,9 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
     
     var hexInOneLine: CGFloat {
         if cols % 2 == 0 {
-            return CGFloat(cols) + CGFloat(cols/2) - 0.5
+            return CGFloat(cols) + CGFloat(cols/4) - 0.5
         }
-        return CGFloat(cols) + CGFloat(cols/2)
+        return CGFloat(cols) + CGFloat(cols/4)
     }
     
     func hexagonWidth(_ geometryWidth: CGFloat) -> CGFloat {
@@ -79,7 +75,7 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
     }
     
     func xPositionTopRedBorder(_ geometryWidth: CGFloat) -> CGFloat {
-        return (geometryWidth - hexInOneLine * hexagonWidth(geometryWidth))/2 + CGFloat(cols) * hexagonWidth(geometryWidth) / 2
+        return (CGFloat(cols) - 0.5) * hexagonWidth(geometryWidth) / 2
     }
     
     func xOffsetRightBlueBorder(_ geometryWidth: CGFloat) -> CGFloat {

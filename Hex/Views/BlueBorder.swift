@@ -18,7 +18,7 @@ struct BlueBorder: View {
         let backgroundBlue = Color(red: 0.2, green: 0.2549, blue: 0.584314, opacity: 1)
 
         Rectangle()
-            .frame(width: frameHeight * (CGFloat(cols) - 0.5), height: frameHeight / 2)
+            .frame(width: frameHeight * (CGFloat(cols) - 1), height: frameHeight / 2)
             .rotationEffect(Angle.degrees(60.3))
             .offset(x: cols % 2 == 0 ? xOffset - frameHeight/4 : xOffset)
             .foregroundColor(backgroundBlue)
