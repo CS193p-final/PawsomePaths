@@ -28,7 +28,7 @@ struct HowToPlayView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .onTapGesture {
                             welcomeView = true
-                            playSound("MouseClick", type: "mp3", soundOn: soundOn, musicOn: true)
+                            playSound("MouseClick", type: "mp3", soundOn: soundOn)
                         }
                     Text("Connect top and bottom side of the board to win")
                         .font(Font.custom("KronaOne-Regular", size: fontSize))

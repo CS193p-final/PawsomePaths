@@ -22,7 +22,7 @@ class ClassicFireworkController {
     }
     
     // It allows fireworks to explodes in close range of corners of a source view
-    func addFireworks(count fireworksCount: Int = 1, sparks sparksCount: Int, around sourceView: UIView, sparkSize: CGSize =  CGSize(width: 17, height: 17), scale: CGFloat = 65.0, maxVectorChange: CGFloat = 15.0, animationDuration: TimeInterval = 1, canChangeZIndex: Bool = true) {
+    func addFireworks(count fireworksCount: Int = 1, sparks sparksCount: Int, around sourceView: UIView, sparkSize: CGSize =  CGSize(width: 17, height: 17), scale: CGFloat = 65.0, maxVectorChange: CGFloat = 15.0, animationDuration: TimeInterval = 0.5, canChangeZIndex: Bool = true) {
         guard let superview = sourceView.superview else {
             fatalError()
         }

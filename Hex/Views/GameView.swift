@@ -29,7 +29,8 @@ struct GameView: View {
         let board = hexGame.board
         if (welcomeView) {
             WelcomeView()
-        } else {
+        }
+        else {
             GeometryReader { geometry in
                 Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-2)
                     .onAppear{
@@ -48,7 +49,7 @@ struct GameView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .onTapGesture {
                                     welcomeView = true
-                                    playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn, musicOn: true)
+                                    playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
                                 }
                             
                             Image(systemName: "gearshape").imageScale(.large)                            .foregroundColor(.white)
@@ -72,19 +73,25 @@ struct GameView: View {
                     .padding()
 
                         ZStack {
-                            if (showResult == true && hexGame.result != "Computer wins" ) {
+                            if (showResult == true && hexGame.result != "Computer wins" && hexGame.result != "You lose" ) {
                                 ForEach(0...8, id: \.self) {_ in
                                     FireworkRepresentable().position(x: CGFloat.random(in: 10 ... 2 * geometry.size.width), y: CGFloat.random(in: 10 ... geometry.size.height)).zIndex(-1)
                                 }
                             }
                             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                                 CellView(cell: cell).onTapGesture {
-                                    playSound("move", type: "wav", soundOn: hexGame.soundOn, musicOn: true)
+                                    playSound("move", type: "wav", soundOn: hexGame.soundOn)
                                     if !hexGame.gameEnded { // only when game has not ended
                                         hexGame.play(cellId: cell.id)
                                     }
                                 }
                             }
+                            .onChange(of: hexGame.gameEnded, perform: { value in
+                                if hexGame.gameEnded {
+                                    playSound(hexGame.result == "Computer wins" || hexGame.result == "You lose" ? "lose" : "win", type: "mp3", soundOn: hexGame.soundOn)
+                                }
+                                print("game result: \(hexGame.result) badam badam")
+                            })
                             .onReceive(self.hexGame.$board, perform: { newValue in
                                 if newValue.winner != 0 {
                                     showResult = true
@@ -105,7 +112,10 @@ struct GameView: View {
                                                 RoundedRectangle(cornerRadius: 10)
                                                     .foregroundColor(hunterGreen)
                                                     .frame(width: 130, height: 50, alignment: .center)
-                                                Text("Menu").font(Font.custom("KronaOne-Regular", size: buttonFontSize)).foregroundColor(.white)
+                                                Text("Menu").font(Font.custom("KronaOne-Regular", size: buttonFontSize)).foregroundColor(.white).onTapGesture {
+                                                    hexGame.newGame(size: hexGame.board.size)
+                                                    welcomeView = true
+                                                }
                                             }
                                         }
                                     }
@@ -165,13 +175,10 @@ struct resultReport: View {
                 .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
                 .padding(.bottom, 200)
         }
-        .background(Image(game.result == "Computer wins" ? "losing" : "background"))
+        .background(Image(game.result == "Computer wins" || game.result == "You lose" ? "losing" : "background"))
         .frame(width: 300, height: 450, alignment: .center)
         .cornerRadius(30.0)
         .font(Font.custom("KronaOne-Regular", size: buttonFontSize))
-        .onAppear {
-            playMusic(game.result == "Computer wins" ? "lose" : "win", type: "mp3", musicOn: game.musicOn)
-        }
     }
 }
 

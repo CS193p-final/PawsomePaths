@@ -20,7 +20,7 @@ class SinglePlayerGame: GameMode {
     
     override var result: String {
         switch board.checkResult() {
-        case .player1Win: return "You wins"
+        case .player1Win: return "You win"
         case .player2Win: return "Computer wins"
         case .unknown: return "Unknown"
         }

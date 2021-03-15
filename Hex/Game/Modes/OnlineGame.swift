@@ -57,10 +57,10 @@ class OnlineGame: GameMode {
             return "Unknown"
         }
         else if winner == localPlayer {
-            return "You wins"
+            return "You win"
         }
         else {
-            return "You loses"
+            return "You lose"
         }
     }
     
