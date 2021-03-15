@@ -83,11 +83,14 @@ struct GameView: View {
                                     if !hexGame.gameEnded { // only when game has not ended
                                         hexGame.play(cellId: cell.id)
                                     }
-                                    if hexGame.gameEnded {
-                                        showResult = true
-                                    }
                                 }
                             }
+                            .onReceive(self.hexGame.$board, perform: { newValue in
+                                if newValue.winner != 0 {
+                                    showResult = true
+                                }
+                                print("board is updated. Game ended = \(showResult)")
+                            })
                             .popup(isPresented: $showResult) {
                                 ZStack {
                                     resultReport(game: hexGame, soundOn: hexGame.soundOn, showResult: showResult)
