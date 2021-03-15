@@ -61,6 +61,8 @@
 		C600184825E895BE00DB9CDC /* Minimax.swift in Sources */ = {isa = PBXBuildFile; fileRef = C600184725E895BE00DB9CDC /* Minimax.swift */; };
 		C600184E25E8AE1E00DB9CDC /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C600184D25E8AE1E00DB9CDC /* Int+Extension.swift */; };
 		C6227AD525F2B085008E301E /* Deque.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6227AD425F2B085008E301E /* Deque.swift */; };
+		C644BB1525FEA25A008A7B64 /* OnlineGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644BB1425FEA25A008A7B64 /* OnlineGame.swift */; };
+		C644BB1825FEA90B008A7B64 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C644BB1725FEA90B008A7B64 /* GoogleService-Info.plist */; };
 		C6596A2F25DB0B0200A0F94B /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A2E25DB0B0200A0F94B /* GameBoard.swift */; };
 		C6596A3325DB11F000A0F94B /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A3225DB11F000A0F94B /* Queue.swift */; };
 		C6596A3825DB1BA500A0F94B /* TwoPlayersGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A3725DB1BA500A0F94B /* TwoPlayersGame.swift */; };
@@ -80,7 +82,6 @@
 		C6B09AD425DE126000C96782 /* DumpAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09AD325DE126000C96782 /* DumpAI.swift */; };
 		C6B09AD825DE142D00C96782 /* SinglePlayerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */; };
 		C6B09ADB25DEF36E00C96782 /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09ADA25DEF36E00C96782 /* GameMode.swift */; };
-		C6F9805525FE9C2600F694D9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6F9805425FE9C2600F694D9 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +140,8 @@
 		C600184725E895BE00DB9CDC /* Minimax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minimax.swift; sourceTree = "<group>"; };
 		C600184D25E8AE1E00DB9CDC /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		C6227AD425F2B085008E301E /* Deque.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deque.swift; sourceTree = "<group>"; };
+		C644BB1425FEA25A008A7B64 /* OnlineGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineGame.swift; sourceTree = "<group>"; };
+		C644BB1725FEA90B008A7B64 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C6596A2E25DB0B0200A0F94B /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		C6596A3225DB11F000A0F94B /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		C6596A3725DB1BA500A0F94B /* TwoPlayersGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoPlayersGame.swift; sourceTree = "<group>"; };
@@ -160,7 +163,6 @@
 		C6B09AD325DE126000C96782 /* DumpAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DumpAI.swift; sourceTree = "<group>"; };
 		C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePlayerGame.swift; sourceTree = "<group>"; };
 		C6B09ADA25DEF36E00C96782 /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
-		C6F9805425FE9C2600F694D9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FF1A0D053A50613DD2D628E2 /* Pods-Hex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hex.release.xcconfig"; path = "Target Support Files/Pods-Hex/Pods-Hex.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -303,7 +305,7 @@
 				C6596A3125DB11D900A0F94B /* Extensions */,
 				C6596A2D25DB0AA400A0F94B /* Game */,
 				C699737825D9F4DB00337F70 /* HexApp.swift */,
-				C6F9805425FE9C2600F694D9 /* GoogleService-Info.plist */,
+				C644BB1725FEA90B008A7B64 /* GoogleService-Info.plist */,
 				C699738125D9F4DC00337F70 /* Info.plist */,
 				C699737E25D9F4DC00337F70 /* Preview Content */,
 				C699738825D9F4EE00337F70 /* Shapes */,
@@ -368,6 +370,7 @@
 				C6596A3725DB1BA500A0F94B /* TwoPlayersGame.swift */,
 				C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */,
 				C6B09ADA25DEF36E00C96782 /* GameMode.swift */,
+				C644BB1425FEA25A008A7B64 /* OnlineGame.swift */,
 			);
 			path = Modes;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C644BB1825FEA90B008A7B64 /* GoogleService-Info.plist in Resources */,
 				C16DA16825FC65620059C426 /* 114.png in Resources */,
 				C16DA16D25FC65620059C426 /* 256.png in Resources */,
 				C16DA16F25FC65620059C426 /* 32.png in Resources */,
@@ -471,7 +475,6 @@
 				C16DA16C25FC65620059C426 /* 120.png in Resources */,
 				C16DA15F25FC65620059C426 /* 48.png in Resources */,
 				C69FD62C25F95F950077394D /* MouseClick.mp3 in Resources */,
-				C6F9805525FE9C2600F694D9 /* GoogleService-Info.plist in Resources */,
 				C16DA17025FC65620059C426 /* Contents.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -535,6 +538,7 @@
 				C6B09ADB25DEF36E00C96782 /* GameMode.swift in Sources */,
 				C69FD62625F9578F0077394D /* PlaySound.swift in Sources */,
 				C600184E25E8AE1E00DB9CDC /* Int+Extension.swift in Sources */,
+				C644BB1525FEA25A008A7B64 /* OnlineGame.swift in Sources */,
 				C1CE2BB925E7824A0012E731 /* ClassicFireworkController.swift in Sources */,
 				C11545B325E74E1C00E8B591 /* Firework.swift in Sources */,
 				C6596A2F25DB0B0200A0F94B /* GameBoard.swift in Sources */,

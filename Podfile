@@ -8,5 +8,6 @@ target 'Hex' do
   # Pods for Hex
   pod 'FBSDKLoginKit'
   pod 'Firebase/Auth'
+  pod 'Firebase/Database'
 
 end

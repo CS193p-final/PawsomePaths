@@ -72,6 +72,22 @@ struct GameView: View {
                     .font(Font.custom("KronaOne-Regular", size: playerTurnFontSize))
                     .padding()
 
+                        ZStack {
+                            if (showResult == true && hexGame.result != "Computer wins" ) {
+                                ForEach(0...8, id: \.self) {_ in
+                                    FireworkRepresentable().position(x: CGFloat.random(in: 10 ... 2 * geometry.size.width), y: CGFloat.random(in: 10 ... geometry.size.height)).zIndex(-1)
+                                }
+                            }
+                            HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
+                                CellView(cell: cell).onTapGesture {
+                                    playSound("move", type: "mp3", soundOn: hexGame.soundOn, musicOn: true)
+                                    if !hexGame.gameEnded { // only when game has not ended
+                                        hexGame.play(cellId: cell.id)
+                                    }
+                                }
+                            }
+                            .onReceive(self.hexGame.$board, perform: { newValue in
+                                if newValue.winner != 0 {
                     ZStack {
                         if (showResult == true && hexGame.result != "Computer wins" ) {
                             ForEach(0...8, id: \.self) {_ in
