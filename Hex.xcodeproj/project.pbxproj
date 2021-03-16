@@ -66,6 +66,7 @@
 		C6227AD525F2B085008E301E /* Deque.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6227AD425F2B085008E301E /* Deque.swift */; };
 		C644BB1525FEA25A008A7B64 /* OnlineGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644BB1425FEA25A008A7B64 /* OnlineGame.swift */; };
 		C644BB1825FEA90B008A7B64 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C644BB1725FEA90B008A7B64 /* GoogleService-Info.plist */; };
+		C64CC855260130D40044B780 /* OnlineGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64CC854260130D40044B780 /* OnlineGameView.swift */; };
 		C6596A2F25DB0B0200A0F94B /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A2E25DB0B0200A0F94B /* GameBoard.swift */; };
 		C6596A3325DB11F000A0F94B /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A3225DB11F000A0F94B /* Queue.swift */; };
 		C6596A3825DB1BA500A0F94B /* TwoPlayersGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A3725DB1BA500A0F94B /* TwoPlayersGame.swift */; };
@@ -148,6 +149,7 @@
 		C6227AD425F2B085008E301E /* Deque.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deque.swift; sourceTree = "<group>"; };
 		C644BB1425FEA25A008A7B64 /* OnlineGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineGame.swift; sourceTree = "<group>"; };
 		C644BB1725FEA90B008A7B64 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C64CC854260130D40044B780 /* OnlineGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineGameView.swift; sourceTree = "<group>"; };
 		C6596A2E25DB0B0200A0F94B /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		C6596A3225DB11F000A0F94B /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		C6596A3725DB1BA500A0F94B /* TwoPlayersGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoPlayersGame.swift; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				C1CE2BB825E7824A0012E731 /* ClassicFireworkController.swift */,
 				C1102DA925E8A0180054C992 /* FireworkView.swift */,
 				C69FD61E25F94F4B0077394D /* HowToPlayView.swift */,
+				C64CC854260130D40044B780 /* OnlineGameView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -569,6 +572,7 @@
 				C6596A3825DB1BA500A0F94B /* TwoPlayersGame.swift in Sources */,
 				C1102DAA25E8A0180054C992 /* FireworkView.swift in Sources */,
 				C6227AD525F2B085008E301E /* Deque.swift in Sources */,
+				C64CC855260130D40044B780 /* OnlineGameView.swift in Sources */,
 				C699739025D9F96600337F70 /* HexGrid.swift in Sources */,
 				C1D1CFE225DA0ED500A6EAAE /* Cell.swift in Sources */,
 				C10AA70125EA2C59006C7531 /* PopupView.swift in Sources */,
@@ -702,7 +706,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Hex/Preview Content\"";
-				DEVELOPMENT_TEAM = DFDCS22GK9;
+				DEVELOPMENT_TEAM = F8WWCGPHV3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hex/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -710,7 +714,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = GD.apa;
+				PRODUCT_BUNDLE_IDENTIFIER = GD.hex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -725,7 +729,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Hex/Preview Content\"";
-				DEVELOPMENT_TEAM = DFDCS22GK9;
+				DEVELOPMENT_TEAM = F8WWCGPHV3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hex/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -733,7 +737,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = GD.apa;
+				PRODUCT_BUNDLE_IDENTIFIER = GD.hex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

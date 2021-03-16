@@ -21,7 +21,7 @@ struct WelcomeView: View {
         } else if (singlePlayerGameView) {
             GameView(hexGame: SinglePlayerGame(name: "singlePlayer"))
         } else if (onlineGameView) {
-            GameView(hexGame: OnlineGame())
+            OnlineGameView(hexGame: OnlineGame())
         }
         else if (howToPlayView) {
             HowToPlayView(soundOn: true)

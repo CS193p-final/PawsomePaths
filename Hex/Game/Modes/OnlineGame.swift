@@ -1,4 +1,4 @@
-//
+	//
 //  OnlineGame.swift
 //  Hex
 //
@@ -13,12 +13,12 @@ class OnlineGame: GameMode {
     var databaseRef: DatabaseReference! = Database.database().reference()
     var matchID: String
     var localPlayer: Int
-    var ready = false
+    @Published var ready = false
     
     var listener: UInt = 0
         
     override init() {
-        matchID = UUID().uuidString
+        matchID = ""
         localPlayer = Int.random(in: 1...2)
         super.init()
         
@@ -27,19 +27,25 @@ class OnlineGame: GameMode {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             if !self.ready {
-                print("creating a match...")
                 self.createMatch()
+                guard self.matchID != "" else {
+                    print("Cannot create a match")
+                    return
+                }
                 self.databaseRef.child("matches").child(self.matchID).observe(DataEventType.value) { (snapshot) in
                     let matchInfo = snapshot.value as! [String: Any]
                     if matchInfo["player_count"] as! Int == 2 {
-                        self.ready = true
                         self.setupMatch()
-                        print("ready to play")
-                        print(snapshot.value!)
+                        self.ready = true
+                        self.objectWillChange.send()
                     }
                 }
             }
         }
+    }
+    
+    deinit {
+        databaseRef.removeObserver(withHandle: listener)
     }
     
     override var playerTurn: String {
@@ -109,9 +115,10 @@ class OnlineGame: GameMode {
                     if matchInfo["player_count"] as! Int == 1 {
                         print("found a match: \(match)")
                         self.matchID = id
-                        self.ready = true
                         self.joinMatch()
                         self.setupMatch()
+                        self.ready = true
+                        self.objectWillChange.send()
                         return
                     }
                 }
