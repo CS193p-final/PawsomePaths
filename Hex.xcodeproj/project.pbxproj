@@ -253,6 +253,48 @@
 			path = AppIcon.appiconset;
 			sourceTree = "<group>";
 		};
+		C64CC85B26013F800044B780 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				C101D1E325DC5789000E86E0 /* WelcomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		C64CC85C26013FB20044B780 /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				C699738F25D9F96600337F70 /* HexGrid.swift */,
+				C699739325D9FF2800337F70 /* CellView.swift */,
+				C18DD74925DEFDD600A29151 /* RedBorder.swift */,
+				C18DD74D25DF60BE00A29151 /* BlueBorder.swift */,
+			);
+			path = Board;
+			sourceTree = "<group>";
+		};
+		C64CC85D26013FE10044B780 /* GameModes */ = {
+			isa = PBXGroup;
+			children = (
+				C64CC854260130D40044B780 /* OnlineGameView.swift */,
+				C699737A25D9F4DB00337F70 /* GameView.swift */,
+			);
+			path = GameModes;
+			sourceTree = "<group>";
+		};
+		C64CC85E2601404C0044B780 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				C11545AB25E7478100E8B591 /* SparkTractory.swift */,
+				C11545AF25E74CF300E8B591 /* SparkView.swift */,
+				C11545B225E74E1C00E8B591 /* Firework.swift */,
+				C11545B525E7578000E8B591 /* ClassicFirework.swift */,
+				C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */,
+				C1CE2BB825E7824A0012E731 /* ClassicFireworkController.swift */,
+				C1102DA925E8A0180054C992 /* FireworkView.swift */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
 		C6596A2D25DB0AA400A0F94B /* Game */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,22 +383,12 @@
 		C699739225D9FEF300337F70 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C64CC85E2601404C0044B780 /* Animation */,
+				C64CC85D26013FE10044B780 /* GameModes */,
+				C64CC85C26013FB20044B780 /* Board */,
+				C64CC85B26013F800044B780 /* Home */,
 				C10AA70025EA2C59006C7531 /* PopupView.swift */,
-				C699737A25D9F4DB00337F70 /* GameView.swift */,
-				C699738F25D9F96600337F70 /* HexGrid.swift */,
-				C699739325D9FF2800337F70 /* CellView.swift */,
-				C101D1E325DC5789000E86E0 /* WelcomeView.swift */,
-				C18DD74925DEFDD600A29151 /* RedBorder.swift */,
-				C18DD74D25DF60BE00A29151 /* BlueBorder.swift */,
-				C11545AB25E7478100E8B591 /* SparkTractory.swift */,
-				C11545AF25E74CF300E8B591 /* SparkView.swift */,
-				C11545B225E74E1C00E8B591 /* Firework.swift */,
-				C11545B525E7578000E8B591 /* ClassicFirework.swift */,
-				C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */,
-				C1CE2BB825E7824A0012E731 /* ClassicFireworkController.swift */,
-				C1102DA925E8A0180054C992 /* FireworkView.swift */,
 				C69FD61E25F94F4B0077394D /* HowToPlayView.swift */,
-				C64CC854260130D40044B780 /* OnlineGameView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

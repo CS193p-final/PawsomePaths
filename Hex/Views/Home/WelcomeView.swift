@@ -27,6 +27,7 @@ struct WelcomeView: View {
             HowToPlayView(soundOn: true)
         }
         else {
+            UserSection().frame(alignment: .top)
             Button {
                 twoPlayerGameView = true
                 playSound("MouseClick", type: "mp3", soundOn: true)
@@ -77,9 +78,10 @@ struct WelcomeView: View {
     }
 }
 
-struct WelcomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        WelcomeView()
+struct UserSection: View {
+    var body: some View {
+        Image(systemName: "person.circle.fill").imageScale(.large)
+            .frame(width: 100, height: 100, alignment: .topLeading)
     }
 }
 
