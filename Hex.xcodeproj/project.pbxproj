@@ -63,6 +63,7 @@
 		C1D1CFE725DB6CBE00A6EAAE /* Array+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */; };
 		C600184825E895BE00DB9CDC /* Minimax.swift in Sources */ = {isa = PBXBuildFile; fileRef = C600184725E895BE00DB9CDC /* Minimax.swift */; };
 		C600184E25E8AE1E00DB9CDC /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C600184D25E8AE1E00DB9CDC /* Int+Extension.swift */; };
+		C6029D3826014A04005FBD3B /* FBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6029D3726014A04005FBD3B /* FBButton.swift */; };
 		C6227AD525F2B085008E301E /* Deque.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6227AD425F2B085008E301E /* Deque.swift */; };
 		C644BB1525FEA25A008A7B64 /* OnlineGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644BB1425FEA25A008A7B64 /* OnlineGame.swift */; };
 		C644BB1825FEA90B008A7B64 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C644BB1725FEA90B008A7B64 /* GoogleService-Info.plist */; };
@@ -146,6 +147,7 @@
 		C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Identifiable.swift"; sourceTree = "<group>"; };
 		C600184725E895BE00DB9CDC /* Minimax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minimax.swift; sourceTree = "<group>"; };
 		C600184D25E8AE1E00DB9CDC /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
+		C6029D3726014A04005FBD3B /* FBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBButton.swift; sourceTree = "<group>"; };
 		C6227AD425F2B085008E301E /* Deque.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deque.swift; sourceTree = "<group>"; };
 		C644BB1425FEA25A008A7B64 /* OnlineGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineGame.swift; sourceTree = "<group>"; };
 		C644BB1725FEA90B008A7B64 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				C101D1E325DC5789000E86E0 /* WelcomeView.swift */,
+				C6029D3726014A04005FBD3B /* FBButton.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -358,7 +361,6 @@
 				C644BB1725FEA90B008A7B64 /* GoogleService-Info.plist */,
 				C699738125D9F4DC00337F70 /* Info.plist */,
 				C699737E25D9F4DC00337F70 /* Preview Content */,
-				C699738825D9F4EE00337F70 /* Shapes */,
 				C699739225D9FEF300337F70 /* Views */,
 			);
 			path = Hex;
@@ -383,6 +385,7 @@
 		C699739225D9FEF300337F70 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C699738825D9F4EE00337F70 /* Shapes */,
 				C64CC85E2601404C0044B780 /* Animation */,
 				C64CC85D26013FE10044B780 /* GameModes */,
 				C64CC85C26013FB20044B780 /* Board */,
@@ -590,6 +593,7 @@
 				C11545B325E74E1C00E8B591 /* Firework.swift in Sources */,
 				C6596A2F25DB0B0200A0F94B /* GameBoard.swift in Sources */,
 				C1CE2BBC25E792BE0012E731 /* CGPoint+Extensions.swift in Sources */,
+				C6029D3826014A04005FBD3B /* FBButton.swift in Sources */,
 				C18DD74E25DF60BE00A29151 /* BlueBorder.swift in Sources */,
 				C11545AC25E7478100E8B591 /* SparkTractory.swift in Sources */,
 				C1D1CFE725DB6CBE00A6EAAE /* Array+Identifiable.swift in Sources */,
