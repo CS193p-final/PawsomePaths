@@ -126,9 +126,3 @@ struct OnlineGameView: View {
         }
     }
 }
-
-struct LoadingView: View {
-    var body: some View {
-        Text("loading...")
-    }
-}
