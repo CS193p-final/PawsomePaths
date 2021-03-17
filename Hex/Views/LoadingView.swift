@@ -11,7 +11,8 @@ struct LoadingView: View {
     var body: some View {
         GeometryReader { geometry in
             let random = Bool.random()
-            Image(random ? "redwiz" : "bluewiz").spinning().imageScale(.large)
+            Image(random ? "redwiz" : "bluewiz").spinning().scaleEffect(geometry.size.width / 1350)
+                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
         }
     }
 }

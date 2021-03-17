@@ -87,6 +87,7 @@ struct OnlineGameView: View {
                                         }
                                     }
                                 }
+                                .rotationEffect(Angle(degrees: 90))
                                 .onReceive(self.hexGame.$board, perform: { newValue in
                                     if newValue.winner != 0 {
                                         showResult = true
