@@ -73,7 +73,7 @@ struct GameView: View {
                     .padding()
 
                         ZStack {
-                            if (showResult == true && hexGame.result != "Computer wins" && hexGame.result != "You lose" ) {
+                            if (showResult == true && hexGame.result != "You lose" ) {
                                 ForEach(0...8, id: \.self) {_ in
                                     FireworkRepresentable().position(x: CGFloat.random(in: 10 ... 2 * geometry.size.width), y: CGFloat.random(in: 10 ... geometry.size.height)).zIndex(-1)
                                 }
@@ -88,9 +88,8 @@ struct GameView: View {
                             }
                             .onChange(of: hexGame.gameEnded, perform: { value in
                                 if hexGame.gameEnded {
-                                    playSound(hexGame.result == "Computer wins" || hexGame.result == "You lose" ? "lose" : "win", type: "mp3", soundOn: hexGame.soundOn)
+                                    playSound(hexGame.result == "You lose" ? "lose" : "win", type: "mp3", soundOn: hexGame.soundOn)
                                 }
-                                print("game result: \(hexGame.result) badam badam")
                             })
                             .onReceive(self.hexGame.$board, perform: { newValue in
                                 if newValue.winner != 0 {
@@ -101,25 +100,7 @@ struct GameView: View {
                             .rotationEffect(Angle.degrees(90))
                             .popup(isPresented: $showResult) {
                                 ZStack {
-                                    resultReport(game: hexGame, soundOn: hexGame.soundOn, showResult: showResult)
-                                    VStack {
-                                        newGameButton(game: hexGame, showResult: showResult)
-                                        Button {
-                                            welcomeView = true
-                                            hexGame.newGame(size: hexGame.board.size)
-                                        } label: {
-                                            ZStack {
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .foregroundColor(hunterGreen)
-                                                    .frame(width: 130, height: 50, alignment: .center)
-                                                Text("Menu").font(Font.custom("KronaOne-Regular", size: buttonFontSize)).foregroundColor(.white).onTapGesture {
-                                                    hexGame.newGame(size: hexGame.board.size)
-                                                    welcomeView = true
-                                                }
-                                            }
-                                        }
-                                    }
-                                    .padding(.top, 275)
+                                    resultReport(game: hexGame, soundOn: hexGame.soundOn, showResult: showResult, welcomeView: $welcomeView)
                                 }
                             }
                         }
@@ -163,22 +144,44 @@ struct newGameButton: View {
 
 struct resultReport: View {
     var game: GameMode
-    let resultFontSize: CGFloat = 30
+    let resultFontSize: CGFloat = 22
     @State var soundOn: Bool
     var showResult: Bool
     let buttonFontSize: CGFloat = 12
+    let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
+    var imageHeight: CGFloat = 450
+    var imageWidth: CGFloat = 300
+    @Binding var welcomeView: Bool
 
     var body: some View {
-        VStack {
-            Text("\(game.result)")
-                .font(Font.custom("KronaOne-Regular", size: resultFontSize))
-                .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
-                .padding(.bottom, 200)
+        GeometryReader { geometry in
+            ZStack {
+                VStack {
+                    Text("\(game.result)")
+                        .font(Font.custom("PressStart2P-Regular", size: resultFontSize))
+                        .foregroundColor(.black)
+                        .padding(.vertical, 100)
+                    newGameButton(game: game, showResult: showResult)
+                    Button {
+                        welcomeView = true
+                        game.newGame(size: game.board.size)
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundColor(hunterGreen)
+                                .frame(width: 130, height: 50, alignment: .center)
+                            Text("Menu").font(Font.custom("KronaOne-Regular", size: buttonFontSize)).foregroundColor(.white).onTapGesture {
+                                game.newGame(size: game.board.size)
+                                welcomeView = true
+                            }
+                        }
+                    }
+                }
+            }
+            .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+            .background(Image(game.result == "You lose" ? "losing" : "background"))
+            .scaleEffect(geometry.size.width / (2 * imageWidth))
         }
-        .background(Image(game.result == "Computer wins" || game.result == "You lose" ? "losing" : "background"))
-        .frame(width: 300, height: 450, alignment: .center)
-        .cornerRadius(30.0)
-        .font(Font.custom("KronaOne-Regular", size: buttonFontSize))
     }
 }
 

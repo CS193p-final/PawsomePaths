@@ -74,7 +74,7 @@ struct OnlineGameView: View {
                         .padding()
 
                             ZStack {
-                                if (showResult == true && hexGame.result != "Computer wins" ) {
+                                if (showResult == true && hexGame.result != "You lose" ) {
                                     ForEach(0...8, id: \.self) {_ in
                                         FireworkRepresentable().position(x: CGFloat.random(in: 10 ... 2 * geometry.size.width), y: CGFloat.random(in: 10 ... geometry.size.height)).zIndex(-1)
                                     }
@@ -92,11 +92,10 @@ struct OnlineGameView: View {
                                     if newValue.winner != 0 {
                                         showResult = true
                                     }
-                                    //print("board is updated. Game ended = \(showResult)")
                                 })
                                 .popup(isPresented: $showResult) {
                                     ZStack {
-                                        resultReport(game: hexGame, soundOn: hexGame.soundOn, showResult: showResult)
+                                        resultReport(game: hexGame, soundOn: hexGame.soundOn, showResult: showResult, welcomeView: $welcomeView)
                                         VStack {
                                             newGameButton(game: hexGame, showResult: showResult)
                                             Button {

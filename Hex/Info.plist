@@ -55,6 +55,7 @@
 	<string>Main</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>PressStart2P-Regular.ttf</string>
 		<string>KronaOne-Regular.ttf</string>
 		<string>DotGothic16-Regular.ttf</string>
 	</array>

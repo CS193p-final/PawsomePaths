@@ -18,6 +18,7 @@
 		C11545B325E74E1C00E8B591 /* Firework.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11545B225E74E1C00E8B591 /* Firework.swift */; };
 		C11545B625E7578000E8B591 /* ClassicFirework.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11545B525E7578000E8B591 /* ClassicFirework.swift */; };
 		C131A08525EF47A50060193A /* KronaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C131A08425EF47A50060193A /* KronaOne-Regular.ttf */; };
+		C13B9ED4260283DE00843545 /* PressStart2P-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C13B9ED3260283DE00843545 /* PressStart2P-Regular.ttf */; };
 		C16DA15B25FC65620059C426 /* 88.png in Resources */ = {isa = PBXBuildFile; fileRef = C16DA13B25FC65620059C426 /* 88.png */; };
 		C16DA15C25FC65620059C426 /* 1024.png in Resources */ = {isa = PBXBuildFile; fileRef = C16DA13C25FC65620059C426 /* 1024.png */; };
 		C16DA15D25FC65620059C426 /* 76.png in Resources */ = {isa = PBXBuildFile; fileRef = C16DA13D25FC65620059C426 /* 76.png */; };
@@ -104,6 +105,7 @@
 		C11545B225E74E1C00E8B591 /* Firework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firework.swift; sourceTree = "<group>"; };
 		C11545B525E7578000E8B591 /* ClassicFirework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicFirework.swift; sourceTree = "<group>"; };
 		C131A08425EF47A50060193A /* KronaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KronaOne-Regular.ttf"; sourceTree = "<group>"; };
+		C13B9ED3260283DE00843545 /* PressStart2P-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PressStart2P-Regular.ttf"; sourceTree = "<group>"; };
 		C16DA13B25FC65620059C426 /* 88.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 88.png; sourceTree = "<group>"; };
 		C16DA13C25FC65620059C426 /* 1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1024.png; sourceTree = "<group>"; };
 		C16DA13D25FC65620059C426 /* 76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 76.png; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 		C11F648825F023200094C266 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C13B9ED3260283DE00843545 /* PressStart2P-Regular.ttf */,
 				C16DA13A25FC65620059C426 /* AppIcon.appiconset */,
 				C69FD62125F957450077394D /* Sounds */,
 				C131A08425EF47A50060193A /* KronaOne-Regular.ttf */,
@@ -491,6 +494,7 @@
 				C644BB1825FEA90B008A7B64 /* GoogleService-Info.plist in Resources */,
 				C16DA16825FC65620059C426 /* 114.png in Resources */,
 				C16DA16D25FC65620059C426 /* 256.png in Resources */,
+				C13B9ED4260283DE00843545 /* PressStart2P-Regular.ttf in Resources */,
 				C16DA16F25FC65620059C426 /* 32.png in Resources */,
 				C16DA17525FC65620059C426 /* 196.png in Resources */,
 				C16DA18725FCAD220059C426 /* musicBox.mp3 in Resources */,
