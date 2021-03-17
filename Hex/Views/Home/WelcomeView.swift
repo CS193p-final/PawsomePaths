@@ -37,6 +37,10 @@ struct WelcomeView: View {
         else {
             if logged {
                 Text("Welcome \(email)")
+                let avatar = UIImage(fromDiskWithFileName: "avatar")
+                if avatar != nil {
+                    Image(uiImage: avatar!)
+                }
             }
             UserSection().frame(alignment: .top)
             
