@@ -13,6 +13,7 @@ struct GameView: View {
     @State var showResult = false
     @State private var showSettings = false
     @ObservedObject var hexGame: GameMode
+    @State var continueGame: Bool?
 
     let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
     let blue = Color(red:0.39, green:0.55, blue:0.894)
@@ -26,7 +27,7 @@ struct GameView: View {
     let playerTurnFontSize: CGFloat = 35
     
     var body: some View {
-        let board = hexGame.board
+        
         if (welcomeView) {
             WelcomeView()
         }
@@ -35,6 +36,7 @@ struct GameView: View {
                 Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-2)
                     .onAppear{
                         playMusic("musicBox", type: "mp3", musicOn: hexGame.musicOn)
+                        hexGame.board = (continueGame != nil && continueGame == true) ? hexGame.board : GameBoard(size: hexGame.board.size, musicOn: hexGame.board.musicOn, soundOn: hexGame.board.soundOn)
                     }
                     .onDisappear {
                         stopMusic("musicBox", type: "mp3")
@@ -68,7 +70,7 @@ struct GameView: View {
                     Text("Hex Game")
                         .font(Font.custom("KronaOne-Regular", size: geometry.size.width / gameTitle))
                         .foregroundColor(Color(red: 0.82422, green: 0.37891, blue: 0.207, opacity: 1))
-                    Text(board.playerTurn == 1 ? "Player 1's turn" : "Player 2's turn").foregroundColor(board.playerTurn == 1 ? red : blue)
+                    Text(hexGame.board.playerTurn == 1 ? "Player 1's turn" : "Player 2's turn").foregroundColor(hexGame.board.playerTurn == 1 ? red : blue)
                         .font(Font.custom("KronaOne-Regular", size: geometry.size.width / playerTurnFontSize))
                     .padding()
 

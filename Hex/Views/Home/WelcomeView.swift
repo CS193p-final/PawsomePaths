@@ -14,14 +14,20 @@ struct WelcomeView: View {
     @State private var singlePlayerGameView = false
     @State private var onlineGameView = false
     @State private var howToPlayView = false
+    @State private var showSingleActionSheet = false
+    @State private var showTwoPlayerActionSheet = false
+    @State private var continueSingleGame: Bool?
+    @State private var continueTwoPlayerGame: Bool?
     @AppStorage("logged") var logged = false
     @AppStorage("email") var email = ""
+    @AppStorage("soundOn") var soundOn: Bool = true
+    @AppStorage("musicOn") var musicOn: Bool = true
     
     var body: some View {
         if (twoPlayerGameView) {
-            GameView(hexGame: TwoPlayersGame(name: "twoPlayer"))
+            GameView(hexGame: TwoPlayersGame(name: "twoPlayer"), continueGame: continueTwoPlayerGame)
         } else if (singlePlayerGameView) {
-            GameView(hexGame: SinglePlayerGame(name: "singlePlayer"))
+            GameView(hexGame: SinglePlayerGame(name: "singlePlayer"), continueGame: continueSingleGame)
         } else if (onlineGameView) {
             OnlineGameView(hexGame: OnlineGame())
         }
@@ -33,9 +39,10 @@ struct WelcomeView: View {
                 Text("Welcome \(email)")
             }
             UserSection().frame(alignment: .top)
+            
             Button {
-                twoPlayerGameView = true
                 playSound("MouseClick", type: "mp3", soundOn: true)
+                showTwoPlayerActionSheet = true
             } label: {
                 RoundedRectangle(cornerRadius: 10).opacity(0.3)
                     .frame(width: 250, height: 75, alignment: .center)
@@ -43,16 +50,40 @@ struct WelcomeView: View {
                     .font(Font.custom("KronaOne-Regular", size: 20))
                     .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
             }
+            .actionSheet(isPresented: $showTwoPlayerActionSheet) {
+                ActionSheet(title: Text("Two Players Game"), buttons: [
+                    .default(Text("New Game")) {
+                        twoPlayerGameView = true
+                        continueTwoPlayerGame = false
+                    },
+                    .default(Text("Contiue")) {
+                        twoPlayerGameView = true
+                        continueTwoPlayerGame = true
+                    }
+                ])
+            }
             
             Button {
                 playSound("MouseClick", type: "mp3", soundOn: true)
-                singlePlayerGameView = true
+                showSingleActionSheet = true
             } label: {
                 RoundedRectangle(cornerRadius: 10).opacity(0.3)
                     .frame(width: 250, height: 75, alignment: .center)
                     .overlay(Text("Single Player"))
                     .font(Font.custom("KronaOne-Regular", size: 20))
                     .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
+            }
+            .actionSheet(isPresented: $showSingleActionSheet) {
+                ActionSheet(title: Text("Single Player Game"), buttons: [
+                    .default(Text("New Game")) {
+                        singlePlayerGameView = true
+                        continueSingleGame = false
+                    },
+                    .default(Text("Contiue")) {
+                        singlePlayerGameView = true
+                        continueSingleGame = true
+                    }
+                ])
             }
             
             Button {
@@ -65,7 +96,7 @@ struct WelcomeView: View {
                     .font(Font.custom("KronaOne-Regular", size: 20))
                     .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
             }
-            
+
             Button {
                 playSound("MouseClick", type: "mp3", soundOn: true)
                 howToPlayView = true
@@ -89,3 +120,8 @@ struct UserSection: View {
             .frame(width: 100, height: 100, alignment: .topLeading)
     }
 }
+
+//struct activitySheet: View {
+//    @State var isPresented: Bool
+//
+//}

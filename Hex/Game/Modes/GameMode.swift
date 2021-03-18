@@ -10,17 +10,16 @@ import Combine
 
 class GameMode: ObservableObject {
     @Published var board: GameBoard
-
     private var autoSaveCancellable: AnyCancellable?
 
     
     init() {
-        self.board = GameBoard(size: 7)
+        self.board = GameBoard(size: 11, musicOn: true, soundOn: true)
     }
     
     init(name: String) {
         let defaultsKey = "GameMode.\(name)"
-        board = GameBoard(json: UserDefaults.standard.data(forKey: defaultsKey)) ?? GameBoard()
+        board = GameBoard(json: UserDefaults.standard.data(forKey: defaultsKey)) ?? GameBoard(size: 11, musicOn: true, soundOn: true)
         autoSaveCancellable = $board.sink { board in
             UserDefaults.standard.setValue(board.json, forKey: defaultsKey)
         }
@@ -71,7 +70,7 @@ class GameMode: ObservableObject {
     }
     
     func newGame(size: Int) {
-        self.board = GameBoard(size: size)
+        self.board = GameBoard(size: size, musicOn: board.musicOn, soundOn: board.soundOn)
     }
     
     func incrementSize() {
