@@ -1,5 +1,5 @@
 //
-//  LoadingView.swift
+//  LaunchView.swift
 //  Hex
 //
 //  Created by Giang Nguyenn on 3/16/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LoadingView: View {
+struct LaunchView: View {
     private let buttonFontSize: CGFloat = 45
     @State private var welcomeView = false
    
@@ -35,8 +35,8 @@ struct LoadingView: View {
     }
 }
 
-struct LoadingView_Previews: PreviewProvider {
+struct LaunchView_Previews: PreviewProvider {
     static var previews: some View {
-        LoadingView()
+        LaunchView()
     }
 }

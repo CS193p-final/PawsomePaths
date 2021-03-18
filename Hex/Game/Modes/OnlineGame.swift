@@ -165,9 +165,7 @@ class OnlineGame: GameMode {
     private func joinMatch() {
         localPlayer = 2
         databaseRef.child("matches").child(matchID).child("player_count").setValue(2)
-    }
-    
-    
+    }  
 }
 
 struct OnlineMatch: Codable {

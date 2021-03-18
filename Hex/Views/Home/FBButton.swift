@@ -19,12 +19,6 @@ struct FBButton: View {
     private var fetchImageCancellable: AnyCancellable?
     
     var body: some View {
-        if avatar != nil {
-            Image(uiImage: avatar!)
-        }
-        else {
-            Image(systemName: "person")
-        }
         Button {
             if logged {
                 loginManager.logOut()
