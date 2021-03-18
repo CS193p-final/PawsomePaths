@@ -20,13 +20,12 @@ struct OnlineGameView: View {
 
     let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     let buttonColor = Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1)
-    let buttonFontSize: CGFloat = 18
-    let gameTitle: CGFloat = 36
-    let playerTurnFontSize: CGFloat = 20
+    let buttonFontSize: CGFloat = 45
+    let gameTitle: CGFloat = 20
+    let playerTurnFontSize: CGFloat = 35
     
     var body: some View {
         let board = hexGame.board
-        Text(hexGame.ready ? "Ready" : "Not ready")
         if (welcomeView) {
             WelcomeView()
         }
@@ -44,7 +43,7 @@ struct OnlineGameView: View {
                         ZStack {
                             Rectangle().ignoresSafeArea().foregroundColor(hunterGreen)
                             HStack {
-                                Text("Back").font(Font.custom("KronaOne-Regular", size: buttonFontSize))
+                                Text("Back").font(Font.custom("PressStart2P-Regular", size: geometry.size.width / buttonFontSize))
                                     .padding()
                                     .foregroundColor(.white)
                                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -53,24 +52,24 @@ struct OnlineGameView: View {
                                         playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
                                     }
                                 
-                                Image(systemName: "gearshape").imageScale(.large)                            .foregroundColor(.white)
+                                Image(systemName: "gearshape").imageScale(.large)          .foregroundColor(.white)
                                     .onTapGesture {
                                         showSettings = true
+                                        playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
                                     }
                                     .popover(isPresented: $showSettings) {
                                         settingsView(game: hexGame)
-                                            .frame(width: 250, alignment: .top)
                                     }
                                     .padding()
                             }
                         }
-                        .frame(width: geometry.size.width, height: 50, alignment: .topLeading)
+                        .frame(width: geometry.size.width, height: geometry.size.width * 2 / gameTitle, alignment: .topLeading)
                         
                         Text("Hex Game")
-                            .font(Font.custom("KronaOne-Regular", size: gameTitle))
+                            .font(Font.custom("KronaOne-Regular", size: geometry.size.width / gameTitle))
                             .foregroundColor(Color(red: 0.82422, green: 0.37891, blue: 0.207, opacity: 1))
                         Text(board.playerTurn == hexGame.localPlayer ? "Your turn" : "Opponent's turn").foregroundColor(board.playerTurn == 1 ? red : blue)
-                        .font(Font.custom("KronaOne-Regular", size: playerTurnFontSize))
+                            .font(Font.custom("KronaOne-Regular", size: geometry.size.width / playerTurnFontSize))
                         .padding()
 
                             ZStack {
@@ -81,12 +80,17 @@ struct OnlineGameView: View {
                                 }
                                 HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                                     CellView(cell: cell).onTapGesture {
-                                        playSound("move", type: "mp3", soundOn: hexGame.soundOn)
+                                        playSound("move", type: "wav", soundOn: hexGame.soundOn)
                                         if !hexGame.gameEnded { // only when game has not ended
                                             hexGame.play(cellId: cell.id)
                                         }
                                     }
                                 }
+                                .onChange(of: hexGame.gameEnded, perform: { value in
+                                    if hexGame.gameEnded {
+                                        playSound(hexGame.result == "You lose" ? "lose" : "win", type: "mp3", soundOn: hexGame.soundOn)
+                                    }
+                                })
                                 .rotationEffect(Angle(degrees: 90))
                                 .onReceive(self.hexGame.$board, perform: { newValue in
                                     if newValue.winner != 0 {
@@ -96,25 +100,10 @@ struct OnlineGameView: View {
                                 .popup(isPresented: $showResult) {
                                     ZStack {
                                         resultReport(game: hexGame, soundOn: hexGame.soundOn, showResult: showResult, welcomeView: $welcomeView)
-                                        VStack {
-                                            newGameButton(game: hexGame, showResult: showResult)
-                                            Button {
-                                                welcomeView = true
-                                                hexGame.newGame(size: hexGame.board.size)
-                                            } label: {
-                                                ZStack {
-                                                    RoundedRectangle(cornerRadius: 10)
-                                                        .foregroundColor(hunterGreen)
-                                                        .frame(width: 130, height: 50, alignment: .center)
-                                                    Text("Menu").font(Font.custom("KronaOne-Regular", size: buttonFontSize)).foregroundColor(.white)
-                                                }
-                                            }
-                                        }
-                                        .padding(.top, 275)
                                     }
                                 }
                             }
-                    newGameButton(game: hexGame, showResult: !showResult) // disabled when result view pop up
+                        newGameButton(game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
                         .foregroundColor(!showResult ? .blue : .gray)
                         .padding()
                     }
@@ -124,5 +113,11 @@ struct OnlineGameView: View {
                 LoadingView()
             }
         }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        OnlineGameView(hexGame: OnlineGame())
     }
 }

@@ -21,9 +21,9 @@ struct GameView: View {
 
     let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     let buttonColor = Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1)
-    let buttonFontSize: CGFloat = 18
-    let gameTitle: CGFloat = 36
-    let playerTurnFontSize: CGFloat = 20
+    let buttonFontSize: CGFloat = 45
+    let gameTitle: CGFloat = 20
+    let playerTurnFontSize: CGFloat = 35
     
     var body: some View {
         let board = hexGame.board
@@ -43,7 +43,7 @@ struct GameView: View {
                     ZStack {
                         Rectangle().ignoresSafeArea().foregroundColor(hunterGreen)
                         HStack {
-                            Text("Back").font(Font.custom("KronaOne-Regular", size: buttonFontSize))
+                            Text("Back").font(Font.custom("PressStart2P-Regular", size: geometry.size.width / buttonFontSize))
                                 .padding()
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -52,24 +52,24 @@ struct GameView: View {
                                     playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
                                 }
                             
-                            Image(systemName: "gearshape").imageScale(.large)                            .foregroundColor(.white)
+                            Image(systemName: "gearshape").imageScale(.large) .foregroundColor(.white)
                                 .onTapGesture {
                                     showSettings = true
+                                    playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
                                 }
                                 .popover(isPresented: $showSettings) {
                                     settingsView(game: hexGame)
-                                        .frame(width: 250, alignment: .top)
                                 }
                                 .padding()
                         }
                     }
-                    .frame(width: geometry.size.width, height: 50, alignment: .topLeading)
+                    .frame(width: geometry.size.width, height: geometry.size.width * 2 / gameTitle, alignment: .topLeading)
                     
                     Text("Hex Game")
-                        .font(Font.custom("KronaOne-Regular", size: gameTitle))
+                        .font(Font.custom("KronaOne-Regular", size: geometry.size.width / gameTitle))
                         .foregroundColor(Color(red: 0.82422, green: 0.37891, blue: 0.207, opacity: 1))
                     Text(board.playerTurn == 1 ? "Player 1's turn" : "Player 2's turn").foregroundColor(board.playerTurn == 1 ? red : blue)
-                    .font(Font.custom("KronaOne-Regular", size: playerTurnFontSize))
+                        .font(Font.custom("KronaOne-Regular", size: geometry.size.width / playerTurnFontSize))
                     .padding()
 
                         ZStack {
@@ -95,7 +95,6 @@ struct GameView: View {
                                 if newValue.winner != 0 {
                                     showResult = true
                                 }
-                                print("board is updated. Game ended = \(showResult)")
                             })
                             .rotationEffect(Angle.degrees(90))
                             .popup(isPresented: $showResult) {
@@ -104,7 +103,7 @@ struct GameView: View {
                                 }
                             }
                         }
-                newGameButton(game: hexGame, showResult: !showResult) // disabled when result view pop up
+                    newGameButton(game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
                     .foregroundColor(!showResult ? .blue : .gray)
                     .padding()
                 }
@@ -116,7 +115,7 @@ struct GameView: View {
 
 struct newGameButton: View {
     var game: GameMode
-    let buttonFontSize: CGFloat = 15
+    let buttonFontSize: CGFloat
     var showResult: Bool
     let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
     
@@ -133,8 +132,8 @@ struct newGameButton: View {
             }
         }
     ) {
-            RoundedRectangle(cornerRadius: 10)
-                .frame(width: 130, height: 50, alignment: .center)
+            RoundedRectangle(cornerRadius: buttonFontSize)
+                .frame(width: buttonFontSize * 10, height: buttonFontSize * 3, alignment: .center)
                 .overlay(Text("Reset Game").foregroundColor(.white)
                             .font(Font.custom("KronaOne-Regular", size: buttonFontSize)))
                 .foregroundColor(hunterGreen)
@@ -144,10 +143,10 @@ struct newGameButton: View {
 
 struct resultReport: View {
     var game: GameMode
-    let resultFontSize: CGFloat = 22
+    let resultFontSize: CGFloat = 30
     @State var soundOn: Bool
     var showResult: Bool
-    let buttonFontSize: CGFloat = 12
+    let buttonFontSize: CGFloat = 45
     let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
     var imageHeight: CGFloat = 450
     var imageWidth: CGFloat = 300
@@ -158,24 +157,31 @@ struct resultReport: View {
             ZStack {
                 VStack {
                     Text("\(game.result)")
-                        .font(Font.custom("PressStart2P-Regular", size: resultFontSize))
+                        .multilineTextAlignment(.center)
+                        .font(Font.custom("PressStart2P-Regular", size: geometry.size.width / resultFontSize))
                         .foregroundColor(.black)
-                        .padding(.vertical, 100)
-                    newGameButton(game: game, showResult: showResult)
-                    Button {
-                        welcomeView = true
-                        game.newGame(size: game.board.size)
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(hunterGreen)
-                                .frame(width: 130, height: 50, alignment: .center)
-                            Text("Menu").font(Font.custom("KronaOne-Regular", size: buttonFontSize)).foregroundColor(.white).onTapGesture {
-                                game.newGame(size: game.board.size)
-                                welcomeView = true
+                        .padding(.bottom, 60)
+                        .frame(width: imageWidth, alignment: .center)
+                    
+                    VStack {
+                        newGameButton(game: game, buttonFontSize: geometry.size.width / buttonFontSize, showResult: showResult)
+                        Button {
+                            welcomeView = true
+                            game.newGame(size: game.board.size)
+                        } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: geometry.size.width / buttonFontSize)
+                                    .frame(width: geometry.size.width / buttonFontSize * 10, height: geometry.size.width / buttonFontSize * 3, alignment: .center)
+                                    .foregroundColor(hunterGreen)
+
+                                Text("Menu").font(Font.custom("KronaOne-Regular", size: geometry.size.width / buttonFontSize)).foregroundColor(.white).onTapGesture {
+                                    game.newGame(size: game.board.size)
+                                    welcomeView = true
+                                }
                             }
                         }
                     }
+                    .offset(y: 70)
                 }
             }
             .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
@@ -188,11 +194,12 @@ struct resultReport: View {
 struct settingsView: View {
     @ObservedObject var game: GameMode
     @State private var showAlert: Bool = false
-    private let palePink: Color = Color(red: 0.996, green: 0.8633, blue: 0.8828 , opacity: 1)
-    let headerFontSize: CGFloat = 20
+    private let lightCyan: Color = Color(red: 0.8555, green: 0.984375, blue: 0.9961, opacity: 0.8)
+    private let queenBlue = Color(red: 0.26953, green: 0.41, blue: 0.5625)
+    let headerFontSize: CGFloat = 15
 
     var body: some View {
-        Section(header: Text("Board size").font(Font.custom("DotGothic16-Regular", size: headerFontSize))) {
+        Section(header: Text("Board size").padding()) {
             Stepper(
                 onIncrement: {
                     game.incrementSize()
@@ -214,19 +221,23 @@ struct settingsView: View {
                 }
                 .padding()
         }
-        Section(header: Text("Sound").font(Font.custom("DotGothic16-Regular", size: headerFontSize))) {
+        .foregroundColor(queenBlue)
+        .font(Font.custom("KronaOne-Regular", size: headerFontSize))
+        
+        Section(header: Text("Sound").font(Font.custom("KronaOne-Regular", size: headerFontSize))) {
             Button {
                 game.toggleSound()
             } label: {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)                        .foregroundColor(palePink)
+                    RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center) .foregroundColor(lightCyan)
                     Image(systemName: game.soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
-                        .foregroundColor(.pink)
                 }
                 .padding()
             }
         }
-        Section(header: Text("Music").font(Font.custom("DotGothic16-Regular", size: headerFontSize))) {
+        .foregroundColor(queenBlue)
+
+        Section(header: Text("Music").font(Font.custom("KronaOne-Regular", size: headerFontSize))) {
             Button {
                 game.toggleMusic()
                 if game.musicOn {
@@ -236,13 +247,13 @@ struct settingsView: View {
                 }
             } label: {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)                        .foregroundColor(palePink)
+                    RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)    .foregroundColor(lightCyan)
                     Image(systemName: game.musicOn ? "music.note" : "play.slash").imageScale(.large)
-                        .foregroundColor(.pink)
                 }
                 .padding()
             }
         }
+        .foregroundColor(queenBlue)
     }
 }
 
