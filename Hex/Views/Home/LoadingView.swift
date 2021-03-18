@@ -1,5 +1,5 @@
 //
-//  LoadingView.swift
+//  LoadingVIew.swift
 //  Hex
 //
 //  Created by Giang Nguyenn on 3/18/21.
@@ -8,15 +8,46 @@
 import SwiftUI
 
 struct LoadingView: View {
-    var game: OnlineGame
-    @AppStorage("logged") var logged = false
-    @AppStorage("email") var email = ""
-    var body: some View {
-        if game.ready {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    @State var game: OnlineGame
+    private let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
+    let buttonFontSize: CGFloat = 45
+    @State var welcomeView: Bool = false
+    private let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
 
+    
+    var body: some View {
+        if welcomeView {
+            WelcomeView()
         } else {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            GeometryReader { geometry in
+                Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-1)
+                Text("Back").font(Font.custom("PressStart2P-Regular", size: geometry.size.width / buttonFontSize))
+                    .foregroundColor(.black)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .onTapGesture {
+                        welcomeView = true
+                        playSound("MouseClick", type: "mp3", soundOn: game.soundOn)
+                    }
+                if game.ready {
+                    VStack {
+                        Text("Found you a worthy contender")
+                            .font(Font.custom("PressStart2P-Regular", size: geometry.size.width / buttonFontSize))
+                            .position(x: geometry.size.width / 2, y: geometry.size.height / 4)
+                        Image("notalkweangy")
+                            .scaleEffect( geometry.size.width / 4096)
+                            .position(x: geometry.size.width / 2, y: geometry.size.height / 2)                    }
+                } else {
+                    ZStack {
+                        Text("Looking for a worthy contender...")
+                            .font(Font.custom("PressStart2P-Regular", size: geometry.size.width / buttonFontSize))
+                            .position(x: geometry.size.width / 2, y: geometry.size.height / 4)
+                        Image("notalkmeangy")
+                            .scaleEffect( geometry.size.width / 4096)
+                            .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                    }
+                }
+            }
         }
     }
 }

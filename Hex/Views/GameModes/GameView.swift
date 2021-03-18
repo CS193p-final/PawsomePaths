@@ -10,21 +10,21 @@ import UIKit
 
 struct GameView: View {
     @State private var welcomeView = false
-    @State var showResult = false
+    @State private var showResult = false
     @State private var showSettings = false
     @ObservedObject var hexGame: GameMode
     @State var continueGame: Bool?
 
-    let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
-    let blue = Color(red:0.39, green:0.55, blue:0.894)
-    let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
-
-
-    let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
-    let buttonColor = Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1)
-    let buttonFontSize: CGFloat = 45
-    let gameTitle: CGFloat = 20
-    let playerTurnFontSize: CGFloat = 35
+    private let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
+    private let blue = Color(red:0.39, green:0.55, blue:0.894)
+    private let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
+    private let titleColor = Color(red: 0.82422, green: 0.37891, blue: 0.207, opacity: 1)
+    private let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
+    private let buttonColor = Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1)
+    
+    private let buttonFontSize: CGFloat = 45
+    private let gameTitle: CGFloat = 20
+    private let playerTurnFontSize: CGFloat = 35
     
     var body: some View {
         
@@ -69,7 +69,7 @@ struct GameView: View {
                     
                     Text("Hex Game")
                         .font(Font.custom("KronaOne-Regular", size: geometry.size.width / gameTitle))
-                        .foregroundColor(Color(red: 0.82422, green: 0.37891, blue: 0.207, opacity: 1))
+                        .foregroundColor(titleColor)
                     Text(hexGame.board.playerTurn == 1 ? "Player 1's turn" : "Player 2's turn").foregroundColor(hexGame.board.playerTurn == 1 ? red : blue)
                         .font(Font.custom("KronaOne-Regular", size: geometry.size.width / playerTurnFontSize))
                     .padding()
@@ -119,7 +119,7 @@ struct newGameButton: View {
     var game: GameMode
     let buttonFontSize: CGFloat
     var showResult: Bool
-    let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
+    private let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
     
     var body: some View {
         Button(action: {
@@ -145,14 +145,16 @@ struct newGameButton: View {
 
 struct resultReport: View {
     var game: GameMode
-    let resultFontSize: CGFloat = 30
     @State var soundOn: Bool
     var showResult: Bool
-    let buttonFontSize: CGFloat = 45
-    let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
-    var imageHeight: CGFloat = 450
-    var imageWidth: CGFloat = 300
     @Binding var welcomeView: Bool
+
+    private let buttonFontSize: CGFloat = 45
+    private let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
+    private let imageHeight: CGFloat = 450
+    private let imageWidth: CGFloat = 300
+    private let resultFontSize: CGFloat = 30
+
 
     var body: some View {
         GeometryReader { geometry in
@@ -198,7 +200,7 @@ struct settingsView: View {
     @State private var showAlert: Bool = false
     private let lightCyan: Color = Color(red: 0.8555, green: 0.984375, blue: 0.9961, opacity: 0.8)
     private let queenBlue = Color(red: 0.26953, green: 0.41, blue: 0.5625)
-    let headerFontSize: CGFloat = 15
+    private let headerFontSize: CGFloat = 15
 
     var body: some View {
         Section(header: Text("Board size").padding()) {

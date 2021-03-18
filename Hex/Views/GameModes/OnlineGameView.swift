@@ -110,7 +110,7 @@ struct OnlineGameView: View {
                 }
             }
             else {
-                LoadingView()
+                LoadingView(game: hexGame)
             }
         }
     }
