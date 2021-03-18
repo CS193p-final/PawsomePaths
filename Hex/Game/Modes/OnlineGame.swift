@@ -72,7 +72,31 @@ class OnlineGame: GameMode {
     
     // MARK: - Intent(s)
     override func play(cellId: Int) {
-        databaseRef.child("matches/\(matchID)/latest_move").setValue(cellId)
+        // only allow to play if current turn is for the local player
+        self.databaseRef.child("matches/\(matchID)").getData { (error, snapshot) in
+            if let error = error {
+                print("Error getting data \(error)")
+            }
+            else if snapshot.exists() {
+                let matchInfo = snapshot.value as! [String: Any]
+                if matchInfo["player_turn"] as! Int == self.localPlayer {
+                    self.databaseRef.child("matches/\(self.matchID)").runTransactionBlock { (data) -> TransactionResult in
+                        var match = data.value as! [String: Any]
+                        match["latest_move"] = cellId
+                        match["player_turn"] = 3 - self.localPlayer
+                        data.value = match
+                        return TransactionResult.success(withValue: data)
+                    }
+                }
+            }
+            else {
+                print("No data available")
+            }
+        }
+    }
+    
+    override func newGame(size: Int) {
+        ready = false
     }
     
     // MARK: - Helper functions
@@ -84,6 +108,12 @@ class OnlineGame: GameMode {
             if id >= 0 {
                 let move = BoardPosition(id: id, cols: self.board.size)
                 self.board.play(move: move)
+                
+                if self.board.winner != 0 {
+                    // notify that the game is over
+                    
+                }
+                
             }
         })
     }
@@ -97,11 +127,14 @@ class OnlineGame: GameMode {
             "player_count": 1,
             "board_size": board.size,
             "latest_move": -1,
-            "player_turn": 1
+            "player_turn": 1,
+            "is_done": 0
         ])
     }
     
     private func findMatch() {
+        // Ignore this warning since firebase event callbacks are always on main thread.
+        /// Publishing changes from background threads is not allowed; make sure to publish values from the main thread (via operators like receive(on:)) on model updates.
         self.databaseRef.child("matches").getData { (error, snapshot) in
             if let error = error {
                 print("Error getting data \(error)")
