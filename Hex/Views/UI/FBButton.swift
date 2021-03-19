@@ -11,6 +11,7 @@ import Firebase
 import FBSDKLoginKit
 
 struct FBButton: View {
+    @EnvironmentObject var viewRouter: ViewRouter
     @AppStorage("logged") var logged = false
     @AppStorage("email") var email = ""
     @AppStorage("firstName") var firstName = ""
@@ -24,6 +25,7 @@ struct FBButton: View {
                 loginManager.logOut()
                 email = ""
                 logged = false
+                viewRouter.currentScreen = .welcome
             }
             else {
                 loginManager.logIn(permissions: ["email"], from: nil) { (result, error) in
@@ -38,8 +40,6 @@ struct FBButton: View {
                                 print((error?.localizedDescription)!)
                                 return
                             }
-                            print("FB login success")
-                            logged = true
                         }
                     }
                     let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, picture, first_name"])
@@ -47,7 +47,6 @@ struct FBButton: View {
                         guard let profileData = res as? [String: Any] else { return }
                         email = profileData["email"] as! String
                         firstName = profileData["first_name"] as! String
-                        print(profileData)
                         // The url is nested 3 layers deep into the result so it's pretty messy
                         // profileData.picture.data.url
                         if let imageURL = ((profileData["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
@@ -57,6 +56,8 @@ struct FBButton: View {
                                 let avatar = UIImage(data: data)
                                 // save avatar to application sandbox
                                 avatar?.saveToDisk(fileName: "avatar")
+                                logged = true
+                                viewRouter.currentScreen = .welcome
                             } catch {
                                 print("Can't load image from path: \(imageURL)")
                             }
