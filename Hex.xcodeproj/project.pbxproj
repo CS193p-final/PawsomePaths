@@ -172,7 +172,7 @@
 		C699737A25D9F4DB00337F70 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		C699737C25D9F4DC00337F70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C699737F25D9F4DC00337F70 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		C699738125D9F4DC00337F70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C699738125D9F4DC00337F70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Hex/Info.plist; sourceTree = SOURCE_ROOT; };
 		C699738925D9F51C00337F70 /* PolygonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonShape.swift; sourceTree = "<group>"; };
 		C699738F25D9F96600337F70 /* HexGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexGrid.swift; sourceTree = "<group>"; };
 		C699739325D9FF2800337F70 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };

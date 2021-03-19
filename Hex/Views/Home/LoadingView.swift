@@ -40,14 +40,20 @@ struct LoadingView: View {
                         Image(uiImage: UIImage(fromDiskWithFileName: "avatar")!)
                     }
                 } else {
-                    ZStack {
-                        Text("Looking for a worthy contender...")
-                            .font(Font.custom("PressStart2P-Regular", size: geometry.size.width / buttonFontSize))
-                            .position(x: geometry.size.width / 2, y: geometry.size.height / 4)
-                        Image("notalkmeangy")
-                            .scaleEffect( geometry.size.width / 2048)
-                            .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                    let random = Bool.random()
+                    Text("Back").font(Font.custom("PressStart2P-Regular", size: geometry.size.width / buttonFontSize))
+                        .padding()
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                        .onTapGesture {
+                            welcomeView = true
+                            playSound("MouseClick", type: "mp3", soundOn: true)
+                        }
+                    VStack {
+                        Image(random ? "redwiz" : "bluewiz").spinning().scaleEffect(geometry.size.width / 1350)
+                        Text("Looking for a worthy contender...").font(Font.custom("PressStart2P-Regular", size: geometry.size.width / 40))
                     }
+                    .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                 }
             }
         }

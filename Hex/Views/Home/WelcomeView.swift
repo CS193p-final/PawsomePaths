@@ -25,9 +25,9 @@ struct WelcomeView: View {
     @AppStorage("firstName") var firstName = ""
     
     var body: some View {
-        ZStack {
-            Rectangle().foregroundColor(backgroundColor).zIndex(-1).ignoresSafeArea()
-            VStack {
+        GeometryReader { geometry in
+            ZStack {
+                Rectangle().foregroundColor(backgroundColor).zIndex(-1).ignoresSafeArea()
                 if (twoPlayerGameView) {
                     GameView(hexGame: TwoPlayersGame(name: "twoPlayer"), continueGame: continueTwoPlayerGame)
                 } else if (singlePlayerGameView) {
@@ -39,89 +39,91 @@ struct WelcomeView: View {
                     HowToPlayView(soundOn: true)
                 }
                 else {
-                    if logged {
-                        Text("Welcome \(firstName)")
-                        let avatar = UIImage(fromDiskWithFileName: "avatar")
-                        if avatar != nil {
-                            Image(uiImage: avatar!)
-                                .padding()
-                                .position(y: 0)
+                    VStack {
+                        if logged {
+                            VStack {
+                                Text("Welcome \(firstName)")
+                                let avatar = UIImage(fromDiskWithFileName: "avatar")
+                                if avatar != nil {
+                                    Image(uiImage: avatar!)
+                                }
+                            }
+                        } else {
+                            UserSection().frame(alignment: .top)
                         }
-                    } else {
-                        UserSection().frame(alignment: .top)
-                            .padding()
-                    }
-                    
-                    Button {
-                        playSound("MouseClick", type: "mp3", soundOn: true)
-                        showTwoPlayerActionSheet = true
-                    } label: {
-                        RoundedRectangle(cornerRadius: 10).opacity(0.3)
-                            .frame(width: 250, height: 75, alignment: .center)
-                            .overlay(Text("2 Players"))
-                            .font(Font.custom("KronaOne-Regular", size: 20))
-                            .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
-                    }
-                    .actionSheet(isPresented: $showTwoPlayerActionSheet) {
-                        ActionSheet(title: Text("Two Players Game"), buttons: [
-                            .default(Text("New Game")) {
-                                twoPlayerGameView = true
-                                continueTwoPlayerGame = false
-                            },
-                            .default(Text("Contiue")) {
-                                twoPlayerGameView = true
-                                continueTwoPlayerGame = true
-                            }
-                        ])
-                    }
-                    
-                    Button {
-                        playSound("MouseClick", type: "mp3", soundOn: true)
-                        showSingleActionSheet = true
-                    } label: {
-                        RoundedRectangle(cornerRadius: 10).opacity(0.3)
-                            .frame(width: 250, height: 75, alignment: .center)
-                            .overlay(Text("Single Player"))
-                            .font(Font.custom("KronaOne-Regular", size: 20))
-                            .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
-                    }
-                    .actionSheet(isPresented: $showSingleActionSheet) {
-                        ActionSheet(title: Text("Single Player Game"), buttons: [
-                            .default(Text("New Game")) {
-                                singlePlayerGameView = true
-                                continueSingleGame = false
-                            },
-                            .default(Text("Contiue")) {
-                                singlePlayerGameView = true
-                                continueSingleGame = true
-                            }
-                        ])
-                    }
-                    
-                    Button {
-                        playSound("MouseClick", type: "mp3", soundOn: true)
-                        onlineGameView = true
-                    } label: {
-                        RoundedRectangle(cornerRadius: 10).opacity(0.3)
-                            .frame(width: 250, height: 75, alignment: .center)
-                            .overlay(Text("Play Online"))
-                            .font(Font.custom("KronaOne-Regular", size: 20))
-                            .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
-                    }
+                        
+                        Button {
+                            playSound("MouseClick", type: "mp3", soundOn: true)
+                            showTwoPlayerActionSheet = true
+                        } label: {
+                            RoundedRectangle(cornerRadius: 10).opacity(0.3)
+                                .frame(width: 250, height: 75, alignment: .center)
+                                .overlay(Text("2 Players"))
+                                .font(Font.custom("KronaOne-Regular", size: 20))
+                                .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
+                        }
+                        .actionSheet(isPresented: $showTwoPlayerActionSheet) {
+                            ActionSheet(title: Text("Two Players Game"), buttons: [
+                                .default(Text("New Game")) {
+                                    twoPlayerGameView = true
+                                    continueTwoPlayerGame = false
+                                },
+                                .default(Text("Contiue")) {
+                                    twoPlayerGameView = true
+                                    continueTwoPlayerGame = true
+                                }
+                            ])
+                        }
+                        
+                        Button {
+                            playSound("MouseClick", type: "mp3", soundOn: true)
+                            showSingleActionSheet = true
+                        } label: {
+                            RoundedRectangle(cornerRadius: 10).opacity(0.3)
+                                .frame(width: 250, height: 75, alignment: .center)
+                                .overlay(Text("Single Player"))
+                                .font(Font.custom("KronaOne-Regular", size: 20))
+                                .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
+                        }
+                        .actionSheet(isPresented: $showSingleActionSheet) {
+                            ActionSheet(title: Text("Single Player Game"), buttons: [
+                                .default(Text("New Game")) {
+                                    singlePlayerGameView = true
+                                    continueSingleGame = false
+                                },
+                                .default(Text("Contiue")) {
+                                    singlePlayerGameView = true
+                                    continueSingleGame = true
+                                }
+                            ])
+                        }
+                        
+                        Button {
+                            playSound("MouseClick", type: "mp3", soundOn: true)
+                            onlineGameView = true
+                        } label: {
+                            RoundedRectangle(cornerRadius: 10).opacity(0.3)
+                                .frame(width: 250, height: 75, alignment: .center)
+                                .overlay(Text("Play Online"))
+                                .font(Font.custom("KronaOne-Regular", size: 20))
+                                .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
+                        }
 
-                    Button {
-                        playSound("MouseClick", type: "mp3", soundOn: true)
-                        howToPlayView = true
-                    } label: {
-                        RoundedRectangle(cornerRadius: 10).opacity(0.3)
+                        Button {
+                            playSound("MouseClick", type: "mp3", soundOn: true)
+                            howToPlayView = true
+                        } label: {
+                            RoundedRectangle(cornerRadius: 10).opacity(0.3)
+                                .frame(width: 250, height: 75, alignment: .center)
+                                .overlay(Text("How To Play"))
+                                .font(Font.custom("KronaOne-Regular", size: 20))
+                                .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
+                        }
+                        
+                        FBButton()
                             .frame(width: 250, height: 75, alignment: .center)
-                            .overlay(Text("How To Play"))
-                            .font(Font.custom("KronaOne-Regular", size: 20))
-                            .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
                     }
-                    
-                    FBButton()
-                        .frame(width: 250, height: 75, alignment: .center)
+                    .position(x: geometry.size.width / 2, y: geometry.size.height / 3)
                 }
             }
         }
