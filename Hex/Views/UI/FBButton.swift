@@ -14,7 +14,6 @@ struct FBButton: View {
     @AppStorage("logged") var logged = false
     @AppStorage("email") var email = ""
     @AppStorage("firstName") var firstName = ""
-    @State var avatar: UIImage? = nil
     @State var loginManager = LoginManager()
     
     private var fetchImageCancellable: AnyCancellable?
@@ -55,7 +54,7 @@ struct FBButton: View {
                             //Download image from imageURL
                             do {
                                 let data = try Data(contentsOf: URL(string: imageURL)!)
-                                avatar = UIImage(data: data)
+                                let avatar = UIImage(data: data)
                                 // save avatar to application sandbox
                                 avatar?.saveToDisk(fileName: "avatar")
                             } catch {

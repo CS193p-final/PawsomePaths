@@ -78,6 +78,8 @@
 		C6596A3325DB11F000A0F94B /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A3225DB11F000A0F94B /* Queue.swift */; };
 		C6596A3825DB1BA500A0F94B /* TwoPlayersGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A3725DB1BA500A0F94B /* TwoPlayersGame.swift */; };
 		C6596A4725DB40B400A0F94B /* MonteCarlo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A4625DB40B400A0F94B /* MonteCarlo.swift */; };
+		C696A51B2605319F0073D313 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696A51A2605319F0073D313 /* MainView.swift */; };
+		C696A51E260531EC0073D313 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696A51D260531EC0073D313 /* ViewRouter.swift */; };
 		C699737925D9F4DB00337F70 /* HexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699737825D9F4DB00337F70 /* HexApp.swift */; };
 		C699737B25D9F4DB00337F70 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699737A25D9F4DB00337F70 /* GameView.swift */; };
 		C699737D25D9F4DC00337F70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C699737C25D9F4DC00337F70 /* Assets.xcassets */; };
@@ -169,6 +171,8 @@
 		C6596A3225DB11F000A0F94B /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		C6596A3725DB1BA500A0F94B /* TwoPlayersGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoPlayersGame.swift; sourceTree = "<group>"; };
 		C6596A4625DB40B400A0F94B /* MonteCarlo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonteCarlo.swift; sourceTree = "<group>"; };
+		C696A51A2605319F0073D313 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		C696A51D260531EC0073D313 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 		C699737525D9F4DB00337F70 /* Hex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C699737825D9F4DB00337F70 /* HexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexApp.swift; sourceTree = "<group>"; };
 		C699737A25D9F4DB00337F70 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -421,6 +425,8 @@
 				C64CC85B26013F800044B780 /* Home */,
 				C10AA70025EA2C59006C7531 /* PopupView.swift */,
 				C69FD61E25F94F4B0077394D /* HowToPlayView.swift */,
+				C696A51A2605319F0073D313 /* MainView.swift */,
+				C696A51D260531EC0073D313 /* ViewRouter.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -614,6 +620,7 @@
 				C699737925D9F4DB00337F70 /* HexApp.swift in Sources */,
 				C6596A4725DB40B400A0F94B /* MonteCarlo.swift in Sources */,
 				C1CE2BB625E77B740012E731 /* ClassFireworkAnimator.swift in Sources */,
+				C696A51E260531EC0073D313 /* ViewRouter.swift in Sources */,
 				C6596A3325DB11F000A0F94B /* Queue.swift in Sources */,
 				C69FD61F25F94F4B0077394D /* HowToPlayView.swift in Sources */,
 				C6B09ADB25DEF36E00C96782 /* GameMode.swift in Sources */,
@@ -642,6 +649,7 @@
 				C6596A3825DB1BA500A0F94B /* TwoPlayersGame.swift in Sources */,
 				C1102DAA25E8A0180054C992 /* FireworkView.swift in Sources */,
 				C6227AD525F2B085008E301E /* Deque.swift in Sources */,
+				C696A51B2605319F0073D313 /* MainView.swift in Sources */,
 				C64D0D1D26028DA5001E6706 /* UIImage+Extension.swift in Sources */,
 				C64CC855260130D40044B780 /* OnlineGameView.swift in Sources */,
 				C699739025D9F96600337F70 /* HexGrid.swift in Sources */,
