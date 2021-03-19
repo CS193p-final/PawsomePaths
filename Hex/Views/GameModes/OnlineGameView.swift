@@ -52,18 +52,19 @@ struct OnlineGameView: View {
                                         playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
                                     }
                                 
-                                Image(systemName: "gearshape").imageScale(.large)          .foregroundColor(.white)
+                                Image(systemName: "gearshape").imageScale(.large).foregroundColor(.white)
                                     .onTapGesture {
                                         showSettings = true
                                         playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
                                     }
                                     .popover(isPresented: $showSettings) {
-                                        settingsView(game: hexGame)
+                                        onlineSettingsView(game: hexGame)
                                     }
                                     .padding()
                             }
                         }
                         .frame(width: geometry.size.width, height: geometry.size.width * 2 / gameTitle, alignment: .topLeading)
+                        .padding(.bottom)
                         
                         Text("Hex Game")
                             .font(Font.custom("KronaOne-Regular", size: geometry.size.width / gameTitle))
@@ -113,6 +114,47 @@ struct OnlineGameView: View {
                 LoadingView(game: hexGame)
             }
         }
+    }
+}
+
+struct onlineSettingsView: View {
+    @ObservedObject var game: GameMode
+    @State private var showAlert: Bool = false
+    private let lightCyan: Color = Color(red: 0.8555, green: 0.984375, blue: 0.9961, opacity: 0.8)
+    private let queenBlue = Color(red: 0.26953, green: 0.41, blue: 0.5625)
+    private let headerFontSize: CGFloat = 15
+
+    var body: some View {
+        Section(header: Text("Sound").font(Font.custom("KronaOne-Regular", size: headerFontSize))) {
+            Button {
+                game.toggleSound()
+            } label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center) .foregroundColor(lightCyan)
+                    Image(systemName: game.soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
+                }
+                .padding()
+            }
+        }
+        .foregroundColor(queenBlue)
+
+        Section(header: Text("Music").font(Font.custom("KronaOne-Regular", size: headerFontSize))) {
+            Button {
+                game.toggleMusic()
+                if game.musicOn {
+                    playMusic("musicBox", type: "mp3", musicOn: game.musicOn)
+                } else {
+                    stopMusic("musicBox", type: "mp3")
+                }
+            } label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)    .foregroundColor(lightCyan)
+                    Image(systemName: game.musicOn ? "music.note" : "play.slash").imageScale(.large)
+                }
+                .padding()
+            }
+        }
+        .foregroundColor(queenBlue)
     }
 }
 

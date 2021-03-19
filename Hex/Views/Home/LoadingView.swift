@@ -28,7 +28,7 @@ struct LoadingView: View {
                     .onTapGesture {
                         welcomeView = true
                         playSound("MouseClick", type: "mp3", soundOn: game.soundOn)
-                    }
+                }
                 if game.ready {
                     VStack {
                         Text("Found you a worthy contender")
@@ -36,7 +36,9 @@ struct LoadingView: View {
                             .position(x: geometry.size.width / 2, y: geometry.size.height / 4)
                         Image("notalkweangy")
                             .scaleEffect( geometry.size.width / 4096)
-                            .position(x: geometry.size.width / 2, y: geometry.size.height / 2)                    }
+                            .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                        Image(uiImage: UIImage(fromDiskWithFileName: "avatar")!)
+                    }
                 } else {
                     ZStack {
                         Text("Looking for a worthy contender...")

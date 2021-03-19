@@ -66,6 +66,7 @@ struct GameView: View {
                         }
                     }
                     .frame(width: geometry.size.width, height: geometry.size.width * 2 / gameTitle, alignment: .topLeading)
+                    .padding(.bottom)
                     
                     Text("Hex Game")
                         .font(Font.custom("KronaOne-Regular", size: geometry.size.width / gameTitle))
