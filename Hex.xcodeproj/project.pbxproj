@@ -69,6 +69,7 @@
 		C600184E25E8AE1E00DB9CDC /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C600184D25E8AE1E00DB9CDC /* Int+Extension.swift */; };
 		C6029D3826014A04005FBD3B /* FBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6029D3726014A04005FBD3B /* FBButton.swift */; };
 		C6227AD525F2B085008E301E /* Deque.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6227AD425F2B085008E301E /* Deque.swift */; };
+		C627D3D026051DC400EA0DD5 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C627D3CF26051DC400EA0DD5 /* CountdownTimer.swift */; };
 		C644BB1525FEA25A008A7B64 /* OnlineGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644BB1425FEA25A008A7B64 /* OnlineGame.swift */; };
 		C644BB1825FEA90B008A7B64 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C644BB1725FEA90B008A7B64 /* GoogleService-Info.plist */; };
 		C64CC855260130D40044B780 /* OnlineGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64CC854260130D40044B780 /* OnlineGameView.swift */; };
@@ -159,6 +160,7 @@
 		C600184D25E8AE1E00DB9CDC /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		C6029D3726014A04005FBD3B /* FBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBButton.swift; sourceTree = "<group>"; };
 		C6227AD425F2B085008E301E /* Deque.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deque.swift; sourceTree = "<group>"; };
+		C627D3CF26051DC400EA0DD5 /* CountdownTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
 		C644BB1425FEA25A008A7B64 /* OnlineGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineGame.swift; sourceTree = "<group>"; };
 		C644BB1725FEA90B008A7B64 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C64CC854260130D40044B780 /* OnlineGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineGameView.swift; sourceTree = "<group>"; };
@@ -268,13 +270,21 @@
 			path = AppIcon.appiconset;
 			sourceTree = "<group>";
 		};
+		C627D3CE26051CDD00EA0DD5 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C627D3CF26051DC400EA0DD5 /* CountdownTimer.swift */,
+				C6029D3726014A04005FBD3B /* FBButton.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		C64CC85B26013F800044B780 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				C1102C4126041FEB00C128B2 /* LoadingView.swift */,
 				C1102C3426041E5100C128B2 /* LaunchView.swift */,
 				C101D1E325DC5789000E86E0 /* WelcomeView.swift */,
-				C6029D3726014A04005FBD3B /* FBButton.swift */,
 				C6C7C5572602F216000F77CC /* FriendsView.swift */,
 			);
 			path = Home;
@@ -403,6 +413,7 @@
 		C699739225D9FEF300337F70 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C627D3CE26051CDD00EA0DD5 /* UI */,
 				C699738825D9F4EE00337F70 /* Shapes */,
 				C64CC85E2601404C0044B780 /* Animation */,
 				C64CC85D26013FE10044B780 /* GameModes */,
@@ -622,6 +633,7 @@
 				C6B09AD425DE126000C96782 /* DumpAI.swift in Sources */,
 				C101D1E425DC5789000E86E0 /* WelcomeView.swift in Sources */,
 				C11545B625E7578000E8B591 /* ClassicFirework.swift in Sources */,
+				C627D3D026051DC400EA0DD5 /* CountdownTimer.swift in Sources */,
 				C18DD74A25DEFDD600A29151 /* RedBorder.swift in Sources */,
 				C600184825E895BE00DB9CDC /* Minimax.swift in Sources */,
 				C699738A25D9F51C00337F70 /* PolygonShape.swift in Sources */,

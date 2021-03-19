@@ -1,4 +1,4 @@
-	//
+//
 //  OnlineGame.swift
 //  Hex
 //
@@ -22,7 +22,7 @@ class OnlineGame: GameMode {
         localPlayer = Int.random(in: 1...2)
         super.init()
         
-        
+
         self.findMatch()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -79,6 +79,11 @@ class OnlineGame: GameMode {
             }
             else if snapshot.exists() {
                 let matchInfo = snapshot.value as! [String: Any]
+                // if the match is done
+                if matchInfo["is_done"] as! Int == 1 {
+                    
+                }
+                
                 if matchInfo["player_turn"] as! Int == self.localPlayer {
                     self.databaseRef.child("matches/\(self.matchID)").runTransactionBlock { (data) -> TransactionResult in
                         var match = data.value as! [String: Any]
@@ -128,7 +133,8 @@ class OnlineGame: GameMode {
             "board_size": board.size,
             "latest_move": -1,
             "player_turn": 1,
-            "is_done": 0
+            "timeout": 0,
+            "is_done": true
         ])
     }
     
@@ -165,7 +171,7 @@ class OnlineGame: GameMode {
     private func joinMatch() {
         localPlayer = 2
         databaseRef.child("matches").child(matchID).child("player_count").setValue(2)
-    }  
+    }
 }
 
 struct OnlineMatch: Codable {
