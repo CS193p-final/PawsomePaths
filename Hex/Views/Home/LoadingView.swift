@@ -10,7 +10,7 @@ import SwiftUI
 struct LoadingView: View {
     @State var game: OnlineGame
     private let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
-    let buttonFontSize: CGFloat = 45
+    let buttonFontSize: CGFloat = 40
     @State var welcomeView: Bool = false
     private let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
 
@@ -35,7 +35,7 @@ struct LoadingView: View {
                             .font(Font.custom("PressStart2P-Regular", size: geometry.size.width / buttonFontSize))
                             .position(x: geometry.size.width / 2, y: geometry.size.height / 4)
                         Image("notalkweangy")
-                            .scaleEffect( geometry.size.width / 4096)
+                            .scaleEffect( geometry.size.width / 2048)
                             .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                         Image(uiImage: UIImage(fromDiskWithFileName: "avatar")!)
                     }
@@ -45,7 +45,7 @@ struct LoadingView: View {
                             .font(Font.custom("PressStart2P-Regular", size: geometry.size.width / buttonFontSize))
                             .position(x: geometry.size.width / 2, y: geometry.size.height / 4)
                         Image("notalkmeangy")
-                            .scaleEffect( geometry.size.width / 4096)
+                            .scaleEffect( geometry.size.width / 2048)
                             .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                     }
                 }

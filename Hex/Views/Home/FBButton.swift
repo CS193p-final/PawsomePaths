@@ -13,6 +13,7 @@ import FBSDKLoginKit
 struct FBButton: View {
     @AppStorage("logged") var logged = false
     @AppStorage("email") var email = ""
+    @AppStorage("firstName") var firstName = ""
     @State var avatar: UIImage? = nil
     @State var loginManager = LoginManager()
     
@@ -42,11 +43,11 @@ struct FBButton: View {
                             logged = true
                         }
                     }
-                    let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, picture"])
+                    let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, picture, first_name"])
                     request.start { (_, res, _) in
                         guard let profileData = res as? [String: Any] else { return }
                         email = profileData["email"] as! String
-                        
+                        firstName = profileData["first_name"] as! String
                         print(profileData)
                         // The url is nested 3 layers deep into the result so it's pretty messy
                         // profileData.picture.data.url
