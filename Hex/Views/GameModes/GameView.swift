@@ -67,7 +67,7 @@ struct GameView: View {
                 Text("Hex Game")
                     .font(Font.custom("KronaOne-Regular", size: geometry.size.width / gameTitle))
                     .foregroundColor(titleColor)
-                Text(hexGame.board.playerTurn == 1 ? "Player 1's turn" : "Player 2's turn").foregroundColor(hexGame.board.playerTurn == 1 ? red : blue)
+                Text(hexGame.playerTurn).foregroundColor(hexGame.board.playerTurn == 1 ? red : blue)
                     .font(Font.custom("KronaOne-Regular", size: geometry.size.width / playerTurnFontSize))
                 .padding()
 

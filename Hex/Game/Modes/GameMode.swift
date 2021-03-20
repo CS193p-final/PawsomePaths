@@ -38,7 +38,7 @@ class GameMode: ObservableObject {
         return cells
     }
     
-    var playerTurn: String { "Player \(board.playerTurn)" }
+    var playerTurn: String { "Player \(board.playerTurn)'s turn" }
     
     var result: String {
         switch board.checkResult() {
