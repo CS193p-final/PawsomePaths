@@ -23,9 +23,9 @@ struct GameView: View {
     private let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     private let buttonColor = Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1)
     
-    private let buttonFontSize: CGFloat = 45
-    private let gameTitle: CGFloat = 20
-    private let playerTurnFontSize: CGFloat = 35
+    private let buttonFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 30
+    private let gameTitle: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 20 : 10
+    private let playerTurnFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 50 : 25
     
     var body: some View {
         GeometryReader { geometry in
@@ -33,6 +33,7 @@ struct GameView: View {
                 .onAppear{
                     playMusic("musicBox", type: "mp3", musicOn: hexGame.musicOn)
                     hexGame.board = (continueGame != nil && continueGame == true) ? hexGame.board : GameBoard(size: hexGame.board.size, musicOn: hexGame.board.musicOn, soundOn: hexGame.board.soundOn)
+                    showResult = false
                 }
                 .onDisappear {
                     stopMusic("musicBox", type: "mp3")
@@ -61,7 +62,7 @@ struct GameView: View {
                             .padding()
                     }
                 }
-                .frame(width: geometry.size.width, height: geometry.size.width * 2 / gameTitle, alignment: .topLeading)
+                .frame(width: geometry.size.width, height: geometry.size.width / gameTitle, alignment: .topLeading)
                 .padding(.bottom)
                 
                 Text("Hex Game")
@@ -69,7 +70,6 @@ struct GameView: View {
                     .foregroundColor(titleColor)
                 Text(hexGame.playerTurn).foregroundColor(hexGame.board.playerTurn == 1 ? red : blue)
                     .font(Font.custom("KronaOne-Regular", size: geometry.size.width / playerTurnFontSize))
-                .padding()
 
                     ZStack {
                         if (showResult == true && hexGame.result != "You lose" ) {
@@ -145,11 +145,12 @@ struct resultReport: View {
     @State var soundOn: Bool
     var showResult: Bool
 
-    private let buttonFontSize: CGFloat = 45
+    private let buttonFontSize: CGFloat = 30
+    private let resultFontSize: CGFloat = 20
+
     private let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
     private let imageHeight: CGFloat = 450
     private let imageWidth: CGFloat = 300
-    private let resultFontSize: CGFloat = 30
 
 
     var body: some View {
@@ -186,7 +187,8 @@ struct resultReport: View {
             }
             .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
             .background(Image(game.result == "You lose" ? "losing" : "background"))
-            .scaleEffect(geometry.size.width / (2 * imageWidth))
+            .scaleEffect(geometry.size.width / imageHeight )
+            .opacity(showResult ? 1 : 0)
         }
     }
 }

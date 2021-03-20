@@ -21,9 +21,9 @@ struct OnlineGameView: View {
 
     let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     let buttonColor = Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1)
-    let buttonFontSize: CGFloat = 45
-    let gameTitle: CGFloat = 20
-    let playerTurnFontSize: CGFloat = 35
+    private let buttonFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 30
+    private let gameTitle: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 20 : 10
+    private let playerTurnFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 50 : 25
     
     var body: some View {
         let board = hexGame.board
