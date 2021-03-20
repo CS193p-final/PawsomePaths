@@ -33,6 +33,9 @@ class OnlineGame: GameMode {
                     return
                 }
                 self.databaseRef.child("matches").child(self.matchID).observe(DataEventType.value) { (snapshot) in
+                    if !snapshot.exists() {
+                        return
+                    }
                     let matchInfo = snapshot.value as! [String: Any]
                     if matchInfo["player_count"] as! Int == 2 {
                         self.setupMatch()
@@ -42,10 +45,6 @@ class OnlineGame: GameMode {
                 }
             }
         }
-    }
-    
-    deinit {
-        databaseRef.removeObserver(withHandle: listener)
     }
     
     override var playerTurn: String {
@@ -108,6 +107,9 @@ class OnlineGame: GameMode {
     private func setupMatch() {
         listener = databaseRef.child("matches").child(matchID).observe(.value, with: { snapshot in
             print("someone update the game: \(snapshot.value!)")
+            if !snapshot.exists() {
+                return;
+            }
             let info = snapshot.value! as! [String: Any]
             let id = info["latest_move"] as! Int
             if id >= 0 {
@@ -171,6 +173,12 @@ class OnlineGame: GameMode {
     private func joinMatch() {
         localPlayer = 2
         databaseRef.child("matches").child(matchID).child("player_count").setValue(2)
+    }
+    
+    func exitMatch() {
+        print("Exiting match ... ")
+        databaseRef.removeObserver(withHandle: listener)
+        databaseRef.child("matches/\(matchID)").removeValue()
     }
 }
 

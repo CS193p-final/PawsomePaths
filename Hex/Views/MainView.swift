@@ -19,7 +19,8 @@ struct MainView: View {
         case .twoPlayersGame(let continueGame):
             GameView(hexGame: TwoPlayersGame(name: "twoPlayer"), continueGame: continueGame)
         case .onlineGame:
-            OnlineGameView(hexGame: OnlineGame())
+            let onlineGame: OnlineGame? = OnlineGame()
+            OnlineGameView(hexGame: onlineGame!)
         case Screen.howToPlay:
             HowToPlayView(soundOn: true)
         }
