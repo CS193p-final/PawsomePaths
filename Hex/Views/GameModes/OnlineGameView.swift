@@ -18,9 +18,10 @@ struct OnlineGameView: View {
     let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
     let blue = Color(red:0.39, green:0.55, blue:0.894)
     let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
-
+    private let titleColor = Color(red: 0.82422, green: 0.37891, blue: 0.207, opacity: 1)
     let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     let buttonColor = Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1)
+    
     private let buttonFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 30
     private let gameTitle: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 20 : 10
     private let playerTurnFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 50 : 25
@@ -33,6 +34,7 @@ struct OnlineGameView: View {
                 Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-2)
                     .onAppear{
                         playMusic("musicBox", type: "mp3", musicOn: hexGame.musicOn)
+                        showResult = false
                     }
                     .onDisappear {
                         stopMusic("musicBox", type: "mp3")
@@ -62,12 +64,12 @@ struct OnlineGameView: View {
                                 .padding()
                         }
                     }
-                    .frame(width: geometry.size.width, height: geometry.size.width * 2 / gameTitle, alignment: .topLeading)
+                    .frame(width: geometry.size.width, height: geometry.size.width / gameTitle, alignment: .topLeading)
                     .padding(.bottom)
                     
                     Text("Hex Game")
                         .font(Font.custom("KronaOne-Regular", size: geometry.size.width / gameTitle))
-                        .foregroundColor(Color(red: 0.82422, green: 0.37891, blue: 0.207, opacity: 1))
+                        .foregroundColor(titleColor)
                     Text(board.playerTurn == hexGame.localPlayer ? "Your turn" : "Opponent's turn").foregroundColor(board.playerTurn == 1 ? red : blue)
                         .font(Font.custom("KronaOne-Regular", size: geometry.size.width / playerTurnFontSize))
                     .padding()
