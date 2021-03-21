@@ -18,6 +18,10 @@
 		C11545B325E74E1C00E8B591 /* Firework.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11545B225E74E1C00E8B591 /* Firework.swift */; };
 		C11545B625E7578000E8B591 /* ClassicFirework.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11545B525E7578000E8B591 /* ClassicFirework.swift */; };
 		C131A08525EF47A50060193A /* KronaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C131A08425EF47A50060193A /* KronaOne-Regular.ttf */; };
+		C136487026072F4000BDC73F /* ModalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C136486F26072F4000BDC73F /* ModalState.swift */; };
+		C13648732607310700BDC73F /* ModalAnchorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13648722607310700BDC73F /* ModalAnchorView.swift */; };
+		C13648762607316800BDC73F /* ModalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13648752607316800BDC73F /* ModalManager.swift */; };
+		C13648792607325300BDC73F /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13648782607325300BDC73F /* ModalView.swift */; };
 		C13B9ED4260283DE00843545 /* PressStart2P-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C13B9ED3260283DE00843545 /* PressStart2P-Regular.ttf */; };
 		C16DA15B25FC65620059C426 /* 88.png in Resources */ = {isa = PBXBuildFile; fileRef = C16DA13B25FC65620059C426 /* 88.png */; };
 		C16DA15C25FC65620059C426 /* 1024.png in Resources */ = {isa = PBXBuildFile; fileRef = C16DA13C25FC65620059C426 /* 1024.png */; };
@@ -111,6 +115,10 @@
 		C11545B225E74E1C00E8B591 /* Firework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firework.swift; sourceTree = "<group>"; };
 		C11545B525E7578000E8B591 /* ClassicFirework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicFirework.swift; sourceTree = "<group>"; };
 		C131A08425EF47A50060193A /* KronaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KronaOne-Regular.ttf"; sourceTree = "<group>"; };
+		C136486F26072F4000BDC73F /* ModalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalState.swift; sourceTree = "<group>"; };
+		C13648722607310700BDC73F /* ModalAnchorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalAnchorView.swift; sourceTree = "<group>"; };
+		C13648752607316800BDC73F /* ModalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalManager.swift; sourceTree = "<group>"; };
+		C13648782607325300BDC73F /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
 		C13B9ED3260283DE00843545 /* PressStart2P-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PressStart2P-Regular.ttf"; sourceTree = "<group>"; };
 		C16DA13B25FC65620059C426 /* 88.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 88.png; sourceTree = "<group>"; };
 		C16DA13C25FC65620059C426 /* 1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1024.png; sourceTree = "<group>"; };
@@ -427,6 +435,10 @@
 				C69FD61E25F94F4B0077394D /* HowToPlayView.swift */,
 				C696A51A2605319F0073D313 /* MainView.swift */,
 				C696A51D260531EC0073D313 /* ViewRouter.swift */,
+				C136486F26072F4000BDC73F /* ModalState.swift */,
+				C13648722607310700BDC73F /* ModalAnchorView.swift */,
+				C13648752607316800BDC73F /* ModalManager.swift */,
+				C13648782607325300BDC73F /* ModalView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -621,6 +633,7 @@
 				C6596A4725DB40B400A0F94B /* MonteCarlo.swift in Sources */,
 				C1CE2BB625E77B740012E731 /* ClassFireworkAnimator.swift in Sources */,
 				C696A51E260531EC0073D313 /* ViewRouter.swift in Sources */,
+				C13648732607310700BDC73F /* ModalAnchorView.swift in Sources */,
 				C6596A3325DB11F000A0F94B /* Queue.swift in Sources */,
 				C69FD61F25F94F4B0077394D /* HowToPlayView.swift in Sources */,
 				C6B09ADB25DEF36E00C96782 /* GameMode.swift in Sources */,
@@ -634,10 +647,13 @@
 				C1CE2BBC25E792BE0012E731 /* CGPoint+Extensions.swift in Sources */,
 				C1000AA226019F06009A1B80 /* Spinning.swift in Sources */,
 				C6029D3826014A04005FBD3B /* FBButton.swift in Sources */,
+				C136487026072F4000BDC73F /* ModalState.swift in Sources */,
 				C18DD74E25DF60BE00A29151 /* BlueBorder.swift in Sources */,
 				C11545AC25E7478100E8B591 /* SparkTractory.swift in Sources */,
 				C1D1CFE725DB6CBE00A6EAAE /* Array+Identifiable.swift in Sources */,
+				C13648792607325300BDC73F /* ModalView.swift in Sources */,
 				C6B09AD425DE126000C96782 /* DumpAI.swift in Sources */,
+				C13648762607316800BDC73F /* ModalManager.swift in Sources */,
 				C101D1E425DC5789000E86E0 /* WelcomeView.swift in Sources */,
 				C11545B625E7578000E8B591 /* ClassicFirework.swift in Sources */,
 				C627D3D026051DC400EA0DD5 /* CountdownTimer.swift in Sources */,

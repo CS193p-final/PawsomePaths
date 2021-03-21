@@ -120,8 +120,3 @@ struct UserSection: View {
             .frame(width: 100, height: 100, alignment: .topLeading)
     }
 }
-
-//struct activitySheet: View {
-//    @State var isPresented: Bool
-//
-//}

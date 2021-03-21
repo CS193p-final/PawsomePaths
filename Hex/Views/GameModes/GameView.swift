@@ -10,11 +10,14 @@ import UIKit
 
 struct GameView: View {
     @EnvironmentObject var viewRouter: ViewRouter
-    
+    var modalManager = ModalManager()
+
     @State private var showResult = false
-    @State private var showSettings = false
+    @State private var showSettingsForPhone = false
+    @State private var showSettingsForPad = false
     @ObservedObject var hexGame: GameMode
     @State var continueGame: Bool?
+    var isIpad = UIDevice.current.userInterfaceIdiom == .pad
 
     private let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
     private let blue = Color(red:0.39, green:0.55, blue:0.894)
@@ -23,11 +26,13 @@ struct GameView: View {
     private let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     private let buttonColor = Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1)
     
-    private let buttonFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 30
-    private let gameTitle: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 20 : 10
-    private let playerTurnFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 50 : 25
+
     
     var body: some View {
+        let buttonFontSize: CGFloat = isIpad ? 60 : 30
+        let gameTitle: CGFloat = isIpad ? 20 : 10
+        let playerTurnFontSize: CGFloat = isIpad ? 50 : 25
+        
         GeometryReader { geometry in
             Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-2)
                 .onAppear{
@@ -50,13 +55,27 @@ struct GameView: View {
                                 playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
                                 viewRouter.currentScreen = .welcome
                             }
-                        
                         Image(systemName: "gearshape").imageScale(.large) .foregroundColor(.white)
                             .onTapGesture {
-                                showSettings = true
+                                if !isIpad {
+                                    if modalManager.modal.position == .closed {
+                                        showSettingsForPhone = true
+                                        self.modalManager.openModal()
+                                    } else {
+                                        showSettingsForPhone = false
+                                        self.modalManager.closeModal()
+                                    }
+                                } else {
+                                    showSettingsForPad = !showSettingsForPad
+                                }
                                 playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
                             }
-                            .popover(isPresented: $showSettings) {
+                            .onAppear {
+                                self.modalManager.newModal(position: .closed) {
+                                    settingsView(game: hexGame)
+                                }
+                            }
+                            .popover(isPresented: $showSettingsForPad) {
                                 settingsView(game: hexGame)
                             }
                             .padding()
@@ -101,10 +120,12 @@ struct GameView: View {
                                 resultReport(game: hexGame, soundOn: hexGame.soundOn, showResult: showResult)
                             }
                         }
+                        ModalAnchorView().environmentObject(modalManager)
                     }
                 newGameButton(game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
                 .foregroundColor(!showResult ? .blue : .gray)
                 .padding()
+                .opacity(showSettingsForPhone ? 0 : 1)
             }
         }
     }
@@ -200,62 +221,63 @@ struct settingsView: View {
     private let lightCyan: Color = Color(red: 0.8555, green: 0.984375, blue: 0.9961, opacity: 0.8)
     private let queenBlue = Color(red: 0.26953, green: 0.41, blue: 0.5625)
     private let headerFontSize: CGFloat = 15
+    @EnvironmentObject var modalManager: ModalManager
 
     var body: some View {
-        Section(header: Text("Board size").padding()) {
-            Stepper(
-                onIncrement: {
-                    game.incrementSize()
-                    if game.board.size == 11 {
-                        showAlert = true
+        VStack {
+            Section(header: Text("Board size").padding()) {
+                Stepper(
+                    onIncrement: {
+                        game.incrementSize()
+                        if game.board.size == 11 {
+                            showAlert = true
+                        }
+                    },
+                    onDecrement: {
+                        game.decrementSize()
+                        if game.board.size == 3 {
+                            showAlert = true
+                        }
+                    },
+                    label: {
+                        Text("\(game.board.size)")
+                    })
+                    .alert(isPresented: $showAlert) { () -> Alert in
+                        Alert(title: Text("Invalid board size"), message: Text("Board size cannot be less than 3x3 or greater than 11x11"), dismissButton: Alert.Button.cancel())
                     }
-                },
-                onDecrement: {
-                    game.decrementSize()
-                    if game.board.size == 3 {
-                        showAlert = true
+            }
+            HStack {
+                Section(header: Text("Sound").font(Font.custom("KronaOne-Regular", size: headerFontSize))) {
+                    Button {
+                        game.toggleSound()
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center) .foregroundColor(lightCyan)
+                            Image(systemName: game.soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
+                        }
                     }
-                },
-                label: {
-                    Text("\(game.board.size)")
-                })
-                .alert(isPresented: $showAlert) { () -> Alert in
-                    Alert(title: Text("Invalid board size"), message: Text("Board size cannot be less than 3x3 or greater than 11x11"), dismissButton: Alert.Button.cancel())
                 }
-                .padding()
+
+                Section(header: Text("Music").font(Font.custom("KronaOne-Regular", size: headerFontSize))) {
+                    Button {
+                        game.toggleMusic()
+                        if game.musicOn {
+                            playMusic("musicBox", type: "mp3", musicOn: game.musicOn)
+                        } else {
+                            stopMusic("musicBox", type: "mp3")
+                        }
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)
+                                .foregroundColor(lightCyan)
+                            Image(systemName: game.musicOn ? "music.note" : "play.slash").imageScale(.large)
+                        }
+                    }
+                }
+            }
         }
+        .padding()
         .foregroundColor(queenBlue)
         .font(Font.custom("KronaOne-Regular", size: headerFontSize))
-        
-        Section(header: Text("Sound").font(Font.custom("KronaOne-Regular", size: headerFontSize))) {
-            Button {
-                game.toggleSound()
-            } label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center) .foregroundColor(lightCyan)
-                    Image(systemName: game.soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
-                }
-                .padding()
-            }
-        }
-        .foregroundColor(queenBlue)
-
-        Section(header: Text("Music").font(Font.custom("KronaOne-Regular", size: headerFontSize))) {
-            Button {
-                game.toggleMusic()
-                if game.musicOn {
-                    playMusic("musicBox", type: "mp3", musicOn: game.musicOn)
-                } else {
-                    stopMusic("musicBox", type: "mp3")
-                }
-            } label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)    .foregroundColor(lightCyan)
-                    Image(systemName: game.musicOn ? "music.note" : "play.slash").imageScale(.large)
-                }
-                .padding()
-            }
-        }
-        .foregroundColor(queenBlue)
     }
 }
