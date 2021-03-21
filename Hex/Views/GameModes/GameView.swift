@@ -61,9 +61,11 @@ struct GameView: View {
                                     if modalManager.modal.position == .closed {
                                         showSettingsForPhone = true
                                         self.modalManager.openModal()
+                                        print("\(showSettingsForPhone) + \(modalManager.modal.position)")
                                     } else {
                                         showSettingsForPhone = false
                                         self.modalManager.closeModal()
+                                        print("\(showSettingsForPhone) + \(modalManager.modal.position)")
                                     }
                                 } else {
                                     showSettingsForPad = !showSettingsForPad
@@ -125,7 +127,7 @@ struct GameView: View {
                 newGameButton(game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
                 .foregroundColor(!showResult ? .blue : .gray)
                 .padding()
-                .opacity(showSettingsForPhone ? 0 : 1)
+                .zIndex(-1)
             }
         }
     }

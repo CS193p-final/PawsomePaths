@@ -105,9 +105,9 @@ struct WelcomeView: View {
                     
                     FBButton()
                         .frame(width: 250, height: 75, alignment: .center)
+                    
                 }
                 .position(x: geometry.size.width / 2, y: geometry.size.height / 3)
-            
             }
         }
     }
