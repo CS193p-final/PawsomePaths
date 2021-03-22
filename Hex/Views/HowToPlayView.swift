@@ -20,8 +20,8 @@ struct HowToPlayView: View {
     private let vPadding: CGFloat = 5
     private let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
     private let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
-    private let redExampleImages = ["redwin1.1", "redwin1.2", "itachicat"]
-    private let blueExampleImages = ["bluewin1", "bluewin2", "bluewin3", "itachicat"]
+    private let redExampleImages = ["redwin1.1", "redwin1.2", "redwin1.3", "itachicat"]
+    private let blueExampleImages = ["bluewin1", "bluewin2", "bluewin3", "bluewin4", "itachicat"]
     @State private var currentRedIndex = 0
     @State private var currentBlueIndex = 0
     
@@ -56,12 +56,24 @@ struct HowToPlayView: View {
 
                         Image(redExampleImages[currentRedIndex]).scaleEffect(geometry.size.width / 1712 ).frame(width: geometry.size.width, height: geometry.size.width)
                         
-                        Image(systemName: "arrow.right.circle").imageScale(.large)
-                            .foregroundColor(red).onTapGesture {
-                                tempRedIndex += 1
-                                currentRedIndex = tempRedIndex % 3
+                        HStack {
+                            Image(systemName: "arrow.left.circle").imageScale(.large)
+                                .foregroundColor(red).onTapGesture {
+                                    if currentRedIndex == 0 {
+                                        currentRedIndex = 3
+                                        tempRedIndex = 3
+                                    } else {
+                                        tempRedIndex -= 1
+                                        currentRedIndex = tempRedIndex % 5
+                                    }
+                            }
+                            Image(systemName: "arrow.right.circle").imageScale(.large)
+                                .foregroundColor(red).onTapGesture {
+                                    tempRedIndex += 1
+                                    currentRedIndex = tempRedIndex % 4
+                            }
                         }
-                        
+
                         Text("Connect left and right side of the board to win")
                             .font(Font.custom("KronaOne-Regular", size: geometry.size.width / playerTurnFontSize))
                             .foregroundColor(blue)
@@ -69,9 +81,23 @@ struct HowToPlayView: View {
                             .frame(maxWidth: .infinity, minHeight: geometry.size.width / playerTurnFontSize, alignment: .leading)
                         
                         Image(blueExampleImages[currentBlueIndex]).scaleEffect(geometry.size.width / 1712 ).frame(width: geometry.size.width, height: geometry.size.width)
-                        Image(systemName: "arrow.right.circle").imageScale(.large).foregroundColor(blue).onTapGesture {
-                            tempBlueIndex += 1
-                            currentBlueIndex = tempBlueIndex % 4
+                        
+                        HStack {
+                            Image(systemName: "arrow.left.circle").imageScale(.large).foregroundColor(blue).onTapGesture {
+                                if currentBlueIndex == 0 {
+                                    currentBlueIndex = 4
+                                    tempBlueIndex = 4
+                                } else {
+                                    tempBlueIndex -= 1
+                                    currentBlueIndex = tempBlueIndex % 5
+                                }
+                            }
+
+                            Image(systemName: "arrow.right.circle").imageScale(.large).foregroundColor(blue).onTapGesture {
+                                tempBlueIndex += 1
+                                currentBlueIndex = tempBlueIndex % 5
+                            }
+
                         }
                     }
 
