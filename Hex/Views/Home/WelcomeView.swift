@@ -20,23 +20,28 @@ struct WelcomeView: View {
     @AppStorage("firstName") var firstName = ""
     
     private let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
+    private var widthRatio = CGFloat(UIDevice.current.userInterfaceIdiom == .pad ? 1/2 : 1)
+    private var heightRatio = CGFloat(1/8)
+    private var buttonFontSizeRatio = CGFloat(1/30)
     
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 Rectangle().foregroundColor(backgroundColor).zIndex(-1).ignoresSafeArea()
                 VStack {
-                    Text(email)
+                    //Text(email)
                     if logged {
                         VStack {
                             Text("Welcome \(firstName)")
                             let avatar = UIImage(fromDiskWithFileName: "avatar")
                             if avatar != nil {
-                                Image(uiImage: avatar!)
+                                Image(uiImage: avatar!).clipShape(Circle())
                             }
                         }
                     } else {
-                        UserSection().frame(alignment: .top)
+                        Text("Welcome guest")
+                        UserSection()
+                            .frame(width: 80, height: 80)
                     }
                     
                     Button {
@@ -105,9 +110,7 @@ struct WelcomeView: View {
                     
                     FBButton()
                         .frame(width: 250, height: 75, alignment: .center)
-                    
                 }
-                .position(x: geometry.size.width / 2, y: geometry.size.height / 3)
             }
         }
     }
@@ -116,7 +119,10 @@ struct WelcomeView: View {
 
 struct UserSection: View {
     var body: some View {
-        Image(systemName: "person.circle.fill").imageScale(.large)
-            .frame(width: 100, height: 100, alignment: .topLeading)
+        Image("guestava")
+            .scaleEffect(90/673)
+            .onTapGesture {
+                print("guestava")
+            }
     }
 }

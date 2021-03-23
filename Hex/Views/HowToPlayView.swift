@@ -80,7 +80,7 @@ struct HowToPlayView: View {
                             .padding(vPadding)
                             .frame(maxWidth: .infinity, minHeight: geometry.size.width / playerTurnFontSize, alignment: .leading)
                         
-                        Image(blueExampleImages[currentBlueIndex]).scaleEffect(geometry.size.width / 1712 ).frame(width: geometry.size.width, height: geometry.size.width)
+                        Image(blueExampleImages[currentBlueIndex]).scaleEffect(geometry.size.width / 1712).frame(width: geometry.size.width, height: geometry.size.width)
                         
                         HStack {
                             Image(systemName: "arrow.left.circle").imageScale(.large).foregroundColor(blue).onTapGesture {

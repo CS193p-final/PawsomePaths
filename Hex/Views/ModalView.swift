@@ -24,22 +24,14 @@ struct ModalView: View {
         
         return GeometryReader(){ geometry in
             ZStack(alignment: .top) {
-//                Color.black
-//                    .opacity(self.modal.position != .closed ? 0.5 : 0)
-//                    //.opacity(0)
-//                    .onTapGesture {
-//                        self.modal.position = .closed
-//                }
-                ZStack(alignment: .top) {
-                    Color(.white)
-                    self.modal.content
-                        //.frame(height: UIScreen.main.bounds.height - (self.modal.position.offsetFromTop() + geometry.safeAreaInsets.top + self.dragState.translation.height))
-                }
-                .mask(RoundedRectangle(cornerRadius: 8, style: .continuous))
-                .offset(y: max(0, self.modal.position.offsetFromTop() + self.dragState.translation.height + geometry.safeAreaInsets.top))
-                .gesture(drag)
-                .animation(self.dragState.isDragging ? nil : self.animation)
+                Color(.white)
+                self.modal.content
+
             }
+            .mask(RoundedRectangle(cornerRadius: 8, style: .continuous))
+            .offset(y: max(0, self.modal.position.offsetFromTop() + self.dragState.translation.height + geometry.safeAreaInsets.top))
+            .gesture(drag)
+            .animation(self.dragState.isDragging ? nil : self.animation)
         }
         .edgesIgnoringSafeArea(.top)
     }
