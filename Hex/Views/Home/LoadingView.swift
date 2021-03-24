@@ -35,6 +35,7 @@ struct LoadingView: View {
                     Text("Found you a worthy contender")
                         .font(Font.custom("PressStart2P-Regular", size: geometry.size.width / buttonFontSize))
                         .position(x: geometry.size.width / 2, y: geometry.size.height / 4)
+                        .foregroundColor(.black)
                     Image("notalkweangy")
                         .scaleEffect( geometry.size.width / 2048)
                         .position(x: geometry.size.width / 2, y: geometry.size.height / 2)

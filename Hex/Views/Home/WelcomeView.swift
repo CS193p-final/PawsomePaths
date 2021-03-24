@@ -25,6 +25,8 @@ struct WelcomeView: View {
     private var widthRatio = CGFloat(UIDevice.current.userInterfaceIdiom == .pad ? 1/2 : 1)
     private var heightRatio = CGFloat(1/8)
     private var buttonFontSizeRatio = CGFloat(1/30)
+    private let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
+
     
     var body: some View {
         GeometryReader { geometry in
@@ -34,14 +36,14 @@ struct WelcomeView: View {
                     //Text(email)
                     if logged {
                         VStack {
-                            Text("Welcome \(firstName)")
+                            Text("Welcome \(firstName)").foregroundColor(.black)
                             let avatar = UIImage(fromDiskWithFileName: "avatar")
                             if avatar != nil {
                                 Image(uiImage: avatar!).clipShape(Circle())
                             }
                         }
                     } else {
-                        Text("Welcome guest")
+                        Text("Welcome guest").foregroundColor(.black)
                         UserSection()
                             .frame(width: 80, height: 80)
                     }

@@ -58,10 +58,11 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
     }
     
     var hexInOneLine: CGFloat {
+        let colsOffset = UIDevice.current.userInterfaceIdiom == .pad ? cols / 3 : cols / 4
         if cols % 2 == 0 {
-            return CGFloat(cols) - 0.5
+            return CGFloat(cols) + CGFloat(colsOffset) - 0.5
         }
-        return CGFloat(cols)
+        return CGFloat(cols) + CGFloat(colsOffset)
     }
     
     func hexagonWidth(_ geometryWidth: CGFloat) -> CGFloat {
