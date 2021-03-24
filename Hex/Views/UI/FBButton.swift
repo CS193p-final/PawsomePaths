@@ -12,6 +12,9 @@ import FBSDKLoginKit
 
 struct FBButton: View {
     @EnvironmentObject var viewRouter: ViewRouter
+    
+    @AppStorage("anonymousUID") var anonymousUID = ""
+    @AppStorage("UID") var uid = ""
     @AppStorage("logged") var logged = false
     @AppStorage("email") var email = ""
     @AppStorage("firstName") var firstName = ""
@@ -23,9 +26,11 @@ struct FBButton: View {
         Button {
             if logged {
                 loginManager.logOut()
+                try! Auth.auth().signOut()
                 email = ""
                 logged = false
                 viewRouter.currentScreen = .welcome
+                uid = anonymousUID
             }
             else {
                 loginManager.logIn(permissions: ["email"], from: nil) { (result, error) in
@@ -57,6 +62,7 @@ struct FBButton: View {
                                 // save avatar to application sandbox
                                 avatar?.saveToDisk(fileName: "avatar")
                                 logged = true
+                                uid = Auth.auth().currentUser!.uid
                                 viewRouter.currentScreen = .welcome
                             } catch {
                                 print("Can't load image from path: \(imageURL)")
