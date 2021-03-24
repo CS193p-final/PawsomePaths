@@ -84,7 +84,7 @@ struct WelcomeView: View {
                             .default(Text("New Game")) {
                                 viewRouter.currentScreen = .singlePlayerGame(false)
                             },
-                            .default(Text("Contiue")) {
+                            .default(Text("Continue")) {
                                 viewRouter.currentScreen = .singlePlayerGame(false)
                             }
                         ])
