@@ -63,6 +63,7 @@
 		C1781A8E2600154C003A1168 /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C1781A8D2600154C003A1168 /* win.mp3 */; };
 		C18DD74A25DEFDD600A29151 /* RedBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18DD74925DEFDD600A29151 /* RedBorder.swift */; };
 		C18DD74E25DF60BE00A29151 /* BlueBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18DD74D25DF60BE00A29151 /* BlueBorder.swift */; };
+		C1AFFB6E260ADE9B0030AD7A /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = C1AFFB6D260ADE9B0030AD7A /* error.wav */; };
 		C1CE2BB625E77B740012E731 /* ClassFireworkAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */; };
 		C1CE2BB925E7824A0012E731 /* ClassicFireworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CE2BB825E7824A0012E731 /* ClassicFireworkController.swift */; };
 		C1CE2BBC25E792BE0012E731 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CE2BBB25E792BE0012E731 /* CGPoint+Extensions.swift */; };
@@ -160,6 +161,7 @@
 		C1781A8D2600154C003A1168 /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
 		C18DD74925DEFDD600A29151 /* RedBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedBorder.swift; sourceTree = "<group>"; };
 		C18DD74D25DF60BE00A29151 /* BlueBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueBorder.swift; sourceTree = "<group>"; };
+		C1AFFB6D260ADE9B0030AD7A /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
 		C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassFireworkAnimator.swift; sourceTree = "<group>"; };
 		C1CE2BB825E7824A0012E731 /* ClassicFireworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicFireworkController.swift; sourceTree = "<group>"; };
 		C1CE2BBB25E792BE0012E731 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
@@ -446,6 +448,7 @@
 		C69FD62125F957450077394D /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				C1AFFB6D260ADE9B0030AD7A /* error.wav */,
 				C1781A8D2600154C003A1168 /* win.mp3 */,
 				C1781A85260014AD003A1168 /* lose.mp3 */,
 				C1781A87260014AD003A1168 /* move.wav */,
@@ -575,6 +578,7 @@
 				C16DA15F25FC65620059C426 /* 48.png in Resources */,
 				C69FD62C25F95F950077394D /* MouseClick.mp3 in Resources */,
 				C16DA17025FC65620059C426 /* Contents.json in Resources */,
+				C1AFFB6E260ADE9B0030AD7A /* error.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

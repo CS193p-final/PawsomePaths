@@ -153,10 +153,12 @@ struct GameBoard: Hashable, Codable {
     mutating func play(move: BoardPosition) {
         if board[move.r][move.c] != 0 {
             print("Invalid move: \(move)")
+            playSound("error", type: "wav", soundOn: soundOn)
             return
+        } else {
+            board[move.r][move.c] = playerTurn
+            playerTurn = 3 - playerTurn
         }
-        board[move.r][move.c] = playerTurn
-        playerTurn = 3 - playerTurn
     }
     
     mutating func undo(move: BoardPosition) {

@@ -28,18 +28,20 @@ class SinglePlayerGame: GameMode {
     
     // MARK: - Intent(s)
     override func play(cellId: Int) {
-        board.play(move: BoardPosition(id: cellId, cols: board.size))
-        objectWillChange.send()
-        if gameEnded {
-            return
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            let boardCopy = self.board
-//            var mcts = MonteCarlo(board: boardCopy)
-//            self.board.play(move: mcts.getPlay())
-            
-            var AI = Minimax(board: boardCopy)
-            self.board.play(move: AI.getPlay())
+        if board.legalMoves.contains(BoardPosition(id: cellId, cols: board.size)) {
+            board.play(move: BoardPosition(id: cellId, cols: board.size))
+            objectWillChange.send()
+            if gameEnded {
+                return
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                let boardCopy = self.board
+    //            var mcts = MonteCarlo(board: boardCopy)
+    //            self.board.play(move: mcts.getPlay())
+                
+                var AI = Minimax(board: boardCopy)
+                self.board.play(move: AI.getPlay())
+            }
         }
     }
 }

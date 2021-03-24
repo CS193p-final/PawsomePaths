@@ -170,7 +170,7 @@ struct resultReport: View {
 
     private let buttonFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 30
     private let resultFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 50 : 25
-    private let scaleEffect: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 1 : 1.2
+    private let scaleEffect: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 2 : 1.2
 
     private let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
     private let imageHeight: CGFloat = 450
