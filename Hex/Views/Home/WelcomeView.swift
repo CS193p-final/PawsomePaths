@@ -15,6 +15,8 @@ struct WelcomeView: View {
     @State private var showSingleActionSheet = false
     @State private var showTwoPlayerActionSheet = false
     
+    @AppStorage("anonymousUID") var anonymousUID = ""
+    @AppStorage("UID") var uid = ""
     @AppStorage("logged") var logged = false
     @AppStorage("email") var email = ""
     @AppStorage("firstName") var firstName = ""
@@ -110,6 +112,21 @@ struct WelcomeView: View {
                     
                     FBButton()
                         .frame(width: 250, height: 75, alignment: .center)
+                }
+            }
+        }
+        .onAppear {
+            if !logged {
+                // try to sign-in with anonymous authentication
+                if anonymousUID != "" {
+                    print("User already loggedin anonymously. UID = \(anonymousUID)")
+                    uid = anonymousUID
+                    return
+                }
+                Auth.auth().signInAnonymously { (result, error) in
+                    print("Signed in anonymously")
+                    anonymousUID = Auth.auth().currentUser!.uid
+                    uid = anonymousUID
                 }
             }
         }
