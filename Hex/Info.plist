@@ -51,8 +51,6 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSMainNibFile~ipad</key>
-	<string>Main</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>PressStart2P-Regular.ttf</string>
