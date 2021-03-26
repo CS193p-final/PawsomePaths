@@ -65,6 +65,9 @@ struct WelcomeView: View {
                             },
                             .default(Text("Continue")) {
                                 viewRouter.currentScreen = .twoPlayersGame(true)
+                            },
+                            .default(Text("Cancel")) {
+                                showTwoPlayerActionSheet = false
                             }
                         ])
                     }
@@ -85,7 +88,10 @@ struct WelcomeView: View {
                                 viewRouter.currentScreen = .singlePlayerGame(false)
                             },
                             .default(Text("Continue")) {
-                                viewRouter.currentScreen = .singlePlayerGame(false)
+                                viewRouter.currentScreen = .singlePlayerGame(true)
+                            },
+                            .default(Text("Cancel")) {
+                                showSingleActionSheet = false
                             }
                         ])
                     }

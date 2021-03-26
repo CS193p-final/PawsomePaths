@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ModalView: View {
-    
+    private let wildBlueYonder = Color(red: 0.71875, green: 0.71875, blue: 0.8164, opacity: 1)
     // Modal State
     @Binding var modal: Modal
     @GestureState var dragState: DragState = .inactive
@@ -24,7 +24,14 @@ struct ModalView: View {
         
         return GeometryReader(){ geometry in
             ZStack(alignment: .top) {
-                Color(.white)
+                Color.black
+                    .opacity(self.modal.position != .closed ? 0.5 : 0)
+                    .onTapGesture {
+                        self.modal.position = .closed
+                    }
+            }
+            ZStack(alignment: .top) {
+                wildBlueYonder
                 self.modal.content
 
             }

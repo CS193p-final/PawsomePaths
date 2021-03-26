@@ -43,91 +43,88 @@ struct GameView: View {
                 .onDisappear {
                     stopMusic("musicBox", type: "mp3")
                 }
-            VStack {
-                ZStack {
-                    Rectangle().ignoresSafeArea().foregroundColor(hunterGreen)
-                    HStack {
-                        Text("Back").font(Font.custom("PressStart2P-Regular", size: geometry.size.width / buttonFontSize))
-                            .padding()
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .onTapGesture {
-                                playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
-                                viewRouter.currentScreen = .welcome
-                            }
-                        Image(systemName: "gearshape").imageScale(.large) .foregroundColor(.white)
-                            .onTapGesture {
-                                if !isIpad {
-                                    if modalManager.modal.position == .closed {
-                                        showSettingsForPhone = true
-                                        self.modalManager.openModal()
-                                        print("\(showSettingsForPhone) + \(modalManager.modal.position)")
-                                    } else {
-                                        showSettingsForPhone = false
-                                        self.modalManager.closeModal()
-                                        print("\(showSettingsForPhone) + \(modalManager.modal.position)")
-                                    }
-                                } else {
-                                    showSettingsForPad = !showSettingsForPad
+            ZStack {
+                VStack {
+                    ZStack {
+                        Rectangle().ignoresSafeArea().foregroundColor(hunterGreen)
+                        HStack {
+                            Text("Back").font(Font.custom("PressStart2P-Regular", size: geometry.size.width / buttonFontSize))
+                                .padding()
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .onTapGesture {
+                                    playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
+                                    viewRouter.currentScreen = .welcome
                                 }
-                                playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
-                            }
-                            .onAppear {
-                                self.modalManager.newModal(position: .closed) {
+                            Image(systemName: "gearshape").imageScale(.large) .foregroundColor(.white)
+                                .onTapGesture {
+                                    if !isIpad {
+                                        if modalManager.modal.position == .closed {
+                                            showSettingsForPhone = true
+                                            self.modalManager.openModal()
+                                        }
+                                    } else {
+                                        showSettingsForPad = !showSettingsForPad
+                                    }
+                                    playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
+                                }
+                                .onAppear {
+                                    self.modalManager.newModal(position: .closed) {
+                                        settingsView(game: hexGame)
+                                    }
+                                }
+                                .popover(isPresented: $showSettingsForPad) {
                                     settingsView(game: hexGame)
                                 }
-                            }
-                            .popover(isPresented: $showSettingsForPad) {
-                                settingsView(game: hexGame)
-                            }
-                            .padding()
-                    }
-                }
-                .frame(width: geometry.size.width, height: geometry.size.width / gameTitle, alignment: .topLeading)
-                .padding(.bottom)
-                
-                Text("Hex Game")
-                    .font(Font.custom("KronaOne-Regular", size: geometry.size.width / gameTitle))
-                    .foregroundColor(titleColor)
-                Text(hexGame.playerTurn).foregroundColor(hexGame.board.playerTurn == 1 ? red : blue)
-                    .font(Font.custom("KronaOne-Regular", size: geometry.size.width / playerTurnFontSize))
-
-                    ZStack {
-                        if (showResult == true && hexGame.result != "You lose" ) {
-                            ForEach(0...8, id: \.self) {_ in
-                                FireworkRepresentable().position(x: CGFloat.random(in: 10 ... 2 * geometry.size.width), y: CGFloat.random(in: 10 ... geometry.size.height)).zIndex(-1)
-                            }
+                                .padding()
                         }
-                        HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
-                            CellView(cell: cell).onTapGesture {
-                                playSound("move", type: "wav", soundOn: hexGame.soundOn)
-                                if !hexGame.gameEnded { // only when game has not ended
-                                    hexGame.play(cellId: cell.id)
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.width / gameTitle, alignment: .topLeading)
+                    .padding(.bottom)
+                    
+                    Text("Hex Game")
+                        .font(Font.custom("KronaOne-Regular", size: geometry.size.width / gameTitle))
+                        .foregroundColor(titleColor)
+                    Text(hexGame.playerTurn).foregroundColor(hexGame.board.playerTurn == 1 ? red : blue)
+                        .font(Font.custom("KronaOne-Regular", size: geometry.size.width / playerTurnFontSize))
+
+                        ZStack {
+                            if (showResult == true && hexGame.result != "You lose" ) {
+                                ForEach(0...8, id: \.self) {_ in
+                                    FireworkRepresentable().position(x: CGFloat.random(in: 10 ... 2 * geometry.size.width), y: CGFloat.random(in: 10 ... geometry.size.height)).zIndex(-1)
+                                }
+                            }
+                            HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
+                                CellView(cell: cell).onTapGesture {
+                                    playSound("move", type: "wav", soundOn: hexGame.soundOn)
+                                    if !hexGame.gameEnded { // only when game has not ended
+                                        hexGame.play(cellId: cell.id)
+                                    }
+                                }
+                            }
+                            .onChange(of: hexGame.gameEnded, perform: { value in
+                                if hexGame.gameEnded {
+                                    playSound(hexGame.result == "You lose" ? "lose" : "win", type: "mp3", soundOn: hexGame.soundOn)
+                                }
+                            })
+                            .onReceive(self.hexGame.$board, perform: { newValue in
+                                if newValue.winner != 0 {
+                                    showResult = true
+                                }
+                            })
+                            .rotationEffect(Angle.degrees(90))
+                            .popup(isPresented: $showResult) {
+                                ZStack {
+                                    resultReport(game: hexGame, soundOn: hexGame.soundOn, showResult: showResult)
                                 }
                             }
                         }
-                        .onChange(of: hexGame.gameEnded, perform: { value in
-                            if hexGame.gameEnded {
-                                playSound(hexGame.result == "You lose" ? "lose" : "win", type: "mp3", soundOn: hexGame.soundOn)
-                            }
-                        })
-                        .onReceive(self.hexGame.$board, perform: { newValue in
-                            if newValue.winner != 0 {
-                                showResult = true
-                            }
-                        })
-                        .rotationEffect(Angle.degrees(90))
-                        .popup(isPresented: $showResult) {
-                            ZStack {
-                                resultReport(game: hexGame, soundOn: hexGame.soundOn, showResult: showResult)
-                            }
-                        }
-                        ModalAnchorView().environmentObject(modalManager)
-                    }
-                newGameButton(game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
-                .foregroundColor(!showResult ? .blue : .gray)
-                .padding()
-                .zIndex(-1)
+                    newGameButton(game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
+                    .foregroundColor(!showResult ? .blue : .gray)
+                    .padding()
+                    .zIndex(-1)
+                }
+                ModalAnchorView().environmentObject(modalManager)
             }
         }
     }
@@ -222,6 +219,7 @@ struct settingsView: View {
     @State private var showAlert: Bool = false
     private let lightCyan: Color = Color(red: 0.8555, green: 0.984375, blue: 0.9961, opacity: 0.8)
     private let queenBlue = Color(red: 0.26953, green: 0.41, blue: 0.5625)
+    private let wildBlueYonder = Color(red: 0.71875, green: 0.71875, blue: 0.8164, opacity: 1)
     private let headerFontSize: CGFloat = 15
     @EnvironmentObject var modalManager: ModalManager
 
@@ -281,5 +279,6 @@ struct settingsView: View {
         .padding()
         .foregroundColor(queenBlue)
         .font(Font.custom("KronaOne-Regular", size: headerFontSize))
+        .background(wildBlueYonder)
     }
 }

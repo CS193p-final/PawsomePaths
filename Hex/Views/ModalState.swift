@@ -14,9 +14,9 @@ enum ModalState: CGFloat {
         case .closed:
             return UIScreen.main.bounds.height
         case .partiallyRevealed:
-            return UIScreen.main.bounds.height - 400
+            return UIScreen.main.bounds.height - 200
         case .open:
-            return UIScreen.main.bounds.height / 3
+            return UIScreen.main.bounds.height / 2
         }
     }
 }
