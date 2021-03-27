@@ -10,16 +10,19 @@ import FBSDKLoginKit
 import FirebaseAuth
 
 struct WelcomeView: View {
+    static var networkMonitor = NetworkConnection()
     @EnvironmentObject var viewRouter: ViewRouter
-    
     @State private var showSingleActionSheet = false
     @State private var showTwoPlayerActionSheet = false
-    
+    @State private var noConnectionAlert = false
+    @State private var isConnected = networkMonitor.isReachable || networkMonitor.isReachableCellular
+
     @AppStorage("anonymousUID") var anonymousUID = ""
     @AppStorage("UID") var uid = ""
     @AppStorage("logged") var logged = false
     @AppStorage("email") var email = ""
     @AppStorage("firstName") var firstName = ""
+    
     
     private let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     private var widthRatio = CGFloat(UIDevice.current.userInterfaceIdiom == .pad ? 1/2 : 1)
@@ -27,13 +30,12 @@ struct WelcomeView: View {
     private var buttonFontSizeRatio = CGFloat(1/30)
     private let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
 
-    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 Rectangle().foregroundColor(backgroundColor).zIndex(-1).ignoresSafeArea()
                 VStack {
-                    //Text(email)
+                    // User name and avatar
                     if logged {
                         VStack {
                             Text("Welcome \(firstName)").foregroundColor(.black)
@@ -48,15 +50,12 @@ struct WelcomeView: View {
                             .frame(width: 80, height: 80)
                     }
                     
+                    // Two Player Mode Button
                     Button {
                         playSound("MouseClick", type: "mp3", soundOn: true)
                         showTwoPlayerActionSheet = true
                     } label: {
-                        RoundedRectangle(cornerRadius: 10).opacity(0.3)
-                            .frame(width: 250, height: 75, alignment: .center)
-                            .overlay(Text("2 Players"))
-                            .font(Font.custom("KronaOne-Regular", size: 20))
-                            .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
+                        rectButton("Two Players")
                     }
                     .actionSheet(isPresented: $showTwoPlayerActionSheet) {
                         ActionSheet(title: Text("Two Players Game"), buttons: [
@@ -72,15 +71,12 @@ struct WelcomeView: View {
                         ])
                     }
                     
+                    // Single Player Mode Button
                     Button {
                         playSound("MouseClick", type: "mp3", soundOn: true)
                         showSingleActionSheet = true
                     } label: {
-                        RoundedRectangle(cornerRadius: 10).opacity(0.3)
-                            .frame(width: 250, height: 75, alignment: .center)
-                            .overlay(Text("Single Player"))
-                            .font(Font.custom("KronaOne-Regular", size: 20))
-                            .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
+                        rectButton("Single Player")
                     }
                     .actionSheet(isPresented: $showSingleActionSheet) {
                         ActionSheet(title: Text("Single Player Game"), buttons: [
@@ -96,26 +92,27 @@ struct WelcomeView: View {
                         ])
                     }
                     
+                    // Play Online Mode Button
                     Button {
                         playSound("MouseClick", type: "mp3", soundOn: true)
-                        viewRouter.currentScreen = .onlineGame
+                        if isConnected {
+                            viewRouter.currentScreen = .onlineGame
+                        } else {
+                            noConnectionAlert = true
+                        }
                     } label: {
-                        RoundedRectangle(cornerRadius: 10).opacity(0.3)
-                            .frame(width: 250, height: 75, alignment: .center)
-                            .overlay(Text("Play Online"))
-                            .font(Font.custom("KronaOne-Regular", size: 20))
-                            .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
+                        rectButton("Play Online")
                     }
-
+                    .alert(isPresented: $noConnectionAlert) { () -> Alert in
+                        Alert(title: Text("No Connection"), message: Text("You need Internet connection to play online. Please check your connection and try again"), dismissButton: .cancel())
+                    }
+                    
+                    // How to Play Screen Button
                     Button {
                         playSound("MouseClick", type: "mp3", soundOn: true)
                         viewRouter.currentScreen = .howToPlay
                     } label: {
-                        RoundedRectangle(cornerRadius: 10).opacity(0.3)
-                            .frame(width: 250, height: 75, alignment: .center)
-                            .overlay(Text("How To Play"))
-                            .font(Font.custom("KronaOne-Regular", size: 20))
-                            .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
+                        rectButton("How to Play")
                     }
                     
                     FBButton()
@@ -137,7 +134,18 @@ struct WelcomeView: View {
                     uid = anonymousUID
                 }
             }
+            WelcomeView.networkMonitor.startMonitoring()
         }
+    }
+}
+
+func rectButton(_ message: String) -> some View {
+    return ZStack {
+        RoundedRectangle(cornerRadius: 10).opacity(0.3)
+            .frame(width: 250, height: 75, alignment: .center)
+            .overlay(Text(message))
+            .font(Font.custom("KronaOne-Regular", size: 20))
+            .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
     }
 }
 

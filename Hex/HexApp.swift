@@ -47,7 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 struct HexApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject var viewRouter = ViewRouter()
-    
     var body: some Scene {
         WindowGroup {
             MainView().environmentObject(viewRouter)

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MainView: View {
     @EnvironmentObject var viewRouter: ViewRouter
-    
     var body: some View {
         switch viewRouter.currentScreen {
         case .welcome:

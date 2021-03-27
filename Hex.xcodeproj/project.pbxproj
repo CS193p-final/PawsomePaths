@@ -64,6 +64,7 @@
 		C18DD74A25DEFDD600A29151 /* RedBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18DD74925DEFDD600A29151 /* RedBorder.swift */; };
 		C18DD74E25DF60BE00A29151 /* BlueBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18DD74D25DF60BE00A29151 /* BlueBorder.swift */; };
 		C1AFFB6E260ADE9B0030AD7A /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = C1AFFB6D260ADE9B0030AD7A /* error.wav */; };
+		C1BE71A5260FC8D90049751E /* NetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BE71A4260FC8D90049751E /* NetworkConnection.swift */; };
 		C1CE2BB625E77B740012E731 /* ClassFireworkAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */; };
 		C1CE2BB925E7824A0012E731 /* ClassicFireworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CE2BB825E7824A0012E731 /* ClassicFireworkController.swift */; };
 		C1CE2BBC25E792BE0012E731 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CE2BBB25E792BE0012E731 /* CGPoint+Extensions.swift */; };
@@ -162,6 +163,7 @@
 		C18DD74925DEFDD600A29151 /* RedBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedBorder.swift; sourceTree = "<group>"; };
 		C18DD74D25DF60BE00A29151 /* BlueBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueBorder.swift; sourceTree = "<group>"; };
 		C1AFFB6D260ADE9B0030AD7A /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
+		C1BE71A4260FC8D90049751E /* NetworkConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnection.swift; sourceTree = "<group>"; };
 		C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassFireworkAnimator.swift; sourceTree = "<group>"; };
 		C1CE2BB825E7824A0012E731 /* ClassicFireworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicFireworkController.swift; sourceTree = "<group>"; };
 		C1CE2BBB25E792BE0012E731 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
@@ -355,8 +357,8 @@
 				C1000AA126019F06009A1B80 /* Spinning.swift */,
 				C6227AD425F2B085008E301E /* Deque.swift */,
 				C6596A3225DB11F000A0F94B /* Queue.swift */,
-				C1CE2BBB25E792BE0012E731 /* CGPoint+Extensions.swift */,
 				C1D1CFE625DB6CBE00A6EAAE /* Array+Identifiable.swift */,
+				C1CE2BBB25E792BE0012E731 /* CGPoint+Extensions.swift */,
 				C600184D25E8AE1E00DB9CDC /* Int+Extension.swift */,
 				C64D0D1C26028DA5001E6706 /* UIImage+Extension.swift */,
 			);
@@ -404,6 +406,7 @@
 				C699738125D9F4DC00337F70 /* Info.plist */,
 				C699737E25D9F4DC00337F70 /* Preview Content */,
 				C699739225D9FEF300337F70 /* Views */,
+				C1BE71A4260FC8D90049751E /* NetworkConnection.swift */,
 			);
 			path = Hex;
 			sourceTree = "<group>";
@@ -653,6 +656,7 @@
 				C6029D3826014A04005FBD3B /* FBButton.swift in Sources */,
 				C136487026072F4000BDC73F /* ModalState.swift in Sources */,
 				C18DD74E25DF60BE00A29151 /* BlueBorder.swift in Sources */,
+				C1BE71A5260FC8D90049751E /* NetworkConnection.swift in Sources */,
 				C11545AC25E7478100E8B591 /* SparkTractory.swift in Sources */,
 				C1D1CFE725DB6CBE00A6EAAE /* Array+Identifiable.swift in Sources */,
 				C13648792607325300BDC73F /* ModalView.swift in Sources */,
