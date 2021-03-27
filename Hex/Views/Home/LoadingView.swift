@@ -54,7 +54,9 @@ struct LoadingView: View {
                     }
                 VStack {
                     Image(random ? "redwiz" : "bluewiz").spinning().scaleEffect(geometry.size.width / 1350)
-                    Text("Looking for a worthy contender...").font(Font.custom("PressStart2P-Regular", size: geometry.size.width / 40))
+                    Text("Looking for a worthy contender...")
+                        .font(Font.custom("PressStart2P-Regular", size: geometry.size.width / 40))
+                        .foregroundColor(.black)
                 }
                 .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
             }

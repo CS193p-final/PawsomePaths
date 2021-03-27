@@ -63,7 +63,7 @@ struct HowToPlayView: View {
                             .padding(vPadding)
 
                         
-                        Text("Blue player connects the top and bottom sides of the board to win.")
+                        Text("Red player connects the top and bottom sides of the board to win.")
                             .foregroundColor(red)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(vPadding)
@@ -88,7 +88,7 @@ struct HowToPlayView: View {
                             }
                         }
 
-                        Text("Red player connects left and right sides of the board to win.")
+                        Text("Blue player connects left and right sides of the board to win.")
                             .foregroundColor(blue)
                             .padding(vPadding)
                             .frame(maxWidth: .infinity, minHeight: geometry.size.width / playerTurnFontSize, alignment: .leading)
