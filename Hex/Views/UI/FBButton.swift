@@ -76,14 +76,20 @@ struct FBButton: View {
                 }
             }
         } label: {
-            Text(logged ? "Log out" : "Connect with FB")
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .padding(.vertical, 10)
-                .padding(.horizontal, 35)
-                .background(Color.blue)
-                .clipShape(Capsule())
-                .frame(width: 250, height: 75, alignment: .center)
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke()
+                    .foregroundColor(.blue)
+                    .frame(width: 190, height: 50, alignment: .center)
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(.white)
+                    .frame(width: 190, height: 50, alignment: .center)
+                HStack {
+                    Image("fb").scaleEffect(0.1).frame(width: 30, height: 50)
+                    Text(logged ? "Log out" : "Connect with FB").fontWeight(.semibold)
+                        .foregroundColor(.blue)
+                }
+            }
         }
 
     }

@@ -115,8 +115,10 @@ struct WelcomeView: View {
                         rectButton("How to Play")
                     }
                     
+                    // Connect with Facebook button
                     FBButton()
-                        .frame(width: 250, height: 75, alignment: .center)
+                    
+                    // Invite friends button
                     InviteButton()
                 }
             }
@@ -143,10 +145,11 @@ struct WelcomeView: View {
 func rectButton(_ message: String) -> some View {
     return ZStack {
         RoundedRectangle(cornerRadius: 10).opacity(0.3)
-            .frame(width: 250, height: 75, alignment: .center)
+            .frame(width: 250, height: UIDevice.current.userInterfaceIdiom == .pad ? 75 : 65, alignment: .center)
             .overlay(Text(message))
             .font(Font.custom("KronaOne-Regular", size: 20))
             .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
+            .padding(UIDevice.current.userInterfaceIdiom == .pad ? 5 : 0)
     }
 }
 
@@ -154,9 +157,6 @@ func rectButton(_ message: String) -> some View {
 struct UserSection: View {
     var body: some View {
         Image("guestava")
-            .scaleEffect(90/673)
-            .onTapGesture {
-                print("guestava")
-            }
+            .scaleEffect(UIDevice.current.userInterfaceIdiom == .pad ? 90/673 : 85/673)
     }
 }
