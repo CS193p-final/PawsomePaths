@@ -102,6 +102,7 @@
 		C6B09AD825DE142D00C96782 /* SinglePlayerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */; };
 		C6B09ADB25DEF36E00C96782 /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09ADA25DEF36E00C96782 /* GameMode.swift */; };
 		C6C7C5582602F216000F77CC /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C7C5572602F216000F77CC /* FriendsView.swift */; };
+		C6DB98CB260E7CE800ED794D /* InviteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DB98CA260E7CE800ED794D /* InviteButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -203,6 +204,8 @@
 		C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePlayerGame.swift; sourceTree = "<group>"; };
 		C6B09ADA25DEF36E00C96782 /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
 		C6C7C5572602F216000F77CC /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
+		C6DB98B5260D7BEF00ED794D /* Hex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hex.entitlements; sourceTree = "<group>"; };
+		C6DB98CA260E7CE800ED794D /* InviteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteButton.swift; sourceTree = "<group>"; };
 		FF1A0D053A50613DD2D628E2 /* Pods-Hex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hex.release.xcconfig"; path = "Target Support Files/Pods-Hex/Pods-Hex.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -291,6 +294,7 @@
 			children = (
 				C627D3CF26051DC400EA0DD5 /* CountdownTimer.swift */,
 				C6029D3726014A04005FBD3B /* FBButton.swift */,
+				C6DB98CA260E7CE800ED794D /* InviteButton.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -396,6 +400,7 @@
 		C699737725D9F4DB00337F70 /* Hex */ = {
 			isa = PBXGroup;
 			children = (
+				C6DB98B5260D7BEF00ED794D /* Hex.entitlements */,
 				C11F648825F023200094C266 /* Assets */,
 				C6596A4525DB400D00A0F94B /* AI */,
 				C699737C25D9F4DC00337F70 /* Assets.xcassets */,
@@ -673,6 +678,7 @@
 				C6596A3825DB1BA500A0F94B /* TwoPlayersGame.swift in Sources */,
 				C1102DAA25E8A0180054C992 /* FireworkView.swift in Sources */,
 				C6227AD525F2B085008E301E /* Deque.swift in Sources */,
+				C6DB98CB260E7CE800ED794D /* InviteButton.swift in Sources */,
 				C696A51B2605319F0073D313 /* MainView.swift in Sources */,
 				C64D0D1D26028DA5001E6706 /* UIImage+Extension.swift in Sources */,
 				C64CC855260130D40044B780 /* OnlineGameView.swift in Sources */,
@@ -808,9 +814,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Hex/Hex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Hex/Preview Content\"";
-				DEVELOPMENT_TEAM = DFDCS22GK9;
+				DEVELOPMENT_TEAM = F8WWCGPHV3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hex/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -831,9 +838,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Hex/Hex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Hex/Preview Content\"";
-				DEVELOPMENT_TEAM = DFDCS22GK9;
+				DEVELOPMENT_TEAM = F8WWCGPHV3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hex/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

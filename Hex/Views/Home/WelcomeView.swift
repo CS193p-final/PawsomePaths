@@ -117,6 +117,7 @@ struct WelcomeView: View {
                     
                     FBButton()
                         .frame(width: 250, height: 75, alignment: .center)
+                    InviteButton()
                 }
             }
         }

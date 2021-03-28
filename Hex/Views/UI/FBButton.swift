@@ -33,7 +33,7 @@ struct FBButton: View {
                 uid = anonymousUID
             }
             else {
-                loginManager.logIn(permissions: ["email"], from: nil) { (result, error) in
+                loginManager.logIn(permissions: ["email", "user_friends"], from: nil) { (result, error) in
                     if error != nil {
                         print(error!.localizedDescription)
                         return
@@ -45,30 +45,34 @@ struct FBButton: View {
                                 print((error?.localizedDescription)!)
                                 return
                             }
-                        }
-                    }
-                    let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, picture, first_name"])
-                    request.start { (_, res, _) in
-                        guard let profileData = res as? [String: Any] else { return }
-                        email = profileData["email"] as! String
-                        firstName = profileData["first_name"] as! String
-                        // The url is nested 3 layers deep into the result so it's pretty messy
-                        // profileData.picture.data.url
-                        if let imageURL = ((profileData["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
-                            //Download image from imageURL
-                            do {
-                                let data = try Data(contentsOf: URL(string: imageURL)!)
-                                let avatar = UIImage(data: data)
-                                // save avatar to application sandbox
-                                avatar?.saveToDisk(fileName: "avatar")
-                                logged = true
-                                uid = Auth.auth().currentUser!.uid
-                                viewRouter.currentScreen = .welcome
-                            } catch {
-                                print("Can't load image from path: \(imageURL)")
+                            let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, picture, first_name, friends"])
+                            request.start { (_, res, _) in
+                                guard let profileData = res as? [String: Any] else { return }
+                                
+                                print("profile data = \(profileData)")
+                                
+                                email = profileData["email"] as! String
+                                firstName = profileData["first_name"] as! String
+                                // The url is nested 3 layers deep into the result so it's pretty messy
+                                // profileData.picture.data.url
+                                if let imageURL = ((profileData["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
+                                    //Download image from imageURL
+                                    do {
+                                        let data = try Data(contentsOf: URL(string: imageURL)!)
+                                        let avatar = UIImage(data: data)
+                                        // save avatar to application sandbox
+                                        avatar?.saveToDisk(fileName: "avatar")
+                                        logged = true
+                                        uid = Auth.auth().currentUser!.uid
+                                        viewRouter.currentScreen = .welcome
+                                    } catch {
+                                        print("Can't load image from path: \(imageURL)")
+                                    }
+                                }
                             }
                         }
                     }
+                    
                 }
             }
         } label: {
@@ -79,6 +83,7 @@ struct FBButton: View {
                 .padding(.horizontal, 35)
                 .background(Color.blue)
                 .clipShape(Capsule())
+                .frame(width: 250, height: 75, alignment: .center)
         }
 
     }
