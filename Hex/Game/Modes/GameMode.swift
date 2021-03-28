@@ -38,12 +38,14 @@ class GameMode: ObservableObject {
         return cells
     }
     
-    var playerTurn: String { "Player \(board.playerTurn)'s turn" }
+    var playerTurn: String {
+        "\(board.playerTurn == 1 ? "Red player" : "Blue player")'s turn"
+    }
     
     var result: String {
         switch board.checkResult() {
-        case .player1Win: return "Player 1 wins"
-        case .player2Win: return "Player 2 wins"
+        case .player1Win: return "Red player wins"
+        case .player2Win: return "Blue player wins"
         case .unknown: return "You win"
         }
     }
