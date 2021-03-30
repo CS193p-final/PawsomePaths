@@ -229,13 +229,13 @@ struct settingsView: View {
                 Stepper(
                     onIncrement: {
                         game.incrementSize()
-                        if game.board.size == 11 {
+                        if game.board.size == game.maxSize {
                             showAlert = true
                         }
                     },
                     onDecrement: {
                         game.decrementSize()
-                        if game.board.size == 3 {
+                        if game.board.size == game.minSize {
                             showAlert = true
                         }
                     },
@@ -243,7 +243,7 @@ struct settingsView: View {
                         Text("\(game.board.size)")
                     })
                     .alert(isPresented: $showAlert) { () -> Alert in
-                        Alert(title: Text("Invalid board size"), message: Text("Board size cannot be less than 3x3 or greater than 11x11"), dismissButton: Alert.Button.cancel())
+                        Alert(title: Text("Invalid board size"), message: Text("Board size cannot be less than \(game.minSize) or greater than \(game.maxSize)"), dismissButton: Alert.Button.cancel())
                     }
             }
             HStack {

@@ -7,11 +7,16 @@
 
 import Foundation
 import Combine
+import UIKit
 
 class GameMode: ObservableObject {
     @Published var board: GameBoard
+    var isIpad = UIDevice.current.userInterfaceIdiom == .pad
     private var autoSaveCancellable: AnyCancellable?
-
+    var maxSize: Int {
+        isIpad ? 13 : 11
+    }
+    private (set) var minSize: Int = 3
     
     init() {
         self.board = GameBoard(size: 11, musicOn: true, soundOn: true)
@@ -76,14 +81,14 @@ class GameMode: ObservableObject {
     }
     
     func incrementSize() {
-        if board.size < 11 {
+        if board.size < maxSize {
             let size = board.size + 1
             newGame(size: size)
         }
     }
     
     func decrementSize() {
-        if board.size > 3 {
+        if board.size > minSize {
             let size = board.size - 1
             newGame(size: size)
         }
