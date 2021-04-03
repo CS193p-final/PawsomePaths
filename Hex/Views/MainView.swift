@@ -20,8 +20,10 @@ struct MainView: View {
         case .onlineGame:
             let onlineGame: OnlineGame? = OnlineGame()
             OnlineGameView(hexGame: onlineGame!)
-        case Screen.howToPlay:
+        case .howToPlay:
             HowToPlayView(soundOn: true)
+        case .friendList:
+            FriendList()
         }
     }
 }

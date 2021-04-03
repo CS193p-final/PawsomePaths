@@ -47,8 +47,9 @@ struct InviteButton: View {
         // This is the workaround for the bug: https://developer.apple.com/forums/thread/652080
         // Swift UI on iOS 14 not assigning new object to @State property
         
-//        Text("\(inviteURL?.absoluteString ?? "")")
-//            .hidden()
+        Text("\(inviteURL?.absoluteString ?? "")")
+            .hidden()
+            .frame(width: 0, height: 0)
         Button(action: {
             show = true
         }, label: {

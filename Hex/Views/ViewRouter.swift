@@ -13,6 +13,7 @@ enum Screen {
     case twoPlayersGame(Bool)
     case onlineGame
     case howToPlay
+    case friendList
 }
 
 class ViewRouter: ObservableObject {
