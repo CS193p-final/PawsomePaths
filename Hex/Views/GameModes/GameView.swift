@@ -89,11 +89,6 @@ struct GameView: View {
                         .font(Font.custom("KronaOne-Regular", size: geometry.size.width / playerTurnFontSize))
 
                         ZStack {
-                            if (showResult == true && hexGame.result != "You lose" ) {
-                                ForEach(0...8, id: \.self) {_ in
-                                    FireworkRepresentable().position(x: CGFloat.random(in: 10 ... 2 * geometry.size.width), y: CGFloat.random(in: 10 ... geometry.size.height)).zIndex(-1)
-                                }
-                            }
                             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                                 CellView(cell: cell).onTapGesture {
                                     playSound("move", type: "wav", soundOn: hexGame.soundOn)
