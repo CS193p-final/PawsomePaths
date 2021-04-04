@@ -54,15 +54,14 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
     }
     
     func offset(id: Int, geometryWidth: CGFloat) -> CGFloat {
-        CGFloat(id / cols) * hexagonWidth(geometryWidth / 2) - (hexagonWidth(geometryWidth) * CGFloat(cols - 1) / 4)
+        CGFloat(CGFloat((id / cols)) * hexagonWidth(geometryWidth / 2)) - CGFloat(hexagonWidth(geometryWidth) * CGFloat(cols - 1) / 4)
     }
     
     var hexInOneLine: CGFloat {
-        let colsOffset = UIDevice.current.userInterfaceIdiom == .pad ? 2 : 1
         if cols % 2 == 0 {
-            return CGFloat(cols) + CGFloat(colsOffset) - 0.5
+            return CGFloat(cols + 1) - CGFloat(0.5)
         }
-        return CGFloat(cols) + CGFloat(colsOffset)
+        return CGFloat(cols + 1)
     }
     
     func hexagonWidth(_ geometryWidth: CGFloat) -> CGFloat {

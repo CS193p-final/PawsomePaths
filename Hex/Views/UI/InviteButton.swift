@@ -48,8 +48,10 @@ struct InviteButton: View {
         // Swift UI on iOS 14 not assigning new object to @State property
         
         Text("\(inviteURL?.absoluteString ?? "")")
-            .hidden()
             .frame(width: 0, height: 0)
+            .padding(-1)
+            .hidden()
+
         Button(action: {
             show = true
         }, label: {

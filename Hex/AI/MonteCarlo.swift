@@ -30,9 +30,6 @@ struct MonteCarlo {
             runSimulation()
             games += 1
         }
-        
-        print("simulated \(games) games")
-        
         let moves = board.legalMoves
         let nextStates = moves.map{board.nextState(move: $0)}
         var bestWinrate: Double = 0
@@ -49,10 +46,6 @@ struct MonteCarlo {
                 }
             }
         }
-        
-//        print("winrate: \(bestWinrate)")
-//        print("wins = \(wins[board.nextState(move: bestMove)]), plays = \(plays[board.nextState(move: bestMove)])")
-//        print()
         return bestMove
     }
     
@@ -108,8 +101,6 @@ struct MonteCarlo {
             }
             visitedStates.insert(state)
         }
-//        print(state.description)
-//        print("winner = \(state.winner)")
         
         for s in visitedStates {
             if !plays.keys.contains(s) {

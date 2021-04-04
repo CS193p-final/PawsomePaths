@@ -27,10 +27,7 @@ struct Minimax {
                 break
             }
 
-            print("difficulty = \(difficulty), score = \(score) eval = \(eval)")
         }
-        print(bestMove)
-        print()
         return bestMove
     }
     
@@ -68,7 +65,6 @@ struct Minimax {
 
                     // Update the best move only at the top level of the game tree
                     if depth == board.difficulty {
-                        print("maxEval = \(maxEval), tmp move = \(bestMove)")
                         bestMove = move
                         if maxEval == Int.max {
                             board.undo(move: move)
@@ -107,7 +103,6 @@ struct Minimax {
                     // Update the best move if the opponent has a winning move in the next round
                     if depth == board.difficulty - 1 && minEval == Int.min {
                         bestMove = move
-                        print("Opponent will win next move")
                         board.undo(move: move)
                         critical = Int.min // Notify that the opponent has a winning move
                         return minEval
