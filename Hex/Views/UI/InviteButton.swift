@@ -65,7 +65,7 @@ struct InviteButton: View {
                     .frame(width: 190, height: 50, alignment: .center)
                 HStack{
                     Image(systemName: "envelope.open.fill").imageScale(.large)
-                    Text("Invite Friends").fontWeight(.semibold)
+                    Text("Invite Friends").fontWeight(.medium)
                 }
                 .foregroundColor(.blue)
 //                .padding(.vertical, 10)

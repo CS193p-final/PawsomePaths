@@ -86,7 +86,7 @@ struct FBButton: View {
                     .frame(width: 190, height: 50, alignment: .center)
                 HStack {
                     Image("fb").scaleEffect(0.1).frame(width: 30, height: 50)
-                    Text(logged ? "Log out" : "Connect with FB").fontWeight(.semibold)
+                    Text(logged ? "Log out" : "Connect with FB").fontWeight(.medium)
                         .foregroundColor(.blue)
                 }
             }

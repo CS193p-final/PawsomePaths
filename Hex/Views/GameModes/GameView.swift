@@ -26,8 +26,6 @@ struct GameView: View {
     private let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     private let buttonColor = Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1)
     
-
-    
     var body: some View {
         let buttonFontSize: CGFloat = isIpad ? 60 : 30
         let gameTitle: CGFloat = isIpad ? 20 : 10
@@ -82,7 +80,7 @@ struct GameView: View {
                     .frame(width: geometry.size.width, height: geometry.size.width / gameTitle, alignment: .topLeading)
                     .padding(.bottom)
                     
-                    Text("Hex Game")
+                    Text("Pawsome Paths")
                         .font(Font.custom("KronaOne-Regular", size: geometry.size.width / gameTitle))
                         .foregroundColor(titleColor)
                     Text(hexGame.playerTurn).foregroundColor(hexGame.board.playerTurn == 1 ? red : blue)

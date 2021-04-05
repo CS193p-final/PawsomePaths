@@ -21,7 +21,7 @@ struct HexGrid<Item, ID, ItemView>: View where Item: Identifiable, ID: Hashable,
     }
     
     var body: some View {
-        GeometryReader { geometry in
+        GeometryReader { geometry in 
             let gridItems = Array(repeating: GridItem(.fixed(hexagonWidth(geometry.size.width)), spacing: 0), count: cols)
                 ZStack {
                     BlueBorder(cols: cols, frameHeight: hexagonHeight(geometry.size.width), frameWidth: hexagonWidth(geometry.size.width))
