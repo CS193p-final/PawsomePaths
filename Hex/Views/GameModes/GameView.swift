@@ -28,7 +28,7 @@ struct GameView: View {
     
     var body: some View {
         let buttonFontSize: CGFloat = isIpad ? 60 : 30
-        let gameTitle: CGFloat = isIpad ? 20 : 10
+        let gameTitle: CGFloat = isIpad ? 30 : 15
         let playerTurnFontSize: CGFloat = isIpad ? 50 : 25
         
         GeometryReader { geometry in
@@ -83,6 +83,7 @@ struct GameView: View {
                     Text("Pawsome Paths")
                         .font(Font.custom("KronaOne-Regular", size: geometry.size.width / gameTitle))
                         .foregroundColor(titleColor)
+                        .padding()
                     Text(hexGame.playerTurn).foregroundColor(hexGame.board.playerTurn == 1 ? red : blue)
                         .font(Font.custom("KronaOne-Regular", size: geometry.size.width / playerTurnFontSize))
 

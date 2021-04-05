@@ -29,7 +29,7 @@ struct OnlineGameView: View {
     
     var body: some View {
         let buttonFontSize: CGFloat = isIpad ? 60 : 30
-        let gameTitle: CGFloat = isIpad ? 20 : 10
+        let gameTitle: CGFloat = isIpad ? 30 : 15
         let playerTurnFontSize: CGFloat = isIpad ? 50 : 25
         
         let board = hexGame.board
@@ -84,9 +84,10 @@ struct OnlineGameView: View {
                         .frame(width: geometry.size.width, height: geometry.size.width / gameTitle, alignment: .topLeading)
                         .padding(.bottom)
                         
-                        Text("Hex Game")
+                        Text("Pawsome Paths")
                             .font(Font.custom("KronaOne-Regular", size: geometry.size.width / gameTitle))
                             .foregroundColor(titleColor)
+                            .padding()
                         Text(board.playerTurn == hexGame.localPlayer ? "Your turn" : "Opponent's turn").foregroundColor(board.playerTurn == 1 ? red : blue)
                             .font(Font.custom("KronaOne-Regular", size: geometry.size.width / playerTurnFontSize))
                         .padding()
