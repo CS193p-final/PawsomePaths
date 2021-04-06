@@ -33,7 +33,7 @@ struct FBButton: View {
                 uid = anonymousUID
             }
             else {
-                loginManager.logIn(permissions: ["email", "user_friends"], from: nil) { (result, error) in
+                loginManager.logIn(permissions: ["email"], from: nil) { (result, error) in
                     if error != nil {
                         print(error!.localizedDescription)
                         return
@@ -45,7 +45,7 @@ struct FBButton: View {
                                 print((error?.localizedDescription)!)
                                 return
                             }
-                            let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, picture, first_name, friends"])
+                            let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, picture, first_name"])
                             request.start { (_, res, _) in
                                 guard let profileData = res as? [String: Any] else { return }
                                 
