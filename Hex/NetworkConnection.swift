@@ -8,7 +8,7 @@
 import Foundation
 import Network
 
-class NetworkConnection {
+class NetworkConnection: ObservableObject {
     static let shared = NetworkConnection()
     let monitor = NWPathMonitor()
     private var status: NWPath.Status = .requiresConnection
@@ -28,6 +28,7 @@ class NetworkConnection {
         }
         let queue = DispatchQueue(label: "NetworkMonitor")
         monitor.start(queue: queue)
+        print("help why u not printing")
     }
     
     func stopMonitoring() {

@@ -15,7 +15,6 @@ struct WelcomeView: View {
     @State private var showSingleActionSheet = false
     @State private var showTwoPlayerActionSheet = false
     @State private var noConnectionAlert = false
-    @State private var isConnected = networkMonitor.isReachable || networkMonitor.isReachableCellular
 
     @AppStorage("anonymousUID") var anonymousUID = ""
     @AppStorage("UID") var uid = ""
@@ -34,6 +33,10 @@ struct WelcomeView: View {
         GeometryReader { geometry in
             ZStack {
                 Rectangle().foregroundColor(backgroundColor).zIndex(-1).ignoresSafeArea()
+                    .onAppear {
+                        WelcomeView.networkMonitor.startMonitoring()
+                        print("monitored")
+                    }
                 VStack {
                     // User name and avatar
                     if logged {
@@ -97,11 +100,12 @@ struct WelcomeView: View {
                     // Play Online Mode Button
                     Button {
                         playSound("MouseClick", type: "mp3", soundOn: true)
-                        if isConnected {
+                        if WelcomeView.networkMonitor.isReachable || WelcomeView.networkMonitor.isReachableCellular {
                             viewRouter.currentScreen = .onlineGame
                         } else {
                             noConnectionAlert = true
                         }
+                        print("Connection status:  \(WelcomeView.networkMonitor.isReachable) and cellular: \(WelcomeView.networkMonitor.isReachableCellular)")
                     } label: {
                         rectButton("Play Online")
                     }
@@ -129,7 +133,7 @@ struct WelcomeView: View {
             if !logged {
                 // try to sign-in with anonymous authentication
                 if anonymousUID != "" {
-                    print("User already loggedin anonymously. UID = \(anonymousUID)")
+                    print("User already logged in anonymously. UID = \(anonymousUID)")
                     uid = anonymousUID
                     return
                 }
@@ -139,7 +143,6 @@ struct WelcomeView: View {
                     uid = anonymousUID
                 }
             }
-            WelcomeView.networkMonitor.startMonitoring()
         }
     }
 }
