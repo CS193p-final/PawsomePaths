@@ -6,31 +6,31 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct Friend: Identifiable {
     var id: UUID = UUID()
     var name: String
+    var requestSent = false
 }
 
 struct FriendList: View {
-//    @State var activeTab = 2
-    
-    var friends: [Friend] = [
-        Friend(name: "Duong"),
-        Friend(name: "Linh"),
-        Friend(name: "Tuan"),
-        Friend(name: "Thien"),
-    ]
+    @EnvironmentObject var viewRouter: ViewRouter
+
+    var databaseRef: DatabaseReference! = Database.database().reference()
+
+    @State var friends: [Friend] = []
     
     var body: some View {
-//        TabView(selection: $activeTab) {
-//            Text("Home").tabItem { Image(systemName: "list.bullet") }.tag(1)
-//            Text("Friends").tabItem { Image(systemName: "person.2.fill") }.tag(2)
-//        }
-//        Text(friends[3].name)
-        NavigationView {
+        VStack {
+            Button (action: {
+                viewRouter.currentScreen = .welcome
+            }, label: {
+                Text("Back")
+            })
+            
             ScrollView {
-                ForEach(friends, id: \.id) { friend in
+                ForEach(friends) { friend in
                     HStack {
                         Image(systemName: "person.fill")
                             .resizable()
@@ -41,13 +41,13 @@ struct FriendList: View {
                         VStack(alignment: .leading, spacing: 10) {
                             Text(friend.name)
                             Button(action: {
-                                print("challenge")
+                                sendRequest(friend)
                             }, label: {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 5)
                                         .frame(height: 35)
                                         .foregroundColor(.blue)
-                                    Text("Challenge")
+                                    Text(friend.requestSent ? "Sent" : "Challenge")
                                         .font(.system(size: 13))
                                         .foregroundColor(.white)
                                 }
@@ -56,8 +56,35 @@ struct FriendList: View {
                         }
                     }
                 }
-            }.navigationTitle("Friends")
+            }
+        
         }
+        .onAppear {
+            if let currentUser = Auth.auth().currentUser {
+                databaseRef.child("users/\(currentUser.uid)/friends").getData { (error, snapshot) in
+                    if let error = error {
+                        print("Error getting user's friends: \(error)")
+                        return
+                    }
+                    if !snapshot.exists() {
+                        print("Snapshot is empty")
+                        return
+                    }
+                    let friendList = snapshot.value as! [String: String]
+                    
+                    for friend in friendList.values {
+                        friends.append(Friend(name: friend))
+                    }
+                }
+            }
+            
+        }
+
+    }
+    
+    private func sendRequest(_ friend: Friend) {
+        guard let id = friends.firstIndex(matching: friend) else { return }
+        friends[id].requestSent = true
     }
 }
 

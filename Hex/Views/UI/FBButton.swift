@@ -20,6 +20,7 @@ struct FBButton: View {
     @AppStorage("firstName") var firstName = ""
     @State var loginManager = LoginManager()
     
+    var databaseRef: DatabaseReference! = Database.database().reference()
     private var fetchImageCancellable: AnyCancellable?
     
     var body: some View {
@@ -33,7 +34,7 @@ struct FBButton: View {
                 uid = anonymousUID
             }
             else {
-                loginManager.logIn(permissions: ["email"], from: nil) { (result, error) in
+                loginManager.logIn(permissions: ["email", "user_friends"], from: nil) { (result, error) in
                     if error != nil {
                         print(error!.localizedDescription)
                         return
@@ -45,14 +46,33 @@ struct FBButton: View {
                                 print((error?.localizedDescription)!)
                                 return
                             }
-                            let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, picture, first_name"])
+                            
+                            if let currentFBUser = AccessToken.current {
+                                databaseRef.child("facebook_users/\(currentFBUser.userID)").setValue(Auth.auth().currentUser?.uid)
+                            }
+                            
+                            guard let firebaseUserID = Auth.auth().currentUser?.uid else { return; }
+                            
+                            let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, picture, first_name, friends"])
                             request.start { (_, res, _) in
                                 guard let profileData = res as? [String: Any] else { return }
                                 
                                 print("profile data = \(profileData)")
-                                
                                 email = profileData["email"] as! String
                                 firstName = profileData["first_name"] as! String
+                                databaseRef.child("users/\(firebaseUserID)/name").setValue(firstName)
+                                databaseRef.child("users/\(firebaseUserID)/email").setValue(email)
+                                
+                                // Get friend list
+                                if let friends = (profileData["friends"] as? [String: Any])?["data"] as? [[String:Any]] {
+                                    print("friends = \(friends)")
+                                    for friend in friends {
+                                        guard let friendID = friend["id"] else { continue }
+                                        guard let friendName = friend["name"] else { continue }
+                                        databaseRef.child("users/\(firebaseUserID)/friends/\(friendID)").setValue(friendName)
+                                    }
+                                }
+                                
                                 // The url is nested 3 layers deep into the result so it's pretty messy
                                 // profileData.picture.data.url
                                 if let imageURL = ((profileData["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
