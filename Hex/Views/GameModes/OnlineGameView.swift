@@ -24,8 +24,7 @@ struct OnlineGameView: View {
     private let titleColor = Color(red: 0.82422, green: 0.37891, blue: 0.207, opacity: 1)
     let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     let buttonColor = Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1)
-    
-
+    @State private var showNotice = false
     
     var body: some View {
         let buttonFontSize: CGFloat = isIpad ? 60 : 30
@@ -133,10 +132,29 @@ struct OnlineGameView: View {
         }
         else {
             LoadingView(game: hexGame)
+                .actionSheet(isPresented: $showNotice) {
+                    ActionSheet(title: Text("No match found"),
+                                message: Text("Yikes, seems like you're the only one online at this moment. Please exit and try again. "),
+                                buttons: [
+                            .default(Text("OK")) {
+                                viewRouter.currentScreen = .welcome
+                            },
+                            .default(Text("Cancel")) {
+                                showNotice = false
+                            }
+                ])
+            }
+            .onAppear {
+                Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false) { timer in
+                    showNotice = true
+                    timer.invalidate()
+               }
+            }
         }
-        
     }
 }
+
+
 
 struct onlineSettingsView: View {
     @ObservedObject var game: GameMode

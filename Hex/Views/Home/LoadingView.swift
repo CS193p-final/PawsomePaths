@@ -27,8 +27,6 @@ struct LoadingView: View {
                 .padding()
                 .onTapGesture {
                     playSound("MouseClick", type: "mp3", soundOn: game.soundOn)
-                    game.exitMatch()
-                    viewRouter.currentScreen = .welcome
             }
             if game.ready {
                 VStack {
