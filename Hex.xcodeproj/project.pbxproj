@@ -76,6 +76,7 @@
 		C6029D3826014A04005FBD3B /* FBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6029D3726014A04005FBD3B /* FBButton.swift */; };
 		C6227AD525F2B085008E301E /* Deque.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6227AD425F2B085008E301E /* Deque.swift */; };
 		C627D3D026051DC400EA0DD5 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C627D3CF26051DC400EA0DD5 /* CountdownTimer.swift */; };
+		C63E4842261E39E800DC2EFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C63E4841261E39E800DC2EFF /* GoogleService-Info.plist */; };
 		C644BB1525FEA25A008A7B64 /* OnlineGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644BB1425FEA25A008A7B64 /* OnlineGame.swift */; };
 		C64CC855260130D40044B780 /* OnlineGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64CC854260130D40044B780 /* OnlineGameView.swift */; };
 		C64D0D1D26028DA5001E6706 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D0D1C26028DA5001E6706 /* UIImage+Extension.swift */; };
@@ -84,7 +85,6 @@
 		C6596A3825DB1BA500A0F94B /* TwoPlayersGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A3725DB1BA500A0F94B /* TwoPlayersGame.swift */; };
 		C6596A4725DB40B400A0F94B /* MonteCarlo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6596A4625DB40B400A0F94B /* MonteCarlo.swift */; };
 		C663D3AD2618158D002A711D /* FriendList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C663D3AC2618158D002A711D /* FriendList.swift */; };
-		C6726C56260BC5B7003814B7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6726C55260BC5B7003814B7 /* GoogleService-Info.plist */; };
 		C696A51B2605319F0073D313 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696A51A2605319F0073D313 /* MainView.swift */; };
 		C696A51E260531EC0073D313 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C696A51D260531EC0073D313 /* ViewRouter.swift */; };
 		C699737925D9F4DB00337F70 /* HexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699737825D9F4DB00337F70 /* HexApp.swift */; };
@@ -176,6 +176,7 @@
 		C6029D3726014A04005FBD3B /* FBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBButton.swift; sourceTree = "<group>"; };
 		C6227AD425F2B085008E301E /* Deque.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deque.swift; sourceTree = "<group>"; };
 		C627D3CF26051DC400EA0DD5 /* CountdownTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
+		C63E4841261E39E800DC2EFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C644BB1425FEA25A008A7B64 /* OnlineGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineGame.swift; sourceTree = "<group>"; };
 		C64CC854260130D40044B780 /* OnlineGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineGameView.swift; sourceTree = "<group>"; };
 		C64D0D1C26028DA5001E6706 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -184,7 +185,6 @@
 		C6596A3725DB1BA500A0F94B /* TwoPlayersGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoPlayersGame.swift; sourceTree = "<group>"; };
 		C6596A4625DB40B400A0F94B /* MonteCarlo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonteCarlo.swift; sourceTree = "<group>"; };
 		C663D3AC2618158D002A711D /* FriendList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendList.swift; sourceTree = "<group>"; };
-		C6726C55260BC5B7003814B7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C696A51A2605319F0073D313 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		C696A51D260531EC0073D313 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 		C699737525D9F4DB00337F70 /* Hex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hex.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -407,7 +407,7 @@
 				C6596A3125DB11D900A0F94B /* Extensions */,
 				C6596A2D25DB0AA400A0F94B /* Game */,
 				C699737825D9F4DB00337F70 /* HexApp.swift */,
-				C6726C55260BC5B7003814B7 /* GoogleService-Info.plist */,
+				C63E4841261E39E800DC2EFF /* GoogleService-Info.plist */,
 				C699738125D9F4DC00337F70 /* Info.plist */,
 				C699737E25D9F4DC00337F70 /* Preview Content */,
 				C699739225D9FEF300337F70 /* Views */,
@@ -558,6 +558,7 @@
 				C1781A8A260014AD003A1168 /* move.wav in Resources */,
 				C16DA16925FC65620059C426 /* 128.png in Resources */,
 				C1781A88260014AD003A1168 /* lose.mp3 in Resources */,
+				C63E4842261E39E800DC2EFF /* GoogleService-Info.plist in Resources */,
 				C16DA16A25FC65620059C426 /* 512.png in Resources */,
 				C699738025D9F4DC00337F70 /* Preview Assets.xcassets in Resources */,
 				C16DA16425FC65620059C426 /* 72.png in Resources */,
@@ -572,7 +573,6 @@
 				C69FD62925F95D040077394D /* WaterDrop.mp3 in Resources */,
 				C16DA15E25FC65620059C426 /* 60.png in Resources */,
 				C16DA16225FC65620059C426 /* 58.png in Resources */,
-				C6726C56260BC5B7003814B7 /* GoogleService-Info.plist in Resources */,
 				C16DA15D25FC65620059C426 /* 76.png in Resources */,
 				C16DA17925FC65620059C426 /* 144.png in Resources */,
 				C69FD62325F957570077394D /* KeyboardTap.mp3 in Resources */,

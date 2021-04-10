@@ -11,6 +11,7 @@ import Firebase
 struct Friend: Identifiable {
     var id: UUID = UUID()
     var name: String
+    var image: UIImage?
     var requestSent = false
 }
 
@@ -18,7 +19,7 @@ struct FriendList: View {
     @EnvironmentObject var viewRouter: ViewRouter
 
     var databaseRef: DatabaseReference! = Database.database().reference()
-
+    var storageRef = Storage.storage().reference()
     @State var friends: [Friend] = []
     
     var body: some View {
@@ -32,12 +33,23 @@ struct FriendList: View {
             ScrollView {
                 ForEach(friends) { friend in
                     HStack {
-                        Image(systemName: "person.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .clipped()
-                            .clipShape(Circle())
-                            .frame(width: 80, height: 80)
+                        Group {
+                            if let uiImage = friend.image {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipped()
+                                    .clipShape(Circle())
+                                    .frame(width: 80, height: 80)
+                            } else {
+                                Image(systemName: "person.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipped()
+                                    .clipShape(Circle())
+                                    .frame(width: 80, height: 80)
+                            }
+                        }
                         VStack(alignment: .leading, spacing: 10) {
                             Text(friend.name)
                             Button(action: {
@@ -72,14 +84,26 @@ struct FriendList: View {
                     }
                     let friendList = snapshot.value as! [String: String]
                     
-                    for friend in friendList.values {
-                        friends.append(Friend(name: friend))
+                    for (fbID, name) in friendList {
+                        print(fbID, name)
+                        databaseRef.child("facebook_users/\(fbID)").getData { (error, snapshot) in
+                            guard let friendID = snapshot.value as? String else {
+                                friends.append(Friend(name: name, image: nil))
+                                return
+                            }
+                            storageRef.child("users/\(friendID)/avatar.png").getData(maxSize: 1024*1024) { (data, error) in
+                                if let error = error {
+                                    print("Can't load profile pic. Error = \(error.localizedDescription)\nUsing default image")
+                                    friends.append(Friend(name: name, image: nil))
+                                    return
+                                }
+                                friends.append(Friend(name: name, image: UIImage(data: data!)))
+                            }
+                        }
                     }
                 }
             }
-            
         }
-
     }
     
     private func sendRequest(_ friend: Friend) {

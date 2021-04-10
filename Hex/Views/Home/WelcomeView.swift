@@ -28,6 +28,8 @@ struct WelcomeView: View {
     private var heightRatio = CGFloat(1/8)
     private var buttonFontSizeRatio = CGFloat(1/30)
     private let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
+    private let gameTitle: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 20 : 10
+    private let playerTurnFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 50 : 25
 
     var body: some View {
         GeometryReader { geometry in
@@ -37,7 +39,9 @@ struct WelcomeView: View {
                         WelcomeView.networkMonitor.startMonitoring()
                         print("monitored")
                     }
-                VStack {
+                
+                ZStack {
+                    Rectangle().foregroundColor(hunterGreen).ignoresSafeArea()
                     // User name and avatar
                     if logged {
                         VStack {
@@ -45,6 +49,7 @@ struct WelcomeView: View {
                             let avatar = UIImage(fromDiskWithFileName: "avatar")
                             if avatar != nil {
                                 Image(uiImage: avatar!).clipShape(Circle())
+                                    .frame(width: 80, height: 80)
                             }
                         }.onTapGesture {
                             viewRouter.currentScreen = .friendList
@@ -54,6 +59,9 @@ struct WelcomeView: View {
                         UserSection()
                             .frame(width: 80, height: 80)
                     }
+                }
+                    .frame(width: geometry.size.width, height: geometry.size.width * 2 / gameTitle, alignment: .topLeading)
+                VStack {
                     
                     // Two Player Mode Button
                     Button {

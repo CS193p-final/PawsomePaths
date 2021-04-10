@@ -21,6 +21,8 @@ struct FBButton: View {
     @State var loginManager = LoginManager()
     
     var databaseRef: DatabaseReference! = Database.database().reference()
+    var storageRef: StorageReference! = Storage.storage().reference()
+    
     private var fetchImageCancellable: AnyCancellable?
     
     var body: some View {
@@ -52,7 +54,7 @@ struct FBButton: View {
                             }
                             
                             guard let firebaseUserID = Auth.auth().currentUser?.uid else { return; }
-                            
+
                             let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, picture, first_name, friends"])
                             request.start { (_, res, _) in
                                 guard let profileData = res as? [String: Any] else { return }
@@ -79,6 +81,20 @@ struct FBButton: View {
                                     //Download image from imageURL
                                     do {
                                         let data = try Data(contentsOf: URL(string: imageURL)!)
+
+                                        // Upload the file to the path "images/rivers.jpg"
+                                        let metadata = StorageMetadata()
+                                        metadata.contentType = "image/png"
+                                        storageRef.child("users/\(firebaseUserID)/avatar.png").putData(data, metadata: metadata) { (metadata, error) in
+                                            guard metadata != nil else {
+                                                // Uh-oh, an error occurred!
+                                                print("Uh-oh, an error occurred!")
+                                                print(error.debugDescription)
+                                                return
+                                            }
+                                            print("Uploaded")
+                                        }
+                                        
                                         let avatar = UIImage(data: data)
                                         // save avatar to application sandbox
                                         avatar?.saveToDisk(fileName: "avatar")
