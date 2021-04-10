@@ -142,6 +142,7 @@ struct OnlineGameView: View {
                 .alert(isPresented: $showNotice) {
                     Alert(title: Text("No match found"), message: Text("Yikes, seems like you're the only on online at this moment. Please exit and try again"), primaryButton:
                             .default(Text("OK"), action: {
+                                hexGame.exitMatch()
                                 viewRouter.currentScreen = .welcome
                             })
                     , secondaryButton: .cancel())
