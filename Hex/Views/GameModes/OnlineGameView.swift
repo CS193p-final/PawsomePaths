@@ -132,23 +132,19 @@ struct OnlineGameView: View {
         }
         else {
             LoadingView(game: hexGame)
-                .actionSheet(isPresented: $showNotice) {
-                    ActionSheet(title: Text("No match found"),
-                                message: Text("Yikes, seems like you're the only one online at this moment. Please exit and try again. "),
-                                buttons: [
-                            .default(Text("OK")) {
+                .onAppear {
+                    Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false) { timer in
+                        showNotice = true
+                        timer.invalidate()
+                        print("start counting")
+                   }
+                }
+                .alert(isPresented: $showNotice) {
+                    Alert(title: Text("No match found"), message: Text("Yikes, seems like you're the only on online at this moment. Please exit and try again"), primaryButton:
+                            .default(Text("OK"), action: {
                                 viewRouter.currentScreen = .welcome
-                            },
-                            .default(Text("Cancel")) {
-                                showNotice = false
-                            }
-                ])
-            }
-            .onAppear {
-                Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false) { timer in
-                    showNotice = true
-                    timer.invalidate()
-               }
+                            })
+                    , secondaryButton: .cancel())
             }
         }
     }
