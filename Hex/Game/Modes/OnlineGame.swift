@@ -104,7 +104,7 @@ class OnlineGame: GameMode {
     
     override func newGame(size: Int) {
         ready = false
-        self.board = GameBoard(size: size, musicOn: board.musicOn, soundOn: board.soundOn)
+        self.board = GameBoard(size: size)
         exitMatch()
         joinWaitQueue()
     }

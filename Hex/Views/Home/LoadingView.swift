@@ -16,6 +16,8 @@ struct LoadingView: View {
     private let gameTitle: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 20 : 10
     private let playerTurnFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 50 : 25
     private let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
+    @AppStorage("musicOn") var musicOn = false
+    @AppStorage("soundOn") var soundOn = false
 
     
     var body: some View {
@@ -26,7 +28,7 @@ struct LoadingView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
                 .onTapGesture {
-                    playSound("MouseClick", type: "mp3", soundOn: game.soundOn)
+                    playSound("MouseClick", type: "mp3", soundOn: soundOn)
             }
             if game.ready {
                 VStack {

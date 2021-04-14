@@ -17,6 +17,9 @@ struct GameView: View {
     @State private var showSettingsForPad = false
     @ObservedObject var hexGame: GameMode
     @State var continueGame: Bool?
+    @AppStorage("musicOn") var musicOn = false
+    @AppStorage("soundOn") var soundOn = false
+    
     var isIpad = UIDevice.current.userInterfaceIdiom == .pad
 
     private let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
@@ -34,8 +37,8 @@ struct GameView: View {
         GeometryReader { geometry in
             Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-2)
                 .onAppear{
-                    playMusic("musicBox", type: "mp3", musicOn: hexGame.musicOn)
-                    hexGame.board = (continueGame != nil && continueGame == true) ? hexGame.board : GameBoard(size: hexGame.board.size, musicOn: hexGame.board.musicOn, soundOn: hexGame.board.soundOn)
+                    playMusic("musicBox", type: "mp3", musicOn: musicOn)
+                    hexGame.board = (continueGame != nil && continueGame == true) ? hexGame.board : GameBoard(size: hexGame.board.size)
                     showResult = false
                 }
                 .onDisappear {
@@ -51,7 +54,7 @@ struct GameView: View {
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .onTapGesture {
-                                    playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
+                                    playSound("MouseClick", type: "mp3", soundOn: soundOn)
                                     viewRouter.currentScreen = .welcome
                                 }
                             Image(systemName: "gearshape").imageScale(.large) .foregroundColor(.white)
@@ -64,7 +67,7 @@ struct GameView: View {
                                     } else {
                                         showSettingsForPad = !showSettingsForPad
                                     }
-                                    playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
+                                    playSound("MouseClick", type: "mp3", soundOn: soundOn)
                                 }
                                 .onAppear {
                                     self.modalManager.newModal(position: .closed) {
@@ -90,7 +93,7 @@ struct GameView: View {
                         ZStack {
                             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                                 CellView(cell: cell).onTapGesture {
-                                    playSound("move", type: "wav", soundOn: hexGame.soundOn)
+                                    playSound("move", type: "wav", soundOn: soundOn)
                                     if !hexGame.gameEnded { // only when game has not ended
                                         hexGame.play(cellId: cell.id)
                                     }
@@ -98,7 +101,7 @@ struct GameView: View {
                             }
                             .onChange(of: hexGame.gameEnded, perform: { value in
                                 if hexGame.gameEnded {
-                                    playSound(hexGame.result == "You lose" ? "lose" : "win", type: "mp3", soundOn: hexGame.soundOn)
+                                    playSound(hexGame.result == "You lose" ? "lose" : "win", type: "mp3", soundOn: soundOn)
                                 }
                             })
                             .onReceive(self.hexGame.$board, perform: { newValue in
@@ -109,7 +112,7 @@ struct GameView: View {
                             .rotationEffect(Angle.degrees(90))
                             .popup(isPresented: $showResult) {
                                 ZStack {
-                                    resultReport(game: hexGame, soundOn: hexGame.soundOn, showResult: showResult)
+                                    resultReport(game: hexGame, soundOn: soundOn, showResult: showResult)
                                 }
                             }
                         }
@@ -133,15 +136,7 @@ struct newGameButton: View {
     
     var body: some View {
         Button(action: {
-            let soundOn = game.soundOn
-            let musicOn = game.musicOn
             showResult ? game.newGame(size: game.board.size) : nil
-            if game.soundOn != soundOn {
-                game.toggleSound()
-            }
-            if game.musicOn != musicOn {
-                game.toggleMusic()
-            }
         }
     ) {
             RoundedRectangle(cornerRadius: buttonFontSize)
@@ -216,6 +211,8 @@ struct settingsView: View {
     private let wildBlueYonder = Color(red: 0.71875, green: 0.71875, blue: 0.8164, opacity: 1)
     private let headerFontSize: CGFloat = 15
     @EnvironmentObject var modalManager: ModalManager
+    @AppStorage("musicOn") var musicOn = false
+    @AppStorage("soundOn") var soundOn = false
 
     var body: some View {
         VStack {
@@ -243,20 +240,20 @@ struct settingsView: View {
             HStack {
                 Section(header: Text("Sound").font(Font.custom("KronaOne-Regular", size: headerFontSize))) {
                     Button {
-                        game.toggleSound()
+                        soundOn = !soundOn
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center) .foregroundColor(lightCyan)
-                            Image(systemName: game.soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
+                            Image(systemName: soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
                         }
                     }
                 }
 
                 Section(header: Text("Music").font(Font.custom("KronaOne-Regular", size: headerFontSize))) {
                     Button {
-                        game.toggleMusic()
-                        if game.musicOn {
-                            playMusic("musicBox", type: "mp3", musicOn: game.musicOn)
+                        musicOn = !musicOn
+                        if musicOn {
+                            playMusic("musicBox", type: "mp3", musicOn: musicOn)
                         } else {
                             stopMusic("musicBox", type: "mp3")
                         }
@@ -264,7 +261,7 @@ struct settingsView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)
                                 .foregroundColor(lightCyan)
-                            Image(systemName: game.musicOn ? "music.note" : "play.slash").imageScale(.large)
+                            Image(systemName: musicOn ? "music.note" : "play.slash").imageScale(.large)
                         }
                     }
                 }

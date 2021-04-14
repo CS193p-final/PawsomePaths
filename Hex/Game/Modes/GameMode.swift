@@ -19,12 +19,12 @@ class GameMode: ObservableObject {
     private (set) var minSize: Int = 3
     
     init() {
-        self.board = GameBoard(size: 11, musicOn: true, soundOn: true)
+        self.board = GameBoard(size: 11)
     }
     
     init(name: String) {
         let defaultsKey = "GameMode.\(name)"
-        board = GameBoard(json: UserDefaults.standard.data(forKey: defaultsKey)) ?? GameBoard(size: 11, musicOn: true, soundOn: true)
+        board = GameBoard(json: UserDefaults.standard.data(forKey: defaultsKey)) ?? GameBoard(size: 11)
         autoSaveCancellable = $board.sink { board in
             UserDefaults.standard.setValue(board.json, forKey: defaultsKey)
         }
@@ -63,21 +63,22 @@ class GameMode: ObservableObject {
         }
     }
     
-    var soundOn: Bool {
-        board.soundOn
-    }
-    
-    var musicOn: Bool {
-        board.musicOn
-    }
+//    var soundOn: Bool {
+//        board.soundOn
+//    }
+//
+//    var musicOn: Bool {
+//        board.musicOn
+//    }
     
     // MARK: - Intent(s)
     func play(cellId: Int) {
         board.play(move: BoardPosition(id: cellId, cols: board.size))
+        //playSound("error", type: "wav", soundOn: soundOn)
     }
     
     func newGame(size: Int) {
-        self.board = GameBoard(size: size, musicOn: board.musicOn, soundOn: board.soundOn)
+        self.board = GameBoard(size: size)
     }
     
     func incrementSize() {
@@ -94,11 +95,11 @@ class GameMode: ObservableObject {
         }
     }
     
-    func toggleSound() {
-        board.toggleSound()
-    }
-    
-    func toggleMusic() {
-        board.toggleMusic()
-    }
+//    func toggleSound() {
+//        board.toggleSound()
+//    }
+//
+//    func toggleMusic() {
+//        board.toggleMusic()
+//    }
 }

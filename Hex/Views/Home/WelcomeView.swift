@@ -15,14 +15,17 @@ struct WelcomeView: View {
     @State private var showSingleActionSheet = false
     @State private var showTwoPlayerActionSheet = false
     @State private var noConnectionAlert = false
+    @State private var showMenu = false
 
     @AppStorage("anonymousUID") var anonymousUID = ""
     @AppStorage("UID") var uid = ""
     @AppStorage("logged") var logged = false
     @AppStorage("email") var email = ""
     @AppStorage("firstName") var firstName = ""
+    @AppStorage("musicOn") var music = false
+    @AppStorage("soundOn") var sound = false
     
-    
+    private let isPad = UIDevice.current.userInterfaceIdiom == .pad
     private let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     private var widthRatio = CGFloat(UIDevice.current.userInterfaceIdiom == .pad ? 1/2 : 1)
     private var heightRatio = CGFloat(1/8)
@@ -40,9 +43,15 @@ struct WelcomeView: View {
                         print("monitored")
                     }
                 Image(systemName: "line.horizontal.3.circle.fill")
-                    .imageScale(.large)
+                    .scaleEffect(isPad ? 2 : 1.5)
                     .foregroundColor(hunterGreen)
-                    .position(x: 20, y: 20)
+                    .position(x: isPad ? 40 : 20, y: isPad ? 40: 20)
+                    .onTapGesture {
+                        showMenu = true
+                    }
+                    .popover(isPresented: $showMenu) {
+                        Menu()
+                    }
 
                 VStack {
                     VStack {
@@ -169,6 +178,11 @@ func rectButton(_ message: String, width: CGFloat, height: CGFloat) -> some View
     }
 }
 
+struct Menu: View {
+    var body: some View {
+        Text("nothing")
+    }
+}
 
 struct UserSection: View {
     var body: some View {

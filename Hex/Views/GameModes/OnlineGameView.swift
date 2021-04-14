@@ -16,6 +16,8 @@ struct OnlineGameView: View {
     @State private var showSettingsForPhone = false
     @State private var showSettingsForPad = false
     @ObservedObject var hexGame: OnlineGame
+    @AppStorage("musicOn") var musicOn = false
+    @AppStorage("soundOn") var soundOn = false
     var isIpad = UIDevice.current.userInterfaceIdiom == .pad
     
     let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
@@ -37,7 +39,7 @@ struct OnlineGameView: View {
             GeometryReader { geometry in
                 Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-2)
                     .onAppear{
-                        playMusic("musicBox", type: "mp3", musicOn: hexGame.musicOn)
+                        playMusic("musicBox", type: "mp3", musicOn: musicOn)
                         showResult = false
                     }
                     .onDisappear {
@@ -53,7 +55,7 @@ struct OnlineGameView: View {
                                     .foregroundColor(.white)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .onTapGesture {
-                                        playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
+                                        playSound("MouseClick", type: "mp3", soundOn: soundOn)
                                         hexGame.exitMatch()
                                         viewRouter.currentScreen = .welcome
                                     }
@@ -68,7 +70,7 @@ struct OnlineGameView: View {
                                         } else {
                                             showSettingsForPad = !showSettingsForPad
                                         }
-                                        playSound("MouseClick", type: "mp3", soundOn: hexGame.soundOn)
+                                        playSound("MouseClick", type: "mp3", soundOn: soundOn)
                                     }                .onAppear {
                                         self.modalManager.newModal(position: .closed) {
                                             settingsView(game: hexGame)
@@ -99,7 +101,7 @@ struct OnlineGameView: View {
                                 }
                                 HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                                     CellView(cell: cell).onTapGesture {
-                                        playSound("move", type: "wav", soundOn: hexGame.soundOn)
+                                        playSound("move", type: "wav", soundOn: soundOn)
                                         if !hexGame.gameEnded { // only when game has not ended
                                             hexGame.play(cellId: cell.id)
                                         }
@@ -107,7 +109,7 @@ struct OnlineGameView: View {
                                 }
                                 .onChange(of: hexGame.gameEnded, perform: { value in
                                     if hexGame.gameEnded {
-                                        playSound(hexGame.result == "You lose" ? "lose" : "win", type: "mp3", soundOn: hexGame.soundOn)
+                                        playSound(hexGame.result == "You lose" ? "lose" : "win", type: "mp3", soundOn: soundOn)
                                     }
                                 })
                                 .rotationEffect(Angle(degrees: 90))
@@ -118,7 +120,7 @@ struct OnlineGameView: View {
                                 })
                                 .popup(isPresented: $showResult) {
                                     ZStack {
-                                        resultReport(game: hexGame, soundOn: hexGame.soundOn, showResult: showResult)
+                                        resultReport(game: hexGame, soundOn: soundOn, showResult: showResult)
                                     }
                                 }
                             }
@@ -160,32 +162,34 @@ struct onlineSettingsView: View {
     private let queenBlue = Color(red: 0.26953, green: 0.41, blue: 0.5625)
     private let headerFontSize: CGFloat = 15
     private let wildBlueYonder = Color(red: 0.71875, green: 0.71875, blue: 0.8164, opacity: 1)
+    @AppStorage("musicOn") var musicOn = false
+    @AppStorage("soundOn") var soundOn = false
 
     var body: some View {
         HStack {
             Section(header: Text("Sound")) {
                 Button {
-                    game.toggleSound()
+                    soundOn = !soundOn
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center) .foregroundColor(lightCyan)
-                        Image(systemName: game.soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
+                        Image(systemName: soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
                     }
                 }
             }
 
             Section(header: Text("Music")) {
                 Button {
-                    game.toggleMusic()
-                    if game.musicOn {
-                        playMusic("musicBox", type: "mp3", musicOn: game.musicOn)
+                    musicOn = !musicOn
+                    if musicOn {
+                        playMusic("musicBox", type: "mp3", musicOn: musicOn)
                     } else {
                         stopMusic("musicBox", type: "mp3")
                     }
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)    .foregroundColor(lightCyan)
-                        Image(systemName: game.musicOn ? "music.note" : "play.slash").imageScale(.large)
+                        Image(systemName: musicOn ? "music.note" : "play.slash").imageScale(.large)
                     }
                 }
             }
