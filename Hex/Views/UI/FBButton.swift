@@ -13,6 +13,10 @@ import FBSDKLoginKit
 struct FBButton: View {
     @EnvironmentObject var viewRouter: ViewRouter
     
+    var width: CGFloat
+    var height: CGFloat
+    var isPad = UIDevice.current.userInterfaceIdiom == .pad
+    
     @AppStorage("anonymousUID") var anonymousUID = ""
     @AppStorage("UID") var uid = ""
     @AppStorage("logged") var logged = false
@@ -22,10 +26,14 @@ struct FBButton: View {
     
     var databaseRef: DatabaseReference! = Database.database().reference()
     var storageRef: StorageReference! = Storage.storage().reference()
-    
-    private var fetchImageCancellable: AnyCancellable?
+
+    var fetchImageCancellable: AnyCancellable?
     
     var body: some View {
+        let padWidth = width / 4
+        let phoneWidth = width / 1.7
+        let padHeight = height / 18
+        let phoneHeight = height / 12
         Button {
             if logged {
                 loginManager.logOut()
@@ -116,16 +124,17 @@ struct FBButton: View {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke()
                     .foregroundColor(.blue)
-                    .frame(width: 190, height: 50, alignment: .center)
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(.white)
-                    .frame(width: 190, height: 50, alignment: .center)
+            }
+            .frame(width: isPad ? padWidth : phoneWidth, height: isPad ? padHeight : phoneHeight, alignment: .center)
+            .overlay(
                 HStack {
                     Image("fb").scaleEffect(0.1).frame(width: 30, height: 50)
                     Text(logged ? "Log out" : "Connect with FB").fontWeight(.medium)
                         .foregroundColor(.blue)
                 }
-            }
+            )
         }
 
     }

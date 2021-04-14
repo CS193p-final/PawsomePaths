@@ -28,7 +28,6 @@ class NetworkConnection: ObservableObject {
         }
         let queue = DispatchQueue(label: "NetworkMonitor")
         monitor.start(queue: queue)
-        print("help why u not printing")
     }
     
     func stopMonitoring() {

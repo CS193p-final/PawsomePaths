@@ -39,36 +39,39 @@ struct WelcomeView: View {
                         WelcomeView.networkMonitor.startMonitoring()
                         print("monitored")
                     }
-                
-                ZStack {
-                    Rectangle().foregroundColor(hunterGreen).ignoresSafeArea()
-                    // User name and avatar
-                    if logged {
-                        VStack {
-                            Text("Welcome \(firstName)").foregroundColor(.black)
-                            let avatar = UIImage(fromDiskWithFileName: "avatar")
-                            if avatar != nil {
-                                Image(uiImage: avatar!).clipShape(Circle())
-                                    .frame(width: 80, height: 80)
-                            }
-                        }.onTapGesture {
-                            viewRouter.currentScreen = .friendList
-                        }
-                    } else {
-                        Text("Welcome guest").foregroundColor(.black)
-                        UserSection()
-                            .frame(width: 80, height: 80)
-                    }
-                }
-                    .frame(width: geometry.size.width, height: geometry.size.width * 2 / gameTitle, alignment: .topLeading)
+                Image(systemName: "line.horizontal.3.circle.fill")
+                    .imageScale(.large)
+                    .foregroundColor(hunterGreen)
+                    .position(x: 20, y: 20)
+
                 VStack {
+                    VStack {
+                        // User name and avatar
+                        if logged {
+                            VStack {
+                                Text("Welcome \(firstName)").foregroundColor(.black)
+                                let avatar = UIImage(fromDiskWithFileName: "avatar")
+                                if avatar != nil {
+                                    Image(uiImage: avatar!).clipShape(Circle())
+                                        .frame(width: 80, height: 80)
+                                }
+                            }.onTapGesture {
+                                viewRouter.currentScreen = .friendList
+                            }
+                        } else {
+                            Text("Welcome guest").foregroundColor(.black)
+                            UserSection()
+                                .frame(width: 80, height: 80)
+                        }
+                    }
+                    //.frame(width: geometry.size.width, height: geometry.size.width * 2 / gameTitle, alignment: .center)
                     
                     // Two Player Mode Button
                     Button {
                         playSound("MouseClick", type: "mp3", soundOn: true)
                         showTwoPlayerActionSheet = true
                     } label: {
-                        rectButton("Two Players")
+                        rectButton("Two Players", width: geometry.size.width, height: geometry.size.height)
                     }
                     .actionSheet(isPresented: $showTwoPlayerActionSheet) {
                         ActionSheet(title: Text("Two Players Game"), buttons: [
@@ -89,7 +92,7 @@ struct WelcomeView: View {
                         playSound("MouseClick", type: "mp3", soundOn: true)
                         showSingleActionSheet = true
                     } label: {
-                        rectButton("Single Player")
+                        rectButton("Single Player", width: geometry.size.width, height: geometry.size.height)
                     }
                     .actionSheet(isPresented: $showSingleActionSheet) {
                         ActionSheet(title: Text("Single Player Game"), buttons: [
@@ -115,7 +118,7 @@ struct WelcomeView: View {
                         }
                         print("Connection status:  \(WelcomeView.networkMonitor.isReachable) and cellular: \(WelcomeView.networkMonitor.isReachableCellular)")
                     } label: {
-                        rectButton("Play Online")
+                        rectButton("Play Online", width: geometry.size.width, height: geometry.size.height)
                     }
                     .alert(isPresented: $noConnectionAlert) { () -> Alert in
                         Alert(title: Text("No Connection"), message: Text("You need Internet connection to play online. Please check your connection and try again"), dismissButton: .cancel())
@@ -126,14 +129,13 @@ struct WelcomeView: View {
                         playSound("MouseClick", type: "mp3", soundOn: true)
                         viewRouter.currentScreen = .howToPlay
                     } label: {
-                        rectButton("How to Play")
+                        rectButton("How to Play", width: geometry.size.width, height: geometry.size.height)
                     }
                     
                     // Connect with Facebook button
-                    FBButton()
-                    
+                    FBButton(width: geometry.size.width, height: geometry.size.height)
                     // Invite friends button
-                    InviteButton()
+                    InviteButton(width: geometry.size.width, height: geometry.size.height)
                 }
             }
         }
@@ -155,14 +157,15 @@ struct WelcomeView: View {
     }
 }
 
-func rectButton(_ message: String) -> some View {
+func rectButton(_ message: String, width: CGFloat, height: CGFloat) -> some View {
+    let isPad = UIDevice.current.userInterfaceIdiom == .pad
     return ZStack {
         RoundedRectangle(cornerRadius: 10).opacity(0.3)
-            .frame(width: 250, height: UIDevice.current.userInterfaceIdiom == .pad ? 75 : 65, alignment: .center)
+            .frame(width: isPad ? width / 3 : width / 1.5, height: isPad ? height / 14 : height / 9, alignment: .center)
             .overlay(Text(message))
             .font(Font.custom("KronaOne-Regular", size: 20))
             .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
-            .padding(UIDevice.current.userInterfaceIdiom == .pad ? 5 : 0)
+            //.padding(UIDevice.current.userInterfaceIdiom == .pad ? 5 : 0)
     }
 }
 

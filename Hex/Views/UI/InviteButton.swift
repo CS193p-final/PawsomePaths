@@ -11,6 +11,9 @@ import FirebaseDynamicLinks
 struct InviteButton: View {
     @State var show = false
     @State var inviteURL: URL?
+    var width: CGFloat
+    var height: CGFloat
+    var isPad = UIDevice.current.userInterfaceIdiom == .pad
     
     func createInviteLink() {
         // Create link
@@ -46,7 +49,10 @@ struct InviteButton: View {
     var body: some View {
         // This is the workaround for the bug: https://developer.apple.com/forums/thread/652080
         // Swift UI on iOS 14 not assigning new object to @State property
-        
+        let padHeight: CGFloat = height / 18
+        let phoneHeight: CGFloat = height / 12
+        let padWidth: CGFloat = width / 4
+        let phoneWidth: CGFloat = width / 2
         Text("\(inviteURL?.absoluteString ?? "")")
             .frame(width: 0, height: 0)
             .padding(-1)
@@ -59,19 +65,18 @@ struct InviteButton: View {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke()
                     .foregroundColor(.blue)
-                    .frame(width: 190, height: 50, alignment: .center)
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(.white)
-                    .frame(width: 190, height: 50, alignment: .center)
+            }
+            .frame(width: isPad ? padWidth : phoneWidth, height: isPad ? padHeight : phoneHeight, alignment: .center)
+            .overlay(
                 HStack{
                     Image(systemName: "envelope.open.fill").imageScale(.large)
                     Text("Invite Friends").fontWeight(.medium)
                 }
                 .foregroundColor(.blue)
-//                .padding(.vertical, 10)
-//                .padding(.horizontal, 35)
-            }
-            .frame(width: 190, height: 50, alignment: .center)
+            )
+
         })
         .onAppear(perform: {
             createInviteLink()
