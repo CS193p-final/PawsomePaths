@@ -20,7 +20,6 @@ extension UIImage {
                 let data = try Data(contentsOf: imageUrl)
                 self.init(data: data)
             } catch {
-                print("-- Error: \(error)")
                 return nil
             }
         } else {

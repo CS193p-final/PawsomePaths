@@ -77,7 +77,7 @@ struct OnlineGameView: View {
                                         }
                                     }
                                     .popover(isPresented: $showSettingsForPad) {
-                                        onlineSettingsView(game: hexGame)
+                                        onlineSettingsView()
                                     }
                                     .padding()
                             }
@@ -156,7 +156,6 @@ struct OnlineGameView: View {
 
 
 struct onlineSettingsView: View {
-    @ObservedObject var game: GameMode
     @State private var showAlert: Bool = false
     private let lightCyan: Color = Color(red: 0.8555, green: 0.984375, blue: 0.9961, opacity: 0.8)
     private let queenBlue = Color(red: 0.26953, green: 0.41, blue: 0.5625)
@@ -188,7 +187,8 @@ struct onlineSettingsView: View {
                     }
                 } label: {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)    .foregroundColor(lightCyan)
+                        RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)
+                            .foregroundColor(lightCyan)
                         Image(systemName: musicOn ? "music.note" : "play.slash").imageScale(.large)
                     }
                 }

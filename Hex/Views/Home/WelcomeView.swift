@@ -33,6 +33,7 @@ struct WelcomeView: View {
     private let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
     private let gameTitle: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 20 : 10
     private let playerTurnFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 50 : 25
+    private let wildBlueYonder = Color(red: 0.71875, green: 0.71875, blue: 0.8164, opacity: 1)
 
     var body: some View {
         GeometryReader { geometry in
@@ -42,38 +43,39 @@ struct WelcomeView: View {
                         WelcomeView.networkMonitor.startMonitoring()
                         print("monitored")
                     }
+                
                 Image(systemName: "line.horizontal.3.circle.fill")
-                    .scaleEffect(isPad ? 2 : 1.5)
-                    .foregroundColor(hunterGreen)
-                    .position(x: isPad ? 40 : 20, y: isPad ? 40: 20)
-                    .onTapGesture {
-                        showMenu = true
-                    }
-                    .popover(isPresented: $showMenu) {
-                        Menu()
-                    }
+                .scaleEffect(isPad ? 2 : 1.5)
+                .foregroundColor(hunterGreen)
+                .onTapGesture {
+                    showMenu = true
+                }
+                .popover(isPresented: $showMenu) {
+                    Menu(width: geometry.size.width, height: geometry.size.height)
+                        .padding()
+                }
+                //.frame(maxWidth: .infinity, alignment: .topLeading)
+                .position(x: isPad ? 40 : 20, y: isPad ? 40: 20)
+
 
                 VStack {
-                    VStack {
-                        // User name and avatar
-                        if logged {
-                            VStack {
-                                Text("Welcome \(firstName)").foregroundColor(.black)
-                                let avatar = UIImage(fromDiskWithFileName: "avatar")
-                                if avatar != nil {
-                                    Image(uiImage: avatar!).clipShape(Circle())
-                                        .frame(width: 80, height: 80)
-                                }
-                            }.onTapGesture {
-                                viewRouter.currentScreen = .friendList
+                    // User name and avatar
+                    if logged {
+                        VStack {
+                            Text("Welcome \(firstName)").foregroundColor(.black)
+                            let avatar = UIImage(fromDiskWithFileName: "avatar")
+                            if avatar != nil {
+                                Image(uiImage: avatar!).clipShape(Circle())
+                                    .frame(width: 80, height: 80)
                             }
-                        } else {
-                            Text("Welcome guest").foregroundColor(.black)
-                            UserSection()
-                                .frame(width: 80, height: 80)
+                        }.onTapGesture {
+                            viewRouter.currentScreen = .friendList
                         }
+                    } else {
+                        Text("Welcome guest").foregroundColor(.black)
+                        UserSection()
+                            .frame(width: 80, height: 80)
                     }
-                    //.frame(width: geometry.size.width, height: geometry.size.width * 2 / gameTitle, alignment: .center)
                     
                     // Two Player Mode Button
                     Button {
@@ -140,11 +142,6 @@ struct WelcomeView: View {
                     } label: {
                         rectButton("How to Play", width: geometry.size.width, height: geometry.size.height)
                     }
-                    
-                    // Connect with Facebook button
-                    FBButton(width: geometry.size.width, height: geometry.size.height)
-                    // Invite friends button
-                    InviteButton(width: geometry.size.width, height: geometry.size.height)
                 }
             }
         }
@@ -179,8 +176,51 @@ func rectButton(_ message: String, width: CGFloat, height: CGFloat) -> some View
 }
 
 struct Menu: View {
+    @AppStorage("soundOn") var soundOn = true
+    @AppStorage("musicOn") var musicOn = true
+    var width: CGFloat
+    var height: CGFloat
+    private let lightCyan: Color = Color(red: 0.8555, green: 0.984375, blue: 0.9961, opacity: 0.8)
+    private let queenBlue = Color(red: 0.26953, green: 0.41, blue: 0.5625)
+    private let headerFontSize: CGFloat = 15
+    
     var body: some View {
-        Text("nothing")
+        HStack {
+            Section(header: Text("Sound")) {
+                Button {
+                    soundOn = !soundOn
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center) .foregroundColor(lightCyan)
+                        Image(systemName: soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
+                    }
+                }
+            }
+
+            Section(header: Text("Music")) {
+                Button {
+                    musicOn = !musicOn
+                    if musicOn {
+                        playMusic("musicBox", type: "mp3", musicOn: musicOn)
+                    } else {
+                        stopMusic("musicBox", type: "mp3")
+                    }
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)
+                            .foregroundColor(lightCyan)
+                        Image(systemName: musicOn ? "music.note" : "play.slash").imageScale(.large)
+                    }
+                }
+            }
+        }
+        .foregroundColor(queenBlue)
+        .padding()
+        .font(Font.custom("KronaOne-Regular", size: headerFontSize))
+        // Connect with Facebook button
+        FBButton(width: width, height: height)
+        // Invite friends button
+        InviteButton(width: width, height: height)
     }
 }
 
