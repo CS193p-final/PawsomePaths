@@ -16,6 +16,7 @@ class OnlineGame: GameMode {
     
     @Published var ready = false
     @AppStorage("UID") var uid = ""
+    @AppStorage("firstName") var firstName = ""
     		
     var listener: UInt = 0
         
@@ -52,7 +53,7 @@ class OnlineGame: GameMode {
     
     override var playerTurn: String {
         if (board.playerTurn == localPlayer) {
-            return "Your turn"
+            return firstName == "" ? "Your turn" : "\(firstName)'s turn"
         }
         else {
             return "Opponent's turn"

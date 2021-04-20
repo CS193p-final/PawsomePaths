@@ -15,7 +15,7 @@ struct WelcomeView: View {
     @State private var showSingleActionSheet = false
     @State private var showTwoPlayerActionSheet = false
     @State private var noConnectionAlert = false
-    @State private var showMenu = false
+    @State private var showMenuForIpad = false
 
     @AppStorage("anonymousUID") var anonymousUID = ""
     @AppStorage("UID") var uid = ""
@@ -25,6 +25,7 @@ struct WelcomeView: View {
     @AppStorage("musicOn") var music = false
     @AppStorage("soundOn") var sound = false
     
+    private var modalManager = ModalManager()
     private let isPad = UIDevice.current.userInterfaceIdiom == .pad
     private let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     private var widthRatio = CGFloat(UIDevice.current.userInterfaceIdiom == .pad ? 1/2 : 1)
@@ -48,13 +49,23 @@ struct WelcomeView: View {
                 .scaleEffect(isPad ? 2 : 1.5)
                 .foregroundColor(hunterGreen)
                 .onTapGesture {
-                    showMenu = true
+                    if isPad {
+                        showMenuForIpad = !showMenuForIpad
+                    } else {
+                        if modalManager.modal.position == .closed {
+                            modalManager.openModal()
+                        }
+                    }
                 }
-                .popover(isPresented: $showMenu) {
+                .popover(isPresented: $showMenuForIpad) {
                     Menu(width: geometry.size.width, height: geometry.size.height)
-                        .padding()
+                        .background(wildBlueYonder)
                 }
-                //.frame(maxWidth: .infinity, alignment: .topLeading)
+                .onAppear {
+                    self.modalManager.newModal(position: .closed) {
+                        Menu(width: geometry.size.width, height: geometry.size.height)
+                            .background(wildBlueYonder)                    }
+                }
                 .position(x: isPad ? 40 : 20, y: isPad ? 40: 20)
 
 
@@ -143,6 +154,7 @@ struct WelcomeView: View {
                         rectButton("How to Play", width: geometry.size.width, height: geometry.size.height)
                     }
                 }
+                ModalAnchorView().environmentObject(modalManager)
             }
         }
         .onAppear {
@@ -185,42 +197,44 @@ struct Menu: View {
     private let headerFontSize: CGFloat = 15
     
     var body: some View {
-        HStack {
-            Section(header: Text("Sound")) {
-                Button {
-                    soundOn = !soundOn
-                } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center) .foregroundColor(lightCyan)
-                        Image(systemName: soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
+        VStack {
+            HStack {
+                Section(header: Text("Sound")) {
+                    Button {
+                        soundOn = !soundOn
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center) .foregroundColor(lightCyan)
+                            Image(systemName: soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
+                        }
                     }
                 }
-            }
 
-            Section(header: Text("Music")) {
-                Button {
-                    musicOn = !musicOn
-                    if musicOn {
-                        playMusic("musicBox", type: "mp3", musicOn: musicOn)
-                    } else {
-                        stopMusic("musicBox", type: "mp3")
-                    }
-                } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)
-                            .foregroundColor(lightCyan)
-                        Image(systemName: musicOn ? "music.note" : "play.slash").imageScale(.large)
+                Section(header: Text("Music")) {
+                    Button {
+                        musicOn = !musicOn
+                        if musicOn {
+                            playMusic("musicBox", type: "mp3", musicOn: musicOn)
+                        } else {
+                            stopMusic("musicBox", type: "mp3")
+                        }
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)
+                                .foregroundColor(lightCyan)
+                            Image(systemName: musicOn ? "music.note" : "play.slash").imageScale(.large)
+                        }
                     }
                 }
             }
+            // Connect with Facebook button
+            FBButton(width: width, height: height)
+            // Invite friends button
+            InviteButton(width: width, height: height)
         }
         .foregroundColor(queenBlue)
         .padding()
         .font(Font.custom("KronaOne-Regular", size: headerFontSize))
-        // Connect with Facebook button
-        FBButton(width: width, height: height)
-        // Invite friends button
-        InviteButton(width: width, height: height)
     }
 }
 

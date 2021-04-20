@@ -10,10 +10,8 @@ import UIKit
 
 struct GameView: View {
     @EnvironmentObject var viewRouter: ViewRouter
-    var modalManager = ModalManager()
 
     @State private var showResult = false
-    @State private var showSettingsForPhone = false
     @State private var showSettingsForPad = false
     @ObservedObject var hexGame: GameMode
     @State var continueGame: Bool?
@@ -21,6 +19,7 @@ struct GameView: View {
     @AppStorage("soundOn") var soundOn = false
     
     var isIpad = UIDevice.current.userInterfaceIdiom == .pad
+    var modalManager = ModalManager()
 
     private let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
     private let blue = Color(red:0.39, green:0.55, blue:0.894)
@@ -61,7 +60,6 @@ struct GameView: View {
                                 .onTapGesture {
                                     if !isIpad {
                                         if modalManager.modal.position == .closed {
-                                            showSettingsForPhone = true
                                             self.modalManager.openModal()
                                         }
                                     } else {

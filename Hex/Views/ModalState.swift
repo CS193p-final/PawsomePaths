@@ -12,9 +12,9 @@ enum ModalState: CGFloat {
     func offsetFromTop() -> CGFloat {
         switch self {
         case .closed:
-            return UIScreen.main.bounds.height + 200
+            return UIScreen.main.bounds.height + UIScreen.main.bounds.height / 3
         case .partiallyRevealed:
-            return UIScreen.main.bounds.height - 200
+            return UIScreen.main.bounds.height - UIScreen.main.bounds.height / 3
         case .open:
             return UIScreen.main.bounds.height / 2
         }

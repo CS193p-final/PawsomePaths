@@ -89,7 +89,7 @@ struct OnlineGameView: View {
                             .font(Font.custom("KronaOne-Regular", size: geometry.size.width / gameTitle))
                             .foregroundColor(titleColor)
                             .padding()
-                        Text(board.playerTurn == hexGame.localPlayer ? "Your turn" : "Opponent's turn").foregroundColor(board.playerTurn == 1 ? red : blue)
+                        Text(hexGame.playerTurn).foregroundColor(board.playerTurn == 1 ? red : blue)
                             .font(Font.custom("KronaOne-Regular", size: geometry.size.width / playerTurnFontSize))
                         .padding()
 
