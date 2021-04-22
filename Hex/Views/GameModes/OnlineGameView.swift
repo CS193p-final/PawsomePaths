@@ -85,14 +85,17 @@ struct OnlineGameView: View {
                         .frame(width: geometry.size.width, height: geometry.size.width / gameTitle, alignment: .topLeading)
                         .padding(.bottom)
                         
-                        HStack(alignment: .center) {
+                        HStack() {
                             Image("guestava")
+                                .frame(width: 100, height: 100, alignment: .leading)
                                 .scaleEffect(UIDevice.current.userInterfaceIdiom == .pad ? 50/673 : 50/673)
+
                             Text("Me")
                             Text("Opponent")
 //                            Image("guestava")
 //                                .scaleEffect(UIDevice.current.userInterfaceIdiom == .pad ? 90/673 : 85/673)
                         }
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
 
                         ZStack {
                             if (showResult == true && hexGame.result != "You lose" ) {
