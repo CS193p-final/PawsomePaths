@@ -85,45 +85,46 @@ struct OnlineGameView: View {
                         .frame(width: geometry.size.width, height: geometry.size.width / gameTitle, alignment: .topLeading)
                         .padding(.bottom)
                         
-                        Text("Pawsome Paths")
-                            .font(Font.custom("KronaOne-Regular", size: geometry.size.width / gameTitle))
-                            .foregroundColor(titleColor)
-                            .padding()
-                        Text(hexGame.playerTurn).foregroundColor(board.playerTurn == 1 ? red : blue)
-                            .font(Font.custom("KronaOne-Regular", size: geometry.size.width / playerTurnFontSize))
-                        .padding()
+                        HStack(alignment: .center) {
+                            Image("guestava")
+                                .scaleEffect(UIDevice.current.userInterfaceIdiom == .pad ? 50/673 : 50/673)
+                            Text("Me")
+                            Text("Opponent")
+//                            Image("guestava")
+//                                .scaleEffect(UIDevice.current.userInterfaceIdiom == .pad ? 90/673 : 85/673)
+                        }
 
-                            ZStack {
-                                if (showResult == true && hexGame.result != "You lose" ) {
-                                    ForEach(0...8, id: \.self) {_ in
-                                        FireworkRepresentable().position(x: CGFloat.random(in: 10 ... 2 * geometry.size.width), y: CGFloat.random(in: 10 ... geometry.size.height)).zIndex(-1)
-                                    }
+                        ZStack {
+                            if (showResult == true && hexGame.result != "You lose" ) {
+                                ForEach(0...8, id: \.self) {_ in
+                                    FireworkRepresentable().position(x: CGFloat.random(in: 10 ... 2 * geometry.size.width), y: CGFloat.random(in: 10 ... geometry.size.height)).zIndex(-1)
                                 }
-                                HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
-                                    CellView(cell: cell).onTapGesture {
-                                        playSound("move", type: "wav", soundOn: soundOn)
-                                        if !hexGame.gameEnded { // only when game has not ended
-                                            hexGame.play(cellId: cell.id)
-                                        }
-                                    }
-                                }
-                                .onChange(of: hexGame.gameEnded, perform: { value in
-                                    if hexGame.gameEnded {
-                                        playSound(hexGame.result == "You lose" ? "lose" : "win", type: "mp3", soundOn: soundOn)
-                                    }
-                                })
-                                .rotationEffect(Angle(degrees: 90))
-                                .onReceive(self.hexGame.$board, perform: { newValue in
-                                    if newValue.winner != 0 {
-                                        showResult = true
-                                    }
-                                })
-                                .popup(isPresented: $showResult) {
-                                    ZStack {
-                                        resultReport(game: hexGame, soundOn: soundOn, showResult: showResult)
+                            }
+                            HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
+                                CellView(cell: cell).onTapGesture {
+                                    playSound("move", type: "wav", soundOn: soundOn)
+                                    if !hexGame.gameEnded { // only when game has not ended
+                                        hexGame.play(cellId: cell.id)
                                     }
                                 }
                             }
+                            .onChange(of: hexGame.gameEnded, perform: { value in
+                                if hexGame.gameEnded {
+                                    playSound(hexGame.result == "You lose" ? "lose" : "win", type: "mp3", soundOn: soundOn)
+                                }
+                            })
+                            .rotationEffect(Angle(degrees: 90))
+                            .onReceive(self.hexGame.$board, perform: { newValue in
+                                if newValue.winner != 0 {
+                                    showResult = true
+                                }
+                            })
+                            .popup(isPresented: $showResult) {
+                                ZStack {
+                                    resultReport(game: hexGame, soundOn: soundOn, showResult: showResult)
+                                }
+                            }
+                        }
                         newGameButton(game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
                         .foregroundColor(!showResult ? .blue : .gray)
                         .padding()

@@ -26,29 +26,6 @@ class OnlineGame: GameMode {
         super.init()
         
         self.joinWaitQueue()
-        
-//        self.findMatch()
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//            if !self.ready {
-//                self.createMatch()
-//                guard self.matchID != "" else {
-//                    print("Cannot create a match")
-//                    return
-//                }
-//                self.databaseRef.child("matches").child(self.matchID).observe(DataEventType.value) { (snapshot) in
-//                    if !snapshot.exists() {
-//                        return
-//                    }
-//                    let matchInfo = snapshot.value as! [String: Any]
-//                    if matchInfo["player_count"] as! Int == 2 {
-//                        self.setupMatch()
-//                        self.ready = true
-//                        self.objectWillChange.send()
-//                    }
-//                }
-//            }
-//        }
     }
     
     override var playerTurn: String {
@@ -132,9 +109,22 @@ class OnlineGame: GameMode {
     }
     
     private func setupMatch() {
-        databaseRef.child("matches/\(matchID)/ready/\(uid)").setValue(true)
-        databaseRef.child("matches/\(matchID)/ready").observe(.childAdded) { (snapshot) in
-            if snapshot.key != self.uid {
+        self.databaseRef.child("matches/\(self.matchID)/info/player_ids").getData { (error, snapshot) in
+            if let error = error {
+                print("Error getting data \(error)")
+            }
+            else if snapshot.exists() {
+                let playerIds = snapshot.value as! [Any]
+                print("snapshot = \(snapshot.value)")
+                if playerIds[0] as! String == self.uid {
+                    self.localPlayer = 1
+                }
+                else {
+                    self.localPlayer = 2
+                }
+                self.ready = true
+                print("I'm ready")
+                self.objectWillChange.send()
                 self.listener = self.databaseRef.child("matches/\(self.matchID)").observe(.value, with: { snapshot in
                     if !snapshot.exists() {
                         return;
@@ -152,51 +142,16 @@ class OnlineGame: GameMode {
                         }
                     }
                 })
-                
-                self.databaseRef.child("matches/\(self.matchID)/info/player_ids").getData { (error, snapshot) in
-                    if let error = error {
-                        print("Error getting data \(error)")
-                    }
-                    else if snapshot.exists() {
-                        let playerIds = snapshot.value as! [Any]
-                        print("snapshot = \(snapshot.value)")
-                        if playerIds[0] as! String == self.uid {
-                            self.localPlayer = 1
-                        }
-                        else {
-                            self.localPlayer = 2
-                        }
-                        self.ready = true
-                        print("I'm ready")
-                        self.objectWillChange.send()
-                    }
-                    else {
-                        print("No data available")
-                    }
-                }
-
-                
+            }
+            else {
+                print("No data available")
             }
         }
+        
     }
     
     private func startMatch() {
         
-    }
-    
-    private func createMatch() {
-        // assume that player 1 always create the match
-        localPlayer = 1
-        let ref = databaseRef.child("matches").childByAutoId()
-        matchID = ref.key!
-        ref.setValue([
-            "player_count": 1,
-            "board_size": board.size,
-            "latest_move": -1,
-            "player_turn": 1,
-            "timeout": 0,
-            "is_done": true
-        ])
     }
     
     private func findMatch() {
