@@ -227,6 +227,13 @@ struct GameBoard: Hashable, Codable {
         return .unknown
     }
     
+    func isValid(move: BoardPosition) -> Bool {
+        if isInside(position: move) && board[move.r][move.c] == 0 {
+            return true
+        }
+        return false
+    }
+    
     func isInside(position: BoardPosition) -> Bool {
         isInside(r: position.r, c: position.c)
     }

@@ -52,6 +52,12 @@ class OnlineGame: GameMode {
     
     // MARK: - Intent(s)
     override func play(cellId: Int) {
+        // check if the move is valid or not
+        let move = BoardPosition(id: cellId, cols: self.board.size)
+        if !board.isValid(move: move) {
+            return
+        }
+        
         // only allow to play if current turn is for the local player
         self.databaseRef.child("matches/\(matchID)").getData { (error, snapshot) in
             if let error = error {
