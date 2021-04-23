@@ -38,7 +38,7 @@ struct OnlineGameView: View {
         let imageFrame : CGFloat = isIpad ? 100 : 40
         let localPlayerName = firstName == "" ? "Your turn" : firstName
         
-        if !hexGame.ready {
+        if hexGame.ready {
             GeometryReader { geometry in
                 Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-2)
                     .onAppear{
@@ -104,7 +104,7 @@ struct OnlineGameView: View {
                                 .padding(.horizontal)
                         }
                         .padding(.top)
-                        .frame(maxWidth: .infinity, alignment: .center)
+                        .frame(maxWidth: .infinity, alignment: isIpad ? .leading : .center)
                         .foregroundColor(.black)
                         
                         ZStack {
