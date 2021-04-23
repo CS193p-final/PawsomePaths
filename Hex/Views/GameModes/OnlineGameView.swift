@@ -18,6 +18,7 @@ struct OnlineGameView: View {
     @ObservedObject var hexGame: OnlineGame
     @AppStorage("musicOn") var musicOn = false
     @AppStorage("soundOn") var soundOn = false
+    @AppStorage("firstName") var firstName = ""
     var isIpad = UIDevice.current.userInterfaceIdiom == .pad
     
     let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
@@ -34,8 +35,10 @@ struct OnlineGameView: View {
         let playerTurnFontSize: CGFloat = isIpad ? 50 : 25
         
         let board = hexGame.board
+        let imageFrame : CGFloat = isIpad ? 100 : 40
+        let localPlayerName = firstName == "" ? "Your turn" : firstName
         
-        if hexGame.ready {
+        if !hexGame.ready {
             GeometryReader { geometry in
                 Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-2)
                     .onAppear{
@@ -86,17 +89,24 @@ struct OnlineGameView: View {
                         .padding(.bottom)
                         
                         HStack() {
-                            Image("guestava")
-                                .frame(width: 100, height: 100, alignment: .leading)
-                                .scaleEffect(UIDevice.current.userInterfaceIdiom == .pad ? 50/673 : 50/673)
+                            Image(hexGame.localPlayer == 1 ? "redava" : "guestava").frame(width: imageFrame, height: imageFrame, alignment: .center)
+                                .scaleEffect(isIpad ? 90/673 : 45/673)
+                                .padding(.horizontal)
 
-                            Text("Me")
-                            Text("Opponent")
-//                            Image("guestava")
-//                                .scaleEffect(UIDevice.current.userInterfaceIdiom == .pad ? 90/673 : 85/673)
+                            Text(hexGame.board.playerTurn == hexGame.localPlayer ? localPlayerName : "Opponent's turn")
+                                .padding(.horizontal)
+                                .font(isIpad ? .title : .headline)
+                                .foregroundColor(hexGame.board.playerTurn == 1 ? red : blue)
+
+                            Image(hexGame.localPlayer == 1 ? "guestava" : "redava")
+                                .frame(width: imageFrame, height: imageFrame, alignment: .center)
+                                .scaleEffect(isIpad ? 90/673 : 45/673)
+                                .padding(.horizontal)
                         }
-                        .frame(maxWidth: .infinity, alignment: .topLeading)
-
+                        .padding(.top)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .foregroundColor(.black)
+                        
                         ZStack {
                             if (showResult == true && hexGame.result != "You lose" ) {
                                 ForEach(0...8, id: \.self) {_ in
