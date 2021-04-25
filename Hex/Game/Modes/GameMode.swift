@@ -74,7 +74,7 @@ class GameMode: ObservableObject {
     // MARK: - Intent(s)
     func play(cellId: Int) {
         board.play(move: BoardPosition(id: cellId, cols: board.size))
-        //playSound("error", type: "wav", soundOn: soundOn)
+        //playSound("error", type: "wav",  )
     }
     
     func newGame(size: Int) {

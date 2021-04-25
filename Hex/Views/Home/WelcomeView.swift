@@ -12,6 +12,7 @@ import FirebaseAuth
 struct WelcomeView: View {
     static var networkMonitor = NetworkConnection()
     @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var audioManager: AudioManager
     @State private var showSingleActionSheet = false
     @State private var showTwoPlayerActionSheet = false
     @State private var noConnectionAlert = false
@@ -22,7 +23,7 @@ struct WelcomeView: View {
     @AppStorage("logged") var logged = false
     @AppStorage("email") var email = ""
     @AppStorage("firstName") var firstName = ""
-    @AppStorage("musicOn") var music = false
+    @AppStorage("musicOn") var musicOn = false
     @AppStorage("soundOn") var sound = false
     
     private var modalManager = ModalManager()
@@ -90,7 +91,7 @@ struct WelcomeView: View {
                     
                     // Two Player Mode Button
                     Button {
-                        playSound("MouseClick", type: "mp3", soundOn: true)
+                        audioManager.playSound("MouseClick", type: "mp3")
                         showTwoPlayerActionSheet = true
                     } label: {
                         rectButton("Two Players", width: geometry.size.width, height: geometry.size.height)
@@ -111,7 +112,7 @@ struct WelcomeView: View {
                     
                     // Single Player Mode Button
                     Button {
-                        playSound("MouseClick", type: "mp3", soundOn: true)
+                        audioManager.playSound("MouseClick", type: "mp3")
                         showSingleActionSheet = true
                     } label: {
                         rectButton("Single Player", width: geometry.size.width, height: geometry.size.height)
@@ -132,7 +133,7 @@ struct WelcomeView: View {
                     
                     // Play Online Mode Button
                     Button {
-                        playSound("MouseClick", type: "mp3", soundOn: true)
+                        audioManager.playSound("MouseClick", type: "mp3")
                         if WelcomeView.networkMonitor.isReachable || WelcomeView.networkMonitor.isReachableCellular {
                             viewRouter.currentScreen = .onlineGame
                         } else {
@@ -148,7 +149,7 @@ struct WelcomeView: View {
                     
                     // How to Play Screen Button
                     Button {
-                        playSound("MouseClick", type: "mp3", soundOn: true)
+                        audioManager.playSound("MouseClick", type: "mp3")
                         viewRouter.currentScreen = .howToPlay
                     } label: {
                         rectButton("How to Play", width: geometry.size.width, height: geometry.size.height)
@@ -188,8 +189,7 @@ func rectButton(_ message: String, width: CGFloat, height: CGFloat) -> some View
 }
 
 struct Menu: View {
-    @AppStorage("soundOn") var soundOn = true
-    @AppStorage("musicOn") var musicOn = true
+    @EnvironmentObject var audioManager: AudioManager
     var width: CGFloat
     var height: CGFloat
     private let lightCyan: Color = Color(red: 0.8555, green: 0.984375, blue: 0.9961, opacity: 0.8)
@@ -201,28 +201,30 @@ struct Menu: View {
             HStack {
                 Section(header: Text("Sound")) {
                     Button {
-                        soundOn = !soundOn
+                        audioManager.toggleSound()
+                        audioManager.objectWillChange.send()
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center) .foregroundColor(lightCyan)
-                            Image(systemName: soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
+                            Image(systemName: audioManager.soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
                         }
                     }
                 }
 
                 Section(header: Text("Music")) {
                     Button {
-                        musicOn = !musicOn
-                        if musicOn {
-                            playMusic("musicBox", type: "mp3", musicOn: musicOn)
+                        audioManager.toggleMusic()
+                        audioManager.objectWillChange.send()
+                        if audioManager.musicOn {
+                            audioManager.playMusic("musicBox", type: "mp3")
                         } else {
-                            stopMusic("musicBox", type: "mp3")
+                            audioManager.stopMusic("musicBox", type: "mp3")
                         }
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)
                                 .foregroundColor(lightCyan)
-                            Image(systemName: musicOn ? "music.note" : "play.slash").imageScale(.large)
+                            Image(systemName: audioManager.musicOn ? "music.note" : "play.slash").imageScale(.large)
                         }
                     }
                 }

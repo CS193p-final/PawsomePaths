@@ -10,6 +10,7 @@ import UIKit
 
 struct GameView: View {
     @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var audioManager: AudioManager
 
     @State private var showResult = false
     @State private var showSettingsForPad = false
@@ -36,12 +37,12 @@ struct GameView: View {
         GeometryReader { geometry in
             Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-2)
                 .onAppear{
-                    playMusic("musicBox", type: "mp3", musicOn: musicOn)
+                    audioManager.playMusic("musicBox", type: "mp3")
                     hexGame.board = (continueGame != nil && continueGame == true) ? hexGame.board : GameBoard(size: hexGame.board.size)
                     showResult = false
                 }
                 .onDisappear {
-                    stopMusic("musicBox", type: "mp3")
+                    audioManager.stopMusic("musicBox", type: "mp3")
                 }
             ZStack {
                 VStack {
@@ -53,7 +54,7 @@ struct GameView: View {
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .onTapGesture {
-                                    playSound("MouseClick", type: "mp3", soundOn: soundOn)
+                                    audioManager.playSound("MouseClick", type: "mp3")
                                     viewRouter.currentScreen = .welcome
                                 }
                             Image(systemName: "gearshape").imageScale(.large) .foregroundColor(.white)
@@ -65,15 +66,15 @@ struct GameView: View {
                                     } else {
                                         showSettingsForPad = !showSettingsForPad
                                     }
-                                    playSound("MouseClick", type: "mp3", soundOn: soundOn)
+                                    audioManager.playSound("MouseClick", type: "mp3")
                                 }
                                 .onAppear {
                                     self.modalManager.newModal(position: .closed) {
-                                        settingsView(game: hexGame)
+                                        settingsView(game: hexGame).environmentObject(audioManager)
                                     }
                                 }
                                 .popover(isPresented: $showSettingsForPad) {
-                                    settingsView(game: hexGame)
+                                    settingsView(game: hexGame).environmentObject(audioManager)
                                 }
                                 .padding()
                         }
@@ -91,7 +92,7 @@ struct GameView: View {
                         ZStack {
                             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                                 CellView(cell: cell).onTapGesture {
-                                    playSound("move", type: "wav", soundOn: soundOn)
+                                    audioManager.playSound("move", type: "wav")
                                     if !hexGame.gameEnded { // only when game has not ended
                                         hexGame.play(cellId: cell.id)
                                     }
@@ -99,7 +100,7 @@ struct GameView: View {
                             }
                             .onChange(of: hexGame.gameEnded, perform: { value in
                                 if hexGame.gameEnded {
-                                    playSound(hexGame.result == "You lose" ? "lose" : "win", type: "mp3", soundOn: soundOn)
+                                    audioManager.playSound(hexGame.result == "You lose" ? "lose" : "win", type: "mp3")
                                 }
                             })
                             .onReceive(self.hexGame.$board, perform: { newValue in
@@ -110,7 +111,7 @@ struct GameView: View {
                             .rotationEffect(Angle.degrees(90))
                             .popup(isPresented: $showResult) {
                                 ZStack {
-                                    resultReport(game: hexGame, soundOn: soundOn, showResult: showResult)
+                                    resultReport(game: hexGame, showResult: showResult)
                                 }
                             }
                         }
@@ -148,8 +149,8 @@ struct newGameButton: View {
 
 struct resultReport: View {
     @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var audioManager: AudioManager
     var game: GameMode
-    @State var soundOn: Bool
     var showResult: Bool
 
     private let buttonFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 30
@@ -186,6 +187,8 @@ struct resultReport: View {
                                 Text("Menu").font(Font.custom("KronaOne-Regular", size: geometry.size.width / buttonFontSize)).foregroundColor(.white).onTapGesture {
                                     game.newGame(size: game.board.size)
                                     viewRouter.currentScreen = .welcome
+                                    audioManager.playSound("MouseClick", type: "mp3")
+                                    
                                 }
                             }
                         }
@@ -203,14 +206,13 @@ struct resultReport: View {
 
 struct settingsView: View {
     @ObservedObject var game: GameMode
+    @EnvironmentObject var audioManager : AudioManager
     @State private var showAlert: Bool = false
     private let lightCyan: Color = Color(red: 0.8555, green: 0.984375, blue: 0.9961, opacity: 0.8)
     private let queenBlue = Color(red: 0.26953, green: 0.41, blue: 0.5625)
     private let wildBlueYonder = Color(red: 0.71875, green: 0.71875, blue: 0.8164, opacity: 1)
     private let headerFontSize: CGFloat = 15
     @EnvironmentObject var modalManager: ModalManager
-    @AppStorage("musicOn") var musicOn = false
-    @AppStorage("soundOn") var soundOn = false
 
     var body: some View {
         VStack {
@@ -238,28 +240,30 @@ struct settingsView: View {
             HStack {
                 Section(header: Text("Sound").font(Font.custom("KronaOne-Regular", size: headerFontSize))) {
                     Button {
-                        soundOn = !soundOn
+                        audioManager.toggleSound()
+                        audioManager.objectWillChange.send()
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center) .foregroundColor(lightCyan)
-                            Image(systemName: soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
+                            Image(systemName: audioManager.soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
                         }
                     }
                 }
 
                 Section(header: Text("Music").font(Font.custom("KronaOne-Regular", size: headerFontSize))) {
                     Button {
-                        musicOn = !musicOn
-                        if musicOn {
-                            playMusic("musicBox", type: "mp3", musicOn: musicOn)
+                        audioManager.toggleMusic()
+                        audioManager.objectWillChange.send()
+                        if audioManager.musicOn {
+                            audioManager.playMusic("musicBox", type: "mp3")
                         } else {
-                            stopMusic("musicBox", type: "mp3")
+                            audioManager.stopMusic("musicBox", type: "mp3")
                         }
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)
                                 .foregroundColor(lightCyan)
-                            Image(systemName: musicOn ? "music.note" : "play.slash").imageScale(.large)
+                            Image(systemName: audioManager.musicOn ? "music.note" : "play.slash").imageScale(.large)
                         }
                     }
                 }

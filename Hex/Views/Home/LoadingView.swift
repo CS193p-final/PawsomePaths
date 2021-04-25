@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoadingView: View {
     @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var audioManager: AudioManager
     
     @State var game: OnlineGame
     private let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
@@ -28,7 +29,7 @@ struct LoadingView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
                 .onTapGesture {
-                    playSound("MouseClick", type: "mp3", soundOn: soundOn)
+                    audioManager.playSound("MouseClick", type: "mp3")
             }
             if game.ready {
                 VStack {
@@ -48,7 +49,7 @@ struct LoadingView: View {
                     .foregroundColor(.black)
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                     .onTapGesture {
-                        playSound("MouseClick", type: "mp3", soundOn: true)
+                        audioManager.playSound("MouseClick", type: "mp3")
                         game.exitMatch()
                         viewRouter.currentScreen = .welcome
                     }

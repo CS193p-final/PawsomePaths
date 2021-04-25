@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HowToPlayView: View {
     @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var audioManager: AudioManager
     
     @State var soundOn: Bool
     private let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
@@ -44,7 +45,7 @@ struct HowToPlayView: View {
                             .font(Font.custom("PressStart2P-Regular", size: geometry.size.width / playerTurnFontSize))
                             .onTapGesture {
                                 viewRouter.currentScreen = .welcome
-                                playSound("MouseClick", type: "mp3", soundOn: soundOn)
+                                audioManager.playSound("MouseClick", type: "mp3")
                             }
                     }
                     .frame(width: geometry.size.width, height: geometry.size.width * 2 / gameTitle, alignment: .topLeading)

@@ -10,6 +10,7 @@ import UIKit
 
 struct OnlineGameView: View {
     @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var audioManager: AudioManager
     var modalManager = ModalManager()
 
     @State var showResult = false
@@ -42,11 +43,11 @@ struct OnlineGameView: View {
             GeometryReader { geometry in
                 Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-2)
                     .onAppear{
-                        playMusic("musicBox", type: "mp3", musicOn: musicOn)
+                        audioManager.playMusic("musicBox", type: "mp3")
                         showResult = false
                     }
                     .onDisappear {
-                        stopMusic("musicBox", type: "mp3")
+                        audioManager.stopMusic("musicBox", type: "mp3")
                     }
                 ZStack {
                     VStack {
@@ -58,7 +59,7 @@ struct OnlineGameView: View {
                                     .foregroundColor(.white)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .onTapGesture {
-                                        playSound("MouseClick", type: "mp3", soundOn: soundOn)
+                                        audioManager.playSound("MouseClick", type: "mp3")
                                         hexGame.exitMatch()
                                         viewRouter.currentScreen = .welcome
                                     }
@@ -73,15 +74,14 @@ struct OnlineGameView: View {
                                         } else {
                                             showSettingsForPad = !showSettingsForPad
                                         }
-                                        playSound("MouseClick", type: "mp3", soundOn: soundOn)
+                                        audioManager.playSound("MouseClick", type: "mp3")
                                     }                .onAppear {
                                         self.modalManager.newModal(position: .closed) {
-                                            settingsView(game: hexGame)
+                                            settingsView(game: hexGame).environmentObject(audioManager)
                                         }
                                     }
                                     .popover(isPresented: $showSettingsForPad) {
-                                        onlineSettingsView()
-                                    }
+                                        onlineSettingsView().environmentObject(audioManager)                                    }
                                     .padding()
                             }
                         }
@@ -115,7 +115,7 @@ struct OnlineGameView: View {
                             }
                             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                                 CellView(cell: cell).onTapGesture {
-                                    playSound("move", type: "wav", soundOn: soundOn)
+                                    audioManager.playSound("move", type: "wav")
                                     if !hexGame.gameEnded { // only when game has not ended
                                         hexGame.play(cellId: cell.id)
                                     }
@@ -123,7 +123,7 @@ struct OnlineGameView: View {
                             }
                             .onChange(of: hexGame.gameEnded, perform: { value in
                                 if hexGame.gameEnded {
-                                    playSound(hexGame.result == "You lose" ? "lose" : "win", type: "mp3", soundOn: soundOn)
+                                    audioManager.playSound(hexGame.result == "You lose" ? "lose" : "win", type: "mp3")
                                 }
                             })
                             .rotationEffect(Angle(degrees: 90))
@@ -134,7 +134,7 @@ struct OnlineGameView: View {
                             })
                             .popup(isPresented: $showResult) {
                                 ZStack {
-                                    resultReport(game: hexGame, soundOn: soundOn, showResult: showResult)
+                                    resultReport(game: hexGame, showResult: showResult)
                                 }
                             }
                         }
@@ -175,35 +175,36 @@ struct onlineSettingsView: View {
     private let queenBlue = Color(red: 0.26953, green: 0.41, blue: 0.5625)
     private let headerFontSize: CGFloat = 15
     private let wildBlueYonder = Color(red: 0.71875, green: 0.71875, blue: 0.8164, opacity: 1)
-    @AppStorage("musicOn") var musicOn = false
-    @AppStorage("soundOn") var soundOn = false
+    @EnvironmentObject var audioManager: AudioManager
 
     var body: some View {
         HStack {
             Section(header: Text("Sound")) {
                 Button {
-                    soundOn = !soundOn
+                    audioManager.toggleSound()
+                    audioManager.objectWillChange.send()
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center) .foregroundColor(lightCyan)
-                        Image(systemName: soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
+                        Image(systemName: audioManager.soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
                     }
                 }
             }
 
             Section(header: Text("Music")) {
                 Button {
-                    musicOn = !musicOn
-                    if musicOn {
-                        playMusic("musicBox", type: "mp3", musicOn: musicOn)
+                    audioManager.toggleMusic()
+                    audioManager.objectWillChange.send()
+                    if audioManager.musicOn {
+                        audioManager.playMusic("musicBox", type: "mp3")
                     } else {
-                        stopMusic("musicBox", type: "mp3")
+                        audioManager.stopMusic("musicBox", type: "mp3")
                     }
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)
                             .foregroundColor(lightCyan)
-                        Image(systemName: musicOn ? "music.note" : "play.slash").imageScale(.large)
+                        Image(systemName: audioManager.musicOn ? "music.note" : "play.slash").imageScale(.large)
                     }
                 }
             }

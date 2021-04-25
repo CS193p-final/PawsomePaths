@@ -30,7 +30,7 @@ class SinglePlayerGame: GameMode {
     override func play(cellId: Int) {
         if board.legalMoves.contains(BoardPosition(id: cellId, cols: board.size)) {
             board.play(move: BoardPosition(id: cellId, cols: board.size))
-            //playSound("error", type: "wav", soundOn: soundOn)
+            //playSound("error", type: "wav",  )
 
             objectWillChange.send()
             if gameEnded {
