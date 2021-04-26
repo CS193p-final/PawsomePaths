@@ -10,6 +10,7 @@ target 'Hex' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
+  pod 'Firebase/Functions'
   pod 'Firebase/Analytics'
   pod 'Firebase/DynamicLinks'
 
