@@ -182,7 +182,6 @@ struct onlineSettingsView: View {
             Section(header: Text("Sound")) {
                 Button {
                     audioManager.toggleSound()
-                    audioManager.objectWillChange.send()
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center) .foregroundColor(lightCyan)
@@ -194,7 +193,6 @@ struct onlineSettingsView: View {
             Section(header: Text("Music")) {
                 Button {
                     audioManager.toggleMusic()
-                    audioManager.objectWillChange.send()
                     if audioManager.musicOn {
                         audioManager.playMusic("musicBox", type: "mp3")
                     } else {

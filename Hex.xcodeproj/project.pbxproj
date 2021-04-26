@@ -63,6 +63,7 @@
 		C1781A8E2600154C003A1168 /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C1781A8D2600154C003A1168 /* win.mp3 */; };
 		C18DD74A25DEFDD600A29151 /* RedBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18DD74925DEFDD600A29151 /* RedBorder.swift */; };
 		C18DD74E25DF60BE00A29151 /* BlueBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18DD74D25DF60BE00A29151 /* BlueBorder.swift */; };
+		C1971809263774BE00411E88 /* FriendsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1971808263774BE00411E88 /* FriendsButton.swift */; };
 		C1AFFB6E260ADE9B0030AD7A /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = C1AFFB6D260ADE9B0030AD7A /* error.wav */; };
 		C1BE71A5260FC8D90049751E /* NetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BE71A4260FC8D90049751E /* NetworkConnection.swift */; };
 		C1CE2BB625E77B740012E731 /* ClassFireworkAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */; };
@@ -163,6 +164,7 @@
 		C1781A8D2600154C003A1168 /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
 		C18DD74925DEFDD600A29151 /* RedBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedBorder.swift; sourceTree = "<group>"; };
 		C18DD74D25DF60BE00A29151 /* BlueBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueBorder.swift; sourceTree = "<group>"; };
+		C1971808263774BE00411E88 /* FriendsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsButton.swift; sourceTree = "<group>"; };
 		C1AFFB6D260ADE9B0030AD7A /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
 		C1BE71A4260FC8D90049751E /* NetworkConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnection.swift; sourceTree = "<group>"; };
 		C1CE2BB525E77B740012E731 /* ClassFireworkAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassFireworkAnimator.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				C627D3CF26051DC400EA0DD5 /* CountdownTimer.swift */,
 				C6029D3726014A04005FBD3B /* FBButton.swift */,
 				C6DB98CA260E7CE800ED794D /* InviteButton.swift */,
+				C1971808263774BE00411E88 /* FriendsButton.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 				C699738A25D9F51C00337F70 /* PolygonShape.swift in Sources */,
 				C6B09AD825DE142D00C96782 /* SinglePlayerGame.swift in Sources */,
 				C11545B025E74CF300E8B591 /* SparkView.swift in Sources */,
+				C1971809263774BE00411E88 /* FriendsButton.swift in Sources */,
 				C6596A3825DB1BA500A0F94B /* TwoPlayersGame.swift in Sources */,
 				C1102DAA25E8A0180054C992 /* FireworkView.swift in Sources */,
 				C6227AD525F2B085008E301E /* Deque.swift in Sources */,
@@ -817,7 +821,7 @@
 				CODE_SIGN_ENTITLEMENTS = Hex/Hex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Hex/Preview Content\"";
-				DEVELOPMENT_TEAM = F8WWCGPHV3;
+				DEVELOPMENT_TEAM = DFDCS22GK9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Hex/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -826,7 +830,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.GD.hex;
+				PRODUCT_BUNDLE_IDENTIFIER = GD.apa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

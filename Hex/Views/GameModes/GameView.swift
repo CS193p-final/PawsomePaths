@@ -241,7 +241,6 @@ struct settingsView: View {
                 Section(header: Text("Sound").font(Font.custom("KronaOne-Regular", size: headerFontSize))) {
                     Button {
                         audioManager.toggleSound()
-                        audioManager.objectWillChange.send()
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center) .foregroundColor(lightCyan)
@@ -253,7 +252,6 @@ struct settingsView: View {
                 Section(header: Text("Music").font(Font.custom("KronaOne-Regular", size: headerFontSize))) {
                     Button {
                         audioManager.toggleMusic()
-                        audioManager.objectWillChange.send()
                         if audioManager.musicOn {
                             audioManager.playMusic("musicBox", type: "mp3")
                         } else {

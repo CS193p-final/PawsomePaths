@@ -19,7 +19,7 @@ struct InviteButton: View {
         // Create link
         let linkParameter = URL(string: "https://testflight.apple.com/join/bMxqwb9t")!
         
-        guard let shareLink = DynamicLinkComponents(link: linkParameter, domainURIPrefix:  "https://gdhex.page.link") else {
+        guard let shareLink = DynamicLinkComponents(link: linkParameter, domainURIPrefix: "https://gdhex.page.link") else {
             print("Couldn't reate FDL components")
             return
         }
@@ -51,17 +51,17 @@ struct InviteButton: View {
         // Swift UI on iOS 14 not assigning new object to @State property
         let padHeight: CGFloat = height / 18
         let phoneHeight: CGFloat = height / 12
-        let padWidth: CGFloat = width / 4
+        let padWidth: CGFloat = width / 4.3
         let phoneWidth: CGFloat = width / 2
-        Text("\(inviteURL?.absoluteString ?? "")")
-            .frame(width: 0, height: 0)
-            .padding(-1)
-            .hidden()
 
         Button(action: {
             show = true
         }, label: {
             ZStack {
+                Text("\(inviteURL?.absoluteString ?? "")")
+                    .frame(width: 0, height: 0)
+                    .hidden()
+                    .zIndex(-1)
                 RoundedRectangle(cornerRadius: 10)
                     .stroke()
                     .foregroundColor(.blue)
