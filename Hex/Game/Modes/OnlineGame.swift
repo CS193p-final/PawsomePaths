@@ -10,9 +10,11 @@ import Firebase
 import FirebaseDatabase
 
 class OnlineGame: GameMode {
-    var databaseRef: DatabaseReference! = Database.database().reference()
+    var databaseRef: DatabaseReference! = Database.database(url:"http://localhost:9000/?ns=hex-game-80370-default-rtdb").reference()
     var matchID: String
     var localPlayer: Int
+    var remotePlayerName: String
+    var localPlayerName: String
     
     @Published var ready = false
     @AppStorage("UID") var uid = ""
@@ -22,9 +24,14 @@ class OnlineGame: GameMode {
         
     override init() {
         matchID = ""
-        localPlayer = Int.random(in: 1...2)
+        localPlayer = 0
+        remotePlayerName = "Unknown"
+        localPlayerName = "Guest" + String(Int.random(in: 1000...9999))
         super.init()
         
+        if firstName != "" {
+            localPlayerName = firstName
+        }
         self.joinWaitQueue()
     }
     
@@ -99,8 +106,8 @@ class OnlineGame: GameMode {
             print("user doesn't have an UID")
             return
         }
-        databaseRef.child("wait_queue/\(uid)").setValue("")
-        databaseRef.child("wait_queue/\(uid)").observe(.value) { (snapshot) in
+        databaseRef.child("wait_queue/\(uid)").setValue(["match": "", "name": localPlayerName])
+        databaseRef.child("wait_queue/\(uid)/match").observe(.value) { (snapshot) in
             if self.matchID != "" {
                 return
             }

@@ -149,7 +149,7 @@ struct OnlineGameView: View {
         else {
             LoadingView(game: hexGame)
                 .onAppear {
-                    Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false) { timer in
+                    Timer.scheduledTimer(withTimeInterval: 1000.0, repeats: false) { timer in
                         showNotice = true
                         timer.invalidate()
                         print("start counting")

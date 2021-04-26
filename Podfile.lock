@@ -25,6 +25,9 @@ PODS:
   - Firebase/DynamicLinks (7.8.1):
     - Firebase/CoreOnly
     - FirebaseDynamicLinks (~> 7.8.0)
+  - Firebase/Functions (7.8.1):
+    - Firebase/CoreOnly
+    - FirebaseFunctions (~> 7.8.0)
   - Firebase/Storage (7.8.1):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 7.8.0)
@@ -56,6 +59,9 @@ PODS:
     - leveldb-library (~> 1.22)
   - FirebaseDynamicLinks (7.8.0):
     - FirebaseCore (~> 7.0)
+  - FirebaseFunctions (7.8.0):
+    - FirebaseCore (~> 7.0)
+    - GTMSessionFetcher/Core (~> 1.4)
   - FirebaseInstallations (7.9.0):
     - FirebaseCore (~> 7.0)
     - GoogleUtilities/Environment (~> 7.0)
@@ -108,6 +114,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Database
   - Firebase/DynamicLinks
+  - Firebase/Functions
   - Firebase/Storage
 
 SPEC REPOS:
@@ -121,6 +128,7 @@ SPEC REPOS:
     - FirebaseCoreDiagnostics
     - FirebaseDatabase
     - FirebaseDynamicLinks
+    - FirebaseFunctions
     - FirebaseInstallations
     - FirebaseStorage
     - GoogleAppMeasurement
@@ -141,6 +149,7 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: 066f996579cf097bdad3d7dc9a918d6b9e129c50
   FirebaseDatabase: f909d1448d4e7c4f5ef5acd1b8095f4bea9813ca
   FirebaseDynamicLinks: 4075f93bb208f2f726ce539d85f4fdc4b1c0e583
+  FirebaseFunctions: 60ffca9955121b73ff3b826766c25cca2cfade8e
   FirebaseInstallations: 5e777e6640fa060405cc7632447b6c5ca5af4742
   FirebaseStorage: 84d1eb7bfe8c3cbfe6beeeb02ce712f65dcb8b83
   GoogleAppMeasurement: 50a254ee92c1b94fbe2abea7e3da35e4c6dedce0
@@ -151,6 +160,6 @@ SPEC CHECKSUMS:
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
 
-PODFILE CHECKSUM: 807292d67a9f01247412ce253661bf959d2aaa88
+PODFILE CHECKSUM: dc966e5f47686749de7d931a8663dceac94ff0b0
 
 COCOAPODS: 1.10.1
