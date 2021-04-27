@@ -35,9 +35,8 @@ struct OnlineGameView: View {
         let gameTitle: CGFloat = isIpad ? 30 : 15
         let playerTurnFontSize: CGFloat = isIpad ? 50 : 25
         
-        let board = hexGame.board
-        let imageFrame : CGFloat = isIpad ? 100 : 40
-        let localPlayerName = firstName == "" ? "Your turn" : firstName
+        let imageFrame : CGFloat = isIpad ? 60 : 40
+        let localPlayerName = firstName == "" ? "Your turn" : "\(firstName)'s turn"
         
         if hexGame.ready {
             GeometryReader { geometry in
@@ -69,15 +68,15 @@ struct OnlineGameView: View {
                                         if !isIpad {
                                             if modalManager.modal.position == .closed {
                                                 showSettingsForPhone = true
-                                                self.modalManager.openModal()
+                                                self.modalManager.peekModal()
                                             }
                                         } else {
                                             showSettingsForPad = !showSettingsForPad
                                         }
                                         audioManager.playSound("MouseClick", type: "mp3")
-                                    }                .onAppear {
+                                    }.onAppear {
                                         self.modalManager.newModal(position: .closed) {
-                                            settingsView(game: hexGame).environmentObject(audioManager)
+                                            onlineSettingsView().environmentObject(audioManager)
                                         }
                                     }
                                     .popover(isPresented: $showSettingsForPad) {
@@ -89,22 +88,22 @@ struct OnlineGameView: View {
                         .padding(.bottom)
                         
                         HStack() {
-                            Image(hexGame.localPlayer == 1 ? "redava" : "guestava").frame(width: imageFrame, height: imageFrame, alignment: .center)
-                                .scaleEffect(isIpad ? 90/673 : 45/673)
-                                .padding(.horizontal)
+                            Image(hexGame.localPlayer == 1 ? "redava" : "guestava")
+                                .frame(width: imageFrame, height: imageFrame, alignment: .center)
+                                .scaleEffect(isIpad ? 60/673 : 40/673)
 
                             Text(hexGame.board.playerTurn == hexGame.localPlayer ? localPlayerName : "Opponent's turn")
                                 .padding(.horizontal)
                                 .font(isIpad ? .title : .headline)
                                 .foregroundColor(hexGame.board.playerTurn == 1 ? red : blue)
+                                .frame(width: geometry.size.width / 2, alignment: .center)
 
                             Image(hexGame.localPlayer == 1 ? "guestava" : "redava")
                                 .frame(width: imageFrame, height: imageFrame, alignment: .center)
-                                .scaleEffect(isIpad ? 90/673 : 45/673)
-                                .padding(.horizontal)
+                                .scaleEffect(isIpad ? 60/673 : 40/673)
                         }
                         .padding(.top)
-                        .frame(maxWidth: .infinity, alignment: isIpad ? .leading : .center)
+                        .frame(maxWidth: .infinity, alignment: .center)
                         .foregroundColor(.black)
                         
                         ZStack {
@@ -127,6 +126,7 @@ struct OnlineGameView: View {
                                 }
                             })
                             .rotationEffect(Angle(degrees: 90))
+                            .scaleEffect(isIpad ? 0.9 : 1)
                             .onReceive(self.hexGame.$board, perform: { newValue in
                                 if newValue.winner != 0 {
                                     showResult = true
@@ -216,6 +216,6 @@ struct onlineSettingsView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        OnlineGameView(hexGame: OnlineGame())
+        OnlineGameView(hexGame: OnlineGame()).environmentObject(AudioManager())
     }
 }

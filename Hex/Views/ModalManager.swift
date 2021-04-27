@@ -21,4 +21,8 @@ class ModalManager: ObservableObject {
     func closeModal() {
         modal.position = .closed
     }
+    
+    func peekModal() {
+        modal.position = .peekaboo
+    }
 }
