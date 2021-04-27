@@ -36,7 +36,6 @@ struct OnlineGameView: View {
         let playerTurnFontSize: CGFloat = isIpad ? 50 : 25
         
         let imageFrame : CGFloat = isIpad ? 60 : 40
-        let localPlayerName = firstName == "" ? "Your turn" : "\(firstName)'s turn"
         
         if hexGame.ready {
             GeometryReader { geometry in
@@ -92,12 +91,19 @@ struct OnlineGameView: View {
                                 .frame(width: imageFrame, height: imageFrame, alignment: .center)
                                 .scaleEffect(isIpad ? 60/673 : 40/673)
 
-                            Text(hexGame.board.playerTurn == hexGame.localPlayer ? localPlayerName : "Opponent's turn")
+                            Text(hexGame.localPlayerName)
                                 .padding(.horizontal)
                                 .font(isIpad ? .title : .headline)
                                 .foregroundColor(hexGame.board.playerTurn == 1 ? red : blue)
-                                .frame(width: geometry.size.width / 2, alignment: .center)
-
+                                .frame(width: geometry.size.width / 3, alignment: .center)
+                            
+                            Text(hexGame.remotePlayerName)
+                                .padding(.horizontal)
+                                .font(isIpad ? .title : .headline)
+                                .foregroundColor(hexGame.board.playerTurn == 1 ? red : blue)
+                                .frame(width: geometry.size.width / 3, alignment: .center)
+                            
+                            
                             Image(hexGame.localPlayer == 1 ? "guestava" : "redava")
                                 .frame(width: imageFrame, height: imageFrame, alignment: .center)
                                 .scaleEffect(isIpad ? 60/673 : 40/673)

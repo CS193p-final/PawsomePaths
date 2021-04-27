@@ -10,7 +10,7 @@ import Firebase
 import FirebaseDatabase
 
 class OnlineGame: GameMode {
-    var databaseRef: DatabaseReference! = Database.database(url:"http://localhost:9000/?ns=hex-game-80370-default-rtdb").reference()
+    var databaseRef: DatabaseReference! = Database.database().reference()
     var matchID: String
     var localPlayer: Int
     var remotePlayerName: String
@@ -123,18 +123,26 @@ class OnlineGame: GameMode {
     }
     
     private func setupMatch() {
-        self.databaseRef.child("matches/\(self.matchID)/info/player_ids").getData { (error, snapshot) in
+        self.databaseRef.child("matches/\(self.matchID)/info").getData { (error, snapshot) in
+            print("Setting up match: \(snapshot)")
             if let error = error {
                 print("Error getting data \(error)")
             }
             else if snapshot.exists() {
-                let playerIds = snapshot.value as! [Any]
+                let info = snapshot.value as! [String: Any]
+                let playerIds = info["player_ids"] as! [Any]
+                let playerNames = info["player_names"] as! [String]
+                
                 print("snapshot = \(snapshot.value)")
                 if playerIds[0] as! String == self.uid {
                     self.localPlayer = 1
+                    self.localPlayerName = playerNames[0]
+                    self.remotePlayerName = playerNames[1]
                 }
                 else {
                     self.localPlayer = 2
+                    self.localPlayerName = playerNames[1]
+                    self.remotePlayerName = playerNames[0]
                 }
                 self.ready = true
                 print("I'm ready")
