@@ -26,7 +26,7 @@ class OnlineGame: GameMode {
         matchID = ""
         localPlayer = 0
         remotePlayerName = "Unknown"
-        localPlayerName = "Guest" + String(Int.random(in: 1000...9999))
+        localPlayerName = "Player " + String(Int.random(in: 1000...9999))
         super.init()
         
         if firstName != "" {

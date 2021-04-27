@@ -24,6 +24,7 @@ struct OnlineGameView: View {
     
     let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
     let blue = Color(red:0.39, green:0.55, blue:0.894)
+    let black = Color.black
     let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
     private let titleColor = Color(red: 0.82422, green: 0.37891, blue: 0.207, opacity: 1)
     let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
@@ -91,17 +92,19 @@ struct OnlineGameView: View {
                                 .frame(width: imageFrame, height: imageFrame, alignment: .center)
                                 .scaleEffect(isIpad ? 60/673 : 40/673)
 
-                            Text(hexGame.localPlayerName)
+                            Text("You")
                                 .padding(.horizontal)
                                 .font(isIpad ? .title : .headline)
-                                .foregroundColor(hexGame.board.playerTurn == 1 ? red : blue)
-                                .frame(width: geometry.size.width / 3, alignment: .center)
+                                .foregroundColor(hexGame.board.playerTurn == hexGame.localPlayer ?
+                                                    (hexGame.localPlayer == 1 ? red : blue) : black)
+                                .frame(width: geometry.size.width / 3, alignment: .leading)
                             
                             Text(hexGame.remotePlayerName)
                                 .padding(.horizontal)
                                 .font(isIpad ? .title : .headline)
-                                .foregroundColor(hexGame.board.playerTurn == 1 ? red : blue)
-                                .frame(width: geometry.size.width / 3, alignment: .center)
+                                .foregroundColor(hexGame.board.playerTurn != hexGame.localPlayer ?
+                                                    (hexGame.localPlayer == 1 ? blue : red) : black)
+                                .frame(width: geometry.size.width / 3, alignment: .trailing)
                             
                             
                             Image(hexGame.localPlayer == 1 ? "guestava" : "redava")
