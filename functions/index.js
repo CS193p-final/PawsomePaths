@@ -47,7 +47,7 @@ exports.matchMaker = functions.database.ref("wait_queue/{playerId}")
           return waitQueue;
         }).then((result) => {
           const player1Id = context.params.playerId;
-          if (result.snapshot.child(player1Id).val() !== matchId) {
+          if (result.snapshot.child(player1Id).val().match !== matchId) {
             return;
           }
 

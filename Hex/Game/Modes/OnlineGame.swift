@@ -113,6 +113,7 @@ class OnlineGame: GameMode {
             }
             
             if snapshot.exists() {
+                print(snapshot.value)
                 self.matchID = snapshot.value as! String
                 if self.matchID != "" {
                     self.joinMatch()
@@ -198,8 +199,8 @@ class OnlineGame: GameMode {
     }
     
     private func joinMatch() {
-        databaseRef.child("wait_queue/\(uid)").removeValue()
         setupMatch()
+        databaseRef.child("wait_queue/\(uid)").removeValue()
     }
     
     func exitMatch() {
