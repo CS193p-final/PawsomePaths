@@ -16,18 +16,19 @@ exports.matchMaker = functions.database.ref("wait_queue/{playerId}")
       const matchId = uuid4();
       let player1Name = snapshot.val().name;
       let player1Match = snapshot.val().match;
+      let player2 = null;
 
       console.log(matchId);
       console.log(player1Name);
       console.log(player1Match);
 
       database.ref("wait_queue").once("value").then((playerInfoList) => {
-        let player2 = null;
         playerInfoList.forEach((playerInfo) => {
           if (playerInfo.val().match === "" &&
               playerInfo.key !== context.params.playerId) {
             player2 = playerInfo;
             console.log(player2);
+            break;
           }
         });
 
