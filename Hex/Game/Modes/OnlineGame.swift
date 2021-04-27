@@ -123,53 +123,50 @@ class OnlineGame: GameMode {
     }
     
     private func setupMatch() {
-        self.databaseRef.child("matches/\(self.matchID)/info").getData { (error, snapshot) in
+        self.databaseRef.child("matches/\(self.matchID)/info").observe(.value, with: { snapshot in
             print("Setting up match: \(snapshot)")
-            if let error = error {
-                print("Error getting data \(error)")
+            
+            if !snapshot.exists() {
+                print("No data available")
+                return
             }
-            else if snapshot.exists() {
-                let info = snapshot.value as! [String: Any]
-                let playerIds = info["player_ids"] as! [Any]
-                let playerNames = info["player_names"] as! [String]
-                
-                print("snapshot = \(snapshot.value)")
-                if playerIds[0] as! String == self.uid {
-                    self.localPlayer = 1
-                    self.localPlayerName = playerNames[0]
-                    self.remotePlayerName = playerNames[1]
-                }
-                else {
-                    self.localPlayer = 2
-                    self.localPlayerName = playerNames[1]
-                    self.remotePlayerName = playerNames[0]
-                }
-                self.ready = true
-                print("I'm ready")
-                self.objectWillChange.send()
-                self.listener = self.databaseRef.child("matches/\(self.matchID)").observe(.value, with: { snapshot in
-                    if !snapshot.exists() {
-                        return;
-                    }
-                    let match = snapshot.value! as! [String: Any]
-                    print(snapshot)
-                    let id = match["latest_move"] as! Int
-                    if id >= 0 {
-                        let move = BoardPosition(id: id, cols: self.board.size)
-                        self.board.play(move: move)
-                        
-                        if self.board.winner != 0 {
-                            // notify that the game is over
-                            
-                        }
-                    }
-                })
+            
+            let info = snapshot.value as! [String: Any]
+            let playerIds = info["player_ids"] as! [Any]
+            let playerNames = info["player_names"] as! [String]
+            
+            print("snapshot = \(snapshot.value)")
+            if playerIds[0] as! String == self.uid {
+                self.localPlayer = 1
+                self.localPlayerName = playerNames[0]
+                self.remotePlayerName = playerNames[1]
             }
             else {
-                print("No data available")
+                self.localPlayer = 2
+                self.localPlayerName = playerNames[1]
+                self.remotePlayerName = playerNames[0]
             }
-        }
-        
+            self.ready = true
+            print("I'm ready")
+            self.objectWillChange.send()
+            self.listener = self.databaseRef.child("matches/\(self.matchID)").observe(.value, with: { snapshot in
+                if !snapshot.exists() {
+                    return;
+                }
+                let match = snapshot.value! as! [String: Any]
+                print(snapshot)
+                let id = match["latest_move"] as! Int
+                if id >= 0 {
+                    let move = BoardPosition(id: id, cols: self.board.size)
+                    self.board.play(move: move)
+                    
+                    if self.board.winner != 0 {
+                        // notify that the game is over
+                        
+                    }
+                }
+            })
+        })
     }
     
     private func startMatch() {
