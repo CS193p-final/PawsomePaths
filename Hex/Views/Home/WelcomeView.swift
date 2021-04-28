@@ -71,8 +71,6 @@ struct WelcomeView: View {
                                 Image(uiImage: avatar!).clipShape(Circle())
                                     .frame(width: 80, height: 80)
                             }
-                        }.onTapGesture {
-                            viewRouter.currentScreen = .friendList
                         }
                     } else {
                         Text("Welcome guest").foregroundColor(.black)
