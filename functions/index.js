@@ -14,8 +14,8 @@ const database = admin.database();
 exports.matchMaker = functions.database.ref("wait_queue/{playerId}")
     .onCreate((snapshot, context) => {
       const matchId = uuid4();
-      let player1Name = snapshot.val().name;
-      let player1Match = snapshot.val().match;
+      const player1Name = snapshot.val().name;
+      const player1Match = snapshot.val().match;
       let player2 = null;
 
       console.log(matchId);
@@ -28,7 +28,6 @@ exports.matchMaker = functions.database.ref("wait_queue/{playerId}")
               playerInfo.key !== context.params.playerId) {
             player2 = playerInfo;
             console.log(player2);
-            break;
           }
         });
 
@@ -56,7 +55,7 @@ exports.matchMaker = functions.database.ref("wait_queue/{playerId}")
             info: {
               match_id: matchId,
               player_ids: [player1Id, player2.key],
-              player_names: [player1Name, player2.val().name]
+              player_names: [player1Name, player2.val().name],
             },
             player_turn: 1,
             latest_move: -1,
