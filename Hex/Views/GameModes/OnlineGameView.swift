@@ -88,10 +88,15 @@ struct OnlineGameView: View {
                         .padding(.bottom)
                         
                         HStack() {
-                            Image(hexGame.localPlayer == 1 ? "redava" : "guestava")
-                                .frame(width: imageFrame, height: imageFrame, alignment: .center)
-                                .scaleEffect(isIpad ? 60/673 : 40/673)
-
+                            if hexGame.localPlayerAvatar != nil {
+                                Image(uiImage: hexGame.localPlayerAvatar!)
+                            } else {
+                                Image(hexGame.localPlayer == 1 ? "redava" : "guestava")
+                                    .frame(width: imageFrame, height: imageFrame, alignment: .center)
+                                    .scaleEffect(isIpad ? 60/673 : 40/673)
+                            }
+                            
+                            
                             Text("You")
                                 .padding(.horizontal)
                                 .font(isIpad ? .title : .headline)
@@ -106,10 +111,13 @@ struct OnlineGameView: View {
                                                     (hexGame.localPlayer == 1 ? blue : red) : black)
                                 .frame(width: geometry.size.width / 3, alignment: .trailing)
                             
-                            
-                            Image(hexGame.localPlayer == 1 ? "guestava" : "redava")
-                                .frame(width: imageFrame, height: imageFrame, alignment: .center)
-                                .scaleEffect(isIpad ? 60/673 : 40/673)
+                            if hexGame.remotePlayerAvatar != nil {
+                                Image(uiImage: hexGame.remotePlayerAvatar!)
+                            } else {
+                                Image(hexGame.localPlayer == 1 ? "guestava" : "redava")
+                                    .frame(width: imageFrame, height: imageFrame, alignment: .center)
+                                    .scaleEffect(isIpad ? 60/673 : 40/673)
+                            }
                         }
                         .padding(.top)
                         .frame(maxWidth: .infinity, alignment: .center)

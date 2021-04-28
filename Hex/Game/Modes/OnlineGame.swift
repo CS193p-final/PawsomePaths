@@ -11,10 +11,13 @@ import FirebaseDatabase
 
 class OnlineGame: GameMode {
     var databaseRef: DatabaseReference! = Database.database().reference()
+    var storageRef: StorageReference! = Storage.storage().reference()
     var matchID: String
     var localPlayer: Int
     var remotePlayerName: String
     var localPlayerName: String
+    @Published var localPlayerAvatar: UIImage?
+    @Published var remotePlayerAvatar: UIImage?
     
     @Published var ready = false
     @AppStorage("UID") var uid = ""
@@ -140,11 +143,46 @@ class OnlineGame: GameMode {
                 self.localPlayer = 1
                 self.localPlayerName = playerNames[0]
                 self.remotePlayerName = playerNames[1]
+                
+                // Get profile picture
+                self.storageRef.child("users/\(playerIds[1])/avatar.png").getData(maxSize: 1024 * 1024) { data, error in
+                    if error != nil {
+                        print("Fail to download player's profile picture")
+                    } else {
+                        self.remotePlayerAvatar = UIImage(data: data!)
+                        self.objectWillChange.send()
+                    }
+                }
+                self.storageRef.child("users/\(playerIds[0])/avatar.png").getData(maxSize: 1024 * 1024) { data, error in
+                    if error != nil {
+                        print("Fail to download player's profile picture")
+                    } else {
+                        self.localPlayerAvatar = UIImage(data: data!)
+                        self.objectWillChange.send()
+                    }
+                }
             }
             else {
                 self.localPlayer = 2
                 self.localPlayerName = playerNames[1]
                 self.remotePlayerName = playerNames[0]
+                // Get profile picture
+                self.storageRef.child("users/\(playerIds[0])/avatar.png").getData(maxSize: 1024 * 1024) { data, error in
+                    if error != nil {
+                        print("Fail to download player's profile picture")
+                    } else {
+                        self.remotePlayerAvatar = UIImage(data: data!)
+                        self.objectWillChange.send()
+                    }
+                }
+                self.storageRef.child("users/\(playerIds[1])/avatar.png").getData(maxSize: 1024 * 1024) { data, error in
+                    if error != nil {
+                        print("Fail to download player's profile picture")
+                    } else {
+                        self.localPlayerAvatar = UIImage(data: data!)
+                        self.objectWillChange.send()
+                    }
+                }
             }
             self.ready = true
             print("I'm ready")

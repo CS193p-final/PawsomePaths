@@ -44,7 +44,7 @@ struct FBButton: View {
                 uid = anonymousUID
             }
             else {
-                loginManager.logIn(permissions: ["email", "user_friends"], from: nil) { (result, error) in
+                loginManager.logIn(permissions: ["email"], from: nil) { (result, error) in
                     if error != nil {
                         print(error!.localizedDescription)
                         return
@@ -63,7 +63,7 @@ struct FBButton: View {
                             
                             guard let firebaseUserID = Auth.auth().currentUser?.uid else { return; }
 
-                            let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, picture, first_name, friends"])
+                            let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, picture, first_name"])
                             request.start { (_, res, _) in
                                 guard let profileData = res as? [String: Any] else { return }
                                 
@@ -74,14 +74,14 @@ struct FBButton: View {
                                 databaseRef.child("users/\(firebaseUserID)/email").setValue(email)
                                 
                                 // Get friend list
-                                if let friends = (profileData["friends"] as? [String: Any])?["data"] as? [[String:Any]] {
-                                    print("friends = \(friends)")
-                                    for friend in friends {
-                                        guard let friendID = friend["id"] else { continue }
-                                        guard let friendName = friend["name"] else { continue }
-                                        databaseRef.child("users/\(firebaseUserID)/friends/\(friendID)").setValue(friendName)
-                                    }
-                                }
+//                                if let friends = (profileData["friends"] as? [String: Any])?["data"] as? [[String:Any]] {
+//                                    print("friends = \(friends)")
+//                                    for friend in friends {
+//                                        guard let friendID = friend["id"] else { continue }
+//                                        guard let friendName = friend["name"] else { continue }
+//                                        databaseRef.child("users/\(firebaseUserID)/friends/\(friendID)").setValue(friendName)
+//                                    }
+//                                }
                                 
                                 // The url is nested 3 layers deep into the result so it's pretty messy
                                 // profileData.picture.data.url
