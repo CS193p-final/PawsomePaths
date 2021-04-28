@@ -38,7 +38,7 @@ struct OnlineGameView: View {
         
         let imageFrame : CGFloat = isIpad ? 60 : 40
         
-        if hexGame.ready {
+        if !hexGame.ready {
             GeometryReader { geometry in
                 Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-2)
                     .onAppear{
@@ -90,33 +90,28 @@ struct OnlineGameView: View {
                         HStack() {
                             if hexGame.localPlayerAvatar != nil {
                                 Image(uiImage: hexGame.localPlayerAvatar!)
+                                    .clipShape(Circle())
+                                    .frame(width: imageFrame, height: imageFrame, alignment: .center)
                             } else {
                                 Image(hexGame.localPlayer == 1 ? "redava" : "guestava")
                                     .frame(width: imageFrame, height: imageFrame, alignment: .center)
                                     .scaleEffect(isIpad ? 60/673 : 40/673)
                             }
-                            
-                            
-                            Text("You")
+
+                            Text(hexGame.localPlayer == hexGame.board.playerTurn ? "Your turn" : "\(hexGame.remotePlayerName)'s turn")
                                 .padding(.horizontal)
-                                .font(isIpad ? .title : .headline)
-                                .foregroundColor(hexGame.board.playerTurn == hexGame.localPlayer ?
-                                                    (hexGame.localPlayer == 1 ? red : blue) : black)
-                                .frame(width: geometry.size.width / 3, alignment: .leading)
-                            
-                            Text(hexGame.remotePlayerName)
-                                .padding(.horizontal)
-                                .font(isIpad ? .title : .headline)
-                                .foregroundColor(hexGame.board.playerTurn != hexGame.localPlayer ?
-                                                    (hexGame.localPlayer == 1 ? blue : red) : black)
-                                .frame(width: geometry.size.width / 3, alignment: .trailing)
+                                .font(Font.custom("PressStart2P-Regular", size: isIpad ?  20 : 10))
+                                .foregroundColor(hexGame.localPlayer == 1 ? blue : red)
+                                .frame(width: geometry.size.width / 2, alignment: .center)
                             
                             if hexGame.remotePlayerAvatar != nil {
                                 Image(uiImage: hexGame.remotePlayerAvatar!)
+                                    .clipShape(Circle())
+                                    .frame(width: imageFrame, height: imageFrame, alignment: .center)
                             } else {
                                 Image(hexGame.localPlayer == 1 ? "guestava" : "redava")
-                                    .frame(width: imageFrame, height: imageFrame, alignment: .center)
                                     .scaleEffect(isIpad ? 60/673 : 40/673)
+                                    .frame(width: imageFrame, height: imageFrame, alignment: .center)
                             }
                         }
                         .padding(.top)

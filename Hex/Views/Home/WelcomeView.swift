@@ -16,7 +16,7 @@ struct WelcomeView: View {
     @State private var showSingleActionSheet = false
     @State private var showTwoPlayerActionSheet = false
     @State private var noConnectionAlert = false
-    @State private var showMenuForIpad = false
+    @State private var showMenu = false
 
     @AppStorage("anonymousUID") var anonymousUID = ""
     @AppStorage("UID") var uid = ""
@@ -49,18 +49,25 @@ struct WelcomeView: View {
                 Image(systemName: "line.horizontal.3.circle.fill")
                 .scaleEffect(isPad ? 2 : 1.5)
                 .foregroundColor(hunterGreen)
-                .position(x: isPad ? 40 : 20, y: isPad ? 40: 20)
                 .onTapGesture {
-                        showMenuForIpad = !showMenuForIpad
+                        showMenu = !showMenu
                 }
-                .popover(isPresented: $showMenuForIpad) {
+                .popover(isPresented: $showMenu) {
                     ZStack {
-                        Menu(width: geometry.size.width, height: geometry.size.height)
                         Rectangle().foregroundColor(wildBlueYonder)
-                            .zIndex(-1)
+                        Menu(showMenu: $showMenu, width: geometry.size.width,  height: geometry.size.height)
                     }
+                    .zIndex(2)
                 }
-
+                .position(x: isPad ? 40 : 20, y: isPad ? 40: 20)
+                Rectangle()
+                    .foregroundColor(.gray)
+                    .opacity(!showMenu ? 0 : 0.5)
+                    .onTapGesture {
+                        showMenu = false
+                    }
+                    .disabled(!isPad)
+                    .zIndex(1)
                 VStack {
                     // User name and avatar
                     if logged {
@@ -181,6 +188,7 @@ func rectButton(_ message: String, width: CGFloat, height: CGFloat) -> some View
 
 struct Menu: View {
     @EnvironmentObject var audioManager: AudioManager
+    @Binding var showMenu: Bool
     var width: CGFloat
     var height: CGFloat
     private let lightCyan: Color = Color(red: 0.8555, green: 0.984375, blue: 0.9961, opacity: 0.8)
