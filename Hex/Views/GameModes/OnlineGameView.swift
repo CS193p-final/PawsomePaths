@@ -38,7 +38,7 @@ struct OnlineGameView: View {
         
         let imageFrame : CGFloat = isIpad ? 60 : 40
         
-        if !hexGame.ready {
+        if hexGame.ready {
             GeometryReader { geometry in
                 Rectangle().foregroundColor(backgroundColor).ignoresSafeArea().zIndex(-2)
                     .onAppear{
