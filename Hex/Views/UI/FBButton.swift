@@ -127,7 +127,6 @@ struct FBButton: View {
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(.white)
             }
-            .frame(width: isPad ? padWidth : phoneWidth, height: isPad ? padHeight : phoneHeight, alignment: .center)
             .overlay(
                 HStack {
                     Image("fb").scaleEffect(0.1).frame(width: 30, height: 50)
@@ -135,6 +134,7 @@ struct FBButton: View {
                         .foregroundColor(.blue)
                 }
             )
+            .frame(width: isPad ? padWidth : phoneWidth, height: isPad ? padHeight : phoneHeight, alignment: .center)
         }
 
     }

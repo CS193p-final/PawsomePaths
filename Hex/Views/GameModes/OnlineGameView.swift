@@ -124,11 +124,6 @@ struct OnlineGameView: View {
                         .foregroundColor(.black)
                         
                         ZStack {
-                            if (showResult == true && hexGame.result != "You lose" ) {
-                                ForEach(0...8, id: \.self) {_ in
-                                    FireworkRepresentable().position(x: CGFloat.random(in: 10 ... 2 * geometry.size.width), y: CGFloat.random(in: 10 ... geometry.size.height)).zIndex(-1)
-                                }
-                            }
                             HexGrid(hexGame.cellValues, cols: hexGame.board.size) { cell in
                                 CellView(cell: cell).onTapGesture {
                                     audioManager.playSound("move", type: "wav")
@@ -166,7 +161,7 @@ struct OnlineGameView: View {
         else {
             LoadingView(game: hexGame)
                 .onAppear {
-                    Timer.scheduledTimer(withTimeInterval: 1000.0, repeats: false) { timer in
+                    Timer.scheduledTimer(withTimeInterval: 10.0, repeats: false) { timer in
                         showNotice = true
                         timer.invalidate()
                         print("start counting")

@@ -49,26 +49,17 @@ struct WelcomeView: View {
                 Image(systemName: "line.horizontal.3.circle.fill")
                 .scaleEffect(isPad ? 2 : 1.5)
                 .foregroundColor(hunterGreen)
+                .position(x: isPad ? 40 : 20, y: isPad ? 40: 20)
                 .onTapGesture {
-                    if isPad {
                         showMenuForIpad = !showMenuForIpad
-                    } else {
-                        if modalManager.modal.position == .closed {
-                            modalManager.openModal()
-                        }
-                    }
                 }
                 .popover(isPresented: $showMenuForIpad) {
-                    Menu(width: geometry.size.width, height: geometry.size.height)
-                        .background(wildBlueYonder)
-                }
-                .onAppear {
-                    self.modalManager.newModal(position: .closed) {
+                    ZStack {
                         Menu(width: geometry.size.width, height: geometry.size.height)
-                            .background(wildBlueYonder)                    }
+                        Rectangle().foregroundColor(wildBlueYonder)
+                            .zIndex(-1)
+                    }
                 }
-                .position(x: isPad ? 40 : 20, y: isPad ? 40: 20)
-
 
                 VStack {
                     // User name and avatar
@@ -195,6 +186,7 @@ struct Menu: View {
     private let lightCyan: Color = Color(red: 0.8555, green: 0.984375, blue: 0.9961, opacity: 0.8)
     private let queenBlue = Color(red: 0.26953, green: 0.41, blue: 0.5625)
     private let headerFontSize: CGFloat = 15
+    private let wildBlueYonder = Color(red: 0.71875, green: 0.71875, blue: 0.8164, opacity: 1)
     
     var body: some View {
         VStack {

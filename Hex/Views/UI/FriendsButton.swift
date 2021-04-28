@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FriendsButton: View {
+    @EnvironmentObject var viewRouter: ViewRouter
     var width: CGFloat
     var height: CGFloat
     var isPad = UIDevice.current.userInterfaceIdiom == .pad
@@ -19,8 +20,7 @@ struct FriendsButton: View {
         let phoneWidth: CGFloat = width / 2.3
 
         Button(action: {
-            print("friend list")
-            // TODO: Show friend list
+            viewRouter.currentScreen = .friendList
         }, label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
