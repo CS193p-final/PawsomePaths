@@ -14,7 +14,6 @@ struct OnlineGameView: View {
     var modalManager = ModalManager()
 
     @State var showResult = false
-    @State private var showSettingsForPhone = false
     @State private var showSettingsForPad = false
     @ObservedObject var hexGame: OnlineGame
     @AppStorage("musicOn") var musicOn = false
@@ -67,7 +66,6 @@ struct OnlineGameView: View {
                                     .onTapGesture {
                                         if !isIpad {
                                             if modalManager.modal.position == .closed {
-                                                showSettingsForPhone = true
                                                 self.modalManager.peekModal()
                                             }
                                         } else {

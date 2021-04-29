@@ -17,7 +17,8 @@ struct WelcomeView: View {
     @State private var showTwoPlayerActionSheet = false
     @State private var noConnectionAlert = false
     @State private var showMenu = false
-
+    @State private showMenuForIpad = false
+    
     @AppStorage("anonymousUID") var anonymousUID = ""
     @AppStorage("UID") var uid = ""
     @AppStorage("logged") var logged = false
@@ -50,17 +51,30 @@ struct WelcomeView: View {
                 .scaleEffect(isPad ? 2 : 1.5)
                 .foregroundColor(hunterGreen)
                 .onTapGesture {
-                        showMenu = !showMenu
+//                    if isPad {showMenuForIpad = !showMenuForIpad}
+//                    else {
+//                        if modalManager.modal.position == .closed {
+//                            modalManager.peekModal()
+//                        }
+//                    }
+                    showMenu = !showMenu
                 }
                 .popover(isPresented: $showMenu) {
                     ZStack {
-                        Rectangle().foregroundColor(wildBlueYonder)
-                        Menu(showMenu: $showMenu, width: geometry.size.width,  height: geometry.size.height)
+                        Rectangle().foregroundColor(wildBlueYonder).ignoresSafeArea()
+                        Menu(width: geometry.size.width,  height: geometry.size.height)
                     }
                     .zIndex(2)
                 }
+//                .onAppear {
+//                    modalManager.newModal(position: .closed) {
+//                        Menu(width: geometry.size.width,  height: geometry.size.height)
+//                            .background(wildBlueYonder)
+//                    }
+//                }
                 .position(x: isPad ? 40 : 20, y: isPad ? 40: 20)
-                Rectangle()
+                if isPad {
+                    Rectangle()
                     .foregroundColor(.gray)
                     .opacity(!showMenu ? 0 : 0.5)
                     .onTapGesture {
@@ -68,6 +82,9 @@ struct WelcomeView: View {
                     }
                     .disabled(!isPad)
                     .zIndex(1)
+                }
+
+
                 VStack {
                     // User name and avatar
                     if logged {
@@ -186,7 +203,6 @@ func rectButton(_ message: String, width: CGFloat, height: CGFloat) -> some View
 
 struct Menu: View {
     @EnvironmentObject var audioManager: AudioManager
-    @Binding var showMenu: Bool
     var width: CGFloat
     var height: CGFloat
     private let lightCyan: Color = Color(red: 0.8555, green: 0.984375, blue: 0.9961, opacity: 0.8)
