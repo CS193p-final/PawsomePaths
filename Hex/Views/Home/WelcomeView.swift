@@ -61,8 +61,9 @@ struct WelcomeView: View {
                 }
                 .popover(isPresented: $showMenu) {
                     ZStack {
-                        Rectangle().foregroundColor(wildBlueYonder).ignoresSafeArea()
-                        Menu(width: geometry.size.width,  height: geometry.size.height)
+                        Rectangle().foregroundColor(wildBlueYonder)
+                        Menu(showMenu: $showMenu, width: geometry.size.width,  height: geometry.size.height)
+                            .environmentObject(audioManager)
                     }
                     .zIndex(2)
                 }
@@ -246,7 +247,7 @@ struct Menu: View {
             // Invite friends button
             InviteButton(width: width, height: height)
             // Show friend list
-            FriendsButton(width: width, height: height)
+            // FriendsButton(width: width, height: height)
         }
         .foregroundColor(queenBlue)
         .padding()
