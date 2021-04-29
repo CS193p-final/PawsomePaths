@@ -230,7 +230,7 @@ struct Menu: View {
             // Invite friends button
             InviteButton(width: width, height: height)
             // Show friend list
-            FriendsButton(width: width, height: height)
+            // FriendsButton(width: width, height: height)
         }
         .foregroundColor(queenBlue)
         .padding()
