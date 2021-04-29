@@ -13,11 +13,13 @@ struct WelcomeView: View {
     static var networkMonitor = NetworkConnection()
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var audioManager: AudioManager
+    @EnvironmentObject var modalManager: ModalManager
+    
     @State private var showSingleActionSheet = false
     @State private var showTwoPlayerActionSheet = false
     @State private var noConnectionAlert = false
     @State private var showMenu = false
-    @State private showMenuForIpad = false
+    @State private var showMenuForIpad = false
     
     @AppStorage("anonymousUID") var anonymousUID = ""
     @AppStorage("UID") var uid = ""
@@ -27,7 +29,6 @@ struct WelcomeView: View {
     @AppStorage("musicOn") var musicOn = false
     @AppStorage("soundOn") var sound = false
     
-    private var modalManager = ModalManager()
     private let isPad = UIDevice.current.userInterfaceIdiom == .pad
     private let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     private var widthRatio = CGFloat(UIDevice.current.userInterfaceIdiom == .pad ? 1/2 : 1)
@@ -51,28 +52,28 @@ struct WelcomeView: View {
                 .scaleEffect(isPad ? 2 : 1.5)
                 .foregroundColor(hunterGreen)
                 .onTapGesture {
-//                    if isPad {showMenuForIpad = !showMenuForIpad}
-//                    else {
-//                        if modalManager.modal.position == .closed {
-//                            modalManager.peekModal()
-//                        }
-//                    }
-                    showMenu = !showMenu
+                    if isPad {showMenuForIpad = !showMenuForIpad}
+                    else {
+                        if modalManager.modal.position == .closed {
+                            modalManager.openModal()
+                        }
+                    }
+//                    showMenu = !showMenu
                 }
-                .popover(isPresented: $showMenu) {
+                .popover(isPresented: $showMenuForIpad) {
                     ZStack {
                         Rectangle().foregroundColor(wildBlueYonder)
-                        Menu(showMenu: $showMenu, width: geometry.size.width,  height: geometry.size.height)
+                        Menu(width: geometry.size.width,  height: geometry.size.height)
                             .environmentObject(audioManager)
                     }
                     .zIndex(2)
                 }
-//                .onAppear {
-//                    modalManager.newModal(position: .closed) {
-//                        Menu(width: geometry.size.width,  height: geometry.size.height)
-//                            .background(wildBlueYonder)
-//                    }
-//                }
+                .onAppear {
+                    modalManager.newModal(position: .closed) {
+                        Menu(width: geometry.size.width,  height: geometry.size.height)
+                            .background(wildBlueYonder)
+                    }
+                }
                 .position(x: isPad ? 40 : 20, y: isPad ? 40: 20)
                 if isPad {
                     Rectangle()
