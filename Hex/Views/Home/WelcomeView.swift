@@ -56,6 +56,7 @@ struct WelcomeView: View {
                     ZStack {
                         Rectangle().foregroundColor(wildBlueYonder)
                         Menu(showMenu: $showMenu, width: geometry.size.width,  height: geometry.size.height)
+                            .environmentObject(audioManager)
                     }
                     .zIndex(2)
                 }

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MainView: View {
     @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var audioManager: AudioManager
+    
     var body: some View {
         switch viewRouter.currentScreen {
         case .welcome:
