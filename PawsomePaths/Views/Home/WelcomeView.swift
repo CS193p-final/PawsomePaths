@@ -58,7 +58,6 @@ struct WelcomeView: View {
                             modalManager.openModal()
                         }
                     }
-//                    showMenu = !showMenu
                 }
                 .popover(isPresented: $showMenuForIpad) {
                     ZStack {
@@ -176,11 +175,6 @@ struct WelcomeView: View {
         .onAppear {
             if !logged {
                 // try to sign-in with anonymous authentication
-                if anonymousUID != "" {
-                    print("User already logged in anonymously. UID = \(anonymousUID)")
-                    uid = anonymousUID
-                    return
-                }
                 Auth.auth().signInAnonymously { (result, error) in
                     print("Signed in anonymously")
                     anonymousUID = Auth.auth().currentUser!.uid

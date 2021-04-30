@@ -39,12 +39,14 @@ struct FBButton: View {
                 loginManager.logOut()
                 try! Auth.auth().signOut()
                 email = ""
-                print("before = \(firstName)")
                 firstName = ""
-                print("after = \(firstName)")
                 logged = false
+                Auth.auth().signInAnonymously { (result, error) in
+                    print("Signed in anonymously")
+                    anonymousUID = Auth.auth().currentUser!.uid
+                    uid = anonymousUID
+                }
                 viewRouter.currentScreen = .welcome
-                uid = anonymousUID
             }
             else {
                 loginManager.logIn(permissions: ["email"], from: nil) { (result, error) in
