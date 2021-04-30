@@ -85,14 +85,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 struct HexApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject var viewRouter = ViewRouter()
-    @StateObject var audioManger = AudioManager()
+    @StateObject var audioManager = AudioManager()
     @StateObject var modalManager = ModalManager()
     
     var body: some Scene {
         WindowGroup {
             MainView()
                 .environmentObject(viewRouter)
-                .environmentObject(audioManger)
+                .environmentObject(audioManager)
                 .environmentObject(modalManager)
         }
     }
