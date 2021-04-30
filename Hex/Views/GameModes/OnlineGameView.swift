@@ -11,7 +11,7 @@ import UIKit
 struct OnlineGameView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var audioManager: AudioManager
-    var modalManager = ModalManager()
+    @EnvironmentObject var modalManager: ModalManager
 
     @State var showResult = false
     @State private var showSettingsForPad = false
