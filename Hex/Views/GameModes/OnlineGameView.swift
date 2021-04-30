@@ -99,7 +99,7 @@ struct OnlineGameView: View {
                             Text(hexGame.localPlayer == hexGame.board.playerTurn ? "Your turn" : "\(hexGame.remotePlayerName)'s turn")
                                 .padding(.horizontal)
                                 .font(Font.custom("PressStart2P-Regular", size: isIpad ?  20 : 10))
-                                .foregroundColor(hexGame.localPlayer == 1 ? blue : red)
+                                .foregroundColor(hexGame.board.playerTurn == 2 ? blue : red)
                                 .frame(width: geometry.size.width / 2, alignment: .center)
                             
                             if hexGame.remotePlayerAvatar != nil {
