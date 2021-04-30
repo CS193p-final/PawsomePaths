@@ -45,7 +45,6 @@ struct WelcomeView: View {
                 Rectangle().foregroundColor(backgroundColor).zIndex(-1).ignoresSafeArea()
                     .onAppear {
                         WelcomeView.networkMonitor.startMonitoring()
-                        print("monitored")
                     }
                 
                 Image(systemName: "line.horizontal.3.circle.fill")
@@ -153,7 +152,6 @@ struct WelcomeView: View {
                         } else {
                             noConnectionAlert = true
                         }
-                        print("Connection status:  \(WelcomeView.networkMonitor.isReachable) and cellular: \(WelcomeView.networkMonitor.isReachableCellular)")
                     } label: {
                         rectButton("Play Online", width: geometry.size.width, height: geometry.size.height)
                     }
@@ -176,7 +174,6 @@ struct WelcomeView: View {
             if !logged {
                 // try to sign-in with anonymous authentication
                 Auth.auth().signInAnonymously { (result, error) in
-                    print("Signed in anonymously")
                     anonymousUID = Auth.auth().currentUser!.uid
                     uid = anonymousUID
                 }
@@ -193,7 +190,6 @@ func rectButton(_ message: String, width: CGFloat, height: CGFloat) -> some View
             .overlay(Text(message))
             .font(Font.custom("KronaOne-Regular", size: 20))
             .foregroundColor(Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1))
-            //.padding(UIDevice.current.userInterfaceIdiom == .pad ? 5 : 0)
     }
 }
 

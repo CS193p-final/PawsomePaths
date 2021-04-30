@@ -19,12 +19,6 @@ class NetworkConnection: ObservableObject {
         monitor.pathUpdateHandler = { [weak self] path in
             self?.status = path.status
             self?.isReachableCellular = path.isExpensive
-            if (path.status == .satisfied) {
-                print("Internet connected")
-            } else {
-                print("No connection")
-            }
-            print(path.isExpensive)
         }
         let queue = DispatchQueue(label: "NetworkMonitor")
         monitor.start(queue: queue)

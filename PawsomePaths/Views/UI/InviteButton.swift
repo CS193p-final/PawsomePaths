@@ -20,7 +20,7 @@ struct InviteButton: View {
         let linkParameter = URL(string: "https://testflight.apple.com/join/bMxqwb9t")!
         
         guard let shareLink = DynamicLinkComponents(link: linkParameter, domainURIPrefix: "https://gdhex.page.link") else {
-            print("Couldn't reate FDL components")
+            // Couldn't reate FDL components
             return
         }
         
@@ -36,7 +36,6 @@ struct InviteButton: View {
         DispatchQueue.main.async {
             shareLink.shorten { (url, warnings, error) in
                 if let error = error {
-                    print("Error = \(error.localizedDescription)")
                     return
                 }
                 guard let url = url else { return }

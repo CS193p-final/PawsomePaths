@@ -148,8 +148,7 @@ struct GameBoard: Hashable, Codable {
     }
     
     mutating func play(move: BoardPosition) {
-        if board[move.r][move.c] != 0 {
-            print("Invalid move: \(move)")
+        if board[move.r][move.c] != 0 { // invalid move
             return
         } else {
             board[move.r][move.c] = playerTurn

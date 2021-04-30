@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         open url: URL,
         options: [UIApplication.OpenURLOptionsKey : Any] = [:]
     ) -> Bool {
-        print("Received URL through custom scheme")
+        // received url through custom scheme
         if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
             self.handleIncomingDynamicLink(dynamicLink)
             return true
@@ -47,20 +47,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func handleIncomingDynamicLink(_ dynamicLink: DynamicLink) {
         guard let url = dynamicLink.url else {
-            print("Dynamic link object doesn't contain url")
+            //dynamic link object doesnt contain url
             return
         }
-        print("Your incoming link parameter is \(url.absoluteString)")
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
 
         if let incomingURL = userActivity.webpageURL {
-            print("incoming URL is \(incomingURL)")
-            
             let linkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingURL) { (dynamicLink, error) in
                 guard error == nil else {
-                    print("Found an error! \(error.debugDescription)")
                     return
                 }
                 

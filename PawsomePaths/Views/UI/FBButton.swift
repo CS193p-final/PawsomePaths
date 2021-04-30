@@ -42,7 +42,6 @@ struct FBButton: View {
                 firstName = ""
                 logged = false
                 Auth.auth().signInAnonymously { (result, error) in
-                    print("Signed in anonymously")
                     anonymousUID = Auth.auth().currentUser!.uid
                     uid = anonymousUID
                 }
@@ -51,14 +50,12 @@ struct FBButton: View {
             else {
                 loginManager.logIn(permissions: ["email"], from: nil) { (result, error) in
                     if error != nil {
-                        print(error!.localizedDescription)
                         return
                     }
                     if AccessToken.current != nil {
                         let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
                         Auth.auth().signIn(with: credential) { (res, error) in
                             if error != nil {
-                                print((error?.localizedDescription)!)
                                 return
                             }
                             
@@ -71,8 +68,6 @@ struct FBButton: View {
                             let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, picture, first_name"])
                             request.start { (_, res, _) in
                                 guard let profileData = res as? [String: Any] else { return }
-                                
-                                print("profile data = \(profileData)")
                                 email = profileData["email"] as! String
                                 firstName = profileData["first_name"] as! String
                                 databaseRef.child("users/\(firebaseUserID)/name").setValue(firstName)
@@ -101,11 +96,8 @@ struct FBButton: View {
                                         storageRef.child("users/\(firebaseUserID)/avatar.png").putData(data, metadata: metadata) { (metadata, error) in
                                             guard metadata != nil else {
                                                 // Uh-oh, an error occurred!
-                                                print("Uh-oh, an error occurred!")
-                                                print(error.debugDescription)
                                                 return
                                             }
-                                            print("Uploaded")
                                         }
                                         
                                         let avatar = UIImage(data: data)

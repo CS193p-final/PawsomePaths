@@ -63,18 +63,9 @@ class GameMode: ObservableObject {
         }
     }
     
-//    var soundOn: Bool {
-//        board.soundOn
-//    }
-//
-//    var musicOn: Bool {
-//        board.musicOn
-//    }
-    
     // MARK: - Intent(s)
     func play(cellId: Int) {
         board.play(move: BoardPosition(id: cellId, cols: board.size))
-        //playSound("error", type: "wav",  )
     }
     
     func newGame(size: Int) {
@@ -94,12 +85,4 @@ class GameMode: ObservableObject {
             newGame(size: size)
         }
     }
-    
-//    func toggleSound() {
-//        board.toggleSound()
-//    }
-//
-//    func toggleMusic() {
-//        board.toggleMusic()
-//    }
 }

@@ -36,7 +36,6 @@ struct CountdownTimer: View {
                 .frame(height: 20)
         }
         .onReceive(timer, perform: { _ in
-            print("hello")
             if timeRemaining > 0 {
                 timeRemaining -= 0.1
             }

@@ -17,9 +17,7 @@ struct MonteCarlo {
     // Causes the AI to calculate the best move from the current game state and return it
     mutating func getPlay() -> BoardPosition {
         assert(!board.legalMoves.isEmpty)
-        
-        //print(board.description)
-        
+
         if board.legalMoves.count == 0 {
             return board.legalMoves.first!
         }

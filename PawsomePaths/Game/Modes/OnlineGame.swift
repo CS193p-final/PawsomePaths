@@ -106,7 +106,7 @@ class OnlineGame: GameMode {
     // MARK: - Helper functions
     private func joinWaitQueue() {
         if uid == "" {
-            print("user doesn't have an UID")
+            // user doesnt have uid
             return
         }
         databaseRef.child("wait_queue/\(uid)").setValue(["match": "", "name": localPlayerName])
@@ -126,13 +126,13 @@ class OnlineGame: GameMode {
     
     private func setupMatch() {
         self.databaseRef.child("matches/\(self.matchID)/info").observe(.value, with: { snapshot in
-            print("Setting up match: \(snapshot)")
             
             if !snapshot.exists() {
-                print("No data available")
+                // no data available
                 return
             }
             
+            // setting up match
             let info = snapshot.value as! [String: Any]
             let playerIds = info["player_ids"] as! [Any]
             let playerNames = info["player_names"] as! [String]
@@ -183,14 +183,12 @@ class OnlineGame: GameMode {
                 }
             }
             self.ready = true
-            print("I'm ready")
             self.objectWillChange.send()
             self.listener = self.databaseRef.child("matches/\(self.matchID)").observe(.value, with: { snapshot in
                 if !snapshot.exists() {
                     return;
                 }
                 let match = snapshot.value! as! [String: Any]
-                print(snapshot)
                 let id = match["latest_move"] as! Int
                 if id >= 0 {
                     let move = BoardPosition(id: id, cols: self.board.size)
@@ -223,7 +221,6 @@ class OnlineGame: GameMode {
                     let id = match.key
                     let matchInfo = match.value
                     if matchInfo["player_count"] as! Int == 1 {
-                        print("found a match: \(match)")
                         self.matchID = id
                         self.joinMatch()
                         self.setupMatch()
@@ -246,8 +243,6 @@ class OnlineGame: GameMode {
     
     func exitMatch() {
         matchID = ""
-        print("Exiting match ... ")
-        print("uid = \(uid)")
         databaseRef.child("wait_queue/\(uid)").removeValue()
         databaseRef.removeObserver(withHandle: listener)
         databaseRef.child("matches/\(matchID)").removeValue()
