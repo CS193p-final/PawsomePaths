@@ -130,7 +130,7 @@ struct FBButton: View {
             .overlay(
                 HStack {
                     Image("fb").scaleEffect(0.1).frame(width: 30, height: 50)
-                    Text(logged ? "Log out" : "Connect with FB").fontWeight(.medium)
+                    Text(logged ? "Log out" : "Sign in Facebook").fontWeight(.medium)
                         .foregroundColor(.blue)
                 }
             )
