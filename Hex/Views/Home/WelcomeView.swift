@@ -18,7 +18,7 @@ struct WelcomeView: View {
     @State private var showSingleActionSheet = false
     @State private var showTwoPlayerActionSheet = false
     @State private var noConnectionAlert = false
-    @State private var showMenu = false
+    //@State private var showMenu = false
     @State private var showMenuForIpad = false
     
     @AppStorage("anonymousUID") var anonymousUID = ""
@@ -78,9 +78,9 @@ struct WelcomeView: View {
                 if isPad {
                     Rectangle()
                     .foregroundColor(.gray)
-                    .opacity(!showMenu ? 0 : 0.5)
+                    .opacity(!showMenuForIpad ? 0 : 0.5)
                     .onTapGesture {
-                        showMenu = false
+                        showMenuForIpad = false
                     }
                     .disabled(!isPad)
                     .zIndex(1)
