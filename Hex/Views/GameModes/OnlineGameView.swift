@@ -33,7 +33,7 @@ struct OnlineGameView: View {
     var body: some View {
         let buttonFontSize: CGFloat = isIpad ? 60 : 30
         let gameTitle: CGFloat = isIpad ? 30 : 15
-        let playerTurnFontSize: CGFloat = isIpad ? 50 : 25
+        let _: CGFloat = isIpad ? 50 : 25
         
         let imageFrame : CGFloat = isIpad ? 60 : 40
         

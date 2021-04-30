@@ -116,7 +116,6 @@ class OnlineGame: GameMode {
             }
             
             if snapshot.exists() {
-                print(snapshot.value)
                 self.matchID = snapshot.value as! String
                 if self.matchID != "" {
                     self.joinMatch()
@@ -138,7 +137,6 @@ class OnlineGame: GameMode {
             let playerIds = info["player_ids"] as! [Any]
             let playerNames = info["player_names"] as! [String]
             
-            print("snapshot = \(snapshot.value)")
             if playerIds[0] as! String == self.uid {
                 self.localPlayer = 1
                 self.localPlayerName = playerNames[0]

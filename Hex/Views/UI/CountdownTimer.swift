@@ -22,7 +22,7 @@ struct CountdownTimer: View {
     var body: some View {
         GeometryReader { geometry in
             let width = geometry.size.width
-            let height = geometry.size.height
+            let _ = geometry.size.height
             ZStack(alignment: .leading) {
                 Rectangle()
                     .fill(Color.gray.opacity(0.3))

@@ -22,7 +22,7 @@ struct Minimax {
         for difficulty in 1...maxDifficulty {
             board.difficulty = difficulty
             var eval = 0
-            let score = minimax(depth: difficulty, isMaximizingPlayer: true, a: Int.min, b: Int.max, bestMove: &bestMove, critical: &eval)
+            _ = minimax(depth: difficulty, isMaximizingPlayer: true, a: Int.min, b: Int.max, bestMove: &bestMove, critical: &eval)
             if eval == Int.min || eval == Int.max {
                 break
             }
