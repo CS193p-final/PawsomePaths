@@ -39,6 +39,9 @@ struct FBButton: View {
                 loginManager.logOut()
                 try! Auth.auth().signOut()
                 email = ""
+                print("before = \(firstName)")
+                firstName = ""
+                print("after = \(firstName)")
                 logged = false
                 viewRouter.currentScreen = .welcome
                 uid = anonymousUID
@@ -130,7 +133,7 @@ struct FBButton: View {
             .overlay(
                 HStack {
                     Image("fb").scaleEffect(0.1).frame(width: 30, height: 50)
-                    Text(logged ? "Log out" : "Sign in Facebook").fontWeight(.medium)
+                    Text(logged ? "Sign out" : "Sign in").fontWeight(.medium)
                         .foregroundColor(.blue)
                 }
             )

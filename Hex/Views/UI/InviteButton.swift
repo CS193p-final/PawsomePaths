@@ -49,10 +49,10 @@ struct InviteButton: View {
     var body: some View {
         // This is the workaround for the bug: https://developer.apple.com/forums/thread/652080
         // Swift UI on iOS 14 not assigning new object to @State property
-        let padHeight: CGFloat = height / 18
-        let phoneHeight: CGFloat = height / 12
-        let padWidth: CGFloat = width / 4.3
-        let phoneWidth: CGFloat = width / 2
+        let padWidth = width / 4
+        let phoneWidth = width / 1.7
+        let padHeight = height / 18
+        let phoneHeight = height / 12
 
         Button(action: {
             show = true
