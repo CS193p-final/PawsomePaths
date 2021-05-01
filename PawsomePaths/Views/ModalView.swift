@@ -13,14 +13,15 @@ struct ModalView: View {
     }
     
     var body: some View {
-        let drag = DragGesture(minimumDistance: 30)
-            .updating($dragState) { drag, state, transaction in
-                state = .dragging(translation:  drag.translation)
-        }
-        .onChanged {
-            self.modal.dragOffset = $0.translation
-        }
-        .onEnded(onDragEnded)
+        // Disable dragging feature for modal view
+//        let drag = DragGesture(minimumDistance: 30)
+//            .updating($dragState) { drag, state, transaction in
+//                state = .dragging(translation:  drag.translation)
+//        }
+        //.onChanged {
+            //self.modal.dragOffset = $0.translation
+        //}
+        //.onEnded(onDragEnded)
         
         return GeometryReader(){ geometry in
             ZStack(alignment: .top) {
@@ -37,7 +38,7 @@ struct ModalView: View {
             }
             .mask(RoundedRectangle(cornerRadius: 8, style: .continuous))
             .offset(y: max(0, self.modal.position.offsetFromTop() + self.dragState.translation.height + geometry.safeAreaInsets.top))
-            .gesture(drag)
+            //.gesture(drag)
             .animation(self.dragState.isDragging ? nil : self.animation)
         }
         .edgesIgnoringSafeArea(.top)

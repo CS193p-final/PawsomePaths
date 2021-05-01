@@ -74,7 +74,8 @@ struct GameView: View {
                                     }
                                 }
                                 .popover(isPresented: $showSettingsForPad) {
-                                    settingsView(game: hexGame).environmentObject(audioManager)
+                                    settingsView(game: hexGame)
+                                        .environmentObject(audioManager)
                                 }
                                 .padding()
                         }
@@ -212,7 +213,6 @@ struct settingsView: View {
     private let queenBlue = Color(red: 0.26953, green: 0.41, blue: 0.5625)
     private let wildBlueYonder = Color(red: 0.71875, green: 0.71875, blue: 0.8164, opacity: 1)
     private let headerFontSize: CGFloat = 15
-    @EnvironmentObject var modalManager: ModalManager
 
     var body: some View {
         VStack {
