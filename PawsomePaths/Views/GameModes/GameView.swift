@@ -189,7 +189,6 @@ struct resultReport: View {
                                     game.newGame(size: game.board.size)
                                     viewRouter.currentScreen = .welcome
                                     audioManager.playSound("MouseClick", type: "mp3")
-                                    
                                 }
                             }
                         }
@@ -220,12 +219,22 @@ struct settingsView: View {
                 Stepper(
                     onIncrement: {
                         game.incrementSize()
+                        // workaround bug
+                        // have to address the bug in the future
+                        audioManager.toggleSound()
+                        audioManager.toggleSound()
+
                         if game.board.size == game.maxSize {
                             showAlert = true
                         }
                     },
                     onDecrement: {
                         game.decrementSize()
+                        // workaround bug
+                        // have to address bug better in the future
+                        audioManager.toggleSound()
+                        audioManager.toggleSound()
+
                         if game.board.size == game.minSize {
                             showAlert = true
                         }

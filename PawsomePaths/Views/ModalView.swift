@@ -43,48 +43,47 @@ struct ModalView: View {
         }
         .edgesIgnoringSafeArea(.top)
     }
-    
-    private func onDragEnded(drag: DragGesture.Value) {
-        
-        // Setting stops
-        let higherStop: ModalState
-        let lowerStop: ModalState
-        
-        // Nearest position for drawer to snap to.
-        let nearestPosition: ModalState
-        
-        // Determining the direction of the drag gesture and its distance from the top
-        let dragDirection = drag.predictedEndLocation.y - drag.location.y
-        let offsetFromTopOfView = modal.position.offsetFromTop() + drag.translation.height
-        
-        // Determining whether drawer is above or below `.partiallyRevealed` threshold for snapping behavior.
-        if offsetFromTopOfView <= ModalState.partiallyRevealed.offsetFromTop() {
-            higherStop = .open
-            lowerStop = .partiallyRevealed
-        } else {
-            higherStop = .partiallyRevealed
-            lowerStop = .closed
-        }
-        
-        // Determining whether drawer is closest to top or bottom
-        if (offsetFromTopOfView - higherStop.offsetFromTop()) < (lowerStop.offsetFromTop() - offsetFromTopOfView) {
-            nearestPosition = higherStop
-        } else {
-            nearestPosition = lowerStop
-        }
-        
-        // Determining the drawer's position.
-        if dragDirection > 0 {
-            modal.position = lowerStop
-        } else if dragDirection < 0 {
-            modal.position = higherStop
-        } else {
-            modal.position = nearestPosition
-        }
-        
-    }
-    
 }
+    
+//    private func onDragEnded(drag: DragGesture.Value) {
+//
+//        // Setting stops
+//        let higherStop: ModalState
+//        let lowerStop: ModalState
+//
+//        // Nearest position for drawer to snap to.
+//        let nearestPosition: ModalState
+//
+//        // Determining the direction of the drag gesture and its distance from the top
+//        let dragDirection = drag.predictedEndLocation.y - drag.location.y
+//        let offsetFromTopOfView = modal.position.offsetFromTop() + drag.translation.height
+//
+//        // Determining whether drawer is above or below `.partiallyRevealed` threshold for snapping behavior.
+//        if offsetFromTopOfView <= ModalState.partiallyRevealed.offsetFromTop() {
+//            higherStop = .open
+//            lowerStop = .partiallyRevealed
+//        } else {
+//            higherStop = .partiallyRevealed
+//            lowerStop = .closed
+//        }
+//
+//        // Determining whether drawer is closest to top or bottom
+//        if (offsetFromTopOfView - higherStop.offsetFromTop()) < (lowerStop.offsetFromTop() - offsetFromTopOfView) {
+//            nearestPosition = higherStop
+//        } else {
+//            nearestPosition = lowerStop
+//        }
+//
+//        // Determining the drawer's position.
+//        if dragDirection > 0 {
+//            modal.position = lowerStop
+//        } else if dragDirection < 0 {
+//            modal.position = higherStop
+//        } else {
+//            modal.position = nearestPosition
+//        }
+//
+//    }
 
 enum DragState {
     

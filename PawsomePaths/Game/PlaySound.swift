@@ -11,8 +11,8 @@ import AVFoundation
 class AudioManager: ObservableObject {
     var soundPlayer: AVAudioPlayer?
     var musicPlayer: AVAudioPlayer?
-    @Published private(set) var musicOn = false
-    @Published private (set) var soundOn = false
+    @Published var musicOn = false
+    @Published var soundOn = false
 
     func playSound(_ sound: String, type: String) {
         if soundOn {
