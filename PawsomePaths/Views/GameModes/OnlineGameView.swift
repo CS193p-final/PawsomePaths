@@ -146,9 +146,9 @@ struct OnlineGameView: View {
                                 }
                             }
                         }
-                        NewGameButton(isOnlineGame: true, game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
-                        .foregroundColor(!showResult ? .blue : .gray)
-                        .padding()
+//                        NewGameButton(isOnlineGame: true, game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
+//                        .foregroundColor(!showResult ? .blue : .gray)
+//                        .padding()
                     }
                     ModalAnchorView().environmentObject(modalManager)
                 }
