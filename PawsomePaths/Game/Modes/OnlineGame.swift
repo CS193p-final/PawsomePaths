@@ -75,10 +75,11 @@ class OnlineGame: GameMode {
             }
             else if snapshot.exists() {
                 let matchInfo = snapshot.value as! [String: Any]
-                // if the match is done
-//                if matchInfo["is_done"] as! Int == 1 {
-//
-//                }
+                // if other player left the match
+                if matchInfo["done"] as! Int != 0 {
+                    self.board.setWinner(playerID: self.localPlayer)
+                    return
+                }
                 
                 if matchInfo["player_turn"] as! Int == self.localPlayer {
                     self.databaseRef.child("matches/\(self.matchID)").runTransactionBlock { (data) -> TransactionResult in
@@ -242,10 +243,24 @@ class OnlineGame: GameMode {
     }
     
     func exitMatch() {
+        let matchRef = databaseRef.child("matches/\(matchID)")
         matchID = ""
+        
         databaseRef.child("wait_queue/\(uid)").removeValue()
         databaseRef.removeObserver(withHandle: listener)
-        databaseRef.child("matches/\(matchID)").removeValue()
+        
+        matchRef.runTransactionBlock { (data) -> TransactionResult in
+            var match = data.value as! [String: Any]
+            var done = match["done"] as! Int
+            done += 1
+            match["done"] = done;
+            if done == 2 {
+                data.value = nil
+                return TransactionResult.success(withValue: data)
+            }
+            data.value = match
+            return TransactionResult.success(withValue: data)
+        }
     }
 }
 

@@ -41,6 +41,7 @@ struct GameBoard: Hashable, Codable {
     private(set) var size: Int
     var board: [[Int]]
     var difficulty = 3
+    private var _winner = 0
     private(set) var playerTurn: Int = 1
     
     var json: Data? {
@@ -131,6 +132,9 @@ struct GameBoard: Hashable, Codable {
     }
     
     var winner: Int {
+        if _winner != 0 {
+            return _winner
+        }
         switch checkResult() {
         case .player1Win:
             return 1
@@ -139,6 +143,10 @@ struct GameBoard: Hashable, Codable {
         default:
             return 0
         }
+    }
+    
+    mutating func setWinner(playerID: Int) {
+        _winner = playerID
     }
     
     func nextState(move: BoardPosition) -> GameBoard {
