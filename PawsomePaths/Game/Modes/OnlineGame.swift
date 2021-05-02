@@ -75,11 +75,6 @@ class OnlineGame: GameMode {
             }
             else if snapshot.exists() {
                 let matchInfo = snapshot.value as! [String: Any]
-                // if other player left the match
-                if matchInfo["done"] as! Int != 0 {
-                    self.board.setWinner(playerID: self.localPlayer)
-                    return
-                }
                 
                 if matchInfo["player_turn"] as! Int == self.localPlayer {
                     self.databaseRef.child("matches/\(self.matchID)").runTransactionBlock { (data) -> TransactionResult in
@@ -190,6 +185,13 @@ class OnlineGame: GameMode {
                     return;
                 }
                 let match = snapshot.value! as! [String: Any]
+                
+                // if other player left the match
+                if match["done"] as! Int != 0 {
+                    self.board.setWinner(playerID: self.localPlayer)
+                    return
+                }
+                
                 let id = match["latest_move"] as! Int
                 if id >= 0 {
                     let move = BoardPosition(id: id, cols: self.board.size)

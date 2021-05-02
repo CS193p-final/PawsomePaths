@@ -171,6 +171,13 @@ struct GameBoard: Hashable, Codable {
     }
     
     func checkResult() -> GameResult {
+        if _winner != 0 {
+            if _winner == 1 {
+                return .player1Win
+            } else {
+                return .player2Win
+            }
+        }
         // Check if player 1 has connected top to bottom
         var visited = Array(repeating: Array(repeating: false, count: size), count: size)
         var queue = Queue<BoardPosition>()
