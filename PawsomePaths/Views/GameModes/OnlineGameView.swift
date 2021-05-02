@@ -134,7 +134,10 @@ struct OnlineGameView: View {
                             .rotationEffect(Angle(degrees: 90))
                             .scaleEffect(isIpad ? 0.9 : 1)
                             .onReceive(self.hexGame.$board, perform: { newValue in
-                                if newValue.winner != 0 {
+                                if newValue.winner > 0 { // normal win
+                                    showResult = true
+                                }
+                                if newValue.winner < 0 { // win by one player disconnected from the game
                                     showResult = true
                                 }
                             })

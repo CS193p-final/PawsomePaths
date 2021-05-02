@@ -52,8 +52,12 @@ class OnlineGame: GameMode {
         if winner == 0 {
             return "Unknown"
         }
-        else if winner == localPlayer {
-            return "You win"
+        else if abs(winner) == localPlayer {
+            if winner > 0 {
+                return "You win"
+            } else {
+                return "Opponent left"
+            }
         }
         else {
             return "You lose"
