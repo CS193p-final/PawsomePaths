@@ -131,9 +131,10 @@ struct GameBoard: Hashable, Codable {
         return moves
     }
     
+    // negative number means the player wins by opponent quitting the game.
     var winner: Int {
         if _winner != 0 {
-            return _winner
+            return -_winner
         }
         switch checkResult() {
         case .player1Win:

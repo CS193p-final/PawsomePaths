@@ -134,16 +134,22 @@ struct OnlineGameView: View {
                             .rotationEffect(Angle(degrees: 90))
                             .scaleEffect(isIpad ? 0.9 : 1)
                             .onReceive(self.hexGame.$board, perform: { newValue in
-                                if newValue.winner != 0 {
+                                if newValue.winner > 0 { // normal win
+                                    showResult = true
+                                }
+                                if newValue.winner < 0 { // win by one player disconnected from the game
                                     showResult = true
                                 }
                             })
                             .popup(isPresented: $showResult) {
                                 ZStack {
-                                    resultReport(game: hexGame, showResult: showResult, isOnlineGame: true)
+                                    resultReport(isOnlineGame: true, game: hexGame, showResult: showResult)
                                 }
                             }
                         }
+                        newGameButton(isOnlineGame: true, game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
+                        .foregroundColor(!showResult ? .blue : .gray)
+                        .padding()
                     }
                     ModalAnchorView().environmentObject(modalManager)
                 }

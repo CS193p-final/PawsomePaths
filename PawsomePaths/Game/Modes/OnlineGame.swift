@@ -52,8 +52,12 @@ class OnlineGame: GameMode {
         if winner == 0 {
             return "Unknown"
         }
-        else if winner == localPlayer {
-            return "You win"
+        else if abs(winner) == localPlayer {
+            if winner > 0 {
+                return "You win"
+            } else {
+                return "Opponent left"
+            }
         }
         else {
             return "You lose"
@@ -75,11 +79,6 @@ class OnlineGame: GameMode {
             }
             else if snapshot.exists() {
                 let matchInfo = snapshot.value as! [String: Any]
-                // if other player left the match
-                if matchInfo["done"] as! Int != 0 {
-                    self.board.setWinner(playerID: self.localPlayer)
-                    return
-                }
                 
                 if matchInfo["player_turn"] as! Int == self.localPlayer {
                     self.databaseRef.child("matches/\(self.matchID)").runTransactionBlock { (data) -> TransactionResult in
@@ -190,6 +189,13 @@ class OnlineGame: GameMode {
                     return;
                 }
                 let match = snapshot.value! as! [String: Any]
+                
+                // if other player left the match
+                if match["done"] as! Int != 0 {
+                    self.board.setWinner(playerID: self.localPlayer)
+                    return
+                }
+                
                 let id = match["latest_move"] as! Int
                 if id >= 0 {
                     let move = BoardPosition(id: id, cols: self.board.size)
@@ -202,39 +208,6 @@ class OnlineGame: GameMode {
                 }
             })
         })
-    }
-    
-    private func startMatch() {
-        
-    }
-    
-    private func findMatch() {
-        // Ignore this warning since firebase event callbacks are always on main thread.
-        /// Publishing changes from background threads is not allowed; make sure to publish values from the main thread (via operators like receive(on:)) on model updates.
-        self.databaseRef.child("matches").getData { (error, snapshot) in
-            if let error = error {
-                print("Error getting data \(error)")
-            }
-            else if snapshot.exists() {
-                let matches = snapshot.value as! [String: [String: Any]]
-                
-                for match in matches {
-                    let id = match.key
-                    let matchInfo = match.value
-                    if matchInfo["player_count"] as! Int == 1 {
-                        self.matchID = id
-                        self.joinMatch()
-                        self.setupMatch()
-                        self.ready = true
-                        self.objectWillChange.send()
-                        return
-                    }
-                }
-            }
-            else {
-                print("No data available")
-            }
-        }
     }
     
     private func joinMatch() {
@@ -250,15 +223,17 @@ class OnlineGame: GameMode {
         databaseRef.removeObserver(withHandle: listener)
         
         matchRef.runTransactionBlock { (data) -> TransactionResult in
-            var match = data.value as! [String: Any]
-            var done = match["done"] as! Int
-            done += 1
-            match["done"] = done;
-            if done == 2 {
-                data.value = nil
-                return TransactionResult.success(withValue: data)
+            if var match = data.value as? [String: Any] {
+                if var done = match["done"] as? Int {
+                    done += 1
+                    match["done"] = done
+                    if done == 2 {
+                        data.value = nil
+                        return TransactionResult.success(withValue: data)
+                    }
+                    data.value = match
+                }
             }
-            data.value = match
             return TransactionResult.success(withValue: data)
         }
     }

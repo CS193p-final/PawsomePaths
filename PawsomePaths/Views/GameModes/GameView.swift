@@ -112,11 +112,11 @@ struct GameView: View {
                             .rotationEffect(Angle.degrees(90))
                             .popup(isPresented: $showResult) {
                                 ZStack {
-                                    resultReport(game: hexGame, showResult: showResult, isOnlineGame: false)
+                                    resultReport(isOnlineGame: false, game: hexGame, showResult: showResult)
                                 }
                             }
                         }
-                    newGameButton(game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
+                    newGameButton(isOnlineGame: false, game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
                     .foregroundColor(!showResult ? .blue : .gray)
                     .padding()
                     .zIndex(-1)
@@ -129,6 +129,9 @@ struct GameView: View {
 
 
 struct newGameButton: View {
+    @EnvironmentObject var viewRouter: ViewRouter
+
+    var isOnlineGame: Bool
     var game: GameMode
     let buttonFontSize: CGFloat
     var showResult: Bool
@@ -136,7 +139,11 @@ struct newGameButton: View {
     
     var body: some View {
         Button(action: {
-            showResult ? game.newGame(size: game.board.size) : nil
+            if isOnlineGame {
+                viewRouter.currentScreen = .onlineGame
+            } else {
+                showResult ? game.newGame(size: game.board.size) : nil
+            }
         }
     ) {
             RoundedRectangle(cornerRadius: buttonFontSize)
@@ -151,6 +158,8 @@ struct newGameButton: View {
 struct resultReport: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var audioManager: AudioManager
+    
+    var isOnlineGame: Bool
     var game: GameMode
     var showResult: Bool
     var isOnlineGame: Bool
@@ -177,9 +186,7 @@ struct resultReport: View {
                         .frame(width: imageWidth, alignment: .center)
                     
                     VStack {
-                        if !isOnlineGame {
-                            newGameButton(game: game, buttonFontSize: geometry.size.width / buttonFontSize, showResult: showResult)
-                        }
+                        newGameButton(isOnlineGame: isOnlineGame, game: game, buttonFontSize: geometry.size.width / buttonFontSize, showResult: showResult)
                         Button {
                             viewRouter.currentScreen = .welcome
                             game.newGame(size: game.board.size)
