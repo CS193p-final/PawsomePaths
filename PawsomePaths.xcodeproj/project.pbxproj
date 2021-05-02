@@ -302,6 +302,7 @@
 		C627D3CE26051CDD00EA0DD5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C10AA70025EA2C59006C7531 /* PopupView.swift */,
 				C627D3CF26051DC400EA0DD5 /* CountdownTimer.swift */,
 				C6029D3726014A04005FBD3B /* FBButton.swift */,
 				C6DB98CA260E7CE800ED794D /* InviteButton.swift */,
@@ -313,6 +314,8 @@
 		C64CC85B26013F800044B780 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C696A51A2605319F0073D313 /* MainView.swift */,
+				C69FD61E25F94F4B0077394D /* HowToPlayView.swift */,
 				C1102C4126041FEB00C128B2 /* LoadingView.swift */,
 				C101D1E325DC5789000E86E0 /* WelcomeView.swift */,
 				C1FA00102605280A0077C7E3 /* LaunchScreen.storyboard */,
@@ -369,6 +372,7 @@
 		C6596A3125DB11D900A0F94B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C1BE71A4260FC8D90049751E /* NetworkConnection.swift */,
 				C1000AA126019F06009A1B80 /* Spinning.swift */,
 				C6227AD425F2B085008E301E /* Deque.swift */,
 				C6596A3225DB11F000A0F94B /* Queue.swift */,
@@ -422,7 +426,6 @@
 				C699738125D9F4DC00337F70 /* Info.plist */,
 				C699737E25D9F4DC00337F70 /* Preview Content */,
 				C699739225D9FEF300337F70 /* Views */,
-				C1BE71A4260FC8D90049751E /* NetworkConnection.swift */,
 			);
 			path = PawsomePaths;
 			sourceTree = "<group>";
@@ -446,22 +449,27 @@
 		C699739225D9FEF300337F70 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C69AB95A263F278E006E14D3 /* Modal */,
 				C627D3CE26051CDD00EA0DD5 /* UI */,
 				C699738825D9F4EE00337F70 /* Shapes */,
 				C64CC85E2601404C0044B780 /* Animation */,
 				C64CC85D26013FE10044B780 /* GameModes */,
 				C64CC85C26013FB20044B780 /* Board */,
 				C64CC85B26013F800044B780 /* Home */,
-				C10AA70025EA2C59006C7531 /* PopupView.swift */,
-				C69FD61E25F94F4B0077394D /* HowToPlayView.swift */,
-				C696A51A2605319F0073D313 /* MainView.swift */,
 				C696A51D260531EC0073D313 /* ViewRouter.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C69AB95A263F278E006E14D3 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
 				C136486F26072F4000BDC73F /* ModalState.swift */,
 				C13648722607310700BDC73F /* ModalAnchorView.swift */,
 				C13648752607316800BDC73F /* ModalManager.swift */,
 				C13648782607325300BDC73F /* ModalView.swift */,
 			);
-			path = Views;
+			path = Modal;
 			sourceTree = "<group>";
 		};
 		C69FD62125F957450077394D /* Sounds */ = {
