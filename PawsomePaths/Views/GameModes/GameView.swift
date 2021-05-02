@@ -112,103 +112,17 @@ struct GameView: View {
                             .rotationEffect(Angle.degrees(90))
                             .popup(isPresented: $showResult) {
                                 ZStack {
-                                    resultReport(isOnlineGame: false, game: hexGame, showResult: showResult)
+                                    ResultReport(isOnlineGame: false, game: hexGame, showResult: showResult)
                                 }
                             }
                         }
-                    newGameButton(isOnlineGame: false, game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
+                    NewGameButton(isOnlineGame: false, game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
                     .foregroundColor(!showResult ? .blue : .gray)
                     .padding()
                     .zIndex(-1)
                 }
                 ModalAnchorView().environmentObject(modalManager)
             }
-        }
-    }
-}
-
-
-struct newGameButton: View {
-    @EnvironmentObject var viewRouter: ViewRouter
-
-    var isOnlineGame: Bool
-    var game: GameMode
-    let buttonFontSize: CGFloat
-    var showResult: Bool
-    private let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
-    
-    var body: some View {
-        Button(action: {
-            if isOnlineGame {
-                viewRouter.currentScreen = .onlineGame
-            } else {
-                showResult ? game.newGame(size: game.board.size) : nil
-            }
-        }
-    ) {
-            RoundedRectangle(cornerRadius: buttonFontSize)
-                .frame(width: buttonFontSize * 10, height: buttonFontSize * 3, alignment: .center)
-                .overlay(Text("Reset Game").foregroundColor(.white)
-                            .font(Font.custom("KronaOne-Regular", size: buttonFontSize)))
-                .foregroundColor(hunterGreen)
-        }
-    }
-}
-
-struct resultReport: View {
-    @EnvironmentObject var viewRouter: ViewRouter
-    @EnvironmentObject var audioManager: AudioManager
-    
-    var isOnlineGame: Bool
-    var game: GameMode
-    var showResult: Bool
-
-    private let buttonFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 30
-    private let resultFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 50 : 25
-    private let scaleEffect: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 2 : 1.2
-
-    private let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
-    private let imageHeight: CGFloat = 450
-    private let imageWidth: CGFloat = 300
-
-
-    var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                VStack {
-                    Text("\(game.result)")
-                        .multilineTextAlignment(.center)
-                        .font(Font.custom("PressStart2P-Regular", size: geometry.size.width / resultFontSize))
-                        .foregroundColor(.black)
-                        .padding(.bottom, 60)
-                        .frame(width: imageWidth, alignment: .center)
-                    
-                    VStack {
-                        newGameButton(isOnlineGame: isOnlineGame, game: game, buttonFontSize: geometry.size.width / buttonFontSize, showResult: showResult)
-                        Button {
-                            viewRouter.currentScreen = .welcome
-                            game.newGame(size: game.board.size)
-                        } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: geometry.size.width / buttonFontSize)
-                                    .frame(width: geometry.size.width / buttonFontSize * 10, height: geometry.size.width / buttonFontSize * 3, alignment: .center)
-                                    .foregroundColor(hunterGreen)
-
-                                Text("Menu").font(Font.custom("KronaOne-Regular", size: geometry.size.width / buttonFontSize)).foregroundColor(.white).onTapGesture {
-                                    game.newGame(size: game.board.size)
-                                    viewRouter.currentScreen = .welcome
-                                    audioManager.playSound("MouseClick", type: "mp3")
-                                }
-                            }
-                        }
-                    }
-                    .offset(y: 70)
-                }
-            }
-            .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-            .background(Image(game.result == "You lose" ? "losing" : "background"))
-            .scaleEffect(geometry.size.width / (scaleEffect * imageWidth))
-            .opacity(showResult ? 1 : 0)
         }
     }
 }

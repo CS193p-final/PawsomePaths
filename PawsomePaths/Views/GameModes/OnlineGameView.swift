@@ -143,11 +143,11 @@ struct OnlineGameView: View {
                             })
                             .popup(isPresented: $showResult) {
                                 ZStack {
-                                    resultReport(isOnlineGame: true, game: hexGame, showResult: showResult)
+                                    ResultReport(isOnlineGame: true, game: hexGame, showResult: showResult)
                                 }
                             }
                         }
-                        newGameButton(isOnlineGame: true, game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
+                        NewGameButton(isOnlineGame: true, game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
                         .foregroundColor(!showResult ? .blue : .gray)
                         .padding()
                     }

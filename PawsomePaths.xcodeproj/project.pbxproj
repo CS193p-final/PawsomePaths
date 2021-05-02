@@ -95,6 +95,8 @@
 		C699738A25D9F51C00337F70 /* PolygonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699738925D9F51C00337F70 /* PolygonShape.swift */; };
 		C699739025D9F96600337F70 /* HexGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699738F25D9F96600337F70 /* HexGrid.swift */; };
 		C699739425D9FF2800337F70 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699739325D9FF2800337F70 /* CellView.swift */; };
+		C69AB95D263F2DC4006E14D3 /* ResultReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69AB95C263F2DC4006E14D3 /* ResultReport.swift */; };
+		C69AB961263F2E67006E14D3 /* NewGameButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69AB960263F2E67006E14D3 /* NewGameButton.swift */; };
 		C69FD61F25F94F4B0077394D /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69FD61E25F94F4B0077394D /* HowToPlayView.swift */; };
 		C69FD62325F957570077394D /* KeyboardTap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C69FD62225F957570077394D /* KeyboardTap.mp3 */; };
 		C69FD62625F9578F0077394D /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69FD62525F9578F0077394D /* PlaySound.swift */; };
@@ -202,6 +204,8 @@
 		C699738925D9F51C00337F70 /* PolygonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonShape.swift; sourceTree = "<group>"; };
 		C699738F25D9F96600337F70 /* HexGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexGrid.swift; sourceTree = "<group>"; };
 		C699739325D9FF2800337F70 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		C69AB95C263F2DC4006E14D3 /* ResultReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultReport.swift; sourceTree = "<group>"; };
+		C69AB960263F2E67006E14D3 /* NewGameButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameButton.swift; sourceTree = "<group>"; };
 		C69FD61E25F94F4B0077394D /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
 		C69FD62225F957570077394D /* KeyboardTap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = KeyboardTap.mp3; sourceTree = "<group>"; };
 		C69FD62525F9578F0077394D /* PlaySound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
@@ -302,11 +306,10 @@
 		C627D3CE26051CDD00EA0DD5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C69AB95F263F2E31006E14D3 /* Buttons */,
 				C10AA70025EA2C59006C7531 /* PopupView.swift */,
 				C627D3CF26051DC400EA0DD5 /* CountdownTimer.swift */,
-				C6029D3726014A04005FBD3B /* FBButton.swift */,
-				C6DB98CA260E7CE800ED794D /* InviteButton.swift */,
-				C1971808263774BE00411E88 /* FriendsButton.swift */,
+				C69AB95C263F2DC4006E14D3 /* ResultReport.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -470,6 +473,17 @@
 				C13648782607325300BDC73F /* ModalView.swift */,
 			);
 			path = Modal;
+			sourceTree = "<group>";
+		};
+		C69AB95F263F2E31006E14D3 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				C6029D3726014A04005FBD3B /* FBButton.swift */,
+				C6DB98CA260E7CE800ED794D /* InviteButton.swift */,
+				C1971808263774BE00411E88 /* FriendsButton.swift */,
+				C69AB960263F2E67006E14D3 /* NewGameButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		C69FD62125F957450077394D /* Sounds */ = {
@@ -664,6 +678,7 @@
 				C699737925D9F4DB00337F70 /* HexApp.swift in Sources */,
 				C6596A4725DB40B400A0F94B /* MonteCarlo.swift in Sources */,
 				C1CE2BB625E77B740012E731 /* ClassFireworkAnimator.swift in Sources */,
+				C69AB961263F2E67006E14D3 /* NewGameButton.swift in Sources */,
 				C696A51E260531EC0073D313 /* ViewRouter.swift in Sources */,
 				C13648732607310700BDC73F /* ModalAnchorView.swift in Sources */,
 				C6596A3325DB11F000A0F94B /* Queue.swift in Sources */,
@@ -687,6 +702,7 @@
 				C13648792607325300BDC73F /* ModalView.swift in Sources */,
 				C6B09AD425DE126000C96782 /* DumpAI.swift in Sources */,
 				C13648762607316800BDC73F /* ModalManager.swift in Sources */,
+				C69AB95D263F2DC4006E14D3 /* ResultReport.swift in Sources */,
 				C101D1E425DC5789000E86E0 /* WelcomeView.swift in Sources */,
 				C11545B625E7578000E8B591 /* ClassicFirework.swift in Sources */,
 				C627D3D026051DC400EA0DD5 /* CountdownTimer.swift in Sources */,
