@@ -112,7 +112,7 @@ struct GameView: View {
                             .rotationEffect(Angle.degrees(90))
                             .popup(isPresented: $showResult) {
                                 ZStack {
-                                    resultReport(isOnlineGame: false, game: hexGame, showResult: showResult)
+                                    resultReport(game: hexGame, showResult: showResult, isOnlineGame: false)
                                 }
                             }
                         }
@@ -159,7 +159,6 @@ struct resultReport: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var audioManager: AudioManager
     
-    var isOnlineGame: Bool
     var game: GameMode
     var showResult: Bool
     var isOnlineGame: Bool

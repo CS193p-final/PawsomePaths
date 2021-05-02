@@ -143,7 +143,7 @@ struct OnlineGameView: View {
                             })
                             .popup(isPresented: $showResult) {
                                 ZStack {
-                                    resultReport(isOnlineGame: true, game: hexGame, showResult: showResult)
+                                    resultReport(game: hexGame, showResult: showResult, isOnlineGame: true)
                                 }
                             }
                         }
