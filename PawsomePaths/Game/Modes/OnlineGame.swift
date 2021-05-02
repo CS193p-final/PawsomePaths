@@ -257,14 +257,15 @@ class OnlineGame: GameMode {
         
         matchRef.runTransactionBlock { (data) -> TransactionResult in
             if var match = data.value as? [String: Any] {
-                var done = match["done"] as! Int
-                done += 1
-                match["done"] = done
-                if done == 2 {
-                    data.value = nil
-                    return TransactionResult.success(withValue: data)
+                if var done = match["done"] as? Int {
+                    done += 1
+                    match["done"] = done
+                    if done == 2 {
+                        data.value = nil
+                        return TransactionResult.success(withValue: data)
+                    }
+                    data.value = match
                 }
-                data.value = match
             }
             return TransactionResult.success(withValue: data)
         }
