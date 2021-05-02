@@ -82,6 +82,7 @@ struct WelcomeView: View {
                     }
                     .disabled(!isPad)
                     .zIndex(1)
+                    .ignoresSafeArea()
                 }
 
 
@@ -92,14 +93,15 @@ struct WelcomeView: View {
                             Text("Welcome \(firstName)").foregroundColor(.black)
                             let avatar = UIImage(fromDiskWithFileName: "avatar")
                             if avatar != nil {
-                                Image(uiImage: avatar!).clipShape(Circle())
-                                    .frame(width: 80, height: 80)
+                                Image(uiImage: avatar!)
+                                    .clipShape(Circle())
+                                    .frame(width: 70, height: 70)
                             }
                         }
                     } else {
                         Text("Welcome guest").foregroundColor(.black)
                         UserSection()
-                            .frame(width: 80, height: 80)
+                            .frame(width: 70, height: 70)
                     }
                     
                     // Two Player Mode Button
@@ -249,6 +251,6 @@ struct Menu: View {
 struct UserSection: View {
     var body: some View {
         Image("guestava")
-            .scaleEffect(UIDevice.current.userInterfaceIdiom == .pad ? 90/673 : 85/673)
+            .scaleEffect(50/673)
     }
 }

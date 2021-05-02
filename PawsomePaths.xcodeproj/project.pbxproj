@@ -829,7 +829,7 @@
 				CODE_SIGN_ENTITLEMENTS = PawsomePaths/Hex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"PawsomePaths/Preview Content\"";
-				DEVELOPMENT_TEAM = F8WWCGPHV3;
+				DEVELOPMENT_TEAM = DFDCS22GK9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PawsomePaths/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -838,7 +838,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.GD.hex;
+				PRODUCT_BUNDLE_IDENTIFIER = GD.apa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -854,7 +854,7 @@
 				CODE_SIGN_ENTITLEMENTS = PawsomePaths/Hex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"PawsomePaths/Preview Content\"";
-				DEVELOPMENT_TEAM = F8WWCGPHV3;
+				DEVELOPMENT_TEAM = DFDCS22GK9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PawsomePaths/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -863,7 +863,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.GD.hex;
+				PRODUCT_BUNDLE_IDENTIFIER = GD.apa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

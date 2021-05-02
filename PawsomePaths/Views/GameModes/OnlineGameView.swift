@@ -35,7 +35,7 @@ struct OnlineGameView: View {
         let gameTitle: CGFloat = isIpad ? 30 : 15
         let _: CGFloat = isIpad ? 50 : 25
         
-        let imageFrame : CGFloat = isIpad ? 60 : 40
+        let imageFrame : CGFloat = 70
         
         if hexGame.ready {
             GeometryReader { geometry in
@@ -78,7 +78,8 @@ struct OnlineGameView: View {
                                         }
                                     }
                                     .popover(isPresented: $showSettingsForPad) {
-                                        onlineSettingsView().environmentObject(audioManager)                                    }
+                                        onlineSettingsView().environmentObject(audioManager)
+                                    }
                                     .padding()
                             }
                         }
@@ -93,7 +94,7 @@ struct OnlineGameView: View {
                             } else {
                                 Image(hexGame.localPlayer == 1 ? "redava" : "guestava")
                                     .frame(width: imageFrame, height: imageFrame, alignment: .center)
-                                    .scaleEffect(isIpad ? 60/673 : 40/673)
+                                    .scaleEffect(50/673)
                             }
 
                             Text(hexGame.localPlayer == hexGame.board.playerTurn ? "Your turn" : "\(hexGame.remotePlayerName)'s turn")
@@ -108,7 +109,7 @@ struct OnlineGameView: View {
                                     .frame(width: imageFrame, height: imageFrame, alignment: .center)
                             } else {
                                 Image(hexGame.localPlayer == 1 ? "guestava" : "redava")
-                                    .scaleEffect(isIpad ? 60/673 : 40/673)
+                                    .scaleEffect(50/673)
                                     .frame(width: imageFrame, height: imageFrame, alignment: .center)
                             }
                         }
