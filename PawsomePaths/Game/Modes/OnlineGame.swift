@@ -210,39 +210,6 @@ class OnlineGame: GameMode {
         })
     }
     
-    private func startMatch() {
-        
-    }
-    
-    private func findMatch() {
-        // Ignore this warning since firebase event callbacks are always on main thread.
-        /// Publishing changes from background threads is not allowed; make sure to publish values from the main thread (via operators like receive(on:)) on model updates.
-        self.databaseRef.child("matches").getData { (error, snapshot) in
-            if let error = error {
-                print("Error getting data \(error)")
-            }
-            else if snapshot.exists() {
-                let matches = snapshot.value as! [String: [String: Any]]
-                
-                for match in matches {
-                    let id = match.key
-                    let matchInfo = match.value
-                    if matchInfo["player_count"] as! Int == 1 {
-                        self.matchID = id
-                        self.joinMatch()
-                        self.setupMatch()
-                        self.ready = true
-                        self.objectWillChange.send()
-                        return
-                    }
-                }
-            }
-            else {
-                print("No data available")
-            }
-        }
-    }
-    
     private func joinMatch() {
         setupMatch()
         databaseRef.child("wait_queue/\(uid)").removeValue()
