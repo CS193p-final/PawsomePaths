@@ -24,7 +24,6 @@ struct OnlineGameView: View {
     let red = Color(red: 0.9296875, green: 0.46, blue: 0.453)
     let blue = Color(red:0.39, green:0.55, blue:0.894)
     let black = Color.black
-    let hunterGreen = Color(red: 0.15625, green: 0.3125, blue: 0.1796875, opacity: 0.5)
     private let titleColor = Color(red: 0.82422, green: 0.37891, blue: 0.207, opacity: 1)
     let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     let buttonColor = Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1)
@@ -50,7 +49,7 @@ struct OnlineGameView: View {
                 ZStack {
                     VStack {
                         ZStack {
-                            Rectangle().ignoresSafeArea().foregroundColor(hunterGreen)
+                            Rectangle().ignoresSafeArea().foregroundColor(Color.hunterGreen)
                             HStack {
                                 Text("Back").font(Font.custom("PressStart2P-Regular", size: geometry.size.width / buttonFontSize))
                                     .padding()
@@ -143,13 +142,13 @@ struct OnlineGameView: View {
                             })
                             .popup(isPresented: $showResult) {
                                 ZStack {
-                                    resultReport(game: hexGame, showResult: showResult, isOnlineGame: true)
+                                    ResultReport(isOnlineGame: true, game: hexGame, showResult: showResult)
                                 }
                             }
                         }
-                        newGameButton(isOnlineGame: true, game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
-                        .foregroundColor(!showResult ? .blue : .gray)
-                        .padding()
+//                        NewGameButton(isOnlineGame: true, game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
+//                        .foregroundColor(!showResult ? .blue : .gray)
+//                        .padding()
                     }
                     ModalAnchorView().environmentObject(modalManager)
                 }
@@ -179,10 +178,7 @@ struct OnlineGameView: View {
 
 struct onlineSettingsView: View {
     @State private var showAlert: Bool = false
-    private let lightCyan: Color = Color(red: 0.8555, green: 0.984375, blue: 0.9961, opacity: 0.8)
-    private let queenBlue = Color(red: 0.26953, green: 0.41, blue: 0.5625)
     private let headerFontSize: CGFloat = 15
-    private let wildBlueYonder = Color(red: 0.71875, green: 0.71875, blue: 0.8164, opacity: 1)
     @EnvironmentObject var audioManager: AudioManager
 
     var body: some View {
@@ -192,7 +188,7 @@ struct onlineSettingsView: View {
                     audioManager.toggleSound()
                 } label: {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center) .foregroundColor(lightCyan)
+                        RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center) .foregroundColor(Color.lightCyan)
                         Image(systemName: audioManager.soundOn ? "speaker.wave.3" : "speaker").imageScale(.large)
                     }
                 }
@@ -209,16 +205,16 @@ struct onlineSettingsView: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10).frame(width: 50, height: 50, alignment: .center)
-                            .foregroundColor(lightCyan)
+                            .foregroundColor(Color.lightCyan)
                         Image(systemName: audioManager.musicOn ? "music.note" : "play.slash").imageScale(.large)
                     }
                 }
             }
         }
-        .foregroundColor(queenBlue)
+        .foregroundColor(Color.queenBlue)
         .padding()
         .font(Font.custom("KronaOne-Regular", size: headerFontSize))
-        .background(wildBlueYonder)
+        .background(Color.wildBlueYonder)
     }
 }
 

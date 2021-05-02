@@ -95,6 +95,9 @@
 		C699738A25D9F51C00337F70 /* PolygonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699738925D9F51C00337F70 /* PolygonShape.swift */; };
 		C699739025D9F96600337F70 /* HexGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699738F25D9F96600337F70 /* HexGrid.swift */; };
 		C699739425D9FF2800337F70 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C699739325D9FF2800337F70 /* CellView.swift */; };
+		C69AB95D263F2DC4006E14D3 /* ResultReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69AB95C263F2DC4006E14D3 /* ResultReport.swift */; };
+		C69AB961263F2E67006E14D3 /* NewGameButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69AB960263F2E67006E14D3 /* NewGameButton.swift */; };
+		C69AB964263F2F20006E14D3 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69AB963263F2F20006E14D3 /* Color+Extensions.swift */; };
 		C69FD61F25F94F4B0077394D /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69FD61E25F94F4B0077394D /* HowToPlayView.swift */; };
 		C69FD62325F957570077394D /* KeyboardTap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C69FD62225F957570077394D /* KeyboardTap.mp3 */; };
 		C69FD62625F9578F0077394D /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69FD62525F9578F0077394D /* PlaySound.swift */; };
@@ -202,6 +205,9 @@
 		C699738925D9F51C00337F70 /* PolygonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonShape.swift; sourceTree = "<group>"; };
 		C699738F25D9F96600337F70 /* HexGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexGrid.swift; sourceTree = "<group>"; };
 		C699739325D9FF2800337F70 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		C69AB95C263F2DC4006E14D3 /* ResultReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultReport.swift; sourceTree = "<group>"; };
+		C69AB960263F2E67006E14D3 /* NewGameButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameButton.swift; sourceTree = "<group>"; };
+		C69AB963263F2F20006E14D3 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		C69FD61E25F94F4B0077394D /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
 		C69FD62225F957570077394D /* KeyboardTap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = KeyboardTap.mp3; sourceTree = "<group>"; };
 		C69FD62525F9578F0077394D /* PlaySound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
@@ -302,10 +308,10 @@
 		C627D3CE26051CDD00EA0DD5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C69AB95F263F2E31006E14D3 /* Buttons */,
+				C10AA70025EA2C59006C7531 /* PopupView.swift */,
 				C627D3CF26051DC400EA0DD5 /* CountdownTimer.swift */,
-				C6029D3726014A04005FBD3B /* FBButton.swift */,
-				C6DB98CA260E7CE800ED794D /* InviteButton.swift */,
-				C1971808263774BE00411E88 /* FriendsButton.swift */,
+				C69AB95C263F2DC4006E14D3 /* ResultReport.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -313,6 +319,8 @@
 		C64CC85B26013F800044B780 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C696A51A2605319F0073D313 /* MainView.swift */,
+				C69FD61E25F94F4B0077394D /* HowToPlayView.swift */,
 				C1102C4126041FEB00C128B2 /* LoadingView.swift */,
 				C101D1E325DC5789000E86E0 /* WelcomeView.swift */,
 				C1FA00102605280A0077C7E3 /* LaunchScreen.storyboard */,
@@ -369,6 +377,7 @@
 		C6596A3125DB11D900A0F94B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C1BE71A4260FC8D90049751E /* NetworkConnection.swift */,
 				C1000AA126019F06009A1B80 /* Spinning.swift */,
 				C6227AD425F2B085008E301E /* Deque.swift */,
 				C6596A3225DB11F000A0F94B /* Queue.swift */,
@@ -376,6 +385,7 @@
 				C1CE2BBB25E792BE0012E731 /* CGPoint+Extensions.swift */,
 				C600184D25E8AE1E00DB9CDC /* Int+Extension.swift */,
 				C64D0D1C26028DA5001E6706 /* UIImage+Extension.swift */,
+				C69AB963263F2F20006E14D3 /* Color+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -422,7 +432,6 @@
 				C699738125D9F4DC00337F70 /* Info.plist */,
 				C699737E25D9F4DC00337F70 /* Preview Content */,
 				C699739225D9FEF300337F70 /* Views */,
-				C1BE71A4260FC8D90049751E /* NetworkConnection.swift */,
 			);
 			path = PawsomePaths;
 			sourceTree = "<group>";
@@ -446,22 +455,38 @@
 		C699739225D9FEF300337F70 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C69AB95A263F278E006E14D3 /* Modal */,
 				C627D3CE26051CDD00EA0DD5 /* UI */,
 				C699738825D9F4EE00337F70 /* Shapes */,
 				C64CC85E2601404C0044B780 /* Animation */,
 				C64CC85D26013FE10044B780 /* GameModes */,
 				C64CC85C26013FB20044B780 /* Board */,
 				C64CC85B26013F800044B780 /* Home */,
-				C10AA70025EA2C59006C7531 /* PopupView.swift */,
-				C69FD61E25F94F4B0077394D /* HowToPlayView.swift */,
-				C696A51A2605319F0073D313 /* MainView.swift */,
 				C696A51D260531EC0073D313 /* ViewRouter.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C69AB95A263F278E006E14D3 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
 				C136486F26072F4000BDC73F /* ModalState.swift */,
 				C13648722607310700BDC73F /* ModalAnchorView.swift */,
 				C13648752607316800BDC73F /* ModalManager.swift */,
 				C13648782607325300BDC73F /* ModalView.swift */,
 			);
-			path = Views;
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		C69AB95F263F2E31006E14D3 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				C6029D3726014A04005FBD3B /* FBButton.swift */,
+				C6DB98CA260E7CE800ED794D /* InviteButton.swift */,
+				C1971808263774BE00411E88 /* FriendsButton.swift */,
+				C69AB960263F2E67006E14D3 /* NewGameButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		C69FD62125F957450077394D /* Sounds */ = {
@@ -656,6 +681,7 @@
 				C699737925D9F4DB00337F70 /* HexApp.swift in Sources */,
 				C6596A4725DB40B400A0F94B /* MonteCarlo.swift in Sources */,
 				C1CE2BB625E77B740012E731 /* ClassFireworkAnimator.swift in Sources */,
+				C69AB961263F2E67006E14D3 /* NewGameButton.swift in Sources */,
 				C696A51E260531EC0073D313 /* ViewRouter.swift in Sources */,
 				C13648732607310700BDC73F /* ModalAnchorView.swift in Sources */,
 				C6596A3325DB11F000A0F94B /* Queue.swift in Sources */,
@@ -679,6 +705,7 @@
 				C13648792607325300BDC73F /* ModalView.swift in Sources */,
 				C6B09AD425DE126000C96782 /* DumpAI.swift in Sources */,
 				C13648762607316800BDC73F /* ModalManager.swift in Sources */,
+				C69AB95D263F2DC4006E14D3 /* ResultReport.swift in Sources */,
 				C101D1E425DC5789000E86E0 /* WelcomeView.swift in Sources */,
 				C11545B625E7578000E8B591 /* ClassicFirework.swift in Sources */,
 				C627D3D026051DC400EA0DD5 /* CountdownTimer.swift in Sources */,
@@ -695,6 +722,7 @@
 				C696A51B2605319F0073D313 /* MainView.swift in Sources */,
 				C64D0D1D26028DA5001E6706 /* UIImage+Extension.swift in Sources */,
 				C64CC855260130D40044B780 /* OnlineGameView.swift in Sources */,
+				C69AB964263F2F20006E14D3 /* Color+Extensions.swift in Sources */,
 				C699739025D9F96600337F70 /* HexGrid.swift in Sources */,
 				C1D1CFE225DA0ED500A6EAAE /* Cell.swift in Sources */,
 				C10AA70125EA2C59006C7531 /* PopupView.swift in Sources */,
@@ -829,7 +857,7 @@
 				CODE_SIGN_ENTITLEMENTS = PawsomePaths/Hex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"PawsomePaths/Preview Content\"";
-				DEVELOPMENT_TEAM = DFDCS22GK9;
+				DEVELOPMENT_TEAM = F8WWCGPHV3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PawsomePaths/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -838,7 +866,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = GD.apa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GD.hex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -854,7 +882,7 @@
 				CODE_SIGN_ENTITLEMENTS = PawsomePaths/Hex.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"PawsomePaths/Preview Content\"";
-				DEVELOPMENT_TEAM = DFDCS22GK9;
+				DEVELOPMENT_TEAM = F8WWCGPHV3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PawsomePaths/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -863,7 +891,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = GD.apa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GD.hex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
