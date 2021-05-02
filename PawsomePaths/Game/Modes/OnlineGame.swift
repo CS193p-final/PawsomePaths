@@ -216,11 +216,14 @@ class OnlineGame: GameMode {
     }
     
     func exitMatch() {
-        let matchRef = databaseRef.child("matches/\(matchID)")
-        matchID = ""
-        
         databaseRef.child("wait_queue/\(uid)").removeValue()
         databaseRef.removeObserver(withHandle: listener)
+        
+        if matchID == "" {
+            return
+        }
+        let matchRef = databaseRef.child("matches/\(matchID)")
+        matchID = ""
         
         matchRef.runTransactionBlock { (data) -> TransactionResult in
             if var match = data.value as? [String: Any] {
