@@ -140,13 +140,10 @@ struct OnlineGameView: View {
                             })
                             .popup(isPresented: $showResult) {
                                 ZStack {
-                                    resultReport(game: hexGame, showResult: showResult)
+                                    resultReport(game: hexGame, showResult: showResult, isOnlineGame: true)
                                 }
                             }
                         }
-                        newGameButton(game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
-                        .foregroundColor(!showResult ? .blue : .gray)
-                        .padding()
                     }
                     ModalAnchorView().environmentObject(modalManager)
                 }

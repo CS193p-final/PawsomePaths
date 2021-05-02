@@ -112,7 +112,7 @@ struct GameView: View {
                             .rotationEffect(Angle.degrees(90))
                             .popup(isPresented: $showResult) {
                                 ZStack {
-                                    resultReport(game: hexGame, showResult: showResult)
+                                    resultReport(game: hexGame, showResult: showResult, isOnlineGame: false)
                                 }
                             }
                         }
@@ -153,6 +153,7 @@ struct resultReport: View {
     @EnvironmentObject var audioManager: AudioManager
     var game: GameMode
     var showResult: Bool
+    var isOnlineGame: Bool
 
     private let buttonFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 30
     private let resultFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 50 : 25
@@ -165,6 +166,7 @@ struct resultReport: View {
 
     var body: some View {
         GeometryReader { geometry in
+            let background = game.result == "You lose" ? "losing" : "background"
             ZStack {
                 VStack {
                     Text("\(game.result)")
@@ -175,7 +177,9 @@ struct resultReport: View {
                         .frame(width: imageWidth, alignment: .center)
                     
                     VStack {
-                        newGameButton(game: game, buttonFontSize: geometry.size.width / buttonFontSize, showResult: showResult)
+                        if !isOnlineGame {
+                            newGameButton(game: game, buttonFontSize: geometry.size.width / buttonFontSize, showResult: showResult)
+                        }
                         Button {
                             viewRouter.currentScreen = .welcome
                             game.newGame(size: game.board.size)
@@ -197,7 +201,7 @@ struct resultReport: View {
                 }
             }
             .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-            .background(Image(game.result == "You lose" ? "losing" : "background"))
+            .background(Image(background))
             .scaleEffect(geometry.size.width / (scaleEffect * imageWidth))
             .opacity(showResult ? 1 : 0)
         }
