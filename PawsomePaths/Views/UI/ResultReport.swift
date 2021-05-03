@@ -47,18 +47,23 @@ struct ResultReport: View {
                         
                         // Menu button
                         Button {
-                            viewRouter.currentScreen = .welcome
+                            if let game = onlineGame {
+                                game.exitMatch()
+                                viewRouter.currentScreen = .welcome
+                            } else if let game = localGame {
+                                game.newGame(size: game.board.size)
+                            } else { // This block of code should never be reached.
+                                print("hex game is empty")
+                            }
+                            audioManager.playSound("MouseClick", type: "mp3")
                         } label: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: geometry.size.width / buttonFontSize)
                                     .frame(width: geometry.size.width / buttonFontSize * 10, height: geometry.size.width / buttonFontSize * 3, alignment: .center)
                                     .foregroundColor(Color.hunterGreen)
 
-                                Text("Menu").font(Font.custom("KronaOne-Regular", size: geometry.size.width / buttonFontSize)).foregroundColor(.white).onTapGesture {
-                                    game.newGame(size: game.board.size)
-                                    viewRouter.currentScreen = .welcome
-                                    audioManager.playSound("MouseClick", type: "mp3")
-                                }
+                                Text("Menu").font(Font.custom("KronaOne-Regular", size: geometry.size.width / buttonFontSize))
+                                    .foregroundColor(.white)
                             }
                         }
                     }
