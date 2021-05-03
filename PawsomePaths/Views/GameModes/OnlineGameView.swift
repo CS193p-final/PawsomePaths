@@ -15,6 +15,8 @@ struct OnlineGameView: View {
 
     @State var showResult = false
     @State private var showSettingsForPad = false
+    @State private var showNotice = false
+    
     @ObservedObject var hexGame: OnlineGame
     @AppStorage("musicOn") var musicOn = false
     @AppStorage("soundOn") var soundOn = false
@@ -27,14 +29,13 @@ struct OnlineGameView: View {
     private let titleColor = Color(red: 0.82422, green: 0.37891, blue: 0.207, opacity: 1)
     let backgroundColor = Color(red: 0.83984, green: 0.90625, blue: 0.7265625, opacity: 1)
     let buttonColor = Color(red: 0.1758, green: 0.515625, blue: 0.53901, opacity: 1)
-    @State private var showNotice = false
     
     var body: some View {
         let buttonFontSize: CGFloat = isIpad ? 60 : 30
         let gameTitle: CGFloat = isIpad ? 30 : 15
         let _: CGFloat = isIpad ? 50 : 25
-        
         let imageFrame : CGFloat = 70
+        var timer: Timer = Timer()
         
         if hexGame.ready {
             GeometryReader { geometry in
@@ -154,11 +155,12 @@ struct OnlineGameView: View {
         else {
             LoadingView(game: hexGame)
                 .onAppear {
-                    Timer.scheduledTimer(withTimeInterval: 20.0, repeats: false) { timer in
+                    timer = Timer.scheduledTimer(withTimeInterval: 20.0, repeats: false) { timer in
                         showNotice = true
                         timer.invalidate()
                    }
                 }
+                .onDisappear {timer.invalidate()}
                 .alert(isPresented: $showNotice) {
                     Alert(title: Text("No match found"), message: Text("Yikes, seems like you're the only on online at this moment. Please exit and try again"), primaryButton:
                             .default(Text("OK"), action: {
