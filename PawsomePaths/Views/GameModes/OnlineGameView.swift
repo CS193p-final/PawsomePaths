@@ -136,7 +136,7 @@ struct OnlineGameView: View {
                                 if newValue.winner > 0 { // normal win
                                     showResult = true
                                 }
-                                if newValue.winner < 0 { // win by one player disconnected from the game
+                                if newValue.winner < 0 && !hexGame.gameEnded { // win by one player disconnected from the game
                                     showResult = true
                                 }
                             })
@@ -165,7 +165,8 @@ struct OnlineGameView: View {
                                 hexGame.exitMatch()
                                 viewRouter.currentScreen = .welcome
                             })
-                    , secondaryButton: .cancel())
+                    , secondaryButton: .cancel()
+                )
             }
         }
     }
