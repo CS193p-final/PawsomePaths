@@ -31,6 +31,7 @@ struct ResultReport: View {
     }
 
     var body: some View {
+        var background: String = game.result == "You lose" ? "losing" : "background"
         GeometryReader { geometry in
             ZStack {
                 VStack {
@@ -65,7 +66,7 @@ struct ResultReport: View {
                 }
             }
             .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-            .background(Image(game.result == "You lose" ? "losing" : "background"))
+            .background(Image(game.result == "Opponent left" ? "forfeit" : background))
             .scaleEffect(geometry.size.width / (scaleEffect * imageWidth))
             .opacity(showResult ? 1 : 0)
         }
