@@ -10,17 +10,20 @@ import SwiftUI
 struct NewGameButton: View {
     @EnvironmentObject var viewRouter: ViewRouter
 
-    var isOnlineGame: Bool
-    var game: GameMode
+    var localGame: GameMode? = nil
+    var onlineGame: OnlineGame? = nil
     let buttonFontSize: CGFloat
     var showResult: Bool
     
     var body: some View {
         Button(action: {
-            if isOnlineGame {
+            if let game = onlineGame {
+                game.exitMatch()
                 viewRouter.currentScreen = .onlineGame
-            } else {
+            } else if let game = localGame {
                 showResult ? game.newGame(size: game.board.size) : nil
+            } else {
+                print("hex game is empty")
             }
         }) {
             RoundedRectangle(cornerRadius: buttonFontSize)

@@ -26,6 +26,8 @@ class OnlineGame: GameMode {
     var listener: UInt = 0
         
     override init() {
+        print("Initializing online game ...")
+        
         matchID = ""
         localPlayer = 0
         remotePlayerName = "Unknown"
@@ -37,6 +39,12 @@ class OnlineGame: GameMode {
         }
         self.joinWaitQueue()
     }
+    
+    deinit {
+        print("Deinitializing online game ...")
+        exitMatch()
+    }
+    
     
     override var playerTurn: String {
         if (board.playerTurn == localPlayer) {

@@ -111,11 +111,11 @@ struct GameView: View {
                             .rotationEffect(Angle.degrees(90))
                             .popup(isPresented: $showResult) {
                                 ZStack {
-                                    ResultReport(isOnlineGame: false, game: hexGame, showResult: showResult)
+                                    ResultReport(localGame: hexGame, showResult: showResult)
                                 }
                             }
                         }
-                    NewGameButton(isOnlineGame: false, game: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
+                    NewGameButton(localGame: hexGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: !showResult) // disabled when result view pop up
                     .foregroundColor(!showResult ? .blue : .gray)
                     .padding()
                     .zIndex(-1)

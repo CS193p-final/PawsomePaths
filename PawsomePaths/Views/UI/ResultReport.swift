@@ -11,8 +11,8 @@ struct ResultReport: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var audioManager: AudioManager
     
-    var isOnlineGame: Bool
-    var game: GameMode
+    var localGame: GameMode? = nil
+    var onlineGame: OnlineGame? = nil
     var showResult: Bool
 
     private let buttonFontSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 30
@@ -21,7 +21,14 @@ struct ResultReport: View {
 
     private let imageHeight: CGFloat = 450
     private let imageWidth: CGFloat = 300
-
+    
+    var game: GameMode {
+        if onlineGame != nil {
+            return onlineGame!
+        } else {
+            return localGame!
+        }
+    }
 
     var body: some View {
         GeometryReader { geometry in
@@ -35,10 +42,11 @@ struct ResultReport: View {
                         .frame(width: imageWidth, alignment: .center)
                     
                     VStack {
-                        NewGameButton(isOnlineGame: isOnlineGame, game: game, buttonFontSize: geometry.size.width / buttonFontSize, showResult: showResult)
+                        NewGameButton(localGame: localGame, onlineGame: onlineGame, buttonFontSize: geometry.size.width / buttonFontSize, showResult: showResult)
+                        
+                        // Menu button
                         Button {
                             viewRouter.currentScreen = .welcome
-                            game.newGame(size: game.board.size)
                         } label: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: geometry.size.width / buttonFontSize)
