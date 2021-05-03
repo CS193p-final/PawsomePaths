@@ -31,7 +31,7 @@ struct ResultReport: View {
     }
 
     var body: some View {
-        var background: String = game.result == "You lose" ? "losing" : "background"
+        let background: String = game.result == "You lose" ? "losing" : "background"
         GeometryReader { geometry in
             ZStack {
                 VStack {
@@ -51,7 +51,7 @@ struct ResultReport: View {
                                 game.exitMatch()
                                 viewRouter.currentScreen = .welcome
                             } else if let game = localGame {
-                                game.newGame(size: game.board.size)
+                                viewRouter.currentScreen = .welcome
                             } else { // This block of code should never be reached.
                                 print("hex game is empty")
                             }
