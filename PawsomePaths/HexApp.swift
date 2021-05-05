@@ -34,7 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
             self.handleIncomingDynamicLink(dynamicLink)
             return true
-        } else {
+        }
+        else {
             // for FB sign-in
             return ApplicationDelegate.shared.application(
                 app,
@@ -43,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 annotation: options[UIApplication.OpenURLOptionsKey.annotation]
             )
         }
+        return true
     }
     
     func handleIncomingDynamicLink(_ dynamicLink: DynamicLink) {
@@ -90,6 +92,9 @@ struct HexApp: App {
                 .environmentObject(viewRouter)
                 .environmentObject(audioManager)
                 .environmentObject(modalManager)
+                .onOpenURL(perform: { url in
+                    ApplicationDelegate.shared.application(UIApplication.shared, open: url, sourceApplication: nil, annotation: UIApplication.OpenURLOptionsKey.annotation)
+                })
         }
     }
 }
