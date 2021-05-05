@@ -17,7 +17,7 @@ struct InviteButton: View {
     
     func createInviteLink() {
         // Create link
-        let linkParameter = URL(string: "https://testflight.apple.com/join/bMxqwb9t")!
+        let linkParameter = URL(string: "https://apps.apple.com/us/app/pawsome-paths/id1559984377")!
         
         guard let shareLink = DynamicLinkComponents(link: linkParameter, domainURIPrefix: "https://gdhex.page.link") else {
             // Couldn't reate FDL components
@@ -29,13 +29,14 @@ struct InviteButton: View {
         }
         shareLink.iOSParameters?.appStoreID = "1559984377"
         shareLink.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
-        shareLink.socialMetaTagParameters?.title = "Hex Game"
+        shareLink.socialMetaTagParameters?.title = "Pawsome Paths"
         shareLink.socialMetaTagParameters?.descriptionText = "Checkout this awesome game"
-        shareLink.socialMetaTagParameters?.imageURL = URL(string: "https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/165727982_2916859945260899_8900223103201178356_o.jpg?_nc_cat=105&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=O8GQZ7aQXTkAX_kYhU0&_nc_ht=scontent-sea1-1.xx&oh=83de67fe410e5e61285996d35e958235&oe=6085DC45")
-
+        
+        shareLink.socialMetaTagParameters?.imageURL = URL(string: "https://i.ibb.co/g60j3Fp/itachicat.jpg")
+        
         DispatchQueue.main.async {
-            shareLink.shorten { (url, warnings, error) in
-                if let error = error {
+            shareLink.shorten { (urßl, warnings, error) in
+                if error != nil {
                     return
                 }
                 guard let url = url else { return }
