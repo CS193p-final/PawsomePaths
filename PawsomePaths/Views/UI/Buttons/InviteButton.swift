@@ -35,7 +35,7 @@ struct InviteButton: View {
         shareLink.socialMetaTagParameters?.imageURL = URL(string: "https://i.ibb.co/g60j3Fp/itachicat.jpg")
         
         DispatchQueue.main.async {
-            shareLink.shorten { (urßl, warnings, error) in
+            shareLink.shorten { (url, warnings, error) in
                 if error != nil {
                     return
                 }
