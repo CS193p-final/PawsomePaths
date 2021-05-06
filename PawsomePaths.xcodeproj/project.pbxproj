@@ -105,6 +105,7 @@
 		C69FD62C25F95F950077394D /* MouseClick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C69FD62B25F95F950077394D /* MouseClick.mp3 */; };
 		C6A973C8264268F10052DEA4 /* AssetExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A973C7264268F10052DEA4 /* AssetExtractor.swift */; };
 		C6A973D4264332C40052DEA4 /* AppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A973D3264332C40052DEA4 /* AppleButton.swift */; };
+		C6A973E1264377F80052DEA4 /* LogoutButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A973E0264377F80052DEA4 /* LogoutButton.swift */; };
 		C6B09AD425DE126000C96782 /* DumpAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09AD325DE126000C96782 /* DumpAI.swift */; };
 		C6B09AD825DE142D00C96782 /* SinglePlayerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */; };
 		C6B09ADB25DEF36E00C96782 /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09ADA25DEF36E00C96782 /* GameMode.swift */; };
@@ -215,6 +216,7 @@
 		C69FD62B25F95F950077394D /* MouseClick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MouseClick.mp3; sourceTree = "<group>"; };
 		C6A973C7264268F10052DEA4 /* AssetExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetExtractor.swift; sourceTree = "<group>"; };
 		C6A973D3264332C40052DEA4 /* AppleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleButton.swift; sourceTree = "<group>"; };
+		C6A973E0264377F80052DEA4 /* LogoutButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutButton.swift; sourceTree = "<group>"; };
 		C6B09AD325DE126000C96782 /* DumpAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DumpAI.swift; sourceTree = "<group>"; };
 		C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePlayerGame.swift; sourceTree = "<group>"; };
 		C6B09ADA25DEF36E00C96782 /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
@@ -487,6 +489,7 @@
 				C1971808263774BE00411E88 /* FriendsButton.swift */,
 				C69AB960263F2E67006E14D3 /* NewGameButton.swift */,
 				C6A973D3264332C40052DEA4 /* AppleButton.swift */,
+				C6A973E0264377F80052DEA4 /* LogoutButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -684,6 +687,7 @@
 				C6596A4725DB40B400A0F94B /* MonteCarlo.swift in Sources */,
 				C1CE2BB625E77B740012E731 /* ClassFireworkAnimator.swift in Sources */,
 				C69AB961263F2E67006E14D3 /* NewGameButton.swift in Sources */,
+				C6A973E1264377F80052DEA4 /* LogoutButton.swift in Sources */,
 				C696A51E260531EC0073D313 /* ViewRouter.swift in Sources */,
 				C13648732607310700BDC73F /* ModalAnchorView.swift in Sources */,
 				C6596A3325DB11F000A0F94B /* Queue.swift in Sources */,

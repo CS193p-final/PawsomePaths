@@ -35,45 +35,33 @@ struct FBButton: View {
         let padHeight = height / 18
         let phoneHeight = height / 12
         Button {
-            if logged {
-                loginManager.logOut()
-                try! Auth.auth().signOut()
-                email = ""
-                firstName = ""
-                logged = false
-                Auth.auth().signInAnonymously { (result, error) in
-                    anonymousUID = Auth.auth().currentUser!.uid
-                    uid = anonymousUID
+            loginManager.logOut()
+            loginManager.logIn(permissions: ["email"], from: nil) { (result, error) in
+                if error != nil {
+                    return
                 }
-                viewRouter.currentScreen = .welcome
-            }
-            else {
-                loginManager.logIn(permissions: ["email"], from: nil) { (result, error) in
-                    if error != nil {
-                        return
-                    }
-                    if AccessToken.current != nil {
-                        let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
-                        Auth.auth().signIn(with: credential) { (res, error) in
-                            if error != nil {
-                                return
-                            }
-                            
-                            if let currentFBUser = AccessToken.current {
-                                databaseRef.child("facebook_users/\(currentFBUser.userID)").setValue(Auth.auth().currentUser?.uid)
-                            }
-                            
-                            guard let firebaseUserID = Auth.auth().currentUser?.uid else { return; }
+                if AccessToken.current != nil {
+                    let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
+                    Auth.auth().signIn(with: credential) { (res, error) in
+                        if error != nil {
+                            return
+                        }
+                        
+                        if let currentFBUser = AccessToken.current {
+                            databaseRef.child("facebook_users/\(currentFBUser.userID)").setValue(Auth.auth().currentUser?.uid)
+                        }
+                        
+                        guard let firebaseUserID = Auth.auth().currentUser?.uid else { return; }
 
-                            let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, picture, first_name"])
-                            request.start { (_, res, _) in
-                                guard let profileData = res as? [String: Any] else { return }
-                                email = profileData["email"] as! String
-                                firstName = profileData["first_name"] as! String
-                                databaseRef.child("users/\(firebaseUserID)/name").setValue(firstName)
-                                databaseRef.child("users/\(firebaseUserID)/email").setValue(email)
-                                
-                                // Get friend list
+                        let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, picture, first_name"])
+                        request.start { (_, res, _) in
+                            guard let profileData = res as? [String: Any] else { return }
+                            email = profileData["email"] as! String
+                            firstName = profileData["first_name"] as! String
+                            databaseRef.child("users/\(firebaseUserID)/name").setValue(firstName)
+                            databaseRef.child("users/\(firebaseUserID)/email").setValue(email)
+                            
+                            // Get friend list
 //                                if let friends = (profileData["friends"] as? [String: Any])?["data"] as? [[String:Any]] {
 //                                    print("friends = \(friends)")
 //                                    for friend in friends {
@@ -82,38 +70,36 @@ struct FBButton: View {
 //                                        databaseRef.child("users/\(firebaseUserID)/friends/\(friendID)").setValue(friendName)
 //                                    }
 //                                }
-                                
-                                // The url is nested 3 layers deep into the result so it's pretty messy
-                                // profileData.picture.data.url
-                                if let imageURL = ((profileData["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
-                                    //Download image from imageURL
-                                    do {
-                                        let data = try Data(contentsOf: URL(string: imageURL)!)
+                            
+                            // The url is nested 3 layers deep into the result so it's pretty messy
+                            // profileData.picture.data.url
+                            if let imageURL = ((profileData["picture"] as? [String: Any])?["data"] as? [String: Any])?["url"] as? String {
+                                //Download image from imageURL
+                                do {
+                                    let data = try Data(contentsOf: URL(string: imageURL)!)
 
-                                        // Upload the file to the path "images/rivers.jpg"
-                                        let metadata = StorageMetadata()
-                                        metadata.contentType = "image/png"
-                                        storageRef.child("users/\(firebaseUserID)/avatar.png").putData(data, metadata: metadata) { (metadata, error) in
-                                            guard metadata != nil else {
-                                                // Uh-oh, an error occurred!
-                                                return
-                                            }
+                                    // Upload the file to the path "images/rivers.jpg"
+                                    let metadata = StorageMetadata()
+                                    metadata.contentType = "image/png"
+                                    storageRef.child("users/\(firebaseUserID)/avatar.png").putData(data, metadata: metadata) { (metadata, error) in
+                                        guard metadata != nil else {
+                                            // Uh-oh, an error occurred!
+                                            return
                                         }
-                                        
-                                        let avatar = UIImage(data: data)
-                                        // save avatar to application sandbox
-                                        avatar?.saveToDisk(fileName: "avatar")
-                                        logged = true
-                                        uid = Auth.auth().currentUser!.uid
-                                        viewRouter.currentScreen = .welcome
-                                    } catch {
-                                        print("Can't load image from path: \(imageURL)")
                                     }
+                                    
+                                    let avatar = UIImage(data: data)
+                                    // save avatar to application sandbox
+                                    avatar?.saveToDisk(fileName: "avatar")
+                                    logged = true
+                                    uid = Auth.auth().currentUser!.uid
+                                    viewRouter.currentScreen = .welcome
+                                } catch {
+                                    print("Can't load image from path: \(imageURL)")
                                 }
                             }
                         }
                     }
-                    
                 }
             }
         } label: {
@@ -127,7 +113,7 @@ struct FBButton: View {
             .overlay(
                 HStack {
                     Image("fb").scaleEffect(0.1).frame(width: 30, height: 50)
-                    Text(logged ? "Sign out" : "Sign in").fontWeight(.medium)
+                    Text("Sign in").fontWeight(.medium)
                         .foregroundColor(.blue)
                 }
             )

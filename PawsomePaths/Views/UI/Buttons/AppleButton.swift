@@ -11,6 +11,11 @@ import AuthenticationServices
 
 struct AppleButton: View {
    
+    @AppStorage("anonymousUID") var anonymousUID = ""
+    @AppStorage("UID") var uid = ""
+    @AppStorage("logged") var logged = false
+    @AppStorage("email") var email = ""
+    @AppStorage("firstName") var firstName = ""
     @State var currentNonce:String?
     
     //Hashing function using CryptoKit
@@ -99,6 +104,11 @@ struct AppleButton: View {
                             }
                         }
                         print(Auth.auth().currentUser?.displayName)
+                        logged = true
+                        if let name = Auth.auth().currentUser?.displayName {
+                            firstName = name
+                        }
+                        
                     }
                     print("\(String(describing: Auth.auth().currentUser?.uid))")
                 default:

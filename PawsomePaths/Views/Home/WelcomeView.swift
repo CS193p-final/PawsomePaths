@@ -197,6 +197,9 @@ func rectButton(_ message: String, width: CGFloat, height: CGFloat) -> some View
 
 struct Menu: View {
     @EnvironmentObject var audioManager: AudioManager
+
+    @AppStorage("logged") var logged = false
+
     var width: CGFloat
     var height: CGFloat
     private let lightCyan: Color = Color(red: 0.8555, green: 0.984375, blue: 0.9961, opacity: 0.8)
@@ -235,13 +238,19 @@ struct Menu: View {
                     }
                 }
             }
-            // Connect with Facebook button
-            FBButton(width: width, height: height)
-            // Apple button
-            AppleButton()
+            
+            if !logged {
+                // Connect with Facebook button
+                FBButton(width: width, height: height)
+                // Apple button
+                AppleButton()
+            } else {
+                LogoutButton(width: width, height: height)
+            }
             
             // Invite friends button
             InviteButton(width: width, height: height)
+            
             // Show friend list
             // FriendsButton(width: width, height: height)
         }
