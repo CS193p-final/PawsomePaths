@@ -10,10 +10,12 @@ import FirebaseAuth
 import AuthenticationServices
 
 struct AppleButton: View {
-   
+    @EnvironmentObject var viewRouter: ViewRouter
+
     @AppStorage("anonymousUID") var anonymousUID = ""
     @AppStorage("UID") var uid = ""
     @AppStorage("logged") var logged = false
+    @AppStorage("AppleLogged") var appleLogged = false
     @AppStorage("email") var email = ""
     @AppStorage("firstName") var firstName = ""
     @State var currentNonce:String?
@@ -101,7 +103,8 @@ struct AppleButton: View {
                             return
                         }
                         print("signed in")
-                        
+                        appleLogged = true
+
                         // Update player's name the first time they log in using apple.
                         if let fullName = appleIDCredential.fullName {
                             let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
@@ -117,7 +120,8 @@ struct AppleButton: View {
                         if let name = Auth.auth().currentUser?.displayName {
                             firstName = name
                         }
-                        
+                        uid = Auth.auth().currentUser!.uid
+                        viewRouter.currentScreen = .welcome
                     }
                     print("\(String(describing: Auth.auth().currentUser?.uid))")
                 default:

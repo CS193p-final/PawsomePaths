@@ -20,6 +20,7 @@ struct LogoutButton: View {
     @AppStorage("anonymousUID") var anonymousUID = ""
     @AppStorage("UID") var uid = ""
     @AppStorage("logged") var logged = false
+    @AppStorage("AppleLogged") var appleLogged = false
     @AppStorage("email") var email = ""
     @AppStorage("firstName") var firstName = ""
     @State var loginManager = LoginManager()
@@ -39,6 +40,8 @@ struct LogoutButton: View {
             email = ""
             firstName = ""
             logged = false
+            appleLogged = false
+            
             Auth.auth().signInAnonymously { (result, error) in
                 anonymousUID = Auth.auth().currentUser!.uid
                 uid = anonymousUID

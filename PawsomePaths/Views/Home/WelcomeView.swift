@@ -24,6 +24,7 @@ struct WelcomeView: View {
     @AppStorage("anonymousUID") var anonymousUID = ""
     @AppStorage("UID") var uid = ""
     @AppStorage("logged") var logged = false
+    @AppStorage("AppleLogged") var appleLogged = false
     @AppStorage("email") var email = ""
     @AppStorage("firstName") var firstName = ""
     @AppStorage("musicOn") var musicOn = false
@@ -88,7 +89,7 @@ struct WelcomeView: View {
 
                 VStack {
                     // User name and avatar
-                    if logged {
+                    if logged && !appleLogged {
                         VStack {
                             Text("Welcome \(firstName)").foregroundColor(.black)
                             let avatar = UIImage(fromDiskWithFileName: "avatar")
@@ -98,6 +99,10 @@ struct WelcomeView: View {
                                     .frame(width: 70, height: 70)
                             }
                         }
+                    } else if appleLogged {
+                        Text("Welcome \(firstName)").foregroundColor(.black)
+                        UserSection()
+                            .frame(width: 70, height: 70)
                     } else {
                         Text("Welcome guest").foregroundColor(.black)
                         UserSection()
