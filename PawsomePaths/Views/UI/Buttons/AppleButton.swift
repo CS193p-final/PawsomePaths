@@ -17,7 +17,11 @@ struct AppleButton: View {
     @AppStorage("email") var email = ""
     @AppStorage("firstName") var firstName = ""
     @State var currentNonce:String?
-    
+
+    var width: CGFloat
+    var height: CGFloat
+    var isPad = UIDevice.current.userInterfaceIdiom == .pad
+
     //Hashing function using CryptoKit
     func sha256(_ input: String) -> String {
         let inputData = Data(input.utf8)
@@ -62,6 +66,11 @@ struct AppleButton: View {
     }
     
     var body: some View {
+        let padWidth = width / 4
+        let phoneWidth = width / 1.7
+        let padHeight = height / 18
+        let phoneHeight = height / 12
+        
         SignInWithAppleButton { request in
             let nonce = randomNonceString()
             currentNonce = nonce
@@ -118,12 +127,8 @@ struct AppleButton: View {
                 break
             }
         }
-        .frame(width: 280, height: 45, alignment: .center)
-}
-
-struct AppleButton_Previews: PreviewProvider {
-    static var previews: some View {
-        AppleButton()
+        .signInWithAppleButtonStyle(.white)
+        .frame(width: isPad ? padWidth : phoneWidth, height: isPad ? padHeight : phoneHeight, alignment: .center)
     }
-}
+
 }

@@ -243,7 +243,7 @@ struct Menu: View {
                 // Connect with Facebook button
                 FBButton(width: width, height: height)
                 // Apple button
-                AppleButton()
+                AppleButton(width: width, height: height)
             } else {
                 LogoutButton(width: width, height: height)
             }
