@@ -237,6 +237,9 @@ struct Menu: View {
             }
             // Connect with Facebook button
             FBButton(width: width, height: height)
+            // Apple button
+            AppleButton()
+            
             // Invite friends button
             InviteButton(width: width, height: height)
             // Show friend list

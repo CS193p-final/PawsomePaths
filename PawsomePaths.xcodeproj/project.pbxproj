@@ -104,6 +104,7 @@
 		C69FD62925F95D040077394D /* WaterDrop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C69FD62825F95D040077394D /* WaterDrop.mp3 */; };
 		C69FD62C25F95F950077394D /* MouseClick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C69FD62B25F95F950077394D /* MouseClick.mp3 */; };
 		C6A973C8264268F10052DEA4 /* AssetExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A973C7264268F10052DEA4 /* AssetExtractor.swift */; };
+		C6A973D4264332C40052DEA4 /* AppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A973D3264332C40052DEA4 /* AppleButton.swift */; };
 		C6B09AD425DE126000C96782 /* DumpAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09AD325DE126000C96782 /* DumpAI.swift */; };
 		C6B09AD825DE142D00C96782 /* SinglePlayerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */; };
 		C6B09ADB25DEF36E00C96782 /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B09ADA25DEF36E00C96782 /* GameMode.swift */; };
@@ -213,6 +214,7 @@
 		C69FD62825F95D040077394D /* WaterDrop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = WaterDrop.mp3; sourceTree = "<group>"; };
 		C69FD62B25F95F950077394D /* MouseClick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MouseClick.mp3; sourceTree = "<group>"; };
 		C6A973C7264268F10052DEA4 /* AssetExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetExtractor.swift; sourceTree = "<group>"; };
+		C6A973D3264332C40052DEA4 /* AppleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleButton.swift; sourceTree = "<group>"; };
 		C6B09AD325DE126000C96782 /* DumpAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DumpAI.swift; sourceTree = "<group>"; };
 		C6B09AD725DE142D00C96782 /* SinglePlayerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePlayerGame.swift; sourceTree = "<group>"; };
 		C6B09ADA25DEF36E00C96782 /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
@@ -484,6 +486,7 @@
 				C6DB98CA260E7CE800ED794D /* InviteButton.swift */,
 				C1971808263774BE00411E88 /* FriendsButton.swift */,
 				C69AB960263F2E67006E14D3 /* NewGameButton.swift */,
+				C6A973D3264332C40052DEA4 /* AppleButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -695,6 +698,7 @@
 				C6596A2F25DB0B0200A0F94B /* GameBoard.swift in Sources */,
 				C1CE2BBC25E792BE0012E731 /* CGPoint+Extensions.swift in Sources */,
 				C1000AA226019F06009A1B80 /* Spinning.swift in Sources */,
+				C6A973D4264332C40052DEA4 /* AppleButton.swift in Sources */,
 				C6029D3826014A04005FBD3B /* FBButton.swift in Sources */,
 				C136487026072F4000BDC73F /* ModalState.swift in Sources */,
 				C18DD74E25DF60BE00A29151 /* BlueBorder.swift in Sources */,
@@ -865,7 +869,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GD.hex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -890,7 +894,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.GD.hex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
