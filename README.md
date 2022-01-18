@@ -1,4 +1,6 @@
-# Hex
+App can be found on AppStore at: https://apps.apple.com/us/app/pawsome-paths/id1559984377
+
+# PawsomePath
 
 ## Getting started
 
